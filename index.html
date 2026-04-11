@@ -44,11 +44,11 @@
 .lr-name{font-size:13px;font-weight:700}.lr-desc{font-size:10px;color:var(--tx3);margin-top:2px}
 
 /* SIDEBAR */
-.side{width:240px;flex-shrink:0;background:var(--sf);border-right:1px solid var(--bd);position:fixed;top:0;left:0;bottom:0;z-index:100;display:flex;flex-direction:column;overflow:hidden;box-shadow:1px 0 8px rgba(0,0,0,.03)}
-.side-head{padding:20px 24px 16px;border-bottom:1px solid var(--bd)}
-.side-logo{font-size:20px;font-weight:800;display:flex;align-items:center;gap:10px;color:var(--tx)}.side-logo .d{width:8px;height:8px;border-radius:50%;background:var(--ac);box-shadow:0 0 0 3px var(--acbg)}
-.side-tag{font-size:9px;color:var(--tx3);letter-spacing:2px;text-transform:uppercase;margin-top:4px;font-weight:500}
-.stage-sw{display:flex;gap:3px;margin-top:10px;padding:3px;background:var(--sf2);border-radius:10px}
+.side{width:280px;flex-shrink:0;background:var(--sf);border-right:1px solid var(--bd);position:fixed;top:0;left:0;bottom:0;z-index:100;display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;box-shadow:8px 0 30px rgba(0,0,0,.1);transform:translateX(-100%);transition:transform .25s cubic-bezier(.4,0,.2,1)}
+.side-head{padding:12px 16px 10px;border-bottom:1px solid var(--bd)}
+.side-logo{font-size:18px;font-weight:800;display:flex;align-items:center;gap:8px;color:var(--tx)}.side-logo .d{width:7px;height:7px;border-radius:50%;background:var(--ac);box-shadow:0 0 0 3px var(--acbg)}
+.side-tag{font-size:8px;color:var(--tx3);letter-spacing:2px;text-transform:uppercase;margin-top:2px;font-weight:500}
+.stage-sw{display:flex;gap:2px;margin-top:6px;padding:2px;background:var(--sf2);border-radius:8px}
 .cab-tab{padding:7px 14px;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--tx3);font-size:11px;font-weight:500;cursor:pointer;font-family:var(--f);transition:all .15s;white-space:nowrap}
 .cab-tab:hover{background:var(--sf2);color:var(--tx)}
 .cab-tab.active{background:var(--acbg);color:var(--ac2);font-weight:700;border-color:var(--ac)}
@@ -132,13 +132,29 @@
 .chat-msg.mine{align-self:flex-end;background:var(--ac);color:#fff;border-bottom-right-radius:4px}
 .chat-msg.theirs{align-self:flex-start;background:var(--sf2);color:var(--tx);border-bottom-left-radius:4px}
 .chat-msg .chat-attach{margin-top:6px;padding:6px 10px;background:rgba(0,0,0,.06);border-radius:6px;font-size:10px}
-.side-nav{flex:1;overflow-y:auto;padding:16px 12px}
-.side-sec{font-size:9px;font-weight:700;color:var(--tx2);letter-spacing:1.5px;text-transform:uppercase;padding:18px 12px 6px}
-.si{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;font-size:12.5px;font-weight:500;color:var(--tx2);border:none;transition:all .15s;user-select:none}.si.locked{opacity:.5}
+.side-nav{flex:1;overflow-y:auto;padding:6px 8px}
+.side-sec{font-size:8px;font-weight:700;color:var(--tx2);letter-spacing:1.5px;text-transform:uppercase;padding:10px 10px 3px}
+.si{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:6px;cursor:pointer;font-size:11.5px;font-weight:500;color:var(--tx2);border:none;transition:all .15s;user-select:none}.si.locked{opacity:.5}
 .si:hover{background:var(--sf2);color:var(--tx)}.si.act{background:var(--acbg);color:var(--ac2);font-weight:600}
 #sideTip{position:fixed;z-index:9000;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:10px 14px;font-size:10px;color:var(--tx2);box-shadow:0 6px 20px rgba(0,0,0,.14);pointer-events:none;line-height:1.5;width:220px;white-space:normal;opacity:0;transition:opacity .15s;font-family:var(--f)}
 .si.si-clr{border-left:3px solid var(--si-clr);border-radius:0 8px 8px 0}.si.si-clr .sb{background:color-mix(in srgb,var(--si-clr) 12%,transparent);color:var(--si-clr)}.si.si-clr.act{background:color-mix(in srgb,var(--si-clr) 8%,transparent);color:var(--si-clr);border-left-color:var(--si-clr)}
-.si .ico{font-size:15px;width:20px;text-align:center;flex-shrink:0}
+.si .ico{font-size:13px;width:18px;height:18px;text-align:center;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.si .ico img{width:16px;height:16px;object-fit:contain}
+/* Collapsible sidebar groups */
+.side-grp{margin:2px 0}
+.side-grp .side-sec{cursor:pointer;user-select:none;display:flex;align-items:center;padding:5px 10px 4px;margin:0;border-radius:6px;transition:background .15s,color .2s;gap:6px}
+.side-grp .side-sec:hover{background:var(--sf2)}
+.side-grp .side-sec:active{transform:scale(.98)}
+.side-arr{margin-left:auto;font-size:9px;opacity:.4;transition:transform .3s cubic-bezier(.4,0,.2,1),opacity .2s;display:flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:4px}
+.side-grp .side-sec:hover .side-arr{opacity:.7;background:rgba(0,0,0,.04)}
+.side-grp.collapsed .side-arr{transform:rotate(-90deg);opacity:.3}
+.side-grp.collapsed .side-sec{color:var(--tx3)}
+.side-grp-items{overflow:hidden;max-height:600px;opacity:1;transition:max-height .3s cubic-bezier(.4,0,.2,1),opacity .2s ease .05s}
+.side-grp.collapsed .side-grp-items{max-height:0;opacity:0;transition:max-height .25s cubic-bezier(.4,0,.2,1),opacity .15s ease}
+.side-grp+.side-grp{margin-top:1px}
+.side-grp-cnt{margin-left:auto;font-size:9px;font-weight:600;color:var(--tx3);background:var(--sf2);padding:1px 6px;border-radius:8px;opacity:0;transition:opacity .25s;pointer-events:none}
+.side-grp.collapsed .side-grp-cnt{opacity:1}
+.side-grp.collapsed .side-arr{margin-left:4px}
 .sn{width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;border:1.5px solid var(--bd2);color:var(--tx3);flex-shrink:0}
 .sn.ok{background:var(--gn);color:#fff;border:none}.sn.cur{background:var(--ac);color:#fff;border:none}
 .sl{flex:1}.sb{font-size:9px;padding:2px 7px;border-radius:8px;font-weight:600}
@@ -149,7 +165,7 @@
 .role-badge{font-size:9px;padding:2px 6px;border-radius:4px;font-weight:600}
 
 /* MAIN — 3 columns */
-.main{flex:1;margin-left:240px;margin-right:320px;min-height:100vh;min-width:0;overflow-x:hidden}
+.main{flex:1;margin-left:0;margin-right:320px;min-height:100vh;min-width:0;overflow-x:hidden}
 
 /* RIGHT PANEL */
 .rpanel{width:320px;flex-shrink:0;background:var(--sf);border-left:1px solid var(--bd);position:fixed;top:0;right:0;bottom:0;z-index:100;display:flex;flex-direction:column;overflow:hidden;box-shadow:-1px 0 8px rgba(0,0,0,.03)}
@@ -410,12 +426,12 @@
 @media(max-width:1400px){.rpanel{width:280px}.main{margin-right:280px}}
 @media(max-width:1100px){.sts{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1fr}.rpanel{display:none}.main{margin-right:0}}
 /* Mobile burger */
-.mob-burger{display:none;background:none;border:none;font-size:22px;cursor:pointer;padding:4px 8px;color:var(--tx);line-height:1}
-.mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:99}
-.side.mob-open{transform:translateX(0)!important;display:flex!important}
+.mob-burger{display:block;background:none;border:none;font-size:22px;cursor:pointer;padding:4px 8px;color:var(--tx);line-height:1}
+.mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:99;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.mob-overlay.vis{display:block!important}
+.side.mob-open{transform:translateX(0)!important}
 @media(max-width:768px){
-.side{width:200px}
-.main{margin-left:200px!important}
+.side{width:260px}
 .sts{grid-template-columns:1fr 1fr}
 .g3{grid-template-columns:repeat(2,1fr)}
 .sec{padding:12px}
@@ -434,13 +450,9 @@
 .c{margin:0 0 8px}
 .modal-box{width:95%!important;max-height:90vh;overflow-y:auto}
 }
-/* ── 600px: Hide sidebar, show burger ── */
+/* ── 600px: Extra compact mobile ── */
 @media(max-width:600px){
-.mob-burger{display:block!important}
-.side{position:fixed;left:0;top:0;bottom:0;width:260px;z-index:100;transform:translateX(-100%);transition:transform .25s ease;overflow-y:auto}
-.side.mob-open{transform:translateX(0)!important}
-.mob-overlay.vis{display:block!important}
-.main{margin-left:0!important}
+.side{width:260px}
 .rpanel{display:none!important}
 }
 
@@ -551,7 +563,7 @@
   .modal-actions{flex-direction:column}
   .modal-actions .btn{width:100%;justify-content:center;text-align:center}
   .btn{padding:8px 12px;font-size:10px;min-height:36px}
-  .si{min-height:40px}
+  .si{min-height:32px}
   .sel{min-height:40px}
   #fpCanvas{min-height:150px;max-height:50vw}
   .db-card{padding:10px}
@@ -578,6 +590,29 @@
   .cx{width:16px;height:16px;font-size:9px}
   .lightbox img{border-radius:4px}
 }
+/* Budget distribution rows */
+.bdr{margin-bottom:6px}
+.bdr-head{display:flex;align-items:center;gap:8px;font-size:12px;padding:4px 0}
+.bdr-icon{font-size:14px;flex-shrink:0}
+.bdr-name{flex:1;font-weight:500;color:var(--tx)}
+.bdr-pct{display:flex;align-items:center;gap:2px;font-size:11px;font-weight:700;color:var(--ac2);white-space:nowrap}
+.bdr-pct-in{width:38px;text-align:center;border:1px solid var(--bd);border-radius:6px;background:var(--sf2);color:var(--tx);font-size:11px;font-weight:700;padding:3px 2px;font-family:var(--f)}
+.bdr-pct-in:focus{border-color:var(--ac);outline:none}
+.bdr-val{font-size:12px;font-weight:700;color:var(--tx);min-width:70px;text-align:right}
+.bdr-bar{height:6px;background:var(--sf2);border-radius:3px;overflow:hidden;margin-top:2px}
+.bdr-fill{height:100%;border-radius:3px;transition:width .3s cubic-bezier(.4,0,.2,1)}
+/* Budget fill bar */
+.budget-fill-wrap{height:8px;background:var(--sf2);border-radius:4px;overflow:hidden;margin-top:8px}
+.budget-fill-bar{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--ac),var(--gn));transition:width .4s cubic-bezier(.4,0,.2,1)}
+/* Collapsible calculator blocks */
+.calc-toggle{display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;transition:color .15s}
+.calc-toggle:hover{color:var(--ac2)}
+.calc-toggle .calc-arrow{font-size:10px;transition:transform .25s;color:var(--tx3)}
+.calc-toggle.open .calc-arrow{transform:rotate(90deg)}
+.calc-body{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1),opacity .25s;opacity:0}
+.calc-body.open{max-height:2000px;opacity:1}
+/* Currency rate badge */
+.cur-rate-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:600;color:var(--gn);background:var(--gnbg);padding:2px 8px;border-radius:6px;margin-left:8px}
 </style>
 </head>
 <body>
@@ -833,10 +868,10 @@ Apple</button>
 <div class="top-umenu-plan"><span class="top-umenu-plan-badge" id="topMenuPlan" style="background:var(--acbg);color:var(--ac2)">TRIAL</span></div>
 </div>
 <div class="top-umenu-body">
-<button class="top-umenu-item" onclick="event.stopPropagation();document.getElementById('topUser').classList.remove('open');nav('account')" style="font-weight:600;color:var(--ac2)">&#127968; Мой Кабинет</button>
+<button class="top-umenu-item" onclick="event.stopPropagation();document.getElementById('topUser').classList.remove('open');nav('account')" style="font-weight:600;color:var(--ac2)"><img src="icons/individual/account.png" style="width:14px;height:14px;vertical-align:-2px;margin-right:6px">Мой Кабинет</button>
 <div class="top-umenu-sep"></div>
-<button class="top-umenu-item" onclick="event.stopPropagation();document.getElementById('topUser').classList.remove('open');nav('account');setTimeout(()=>switchCabTab('cab-concepts'),50)">&#128209; Мои концепции</button>
-<button class="top-umenu-item" onclick="event.stopPropagation();document.getElementById('topUser').classList.remove('open');nav('account');setTimeout(()=>switchCabTab('cab-profile'),50)">&#9881; Настройки</button>
+<button class="top-umenu-item" onclick="event.stopPropagation();document.getElementById('topUser').classList.remove('open');nav('account');setTimeout(()=>switchCabTab('cab-concepts'),50)"><img src="icons/individual/concepts.png" style="width:14px;height:14px;vertical-align:-2px;margin-right:6px">Мои концепции</button>
+<button class="top-umenu-item" onclick="event.stopPropagation();document.getElementById('topUser').classList.remove('open');nav('account');setTimeout(()=>switchCabTab('cab-profile'),50)"><img src="icons/individual/settings.png" style="width:14px;height:14px;vertical-align:-2px;margin-right:6px">Настройки</button>
 <button class="top-umenu-item" onclick="event.stopPropagation();document.getElementById('topUser').classList.remove('open');nav('account');setTimeout(()=>switchCabTab('cab-plan'),50)">&#9889; Сменить тариф</button>
 <div class="top-umenu-sep"></div>
 <button class="top-umenu-item danger" onclick="event.stopPropagation();logout()">&#10140; Выход</button>
@@ -847,12 +882,12 @@ Apple</button>
 </div>
 </div>
 <div class="tab-bar" id="tabBar">
-<div class="tab act" data-nav="s1" onclick="nav('s1')" style="--tab-clr:#3b82f6"><div class="tab-top"><span class="tab-num">1</span><span class="tab-icon">&#127970;</span>Помещение</div><span class="tab-cost" id="tabCost1"></span></div>
-<div class="tab" data-nav="s2" onclick="nav('s2')" style="--tab-clr:#f59e0b"><div class="tab-top"><span class="tab-num">2</span><span class="tab-icon">&#128736;</span>Модернизация</div><span class="tab-cost" id="tabCost2"></span></div>
-<div class="tab" data-nav="s3" onclick="nav('s3')" style="--tab-clr:#8b5cf6"><div class="tab-top"><span class="tab-num">3</span><span class="tab-icon">&#128230;</span>Оснащение</div><span class="tab-cost" id="tabCost3"></span></div>
-<div class="tab" data-nav="s4" onclick="nav('s4')" style="--tab-clr:#06b6d4"><div class="tab-top"><span class="tab-num">4</span><span class="tab-icon">&#129489;</span>Персонал</div><span class="tab-cost" id="tabCost4"></span></div>
-<div class="tab" data-nav="s5" onclick="nav('s5')" style="--tab-clr:#22c55e"><div class="tab-top"><span class="tab-num">5</span><span class="tab-icon">&#129657;</span>Услуги населению</div><span class="tab-cost" id="tabCost5"></span></div>
-<div class="tab" data-nav="s6" onclick="nav('s6')" style="--tab-clr:#ec4899"><div class="tab-top"><span class="tab-num">6</span><span class="tab-icon">&#128200;</span>Концепция</div><span class="tab-cost" id="tabCost6"></span></div>
+<div class="tab act" data-nav="s6" onclick="nav('s6')" style="--tab-clr:#ec4899"><div class="tab-top"><span class="tab-num">1</span><span class="tab-icon">&#128200;</span>Концепция</div><span class="tab-cost" id="tabCost6"></span></div>
+<div class="tab" data-nav="s1" onclick="nav('s1')" style="--tab-clr:#3b82f6"><div class="tab-top"><span class="tab-num">2</span><span class="tab-icon">&#127970;</span>Помещение</div><span class="tab-cost" id="tabCost1"></span></div>
+<div class="tab" data-nav="s2" onclick="nav('s2')" style="--tab-clr:#f59e0b"><div class="tab-top"><span class="tab-num">3</span><span class="tab-icon">&#128736;</span>Модернизация</div><span class="tab-cost" id="tabCost2"></span></div>
+<div class="tab" data-nav="s3" onclick="nav('s3')" style="--tab-clr:#8b5cf6"><div class="tab-top"><span class="tab-num">4</span><span class="tab-icon">&#128230;</span>Оснащение</div><span class="tab-cost" id="tabCost3"></span></div>
+<div class="tab" data-nav="s4" onclick="nav('s4')" style="--tab-clr:#06b6d4"><div class="tab-top"><span class="tab-num">5</span><span class="tab-icon">&#129489;</span>Персонал</div><span class="tab-cost" id="tabCost4"></span></div>
+<div class="tab" data-nav="s5" onclick="nav('s5')" style="--tab-clr:#22c55e"><div class="tab-top"><span class="tab-num">6</span><span class="tab-icon">&#129657;</span>Услуги населению</div><span class="tab-cost" id="tabCost5"></span></div>
 <div class="tab" data-nav="s7" onclick="nav('s7')" style="--tab-clr:#ef4444"><div class="tab-top"><span class="tab-num">7</span><span class="tab-icon">&#128203;</span>Документация</div><span class="tab-cost" id="tabCost7"></span></div>
 </div>
 
@@ -864,12 +899,12 @@ Apple</button>
 <div class="st"><div class="st-l">Позиций</div><div class="st-v" id="totalItems">0</div><div class="st-s">выбрано</div><div class="st-b"><div class="st-bf" style="width:0%;background:var(--ac)"></div></div></div>
 </div>
 <div class="g3" id="stagesGrid">
-<div class="stg cur" onclick="nav('s1')"><div style="display:flex;justify-content:space-between"><div class="stg-n">01</div><span class="tag t-wip">В работе</span></div><div class="stg-t">Помещение</div><div class="stg-d">Объект, планировка, характеристики</div><div class="stg-pb"><div class="stg-pf" style="width:0%;background:var(--ac)"></div></div><div class="stg-m"><span>180 м&sup2;</span><strong>0%</strong></div></div>
-<div class="stg" onclick="nav('s2')"><div style="display:flex;justify-content:space-between"><div class="stg-n">02</div><span class="tag t-w">Ожидает</span></div><div class="stg-t">Модернизация</div><div class="stg-d">Ремонт помещения: электрика, сантехника, отделка</div><div class="stg-pb"><div class="stg-pf" style="width:0%"></div></div><div class="stg-m"><span></span><strong>0%</strong></div></div>
-<div class="stg" onclick="nav('s3')"><div style="display:flex;justify-content:space-between"><div class="stg-n">03</div><span class="tag t-w">Ожидает</span></div><div class="stg-t">Оснащение</div><div class="stg-d">Оборудование, инструменты, расходники</div><div class="stg-pb"><div class="stg-pf" style="width:0%"></div></div><div class="stg-m"><span></span><strong>0%</strong></div></div>
-<div class="stg" onclick="nav('s4')"><div style="display:flex;justify-content:space-between"><div class="stg-n">04</div><span class="tag t-w">Ожидает</span></div><div class="stg-t">Персонал</div><div class="stg-d">Штат, ФОТ, специалисты</div><div class="stg-pb"><div class="stg-pf" style="width:0%"></div></div><div class="stg-m"><span></span><strong>0%</strong></div></div>
-<div class="stg" onclick="nav('s5')"><div style="display:flex;justify-content:space-between"><div class="stg-n">05</div><span class="tag t-w">Ожидает</span></div><div class="stg-t">Услуги оказываемые населению</div><div class="stg-d">Стоматологические услуги, ценообразование</div><div class="stg-pb"><div class="stg-pf" style="width:0%"></div></div><div class="stg-m"><span></span><strong>0%</strong></div></div>
-<div class="stg" onclick="nav('s6')"><div style="display:flex;justify-content:space-between"><div class="stg-n">06</div><span class="tag t-w">Ожидает</span></div><div class="stg-t">Концепция</div><div class="stg-d">Бизнес-модель, рентабельность</div><div class="stg-pb"><div class="stg-pf" style="width:0%"></div></div><div class="stg-m"><span></span><strong>0%</strong></div></div>
+<div class="stg cur" onclick="nav('s6')"><div style="display:flex;justify-content:space-between"><div class="stg-n">01</div><span class="tag t-wip">В работе</span></div><div class="stg-t">Концепция</div><div class="stg-d">Бизнес-модель, бюджет, валюта, рентабельность</div><div class="stg-pb"><div class="stg-pf" style="width:0%;background:var(--ac)"></div></div><div class="stg-m"><span></span><strong>0%</strong></div></div>
+<div class="stg" onclick="nav('s1')"><div style="display:flex;justify-content:space-between"><div class="stg-n">02</div><span class="tag t-w">Ожидает</span></div><div class="stg-t">Помещение</div><div class="stg-d">Объект, планировка, характеристики</div><div class="stg-pb"><div class="stg-pf" style="width:0%"></div></div><div class="stg-m"><span>180 м&sup2;</span><strong>0%</strong></div></div>
+<div class="stg" onclick="nav('s2')"><div style="display:flex;justify-content:space-between"><div class="stg-n">03</div><span class="tag t-w">Ожидает</span></div><div class="stg-t">Модернизация</div><div class="stg-d">Ремонт помещения: электрика, сантехника, отделка</div><div class="stg-pb"><div class="stg-pf" style="width:0%"></div></div><div class="stg-m"><span></span><strong>0%</strong></div></div>
+<div class="stg" onclick="nav('s3')"><div style="display:flex;justify-content:space-between"><div class="stg-n">04</div><span class="tag t-w">Ожидает</span></div><div class="stg-t">Оснащение</div><div class="stg-d">Оборудование, инструменты, расходники</div><div class="stg-pb"><div class="stg-pf" style="width:0%"></div></div><div class="stg-m"><span></span><strong>0%</strong></div></div>
+<div class="stg" onclick="nav('s4')"><div style="display:flex;justify-content:space-between"><div class="stg-n">05</div><span class="tag t-w">Ожидает</span></div><div class="stg-t">Персонал</div><div class="stg-d">Штат, ФОТ, специалисты</div><div class="stg-pb"><div class="stg-pf" style="width:0%"></div></div><div class="stg-m"><span></span><strong>0%</strong></div></div>
+<div class="stg" onclick="nav('s5')"><div style="display:flex;justify-content:space-between"><div class="stg-n">06</div><span class="tag t-w">Ожидает</span></div><div class="stg-t">Услуги населению</div><div class="stg-d">Прайс-лист, ценообразование</div><div class="stg-pb"><div class="stg-pf" style="width:0%"></div></div><div class="stg-m"><span></span><strong>0%</strong></div></div>
 <div class="stg" onclick="nav('s7')"><div style="display:flex;justify-content:space-between"><div class="stg-n">07</div><span class="tag t-w">Ожидает</span></div><div class="stg-t">Документация</div><div class="stg-d">Лицензии, санэпиднадзор, RODO, страхование</div><div class="stg-pb"><div class="stg-pf" style="width:0%"></div></div><div class="stg-m"><span></span><strong>0%</strong></div></div>
 </div>
 <!-- IMPORT CONCEPT -->
@@ -1199,7 +1234,7 @@ Apple</button>
 <div class="sts" id="renStats" style="grid-template-columns:repeat(4,1fr)">
 <div class="st"><div class="st-l">Работ</div><div class="st-v" id="renCount">0</div><div class="st-s">выбрано</div></div>
 <div class="st"><div class="st-l">Категорий</div><div class="st-v" id="renCatCount">0</div><div class="st-s">направлений</div></div>
-<div class="st"><div class="st-l">Общая стоимость</div><div class="st-v" style="font-size:16px;color:var(--ac2)" id="renTotal">0</div><div class="st-s">PLN</div></div>
+<div class="st"><div class="st-l">Общая стоимость</div><div class="st-v" style="font-size:16px;color:var(--ac2)" id="renTotal">0</div><div class="st-s cur-label">PLN</div></div>
 <div class="st"><div class="st-l">Выполнено</div><div class="st-v" style="color:var(--gn)" id="renDone">0</div><div class="st-s">из выбранных</div></div>
 </div>
 
@@ -1237,9 +1272,9 @@ Apple</button>
 <div class="ph"><div><h2>03 &middot; Оснащение</h2><div class="ph-s">Выбранное оборудование для проекта</div></div><button class="btn sm pr" onclick="navToEquip(null)">Каталог оборудования →</button></div>
 <div class="sts" id="eqStats" style="grid-template-columns:repeat(4,1fr)">
 <div class="st"><div class="st-l">Позиций</div><div class="st-v" id="eqCount">0</div><div class="st-s">выбрано</div></div>
-<div class="st"><div class="st-l">Общая стоимость</div><div class="st-v" style="font-size:16px;color:var(--ac2)" id="eqTotal">0</div><div class="st-s">PLN</div></div>
+<div class="st"><div class="st-l">Общая стоимость</div><div class="st-v" style="font-size:16px;color:var(--ac2)" id="eqTotal">0</div><div class="st-s cur-label">PLN</div></div>
 <div class="st"><div class="st-l">Категорий</div><div class="st-v" id="eqCats">0</div><div class="st-s">типов</div></div>
-<div class="st"><div class="st-l">Средняя цена</div><div class="st-v" style="font-size:16px" id="eqAvg">0</div><div class="st-s">PLN</div></div>
+<div class="st"><div class="st-l">Средняя цена</div><div class="st-v" style="font-size:16px" id="eqAvg">0</div><div class="st-s cur-label">PLN</div></div>
 </div>
 <div id="selectedEquipCards"></div>
 </div>
@@ -1249,8 +1284,8 @@ Apple</button>
 <div class="ph"><div><h2>04 &middot; Персонал</h2><div class="ph-s">Штатное расписание, ФОТ, отделы</div></div><button class="btn sm pr" onclick="openModal('staff')">+ Добавить</button></div>
 <div class="sts" id="staffStats">
 <div class="st"><div class="st-l">Штат</div><div class="st-v" id="staffCount">0</div><div class="st-s">человек</div></div>
-<div class="st"><div class="st-l">ЗП / мес.</div><div class="st-v" style="font-size:16px;color:var(--ac2)" id="staffFot">0</div><div class="st-s">PLN</div></div>
-<div class="st"><div class="st-l">ЗП / год</div><div class="st-v" style="font-size:16px;color:var(--yl)" id="staffFotYear">0</div><div class="st-s">PLN</div></div>
+<div class="st"><div class="st-l">ЗП / мес.</div><div class="st-v" style="font-size:16px;color:var(--ac2)" id="staffFot">0</div><div class="st-s cur-label">PLN</div></div>
+<div class="st"><div class="st-l">ЗП / год</div><div class="st-v" style="font-size:16px;color:var(--yl)" id="staffFotYear">0</div><div class="st-s cur-label">PLN</div></div>
 <div class="st"><div class="st-l">Средняя ЗП</div><div class="st-v" style="font-size:16px" id="staffAvg">0</div><div class="st-s">PLN/мес</div></div>
 </div>
 <div id="staffCards"></div>
@@ -1263,8 +1298,8 @@ Apple</button>
 <div class="sts" id="svcStats" style="grid-template-columns:repeat(4,1fr)">
 <div class="st"><div class="st-l">Позиций</div><div class="st-v" id="svcCount">0</div><div class="st-s">в прайсе</div></div>
 <div class="st"><div class="st-l">Категорий</div><div class="st-v" id="svcCats">0</div><div class="st-s">направлений</div></div>
-<div class="st"><div class="st-l">Средний чек</div><div class="st-v" style="font-size:16px;color:var(--ac2)" id="svcAvgPrice">0</div><div class="st-s">PLN</div></div>
-<div class="st"><div class="st-l">Мин / Макс</div><div class="st-v" style="font-size:16px;color:var(--gn)" id="svcRevenue">0</div><div class="st-s">PLN</div></div>
+<div class="st"><div class="st-l">Средний чек</div><div class="st-v" style="font-size:16px;color:var(--ac2)" id="svcAvgPrice">0</div><div class="st-s cur-label">PLN</div></div>
+<div class="st"><div class="st-l">Мин / Макс</div><div class="st-v" style="font-size:16px;color:var(--gn)" id="svcRevenue">0</div><div class="st-s cur-label">PLN</div></div>
 </div>
 <div id="serviceCards"></div>
 <div style="text-align:right;padding:12px 0;border-top:1px solid var(--bd);margin-top:8px"><span style="font-size:12px;color:var(--tx3)">Средний чек: </span><span style="font-size:18px;font-weight:800;color:var(--ac2)" id="s5Total">0 PLN</span></div>
@@ -1272,21 +1307,89 @@ Apple</button>
 
 <!-- ═══ S6: КОНЦЕПЦИЯ ═══ -->
 <div class="sec" id="sec-s6">
-<div class="ph"><div><h2>06 &middot; Концепция</h2><div class="ph-s">Бизнес-модель, рентабельность, документация</div></div><span class="tag t-wip">В работе</span></div>
+<div class="ph"><div><h2>01 &middot; Концепция</h2><div class="ph-s">Бизнес-модель, бюджет, валюта, рентабельность</div></div><span class="tag t-wip">В работе</span></div>
 
-<!-- ═══ СВОДНЫЙ БЮДЖЕТ ═══ -->
-<div class="c" style="border-color:var(--acbd);background:linear-gradient(135deg,var(--acbg),var(--sf))"><div class="ch" style="border-bottom-color:var(--acbd)"><h3>&#128176; Сводный бюджет концепции</h3><span style="font-size:10px;color:var(--tx3)">Автосборка из всех этапов</span></div>
+<!-- ═══ ВАЛЮТА + ОБЩИЙ БЮДЖЕТ ═══ -->
+<div class="c" style="border-color:var(--acbd);background:linear-gradient(135deg,var(--acbg),var(--sf))">
+<div class="ch" style="border-bottom-color:var(--acbd)"><h3>&#128176; Бюджет и валюта</h3><button class="btn sm pr" onclick="distributeBudget()" style="font-size:10px">Распределить</button></div>
+<div class="cb">
+<!-- Валюта -->
+<div style="display:flex;gap:12px;align-items:flex-end;margin-bottom:16px;flex-wrap:wrap">
+<div style="flex:1;min-width:200px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Валюта проекта</div>
+<select id="currencySelect" onchange="setCurrency(this.value)" style="width:100%;padding:10px 12px;border:1px solid var(--bd);border-radius:10px;background:var(--sf);color:var(--tx);font-size:13px;font-weight:600;font-family:var(--f);cursor:pointer">
+<option value="PLN">🇵🇱 PLN — Злотый (Польша)</option>
+<option value="EUR">🇪🇺 EUR — Евро</option>
+<option value="GBP">🇬🇧 GBP — Фунт стерлингов</option>
+<option value="CHF">🇨🇭 CHF — Франк (Швейцария)</option>
+<option value="SEK">🇸🇪 SEK — Крона (Швеция)</option>
+<option value="NOK">🇳🇴 NOK — Крона (Норвегия)</option>
+<option value="DKK">🇩🇰 DKK — Крона (Дания)</option>
+<option value="CZK">🇨🇿 CZK — Крона (Чехия)</option>
+<option value="HUF">🇭🇺 HUF — Форинт (Венгрия)</option>
+<option value="RON">🇷🇴 RON — Лей (Румыния)</option>
+<option value="BGN">🇧🇬 BGN — Лев (Болгария)</option>
+<option value="HRK">🇭🇷 HRK — Куна (Хорватия)</option>
+<option value="RSD">🇷🇸 RSD — Динар (Сербия)</option>
+<option value="UAH">🇺🇦 UAH — Гривна (Украина)</option>
+<option value="BYN">🇧🇾 BYN — Рубль (Беларусь)</option>
+<option value="GEL">🇬🇪 GEL — Лари (Грузия)</option>
+<option value="TRY">🇹🇷 TRY — Лира (Турция)</option>
+<option value="ISK">🇮🇸 ISK — Крона (Исландия)</option>
+<option value="ALL">🇦🇱 ALL — Лек (Албания)</option>
+<option value="BAM">🇧🇦 BAM — Марка (Босния)</option>
+<option value="MKD">🇲🇰 MKD — Денар (С. Македония)</option>
+<option value="MDL">🇲🇩 MDL — Лей (Молдова)</option>
+<option value="RUB">🇷🇺 RUB — Рубль (Россия)</option>
+<option value="USD">🇺🇸 USD — Доллар (США)</option>
+</select>
+</div>
+<div style="flex:1;min-width:200px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Общий бюджет проекта</div>
+<div style="position:relative"><input id="totalBudgetInput" type="number" placeholder="Введите сумму..." value="" oninput="onBudgetInput()" style="width:100%;padding:10px 60px 10px 12px;border:1px solid var(--acbd);border-radius:10px;background:var(--sf);color:var(--tx);font-size:18px;font-weight:800;font-family:var(--f)"><span id="budgetCurrLabel" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:700;color:var(--tx3)">PLN</span></div>
+</div>
+</div>
+
+<!-- Budget fill bar -->
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+<div style="flex:1"><div class="budget-fill-wrap"><div class="budget-fill-bar" id="budgetFillBar" style="width:0%"></div></div></div>
+<span style="font-size:11px;font-weight:700;color:var(--ac2)" id="budgetFillPct">0%</span>
+</div>
+
+<!-- Распределение по этапам (collapsible) -->
+<div class="calc-toggle" onclick="toggleCalc(this)"><span class="calc-arrow">&#9654;</span><span style="font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Распределение по этапам</span></div>
+<div class="calc-body" id="budgetDistWrap">
+<div id="budgetDistribution" style="padding-top:8px">
+<div class="bdr" data-key="rent" data-pct="15"><div class="bdr-head"><span class="bdr-icon">🏢</span><span class="bdr-name">Помещение (аренда 12 мес.)</span><span class="bdr-pct"><input type="number" class="bdr-pct-in" value="15" min="0" max="100" oninput="updateDistPct(this)">%</span><span class="bdr-val" id="distRent">0</span></div><div class="bdr-bar"><div class="bdr-fill" style="width:15%;background:#3b82f6"></div></div></div>
+<div class="bdr" data-key="reno" data-pct="25"><div class="bdr-head"><span class="bdr-icon">🔨</span><span class="bdr-name">Ремонт и модернизация</span><span class="bdr-pct"><input type="number" class="bdr-pct-in" value="25" min="0" max="100" oninput="updateDistPct(this)">%</span><span class="bdr-val" id="distReno">0</span></div><div class="bdr-bar"><div class="bdr-fill" style="width:25%;background:#f59e0b"></div></div></div>
+<div class="bdr" data-key="equip" data-pct="30"><div class="bdr-head"><span class="bdr-icon">🪑</span><span class="bdr-name">Оборудование</span><span class="bdr-pct"><input type="number" class="bdr-pct-in" value="30" min="0" max="100" oninput="updateDistPct(this)">%</span><span class="bdr-val" id="distEquip">0</span></div><div class="bdr-bar"><div class="bdr-fill" style="width:30%;background:#8b5cf6"></div></div></div>
+<div class="bdr" data-key="staff" data-pct="15"><div class="bdr-head"><span class="bdr-icon">👤</span><span class="bdr-name">ФОТ (первые 3 мес.)</span><span class="bdr-pct"><input type="number" class="bdr-pct-in" value="15" min="0" max="100" oninput="updateDistPct(this)">%</span><span class="bdr-val" id="distStaff">0</span></div><div class="bdr-bar"><div class="bdr-fill" style="width:15%;background:#06b6d4"></div></div></div>
+<div class="bdr" data-key="docs" data-pct="5"><div class="bdr-head"><span class="bdr-icon">📜</span><span class="bdr-name">Документация и лицензии</span><span class="bdr-pct"><input type="number" class="bdr-pct-in" value="5" min="0" max="100" oninput="updateDistPct(this)">%</span><span class="bdr-val" id="distDocs">0</span></div><div class="bdr-bar"><div class="bdr-fill" style="width:5%;background:#ef4444"></div></div></div>
+<div class="bdr" data-key="mkt" data-pct="10"><div class="bdr-head"><span class="bdr-icon">📈</span><span class="bdr-name">Маркетинг (запуск)</span><span class="bdr-pct"><input type="number" class="bdr-pct-in" value="10" min="0" max="100" oninput="updateDistPct(this)">%</span><span class="bdr-val" id="distMkt">0</span></div><div class="bdr-bar"><div class="bdr-fill" style="width:10%;background:#22c55e"></div></div></div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:8px;border-top:2px solid var(--acbd)">
+<span style="font-size:11px;font-weight:700;color:var(--tx)">Итого: <span id="distPctTotal" style="color:var(--ac2)">100</span>%</span>
+<span style="font-size:16px;font-weight:800;color:var(--ac2)" id="distTotal">0</span>
+</div>
+</div><!-- close budgetDistribution -->
+</div><!-- close calc-body budgetDistWrap -->
+<!-- Live currency rate -->
+<div style="margin-top:8px;text-align:right"><span id="curRateBadge" class="cur-rate-badge" style="display:none">1 EUR = ? PLN</span></div>
+</div></div>
+
+<!-- ═══ СВОДНЫЙ БЮДЖЕТ (автосборка) ═══ -->
+<div class="c"><div class="ch"><h3>&#128202; Сводка из этапов</h3><span style="font-size:10px;color:var(--tx3)">Автоматически из каталогов</span></div>
 <div class="cb">
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
 <div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px;text-align:center">
 <div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Общие инвестиции</div>
 <div style="font-size:22px;font-weight:800;color:var(--ac2);margin-top:4px" id="budgetTotal">0</div>
-<div style="font-size:10px;color:var(--tx3)">PLN</div>
+<div style="font-size:10px;color:var(--tx3)" class="cur-label">PLN</div>
 </div>
 <div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px;text-align:center">
 <div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Ежемесячные расходы</div>
 <div style="font-size:22px;font-weight:800;color:var(--rd);margin-top:4px" id="budgetMonthly">0</div>
-<div style="font-size:10px;color:var(--tx3)">PLN / мес</div>
+<div style="font-size:10px;color:var(--tx3)" class="cur-label">PLN</div>
 </div>
 <div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px;text-align:center">
 <div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Окупаемость</div>
@@ -1294,20 +1397,25 @@ Apple</button>
 <div style="font-size:10px;color:var(--tx3)">мес</div>
 </div>
 </div>
-<div style="display:grid;grid-template-columns:1fr auto;gap:3px 12px;font-size:11px;padding:0 4px">
-<span style="color:var(--tx2)">&#127970; Помещение (аренда × 12 мес.)</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetRent">0 PLN</span>
-<span style="color:var(--tx2)">&#128736; Ремонт и модернизация</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetReno">0 PLN</span>
-<span style="color:var(--tx2)">&#128230; Оборудование</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetEquip">0 PLN</span>
-<span style="color:var(--tx2)">&#129489; ФОТ (первые 3 мес.)</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetStaff">0 PLN</span>
-<span style="color:var(--tx2)">&#128203; Документация и лицензии</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetDocs">0 PLN</span>
-<span style="color:var(--tx2)">&#128200; Маркетинг (запуск)</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetMkt">0 PLN</span>
-<span style="font-weight:800;color:var(--tx);border-top:2px solid var(--acbd);padding-top:6px;margin-top:4px">ИТОГО ИНВЕСТИЦИИ</span><span style="font-weight:800;color:var(--ac2);text-align:right;border-top:2px solid var(--acbd);padding-top:6px;margin-top:4px" id="budgetGrand">0 PLN</span>
+<div class="calc-toggle" onclick="toggleCalc(this)"><span class="calc-arrow">&#9654;</span><span style="font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Детализация</span></div>
+<div class="calc-body">
+<div style="display:grid;grid-template-columns:1fr auto;gap:3px 12px;font-size:11px;padding:8px 4px 0">
+<span style="color:var(--tx2)">&#127970; Помещение (аренда × 12 мес.)</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetRent">0</span>
+<span style="color:var(--tx2)">&#128736; Ремонт и модернизация</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetReno">0</span>
+<span style="color:var(--tx2)">&#128230; Оборудование</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetEquip">0</span>
+<span style="color:var(--tx2)">&#129489; ФОТ (первые 3 мес.)</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetStaff">0</span>
+<span style="color:var(--tx2)">&#128203; Документация и лицензии</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetDocs">0</span>
+<span style="color:var(--tx2)">&#128200; Маркетинг (запуск)</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetMkt">0</span>
+<span style="font-weight:800;color:var(--tx);border-top:2px solid var(--acbd);padding-top:6px;margin-top:4px">ИТОГО</span><span style="font-weight:800;color:var(--ac2);text-align:right;border-top:2px solid var(--acbd);padding-top:6px;margin-top:4px" id="budgetGrand">0</span>
 </div>
+</div><!-- close calc-body -->
 </div></div>
 
 <!-- Бизнес-модель -->
 <div class="c"><div class="ch"><h3>&#127973; Бизнес-модель</h3><button class="btn sm gn" id="bmSaveBtn" onclick="saveBusinessModel()">Сохранить</button></div>
 <div class="cb">
+<div class="calc-toggle" onclick="toggleCalc(this)"><span class="calc-arrow">&#9654;</span><span style="font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Редактировать параметры</span></div>
+<div class="calc-body">
 <div class="g2">
 <div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">BUSINESS TYPE</div><input class="price-edit" id="cType" placeholder="e.g. Dental clinic, Veterinary, Beauty salon..." style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
 <div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">BRAND NAME</div><input class="price-edit" id="cBrand" placeholder="Your brand or clinic name" style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
@@ -1320,10 +1428,35 @@ Apple</button>
 <div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">USP</div><input class="price-edit" id="cUsp" placeholder="What makes you different? e.g. AI-powered, painless" style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
 <div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">TECHNOLOGY</div><input class="price-edit" id="cTech" placeholder="e.g. CBCT 3D, CAD/CAM, Digital workflow" style="font-size:13px;font-weight:700;margin-top:4px;width:100%;color:var(--gn)"></div>
 </div>
+</div><!-- close calc-body business model -->
 </div></div>
 
 <!-- Конструктор рентабельности -->
-<div class="c"><div class="ch"><h3>&#128200; Конструктор рентабельности</h3><span style="font-size:10px;color:var(--tx3)">Все формулы видны</span></div><div class="cb">
+<div class="c"><div class="ch"><h3>&#128200; Конструктор рентабельности</h3><span style="font-size:10px;color:var(--tx3)">Итоговые показатели</span></div><div class="cb">
+
+<!-- Итоговые KPI (всегда видны) -->
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px" id="kpiSummary">
+<div style="background:var(--gnbg);border:1px solid rgba(26,153,86,.15);border-radius:10px;padding:12px;text-align:center">
+<div style="font-size:8px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Выручка/мес</div>
+<div style="font-size:18px;font-weight:800;color:var(--gn);margin-top:2px" id="kpiRevenue">0</div>
+</div>
+<div style="background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:10px;padding:12px;text-align:center">
+<div style="font-size:8px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Расходы/мес</div>
+<div style="font-size:18px;font-weight:800;color:var(--rd);margin-top:2px" id="kpiExpenses">0</div>
+</div>
+<div style="background:var(--acbg);border:1px solid var(--acbd);border-radius:10px;padding:12px;text-align:center">
+<div style="font-size:8px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Прибыль/мес</div>
+<div style="font-size:18px;font-weight:800;color:var(--ac2);margin-top:2px" id="kpiProfit">0</div>
+</div>
+<div style="background:var(--ylbg);border:1px solid rgba(192,138,16,.15);border-radius:10px;padding:12px;text-align:center">
+<div style="font-size:8px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Окупаемость</div>
+<div style="font-size:18px;font-weight:800;color:var(--yl);margin-top:2px" id="kpiPayback">--</div>
+</div>
+</div>
+
+<!-- Collapsible calculator details -->
+<div class="calc-toggle" onclick="toggleCalc(this)"><span class="calc-arrow">&#9654;</span><span style="font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Калькулятор — подробности</span></div>
+<div class="calc-body" id="profCalcBody">
 
 <!-- Входные параметры -->
 <div style="margin-bottom:16px">
@@ -1437,6 +1570,8 @@ Apple</button>
 </div>
 </div>
 
+</div><!-- close calc-body profCalcBody -->
+
 </div></div>
 
 </div>
@@ -1447,7 +1582,7 @@ Apple</button>
 <div class="sts">
 <div class="st"><div class="st-l">Документов</div><div class="st-v" id="docCount">0</div><div class="st-s">в проекте</div></div>
 <div class="st"><div class="st-l">Готово</div><div class="st-v" id="docDone">0</div><div class="st-s">выполнено</div><div class="st-b"><div class="st-bf" id="docBar" style="width:0%;background:var(--gn)"></div></div></div>
-<div class="st"><div class="st-l">Общая стоимость</div><div class="st-v" style="font-size:16px;color:var(--ac2)" id="docCostStat">0</div><div class="st-s">PLN</div></div>
+<div class="st"><div class="st-l">Общая стоимость</div><div class="st-v" style="font-size:16px;color:var(--ac2)" id="docCostStat">0</div><div class="st-s cur-label">PLN</div></div>
 </div>
 <div id="docCards"></div>
 <div style="text-align:right;padding:12px 0;border-top:1px solid var(--bd);margin-top:8px"><span style="font-size:12px;color:var(--tx3)">Итого: </span><span style="font-size:18px;font-weight:800;color:var(--ac2)" id="s7Total">0 PLN</span></div>
@@ -1901,7 +2036,7 @@ function switchAdminRole(role){
 <div class="bk" onclick="nav('overview')">&larr; Обзор</div>
 <div class="ph"><div><h2>Рентабельность</h2><div class="ph-s">Оценка окупаемости</div></div></div>
 <div class="g2" style="margin-bottom:20px">
-<div class="profit-card"><div class="profit-label">Общие инвестиции</div><div class="profit-big" style="color:var(--rd)" id="prInvest">0</div><div class="profit-sub">PLN</div></div>
+<div class="profit-card"><div class="profit-label">Общие инвестиции</div><div class="profit-big" style="color:var(--rd)" id="prInvest">0</div><div class="profit-sub cur-label">PLN</div></div>
 <div class="profit-card"><div class="profit-label">Окупаемость</div><div class="profit-big" style="color:var(--gn)" id="prPayback">--</div><div class="profit-sub">месяцев</div></div>
 </div>
 <div class="c"><div class="ch"><h3>Ежемесячная модель</h3></div><div class="cb">
@@ -3147,6 +3282,117 @@ function loadBusinessModel(){
   }catch(e){}
 }
 
+/* ═══ BUDGET / CURRENCY / DISTRIBUTION ═══ */
+let activeCurrency='PLN';
+let currencyRates={};
+let currencyRatesBase='EUR';
+
+function toggleCalc(el){
+  el.classList.toggle('open');
+  const body=el.nextElementSibling;
+  if(body)body.classList.toggle('open');
+}
+
+function setCurrency(val){
+  activeCurrency=val;
+  document.querySelectorAll('.cur-label').forEach(e=>e.textContent=val);
+  const lbl=document.getElementById('budgetCurrLabel');
+  if(lbl)lbl.textContent=val;
+  uSet('svita_currency',val);
+  onBudgetInput();
+  updateCurRateBadge();
+}
+
+function onBudgetInput(){
+  const inp=document.getElementById('totalBudgetInput');
+  const total=parseFloat(inp?.value)||0;
+  uSet('svita_budget',total.toString());
+  distributeBudget();
+}
+
+function distributeBudget(){
+  const inp=document.getElementById('totalBudgetInput');
+  const total=parseFloat(inp?.value)||0;
+  const rows=document.querySelectorAll('#budgetDistribution .bdr');
+  let sumPct=0;
+  rows.forEach(row=>{
+    const pctIn=row.querySelector('.bdr-pct-in');
+    const pct=parseFloat(pctIn?.value)||0;
+    sumPct+=pct;
+    const amount=Math.round(total*pct/100);
+    const valEl=row.querySelector('.bdr-val');
+    if(valEl)valEl.textContent=amount.toLocaleString('ru')+' '+activeCurrency;
+    const fill=row.querySelector('.bdr-fill');
+    if(fill)fill.style.width=Math.min(pct,100)+'%';
+    row.dataset.pct=pct;
+  });
+  const pctTotalEl=document.getElementById('distPctTotal');
+  if(pctTotalEl){pctTotalEl.textContent=Math.round(sumPct);pctTotalEl.style.color=Math.abs(sumPct-100)<0.5?'var(--gn)':'var(--rd)'}
+  const distTotalEl=document.getElementById('distTotal');
+  if(distTotalEl)distTotalEl.textContent=total.toLocaleString('ru')+' '+activeCurrency;
+  updateBudgetFill(total);
+}
+
+function updateDistPct(input){
+  const row=input.closest('.bdr');
+  if(row)row.dataset.pct=input.value;
+  distributeBudget();
+}
+
+function updateBudgetFill(total){
+  const bar=document.getElementById('budgetFillBar');
+  const pctEl=document.getElementById('budgetFillPct');
+  if(!bar||!pctEl)return;
+  const target=1760000;
+  const pct=total>0?Math.min(Math.round(total/target*100),100):0;
+  bar.style.width=pct+'%';
+  pctEl.textContent=pct+'%';
+  if(pct>=100){bar.style.background='linear-gradient(90deg,var(--gn),#10b981)'}
+  else if(pct>=70){bar.style.background='linear-gradient(90deg,var(--ac),var(--gn))'}
+  else if(pct>=30){bar.style.background='linear-gradient(90deg,var(--yl),var(--ac))'}
+  else{bar.style.background='linear-gradient(90deg,var(--rd),var(--yl))'}
+}
+
+function loadBudgetState(){
+  const cur=uGet('svita_currency')||'PLN';
+  const sel=document.getElementById('currencySelect');
+  if(sel)sel.value=cur;
+  activeCurrency=cur;
+  document.querySelectorAll('.cur-label').forEach(e=>e.textContent=cur);
+  const lbl=document.getElementById('budgetCurrLabel');
+  if(lbl)lbl.textContent=cur;
+  const budget=uGet('svita_budget')||'';
+  const inp=document.getElementById('totalBudgetInput');
+  if(inp&&budget)inp.value=budget;
+  distributeBudget();
+}
+
+async function fetchCurrencyRates(){
+  try{
+    const resp=await fetch('https://api.frankfurter.dev/v1/latest?base=EUR');
+    const data=await resp.json();
+    if(data&&data.rates){currencyRates=data.rates;currencyRates.EUR=1;currencyRatesBase='EUR';updateCurRateBadge()}
+  }catch(e){console.warn('Currency API unavailable:',e)}
+}
+
+function updateCurRateBadge(){
+  const badge=document.getElementById('curRateBadge');
+  if(!badge)return;
+  if(!currencyRates||!currencyRates[activeCurrency]||activeCurrency==='EUR'){badge.style.display='none';return}
+  const rate=currencyRates[activeCurrency];
+  badge.textContent='1 EUR = '+rate.toFixed(2)+' '+activeCurrency;
+  badge.style.display='inline-flex';
+}
+
+function updateKpiSummary(revenue,expenses,profit,payback){
+  const f=n=>n.toLocaleString('ru');
+  const el=id=>document.getElementById(id);
+  if(el('kpiRevenue'))el('kpiRevenue').textContent=f(revenue);
+  if(el('kpiExpenses'))el('kpiExpenses').textContent=f(expenses);
+  if(el('kpiProfit'))el('kpiProfit').textContent=f(profit);
+  if(el('kpiPayback'))el('kpiPayback').textContent=payback>0?payback+' мес.':'--';
+}
+
 function saveProperty(){
   if(!activeProperty)return;
   uSet('svita_property',JSON.stringify(activeProperty));
@@ -4043,8 +4289,9 @@ async function loginCheck(){
   const profile=await sb.from('profiles').select('display_name,role').eq('email',email).single();
   const role=profile.data?.role||'viewer';
   const name=profile.data?.display_name||data.user.user_metadata?.name||email.split('@')[0];
+  const isSuperAdmin=role==='superadmin';
   const isAdmin=role==='superadmin'||role==='admin';
-  currentUser={email,name,isAdmin,emailConfirmed:true,id:data.user.id};
+  currentUser={email,name,isAdmin,isSuperAdmin,emailConfirmed:true,id:data.user.id};
   localStorage.setItem('svita_session',JSON.stringify(currentUser));
   syncSessionCookie(currentUser);
   proceedToRoleSelect();
@@ -4372,7 +4619,9 @@ function enterApp(){
     sb.auth.getSession().then(({data:{session}})=>{
       if(!session)return;
       sb.from('user_sessions').insert({email:currentUser.email,user_agent:navigator.userAgent}).then(()=>{});
-      sb.from('profiles').upsert({email:currentUser.email,display_name:currentUser.name,role:currentRole,last_login:new Date().toISOString()},{onConflict:'email'}).then(()=>{});
+      const _profileData={email:currentUser.email,display_name:currentUser.name,last_login:new Date().toISOString()};
+      if(!currentUser.isAdmin)_profileData.role=currentRole;
+      sb.from('profiles').upsert(_profileData,{onConflict:'email'}).then(()=>{});
       sb.from('page_views').insert({page:'/dashboard',user_agent:navigator.userAgent,referrer:document.referrer||null}).then(()=>{});
     }).catch(()=>{});
     // Ensure current user is in DB.users
@@ -4380,12 +4629,12 @@ function enterApp(){
       DB.users.push({id:genUserId(),name:currentUser.name,email:currentUser.email,role:currentRole,plan:'trial',status:'Активен',created:new Date().toISOString().slice(0,10)});
     }
     // Load all users from admin_users for admin panel
-    if(currentRole==='admin'){
-      sb.from('admin_users').select('id,email,name,role,created_at').then(({data:rows})=>{
+    if(currentRole==='admin'||currentRole==='superadmin'){
+      sb.from('profiles').select('id,user_id,email,display_name,role,plan,status,created_at').then(({data:rows})=>{
         if(!rows||!rows.length)return;
         rows.forEach(r=>{
           if(!DB.users.find(u=>u.email===r.email)){
-            DB.users.push({id:r.id||genUserId(),name:r.name||r.email.split('@')[0],email:r.email,role:r.role||'viewer',plan:r.role==='superadmin'||r.role==='admin'?'admin':'trial',status:'Активен',created:(r.created_at||'').slice(0,10)});
+            DB.users.push({id:r.user_id||r.id||genUserId(),name:r.display_name||r.email.split('@')[0],email:r.email,role:r.role||'owner',plan:r.plan||'trial',status:r.status||'Активен',created:(r.created_at||'').slice(0,10)});
           }
         });
         renderUsers();if(currentRole)buildSidebar();
@@ -4403,6 +4652,7 @@ function enterApp(){
   try{loadCustomDB()}catch(e){console.error('[SVITA] loadCustomDB:',e)}
   try{loadPicked()}catch(e){console.error('[SVITA] loadPicked:',e)}
   try{loadBusinessModel()}catch(e){console.error('[SVITA] loadBM:',e)}
+  try{loadBudgetState();fetchCurrencyRates()}catch(e){console.error('[SVITA] budget:',e)}
   // Auto-pick all default employees if pickedStaff is empty (first launch)
   try{
   if(!Object.keys(DB.pickedStaff||{}).length&&currentRole==='admin'){
@@ -4554,8 +4804,9 @@ document.addEventListener('click',function(e){
           const name=su.user_metadata?.name||su.user_metadata?.full_name||email.split('@')[0];
           // Check profile in DB
           const{data:prof}=await sb.from('profiles').select('id,email,display_name,role').eq('email',email).single();
+          const isSuperAdmin=prof?.role==='superadmin';
           const isAdmin=prof?.role==='superadmin'||prof?.role==='admin';
-          currentUser={email,name:prof?.display_name||name,isAdmin,emailConfirmed:true,id:prof?.id||su.id};
+          currentUser={email,name:prof?.display_name||name,isAdmin,isSuperAdmin,emailConfirmed:true,id:su.id};
           localStorage.setItem('svita_session',JSON.stringify(currentUser));
           syncSessionCookie(currentUser);
           // Clean OAuth hash from URL
@@ -4580,17 +4831,18 @@ document.addEventListener('click',function(e){
         if(!session){localStorage.removeItem('svita_session');syncSessionCookie(null);return}
         const{data}=await sb.from('profiles').select('id,email,display_name,role').eq('email',session.user.email).single();
         if(data){
+          const isSuperAdmin=data.role==='superadmin';
           const isAdmin=data.role==='superadmin'||data.role==='admin';
-          currentUser={email:data.email,name:data.display_name||data.email.split('@')[0],isAdmin,emailConfirmed:true,id:data.id};
+          currentUser={email:data.email,name:data.display_name||data.email.split('@')[0],isAdmin,isSuperAdmin,emailConfirmed:true,id:session.user.id};
           localStorage.setItem('svita_session',JSON.stringify(currentUser));
           syncSessionCookie(currentUser);
         }else{localStorage.removeItem('svita_session');syncSessionCookie(null);return}
       }catch(e){
         // Server unreachable — use cached but strip admin (safe default)
-        currentUser={email:u.email,name:u.name,isAdmin:false,emailConfirmed:u.emailConfirmed,id:u.id};
+        currentUser={email:u.email,name:u.name,isAdmin:false,isSuperAdmin:false,emailConfirmed:u.emailConfirmed,id:u.id};
       }
     }else{
-      currentUser={email:u.email,name:u.name,isAdmin:false,emailConfirmed:u.emailConfirmed,id:u.id};
+      currentUser={email:u.email,name:u.name,isAdmin:false,isSuperAdmin:false,emailConfirmed:u.emailConfirmed,id:u.id};
     }
     // Restore biz type
     const sBiz=localStorage.getItem('svita_biz_type');
@@ -4630,109 +4882,141 @@ function switchStage(n){
   document.getElementById('tabBar').style.display=n===1&&(currentRole==='admin'||currentRole==='owner')?'flex':'none';
 }
 
-function toggleMobileSidebar(){
+function toggleMobileSidebar(forceClose){
   const s=document.getElementById('sidebar');
   const o=document.getElementById('mobOverlay');
+  if(forceClose){s.classList.remove('mob-open');o.classList.remove('vis');return}
   s.classList.toggle('mob-open');
   o.classList.toggle('vis');
 }
 let _sidebarBuilt=false;
+function _sideGrpState(){try{return JSON.parse(localStorage.getItem('svita_side_grp')||'{}')}catch(e){return{}}}
+function _grpOpen(key){return !_sideGrpState()[key]}
+const _grpDefaults={};
+function _grpStart(key,label){
+  const st=_sideGrpState();
+  const isCollapsed=st.hasOwnProperty(key)?st[key]:!!_grpDefaults[key];
+  const c=isCollapsed?' collapsed':'';
+  return '<div class="side-grp'+c+'" data-grp="'+key+'"><div class="side-sec" onclick="toggleSideGrp(this.parentElement)">'+label+'<span class="side-grp-cnt"></span><span class="side-arr">▾</span></div><div class="side-grp-items">';
+}
+function _grpEnd(){return '</div></div>'}
+function _updateGrpCounts(){
+  document.querySelectorAll('.side-grp').forEach(g=>{
+    const cnt=g.querySelectorAll('.side-grp-items .si').length;
+    const el=g.querySelector('.side-grp-cnt');
+    if(el)el.textContent=cnt;
+  });
+}
+function toggleSideGrp(el){
+  el.classList.toggle('collapsed');
+  const st=_sideGrpState();
+  st[el.dataset.grp]=el.classList.contains('collapsed');
+  localStorage.setItem('svita_side_grp',JSON.stringify(st));
+}
 function buildSidebar(){
   const n=document.getElementById('sideNav');
   if(!n||!currentRole)return;
   // Build structure only ONCE — after that only update badges
   if(_sidebarBuilt){updateSidebarBadges();return}
-  let html='<div class="si act" data-nav="overview" data-tip="Главная панель: прогресс, метрики и статус"><span class="ico">&#9673;</span><span class="sl">Обзор</span></div>';
-  html+='<div class="si" data-nav="news" data-tip="Свежие публикации и обновления платформы"><span class="ico">&#128240;</span><span class="sl">Новости</span></div>';
+  const _i=n=>'<img src="icons/individual/'+n+'.png" alt="">';
+  let html='<div class="si act" data-nav="overview" data-tip="Главная панель: прогресс, метрики и статус"><span class="ico">'+_i('overview')+'</span><span class="sl">Обзор</span></div>';
+  html+='<div class="si" data-nav="news" data-tip="Свежие публикации и обновления платформы"><span class="ico">'+_i('news')+'</span><span class="sl">Новости</span></div>';
 
   // ── STAGE 1: Формирование концепции ──
   if(currentStage===1&&(currentRole==='admin'||currentRole==='owner')){
-    html+='<div class="side-sec">Аналитика</div>';
-    html+='<div class="si" data-nav="budget" data-tip="Финансовый план: стартовые и операционные расходы"><span class="ico">&#128176;</span><span class="sl">Бюджет</span></div>';
-    html+='<div class="si" data-nav="profit" data-tip="Прогноз доходов, точка безубыточности, окупаемость"><span class="ico">&#128200;</span><span class="sl">Рентабельность</span></div>';
-    html+='<div class="si" data-nav="zones" data-tip="Функциональные зоны: разбивка помещения по назначению"><span class="ico">&#127968;</span><span class="sl">Зоны</span></div>';
-    const _ctIcon=currentBizType==='dental'?'🏥':'🏢';
+    html+=_grpStart('analytics','Аналитика');
+    html+='<div class="si" data-nav="budget" data-tip="Финансовый план: стартовые и операционные расходы"><span class="ico">'+_i('budget')+'</span><span class="sl">Бюджет</span></div>';
+    html+='<div class="si" data-nav="profit" data-tip="Прогноз доходов, точка безубыточности, окупаемость"><span class="ico">'+_i('profit')+'</span><span class="sl">Рентабельность</span></div>';
+    html+='<div class="si" data-nav="zones" data-tip="Функциональные зоны: разбивка помещения по назначению"><span class="ico">'+_i('zones')+'</span><span class="sl">Зоны</span></div>';
     const _ctLabel=currentBizType==='dental'?'Стоимость кабинетов':'Стоимость помещений';
-    html+='<div class="si" data-nav="cabinet-types" data-tip="Смета по каждому кабинету/помещению"><span class="ico">'+_ctIcon+'</span><span class="sl">'+_ctLabel+'</span><span class="sb wip" id="sbCab">0</span></div>';
+    html+='<div class="si" data-nav="cabinet-types" data-tip="Смета по каждому кабинету/помещению"><span class="ico">'+_i('cabinet-types')+'</span><span class="sl">'+_ctLabel+'</span><span class="sb wip" id="sbCab">0</span></div>';
+    html+=_grpEnd();
 
-    html+='<div class="side-sec">Базы данных</div>';
-    html+='<div class="si si-clr" style="--si-clr:#3b82f6" data-nav="db-premises" data-tip="Каталог коммерческой недвижимости для аренды"><span class="ico">&#127970;</span><span class="sl">Помещения</span><span class="sb wip" id="sbPrem">0</span></div>';
-    html+='<div class="si si-clr" style="--si-clr:#f59e0b" data-nav="db-renovations" data-tip="Ремонт и отделка: материалы, работы, цены"><span class="ico">&#128736;</span><span class="sl">Модернизация</span><span class="sb wip" id="sbReno">0</span></div>';
+    html+=_grpStart('databases','Базы данных');
+    html+='<div class="si si-clr" style="--si-clr:#3b82f6" data-nav="db-premises" data-tip="Каталог коммерческой недвижимости для аренды"><span class="ico">'+_i('db-premises')+'</span><span class="sl">Помещения</span><span class="sb wip" id="sbPrem">0</span></div>';
+    html+='<div class="si si-clr" style="--si-clr:#f59e0b" data-nav="db-renovations" data-tip="Ремонт и отделка: материалы, работы, цены"><span class="ico">'+_i('db-renovations')+'</span><span class="sl">Модернизация</span><span class="sb wip" id="sbReno">0</span></div>';
     const _svcLabel=currentBizType&&currentBizType!=='dental'?'Меню':'Услуги населению';
-    const _svcIcon=currentBizType&&currentBizType!=='dental'?'&#127860;':'&#128203;';
-    html+='<div class="si si-clr" style="--si-clr:#10b981" data-nav="db-services" data-tip="Прайс-лист услуг вашего заведения"><span class="ico">'+_svcIcon+'</span><span class="sl">'+_svcLabel+'</span><span class="sb wip" id="sbSvc">0</span></div>';
-    html+='<div class="si si-clr" style="--si-clr:#8b5cf6" data-nav="db-suppliers" data-tip="Каталог мебели и оборудования"><span class="ico">&#128230;</span><span class="sl">Оборудование</span><span class="sb wip" id="sbEquip">0</span></div>';
-    html+='<div class="si si-clr" style="--si-clr:#06b6d4" data-nav="db-employees" data-tip="Штатное расписание и зарплаты"><span class="ico">&#129489;</span><span class="sl">Сотрудники</span><span class="sb wip" id="sbEmp">0</span></div>';
-    html+='<div class="si si-clr" style="--si-clr:#ef4444" data-nav="db-docs" data-tip="Юридические документы и лицензии"><span class="ico">&#128203;</span><span class="sl">Документация</span><span class="sb wip" id="sbDocs">0</span></div>';
+    html+='<div class="si si-clr" style="--si-clr:#10b981" data-nav="db-services" data-tip="Прайс-лист услуг вашего заведения"><span class="ico">'+_i('db-services')+'</span><span class="sl">'+_svcLabel+'</span><span class="sb wip" id="sbSvc">0</span></div>';
+    html+='<div class="si si-clr" style="--si-clr:#8b5cf6" data-nav="db-suppliers" data-tip="Каталог мебели и оборудования"><span class="ico">'+_i('db-suppliers')+'</span><span class="sl">Оборудование</span><span class="sb wip" id="sbEquip">0</span></div>';
+    html+='<div class="si si-clr" style="--si-clr:#06b6d4" data-nav="db-employees" data-tip="Штатное расписание и зарплаты"><span class="ico">'+_i('db-employees')+'</span><span class="sl">Сотрудники</span><span class="sb wip" id="sbEmp">0</span></div>';
+    html+='<div class="si si-clr" style="--si-clr:#ef4444" data-nav="db-docs" data-tip="Юридические документы и лицензии"><span class="ico">'+_i('db-docs')+'</span><span class="sl">Документация</span><span class="sb wip" id="sbDocs">0</span></div>';
+    html+=_grpEnd();
   }
 
   // ── STAGE 2: Закупки и установка ──
   if(currentStage===2&&(currentRole==='admin'||currentRole==='owner')){
     const canC=currentRole==='admin'||(typeof userSubscription!=='undefined'&&userSubscription.contractors_access);
-    html+='<div class="si" data-nav="notes" data-tip="Записи о подрядчиках и поставщиках"><span class="ico">&#128221;</span><span class="sl">Заметки</span></div>';
-    html+='<div class="si" data-nav="exec-contractors" data-tip="Привязанные исполнители, задачи и счета"><span class="ico">&#128119;</span><span class="sl">Исполнители</span></div>';
-    html+='<div class="si'+(canC?'':' locked')+'" data-nav="'+(canC?'exec-chat':'upgrade-gate')+'" data-tip="Чат с подрядчиками и пост��вщиками"><span class="ico">&#128172;</span><span class="sl">Чат</span>'+(canC?'':'<span class="sb" style="background:rgba(201,169,110,.15);color:#c9a96e;font-size:8px">&#128274; PRO</span>')+'</div>';
-    html+='<div style="border-top:1px solid var(--bd);margin:8px 16px"></div>';
-    html+='<div class="side-sec">Исполнение</div>';
-    html+='<div class="si si-clr" style="--si-clr:#3b82f6" data-nav="exec-premises" data-tip="Поиск и аренда помещения"><span class="ico">&#127970;</span><span class="sl">Помещения</span><span class="sb wip" id="sbExPrem">0</span></div>';
-    html+='<div class="si si-clr" style="--si-clr:#f59e0b" data-nav="exec-renovations" data-tip="Выполнение ремонтных работ"><span class="ico">&#128736;</span><span class="sl">Модернизация</span><span class="sb wip" id="sbExReno">0</span></div>';
+    html+='<div class="si" data-nav="notes" data-tip="Записи о подрядчиках и поставщиках"><span class="ico">'+_i('notes')+'</span><span class="sl">Заметки</span></div>';
+    html+='<div class="si" data-nav="exec-contractors" data-tip="Привязанные исполнители, задачи и счета"><span class="ico">'+_i('exec-contractors')+'</span><span class="sl">Исполнители</span></div>';
+    html+='<div class="si'+(canC?'':' locked')+'" data-nav="'+(canC?'exec-chat':'upgrade-gate')+'" data-tip="Чат с подрядчиками и поставщиками"><span class="ico">'+_i('exec-chat')+'</span><span class="sl">Чат</span>'+(canC?'':'<span class="sb" style="background:rgba(201,169,110,.15);color:#c9a96e;font-size:8px">&#128274; PRO</span>')+'</div>';
+    html+='<div style="border-top:1px solid var(--bd);margin:4px 10px"></div>';
+    html+=_grpStart('execution','Исполнение');
+    html+='<div class="si si-clr" style="--si-clr:#3b82f6" data-nav="exec-premises" data-tip="Поиск и аренда помещения"><span class="ico">'+_i('exec-premises')+'</span><span class="sl">Помещения</span><span class="sb wip" id="sbExPrem">0</span></div>';
+    html+='<div class="si si-clr" style="--si-clr:#f59e0b" data-nav="exec-renovations" data-tip="Выполнение ремонтных работ"><span class="ico">'+_i('exec-renovations')+'</span><span class="sl">Модернизация</span><span class="sb wip" id="sbExReno">0</span></div>';
     const _svcL2=currentBizType&&currentBizType!=='dental'?'Меню':'Услуги';
-    html+='<div class="si si-clr" style="--si-clr:#10b981" data-nav="exec-services" data-tip="Запуск услуг и ценообразование"><span class="ico">&#128203;</span><span class="sl">'+_svcL2+'</span><span class="sb wip" id="sbExSvc">0</span></div>';
-    html+='<div class="si si-clr" style="--si-clr:#8b5cf6" data-nav="exec-equipment" data-tip="Закупка и установка оборудования"><span class="ico">&#128230;</span><span class="sl">Оборудование</span><span class="sb wip" id="sbExEquip">0</span></div>';
-    html+='<div class="si si-clr" style="--si-clr:#06b6d4" data-nav="exec-staff" data-tip="Найм и оформление сотрудников"><span class="ico">&#129489;</span><span class="sl">Сотрудники</span><span class="sb wip" id="sbExStaff">0</span></div>';
-    html+='<div class="si si-clr" style="--si-clr:#ef4444" data-nav="exec-docs" data-tip="Получение лицензий и оформление документов"><span class="ico">&#128203;</span><span class="sl">Документация</span><span class="sb wip" id="sbExDocs">0</span></div>';
-    html+='<div style="border-top:1px solid var(--bd);margin:8px 16px"></div>';
-    html+='<div class="side-sec">Исполнители</div>';
-    html+='<div class="si'+(canC?'':' locked')+'" data-nav="'+(canC?'db-contractors':'upgrade-gate')+'" data-tip="Компании для выполнения работ"><span class="ico">&#128736;</span><span class="sl">Подрядчики</span>'+(canC?'<span class="sb wip" id="sbContr">0</span>':'<span class="sb" style="background:rgba(201,169,110,.15);color:#c9a96e;font-size:8px">&#128274; PRO</span>')+'</div>';
-    html+='<div class="si'+(canC?'':' locked')+'" data-nav="'+(canC?'db-vendor-companies':'upgrade-gate')+'" data-tip="Поставщики оборудования и материалов"><span class="ico">&#127970;</span><span class="sl">Поставщики</span>'+(canC?'<span class="sb wip" id="sbVend">0</span>':'<span class="sb" style="background:rgba(201,169,110,.15);color:#c9a96e;font-size:8px">&#128274; PRO</span>')+'</div>';
+    html+='<div class="si si-clr" style="--si-clr:#10b981" data-nav="exec-services" data-tip="Запуск услуг и ценообразование"><span class="ico">'+_i('exec-services')+'</span><span class="sl">'+_svcL2+'</span><span class="sb wip" id="sbExSvc">0</span></div>';
+    html+='<div class="si si-clr" style="--si-clr:#8b5cf6" data-nav="exec-equipment" data-tip="Закупка и установка оборудования"><span class="ico">'+_i('exec-equipment')+'</span><span class="sl">Оборудование</span><span class="sb wip" id="sbExEquip">0</span></div>';
+    html+='<div class="si si-clr" style="--si-clr:#06b6d4" data-nav="exec-staff" data-tip="Найм и оформление сотрудников"><span class="ico">'+_i('exec-staff')+'</span><span class="sl">Сотрудники</span><span class="sb wip" id="sbExStaff">0</span></div>';
+    html+='<div class="si si-clr" style="--si-clr:#ef4444" data-nav="exec-docs" data-tip="Получение лицензий и оформление документов"><span class="ico">'+_i('exec-docs')+'</span><span class="sl">Документация</span><span class="sb wip" id="sbExDocs">0</span></div>';
+    html+=_grpEnd();
+    html+='<div style="border-top:1px solid var(--bd);margin:4px 10px"></div>';
+    html+=_grpStart('executors','Исполнители');
+    html+='<div class="si'+(canC?'':' locked')+'" data-nav="'+(canC?'db-contractors':'upgrade-gate')+'" data-tip="Компании для выполнения работ"><span class="ico">'+_i('exec-contractors')+'</span><span class="sl">Подрядчики</span>'+(canC?'<span class="sb wip" id="sbContr">0</span>':'<span class="sb" style="background:rgba(201,169,110,.15);color:#c9a96e;font-size:8px">&#128274; PRO</span>')+'</div>';
+    html+='<div class="si'+(canC?'':' locked')+'" data-nav="'+(canC?'db-vendor-companies':'upgrade-gate')+'" data-tip="Поставщики оборудования и материалов"><span class="ico">'+_i('vendor-companies')+'</span><span class="sl">Поставщики</span>'+(canC?'<span class="sb wip" id="sbVend">0</span>':'<span class="sb" style="background:rgba(201,169,110,.15);color:#c9a96e;font-size:8px">&#128274; PRO</span>')+'</div>';
+    html+=_grpEnd();
   }
 
   // ── Подрядчик ──
   if(currentRole==='contractor'){
-    html+='<div class="side-sec">Работа</div>';
-    html+='<div class="si" data-nav="contractor-works" data-tip="Тендеры и заказы от владельцев бизнеса"><span class="ico">&#128736;</span><span class="sl">Доступные работы</span></div>';
-    html+='<div class="si" data-nav="contractor-proposals" data-tip="Отправленные коммерческие предложения"><span class="ico">&#128196;</span><span class="sl">Мои предложения</span></div>';
-    html+='<div class="si" data-nav="contractor-orders" data-tip="Принятые заказы в работе"><span class="ico">&#128203;</span><span class="sl">Активные заказы</span></div>';
+    html+=_grpStart('work','Работа');
+    html+='<div class="si" data-nav="contractor-works" data-tip="Тендеры и заказы от владельцев бизнеса"><span class="ico">'+_i('contractor-works')+'</span><span class="sl">Доступные работы</span></div>';
+    html+='<div class="si" data-nav="contractor-proposals" data-tip="Отправленные коммерческие предложения"><span class="ico">'+_i('contractor-proposals')+'</span><span class="sl">Мои предложения</span></div>';
+    html+='<div class="si" data-nav="contractor-orders" data-tip="Принятые заказы в работе"><span class="ico">'+_i('contractor-orders')+'</span><span class="sl">Активные заказы</span></div>';
     const _canChat=typeof userSubscription!=='undefined'&&userSubscription.contractors_access;
-    html+='<div class="si'+(_canChat?'':' locked')+'" data-nav="'+(_canChat?'exec-chat':'upgrade-gate')+'" data-tip="Переписка с заказчиками"><span class="ico">&#128172;</span><span class="sl">Чат</span>'+(_canChat?'':'<span class="sb" style="background:rgba(201,169,110,.15);color:#c9a96e;font-size:8px">&#128274; PRO</span>')+'</div>';
+    html+='<div class="si'+(_canChat?'':' locked')+'" data-nav="'+(_canChat?'exec-chat':'upgrade-gate')+'" data-tip="Переписка с заказчиками"><span class="ico">'+_i('exec-chat')+'</span><span class="sl">Чат</span>'+(_canChat?'':'<span class="sb" style="background:rgba(201,169,110,.15);color:#c9a96e;font-size:8px">&#128274; PRO</span>')+'</div>';
+    html+=_grpEnd();
   }
   // ── Поставщик ──
   if(currentRole==='supplier'){
-    html+='<div class="side-sec">Каталог</div>';
-    html+='<div class="si" data-nav="db-suppliers" data-tip="Управление каталогом товаров"><span class="ico">&#128230;</span><span class="sl">Мой каталог</span></div>';
-    html+='<div class="si" data-nav="supplier-requests" data-tip="Запросы на поставку от заказчиков"><span class="ico">&#128229;</span><span class="sl">Входящие запросы</span></div>';
+    html+=_grpStart('catalog','Каталог');
+    html+='<div class="si" data-nav="db-suppliers" data-tip="Управление каталогом товаров"><span class="ico">'+_i('supplier-catalog')+'</span><span class="sl">Мой каталог</span></div>';
+    html+='<div class="si" data-nav="supplier-requests" data-tip="Запросы на поставку от заказчиков"><span class="ico">'+_i('supplier-requests')+'</span><span class="sl">Входящие запросы</span></div>';
     const _canChat2=typeof userSubscription!=='undefined'&&userSubscription.contractors_access;
-    html+='<div class="si'+(_canChat2?'':' locked')+'" data-nav="'+(_canChat2?'exec-chat':'upgrade-gate')+'" data-tip="Переписка с заказчиками"><span class="ico">&#128172;</span><span class="sl">Чат</span>'+(_canChat2?'':'<span class="sb" style="background:rgba(201,169,110,.15);color:#c9a96e;font-size:8px">&#128274; PRO</span>')+'</div>';
+    html+='<div class="si'+(_canChat2?'':' locked')+'" data-nav="'+(_canChat2?'exec-chat':'upgrade-gate')+'" data-tip="Переписка с заказчиками"><span class="ico">'+_i('exec-chat')+'</span><span class="sl">Чат</span>'+(_canChat2?'':'<span class="sb" style="background:rgba(201,169,110,.15);color:#c9a96e;font-size:8px">&#128274; PRO</span>')+'</div>';
+    html+=_grpEnd();
   }
 
   // ── Employee — на обоих этапах ──
   if(currentRole==='employee'){
-    html+='<div class="side-sec">Мой профиль</div>';
-    html+='<div class="si" data-nav="db-employees" data-tip="Ваш профиль сотрудника, навыки и контакты"><span class="ico">&#129489;</span><span class="sl">Мои данные</span></div>';
+    html+=_grpStart('myprofile','Мой профиль');
+    html+='<div class="si" data-nav="db-employees" data-tip="Ваш профиль сотрудника, навыки и контакты"><span class="ico">'+_i('employee-data')+'</span><span class="sl">Мои данные</span></div>';
+    html+=_grpEnd();
   }
 
   // ── Admin panel — visible when user IS admin, regardless of selected role ──
   if(currentUser&&currentUser.isAdmin){
-    html+='<div style="border-top:1px solid var(--bd);margin:8px 16px"></div>';
+    html+='<div style="border-top:1px solid var(--bd);margin:4px 10px"></div>';
     html+='<div class="side-sec">Администрирование</div>';
-    html+='<div class="si" data-nav="users" data-tip="Управление пользователями, ролями и подписками"><span class="ico">&#128101;</span><span class="sl">Пользователи</span><span class="sb wip" id="sbUsers">0</span></div>';
-    html+='<div class="si" data-nav="metrics" data-tip="Статистика посещений, источники трафика, SEO"><span class="ico">&#128202;</span><span class="sl">Метрики</span></div>';
-    html+='<div id="sideRoleSwitch" style="padding:8px 16px"></div>';
+    html+='<div class="si" data-nav="users" data-tip="Управление пользователями, ролями и подписками"><span class="ico">'+_i('users')+'</span><span class="sl">Пользователи</span><span class="sb wip" id="sbUsers">0</span></div>';
+    html+='<div class="si" data-nav="metrics" data-tip="Статистика посещений, источники трафика, SEO"><span class="ico">'+_i('metrics')+'</span><span class="sl">Метрики</span></div>';
+    if(currentUser.isSuperAdmin){
+      html+='<div id="sideRoleSwitch" style="padding:4px 10px"></div>';
+    }
   }
 
   // ── Мой Кабинет — для всех ──
-  html+='<div style="border-top:1px solid var(--bd);margin:8px 16px"></div>';
-  html+='<div class="si" data-nav="account" data-tip="Профиль, управление, концепции, тариф, безопасность"><span class="ico">&#127968;</span><span class="sl">Мой Кабинет</span></div>';
+  html+='<div style="border-top:1px solid var(--bd);margin:4px 10px"></div>';
+  html+='<div class="si" data-nav="account" data-tip="Профиль, управление, концепции, тариф, безопасность"><span class="ico">'+_i('account')+'</span><span class="sl">Мой Кабинет</span></div>';
   n.innerHTML=html;
-  n.querySelectorAll('[data-nav]').forEach(el=>{el.addEventListener('click',()=>nav(el.dataset.nav))});
-  // Render inline role switcher for admin
+  n.querySelectorAll('[data-nav]').forEach(el=>{el.addEventListener('click',()=>{nav(el.dataset.nav);toggleMobileSidebar(true)})});
+  // Render inline role switcher for superadmin only
   const _srs=document.getElementById('sideRoleSwitch');
-  if(_srs&&currentUser&&currentUser.isAdmin){
-    const roles=['admin','owner','contractor','supplier','employee'];
-    let rh='<div style="font-size:9px;font-weight:600;color:var(--tx3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">Просмотр от роли</div><div style="display:flex;gap:4px;flex-wrap:wrap">';
+  if(_srs&&currentUser&&currentUser.isSuperAdmin){
+    const roles=['owner','admin','contractor','supplier','employee'];
+    let rh='<div style="font-size:8px;font-weight:600;color:var(--tx3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Эмуляция роли</div><div style="display:flex;gap:3px;flex-wrap:wrap">';
     roles.forEach(r=>{
       const sel=r===currentRole;
-      rh+='<button onclick="switchAdminRole(\''+r+'\')" style="padding:4px 10px;border-radius:6px;font-size:10px;font-weight:'+(sel?'700':'400')+';border:1px solid '+(sel?'var(--ac)':'var(--bd)')+';background:'+(sel?'var(--acbg)':'transparent')+';color:'+(sel?'var(--ac2)':'var(--tx3)')+';cursor:pointer;font-family:var(--f);transition:all .15s">'+({admin:'Адм',owner:'Влд',contractor:'Подр',supplier:'Пост',employee:'Сотр'}[r]||r)+'</button>';
+      rh+='<button onclick="switchAdminRole(\''+r+'\')" style="padding:3px 8px;border-radius:5px;font-size:9px;font-weight:'+(sel?'700':'400')+';border:1px solid '+(sel?'var(--ac)':'var(--bd)')+';background:'+(sel?'var(--acbg)':'transparent')+';color:'+(sel?'var(--ac2)':'var(--tx3)')+';cursor:pointer;font-family:var(--f);transition:all .15s">'+({admin:'Адм',owner:'Влд',contractor:'Подр',supplier:'Пост',employee:'Сотр'}[r]||r)+'</button>';
     });
     rh+='</div>';
     _srs.innerHTML=rh;
@@ -4752,6 +5036,7 @@ function buildSidebar(){
   });
   document.getElementById('tabBar').style.display=(currentStage===1&&(currentRole==='admin'||currentRole==='owner'))?'flex':'none';
   _sidebarBuilt=true;
+  _updateGrpCounts();
   updateSidebarBadges();
 }
 
@@ -4775,7 +5060,7 @@ function getSecNames(){
   return{overview:'Обзор',s1:'Помещение',s2:'Модернизация',s3:'Оснащение',s4:'Персонал',s5:isCoffee?'Меню':'Услуги населению',s6:'Концепция',s7:'Документация',account:'Личный кабинет',budget:'Бюджет',profit:'Рентабельность',zones:'Зоны',news:'Новости','db-premises':'БД Помещений','db-renovations':'Модернизация и услуги','db-services':isCoffee?'Меню':'Каталог услуг','db-docs':'Каталог документов','db-contractors':'БД Подрядчиков','db-suppliers':'Каталог оборудования','db-employees':'БД Сотрудников','db-vendor-companies':'Поставщики',users:'Пользователи','cabinet-types':isCoffee?'Стоимость помещений':'Типы кабинетов','contractor-works':'Доступные работы','contractor-proposals':'Мои предложения','exec-premises':'Помещения','exec-renovations':'Модернизация','exec-services':'Услуги','exec-equipment':'Оборудование','exec-staff':'Сотрудники','exec-docs':'Документация','exec-contractors':'Исполнители','exec-chat':'Чат',notes:'Заметки',metrics:'Метрики','contractor-orders':'Активные заказы','supplier-requests':'Входящие запросы'};
 }
 const secNames=getSecNames();
-const stageOrder=['s1','s2','s3','s4','s5','s6','s7'];
+const stageOrder=['s6','s1','s2','s3','s4','s5','s7'];
 let cur='overview';
 
 function nav(id){
@@ -4789,10 +5074,18 @@ function nav(id){
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('vis'));
   const el=document.getElementById('sec-'+id);
   if(el)el.classList.add('vis');
-  // Sidebar items
+  // Sidebar items — auto-expand collapsed group if needed
   document.querySelectorAll('.si').forEach(s=>s.classList.remove('act'));
   const si=document.querySelector('.si[data-nav="'+id+'"]');
-  if(si)si.classList.add('act');
+  if(si){
+    si.classList.add('act');
+    const grp=si.closest('.side-grp');
+    if(grp&&grp.classList.contains('collapsed')){
+      grp.classList.remove('collapsed');
+      const st=_sideGrpState();st[grp.dataset.grp]=false;
+      localStorage.setItem('svita_side_grp',JSON.stringify(st));
+    }
+  }
   // Tab bar
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('act'));
   const tab=document.querySelector('.tab[data-nav="'+id+'"]');
@@ -4872,7 +5165,7 @@ function renderCabManage(){
   const equips=DB.suppliers||[];
   document.getElementById('cabEquipCount').textContent=equips.length;
   const el=document.getElementById('cabEquipList');
-  el.innerHTML=equips.length?equips.slice(0,50).map(e=>'<div class="cab-item" data-filter="'+esc((e.name||'')+' '+(e.category||'')+' '+(e.supplier||'')).toLowerCase()+'">'+_cabAvatar(e.name,'#06b6d4')+'<div class="cab-item-info"><div class="cab-item-name">'+esc(e.name)+'</div><div class="cab-item-sub">'+esc(e.category||'')+(e.supplier?' · '+esc(e.supplier):'')+(e.price?' · '+Number(e.price).toLocaleString()+' PLN':'')+'</div></div></div>').join('')+(equips.length>50?'<div style="text-align:center;padding:8px;font-size:10px;color:var(--tx3)">...ещё '+(equips.length-50)+'</div>':''):'<div style="text-align:center;color:var(--tx3);font-size:11px;padding:12px">Нет товаров</div>';
+  el.innerHTML=equips.length?equips.slice(0,50).map(e=>'<div class="cab-item" data-filter="'+esc((e.name||'')+' '+(e.category||'')+' '+(e.supplier||'')).toLowerCase()+'">'+_cabAvatar(e.name,'#06b6d4')+'<div class="cab-item-info"><div class="cab-item-name">'+esc(e.name)+'</div><div class="cab-item-sub">'+esc(e.category||'')+(e.supplier?' · '+esc(e.supplier):'')+(e.price?' · '+Number(e.price).toLocaleString()+' '+(activeCurrency||'PLN'):'')+'</div></div></div>').join('')+(equips.length>50?'<div style="text-align:center;padding:8px;font-size:10px;color:var(--tx3)">...ещё '+(equips.length-50)+'</div>':''):'<div style="text-align:center;color:var(--tx3);font-size:11px;padding:12px">Нет товаров</div>';
   // Скрыть управление для не-админов
   if(!isAdmin){
     document.querySelector('#cab-manage').innerHTML='<div class="c"><div class="cb" style="text-align:center;color:var(--tx3);font-size:12px;padding:24px">Раздел доступен только администраторам</div></div>';
@@ -5436,7 +5729,7 @@ function _chatKey(email){
   const pair=[me,email].sort();
   return 'svita_chat_'+pair[0]+'__'+pair[1];
 }
-var _roleLabels={admin:'Админ',superadmin:'Админ',owner:'Владелец',contractor:'Подрядчик',supplier:'Поставщик',viewer:'Зритель',employee:'Сотрудник'};
+var _roleLabels={admin:'Админ',superadmin:'Суперадмин',owner:'Владелец',contractor:'Подрядчик',supplier:'Поставщик',viewer:'Зритель',employee:'Сотрудник'};
 var _groupLabels={owner:'Владельцы',admin:'Администраторы',contractor:'Подрядчики',supplier:'Поставщики',employee:'Сотрудники',viewer:'Зрители'};
 var _groupColors={contractor:'#f59e0b',supplier:'#8b5cf6',owner:'var(--ac)',admin:'#3b82f6',employee:'#06b6d4'};
 /* === Активные диалоги (основной список) === */
@@ -5618,7 +5911,7 @@ function createInvoice(contractorEmail,contractorName,items,totalPrice){
     assignments[it.cat+'_'+it.id]={contractor:contractorEmail,contractor_name:contractorName,invoice_id:inv.id,status:'assigned'};
   });
   saveAssignments();
-  toast('Счёт создан: '+totalPrice.toLocaleString()+' PLN','gn');
+  toast('Счёт создан: '+totalPrice.toLocaleString()+' '+(activeCurrency||'PLN'),'gn');
   return inv;
 }
 
@@ -6105,7 +6398,7 @@ async function sendProposal(){
   }
   contractorSelected={};
   renderContractorWorks();
-  alert('Коммерческое предложение отправлено! Сумма: '+total.toLocaleString()+' PLN');
+  alert('Коммерческое предложение отправлено! Сумма: '+total.toLocaleString()+' '+(activeCurrency||'PLN'));
   nav('contractor-proposals');
 }
 
@@ -8425,7 +8718,7 @@ function renderStaff(){
   if(el('staffFot'))el('staffFot').textContent=totalFot.toLocaleString('ru');
   if(el('staffFotYear'))el('staffFotYear').textContent=(totalFot*12).toLocaleString('ru');
   if(el('staffAvg'))el('staffAvg').textContent=avg.toLocaleString('ru');
-  if(el('s4Total'))el('s4Total').textContent=totalFot.toLocaleString('ru')+' PLN';
+  if(el('s4Total'))el('s4Total').textContent=totalFot.toLocaleString('ru')+' '+(activeCurrency||'PLN');
   if(!cnt){c.innerHTML='<div style="padding:24px;text-align:center;color:var(--tx3);font-size:12px">Добавьте сотрудников из БД Сотрудников</div>';return}
   c.innerHTML=items.map(r=>{
     const statusColor=r.status==='Работает'?'var(--gn)':r.status==='Собеседование'?'var(--yl)':'var(--tx3)';
@@ -8541,7 +8834,7 @@ function renderSelectedServices(){
   document.getElementById('svcCats').textContent=catKeys.length;
   document.getElementById('svcAvgPrice').textContent=avg.toLocaleString('ru');
   document.getElementById('svcRevenue').textContent=mn.toLocaleString('ru')+' / '+mx.toLocaleString('ru');
-  document.getElementById('s5Total').textContent=avg.toLocaleString('ru')+' PLN';
+  document.getElementById('s5Total').textContent=avg.toLocaleString('ru')+' '+(activeCurrency||'PLN');
 
   let html='';
   catKeys.forEach(cat=>{
@@ -9111,7 +9404,7 @@ function renderCabinetTypes(){
 <div style="font-size:11px;color:var(--tx2);margin-top:2px">${rm.type} · ${rm.area} м²</div>
 </div>
 <div style="text-align:right">
-<div style="font-size:20px;font-weight:800;color:${costColor}">${roomCost>0?roomCost.toLocaleString('ru')+' PLN':'—'}</div>
+<div style="font-size:20px;font-weight:800;color:${costColor}">${roomCost>0?roomCost.toLocaleString('ru')+' '+(activeCurrency||'PLN'):'—'}</div>
 <div style="font-size:10px;color:var(--tx3)">${items.length} позиций</div>
 </div>
 </div>`;
@@ -9339,13 +9632,14 @@ function calcTotals(){
   const grand=rent+eng+equip;
   // Update S1 cost total
   const s1el=document.getElementById('s1CostTotal');
-  if(s1el)s1el.textContent=rent.toLocaleString('ru')+' PLN';
+  if(s1el)s1el.textContent=rent.toLocaleString('ru')+' '+(activeCurrency||'PLN');
   const renDisp=document.getElementById('renCostDisplay');
   if(renDisp)renDisp.textContent=renovation.toLocaleString('ru');
   return{rent,renovation,eng,equip,docs,staff,fot,grand,revenue,expenses,chairs,ppc,wd,avgCheck,rentMonth};
 }
 function updateBudgetSummary(t){
-  const f=n=>n.toLocaleString('ru')+' PLN';
+  const c=activeCurrency||'PLN';
+  const f=n=>n.toLocaleString('ru')+' '+c;
   const rentYear=t.rentMonth*12;
   const staffQ=t.staff*3;
   const mkt=parseInt(document.getElementById('prMarketing')?.value||0);
@@ -9377,9 +9671,9 @@ function recalc(){
 function _recalcNow(){
   const t=calcTotals();
   // s2Total removed — renTotal is updated by renderSelectedRenovations()
-  document.getElementById('s4Total').textContent=t.staff.toLocaleString('ru')+' PLN';
-  document.getElementById('s7Total').textContent=t.docs.toLocaleString('ru')+' PLN';
-  const el6r=document.getElementById('s6Revenue');if(el6r)el6r.textContent=t.revenue.toLocaleString('ru')+' PLN';
+  document.getElementById('s4Total').textContent=t.staff.toLocaleString('ru')+' '+(activeCurrency||'PLN');
+  document.getElementById('s7Total').textContent=t.docs.toLocaleString('ru')+' '+(activeCurrency||'PLN');
+  const el6r=document.getElementById('s6Revenue');if(el6r)el6r.textContent=t.revenue.toLocaleString('ru')+' '+(activeCurrency||'PLN');
   const profit=t.revenue-t.expenses;
   document.getElementById('ovROI').textContent=profit>0&&t.grand>0?Math.ceil(t.grand/profit):'--';
   document.getElementById('totalItems').textContent=Object.keys(DB.pickedEquip||{}).length;
@@ -9396,13 +9690,13 @@ function _recalcNow(){
 function updateTabCosts(t){
   // Tab 1: Помещение — аренда + депозит
   const tc1=document.getElementById('tabCost1');
-  if(tc1)tc1.textContent=t.rent>0?t.rent.toLocaleString('ru')+' PLN':'';
+  if(tc1)tc1.textContent=t.rent>0?t.rent.toLocaleString('ru')+' '+(activeCurrency||'PLN'):'';
   // Tab 2: Модернизация — только ремонт
   const tc2=document.getElementById('tabCost2');
-  if(tc2)tc2.textContent=t.renovation>0?t.renovation.toLocaleString('ru')+' PLN':'';
+  if(tc2)tc2.textContent=t.renovation>0?t.renovation.toLocaleString('ru')+' '+(activeCurrency||'PLN'):'';
   // Tab 3: Оснащение — оборудование
   const tc3=document.getElementById('tabCost3');
-  if(tc3)tc3.textContent=t.equip>0?t.equip.toLocaleString('ru')+' PLN':'';
+  if(tc3)tc3.textContent=t.equip>0?t.equip.toLocaleString('ru')+' '+(activeCurrency||'PLN'):'';
   // Tab 4: Персонал — ФОТ/мес
   let fot=0;
   Object.entries(DB.pickedStaff||{}).forEach(([id,p])=>{
@@ -9419,7 +9713,7 @@ function updateTabCosts(t){
     if(s)svcTotal+=(p.customPrice!=null?p.customPrice:s.price)*(p.qty||1);
   });
   const tc5=document.getElementById('tabCost5');
-  if(tc5)tc5.textContent=svcTotal>0?svcTotal.toLocaleString('ru')+' PLN':'';
+  if(tc5)tc5.textContent=svcTotal>0?svcTotal.toLocaleString('ru')+' '+(activeCurrency||'PLN'):'';
   // Tab 5 stats
   const svcCountEl=document.getElementById('svcCount');
   const svcCatsEl=document.getElementById('svcCats');
@@ -9431,13 +9725,13 @@ function updateTabCosts(t){
   if(svcAvgEl)svcAvgEl.textContent=svcPickedCount>0?Math.round(svcTotal/svcPickedCount).toLocaleString('ru'):'0';
   if(svcRevEl){const chairs=parseInt(document.getElementById('chairsCount')?.value||7);const ppd=parseInt(document.getElementById('patientsPerChair')?.value||6);const wd=parseInt(document.getElementById('workDays')?.value||22);const avgP=svcPickedCount>0?svcTotal/svcPickedCount:0;svcRevEl.textContent=Math.round(avgP*chairs*ppd*wd).toLocaleString('ru')}
   const s5t=document.getElementById('s5Total');
-  if(s5t)s5t.textContent=(svcPickedCount>0?Math.round(svcTotal/svcPickedCount).toLocaleString('ru'):'0')+' PLN';
+  if(s5t)s5t.textContent=(svcPickedCount>0?Math.round(svcTotal/svcPickedCount).toLocaleString('ru'):'0')+' '+(activeCurrency||'PLN');
   // Tab 6: Концепция
   const tc6=document.getElementById('tabCost6');
   if(tc6)tc6.textContent='';
   // Tab 7: Документация
   const tc7=document.getElementById('tabCost7');
-  if(tc7)tc7.textContent=t.docs>0?t.docs.toLocaleString('ru')+' PLN':'';
+  if(tc7)tc7.textContent=t.docs>0?t.docs.toLocaleString('ru')+' '+(activeCurrency||'PLN'):'';
   // Tab status: red (0) → orange (wip) → green (ok)
   const tabs=document.querySelectorAll('#tabBar .tab');
   const renP=Object.keys(DB.pickedRenovations||{}).length;
@@ -9582,11 +9876,12 @@ function showAchToast(count){
 
 function updateBudget(){
   const t=calcTotals();
-  document.getElementById('budgetGrand').textContent=t.grand.toLocaleString('ru')+' PLN';
-  document.getElementById('bCatRent').textContent=t.rent.toLocaleString('ru')+' PLN';
-  document.getElementById('bCatEng').textContent=t.eng.toLocaleString('ru')+' PLN';
-  document.getElementById('bCatEquip').textContent=t.equip.toLocaleString('ru')+' PLN';
-  document.getElementById('bCatDocs').textContent=t.docs.toLocaleString('ru')+' PLN';
+  const c=activeCurrency||'PLN';
+  document.getElementById('budgetGrand').textContent=t.grand.toLocaleString('ru')+' '+c;
+  document.getElementById('bCatRent').textContent=t.rent.toLocaleString('ru')+' '+c;
+  document.getElementById('bCatEng').textContent=t.eng.toLocaleString('ru')+' '+c;
+  document.getElementById('bCatEquip').textContent=t.equip.toLocaleString('ru')+' '+c;
+  document.getElementById('bCatDocs').textContent=t.docs.toLocaleString('ru')+' '+c;
   // Build itemized list from DB data (not DOM) to work even when sections are hidden
   const items=[];
   // Rent + deposit
@@ -9633,13 +9928,13 @@ function updateProfit(){
   document.getElementById('prInvest').textContent=t.grand.toLocaleString('ru');
   document.getElementById('prPayback').textContent=payback||'--';
   document.getElementById('prPatients').textContent=t.chairs*t.ppc;
-  document.getElementById('prAvgCheck').textContent=t.avgCheck.toLocaleString('ru')+' PLN';
-  document.getElementById('prRevenue').textContent=t.revenue.toLocaleString('ru')+' PLN';
-  document.getElementById('prRent').textContent=t.rentMonth.toLocaleString('ru')+' PLN';
-  document.getElementById('prStaff').textContent=t.staff.toLocaleString('ru')+' PLN';
-  document.getElementById('prFot').textContent=t.fot.toLocaleString('ru')+' PLN';
-  document.getElementById('prExpenses').textContent=t.expenses.toLocaleString('ru')+' PLN';
-  document.getElementById('prProfit').textContent=profit.toLocaleString('ru')+' PLN';
+  document.getElementById('prAvgCheck').textContent=t.avgCheck.toLocaleString('ru')+' '+(activeCurrency||'PLN');
+  document.getElementById('prRevenue').textContent=t.revenue.toLocaleString('ru')+' '+(activeCurrency||'PLN');
+  document.getElementById('prRent').textContent=t.rentMonth.toLocaleString('ru')+' '+(activeCurrency||'PLN');
+  document.getElementById('prStaff').textContent=t.staff.toLocaleString('ru')+' '+(activeCurrency||'PLN');
+  document.getElementById('prFot').textContent=t.fot.toLocaleString('ru')+' '+(activeCurrency||'PLN');
+  document.getElementById('prExpenses').textContent=t.expenses.toLocaleString('ru')+' '+(activeCurrency||'PLN');
+  document.getElementById('prProfit').textContent=profit.toLocaleString('ru')+' '+(activeCurrency||'PLN');
   document.getElementById('prProfit').className='metric-val '+(profit>0?'pos':'neg');
   document.getElementById('prMarginBar').style.width=Math.max(0,Math.min(100,margin))+'%';
   document.getElementById('prMarginBar').style.background=margin>30?'var(--gn)':margin>15?'var(--yl)':'var(--rd)';
@@ -9647,7 +9942,7 @@ function updateProfit(){
   document.getElementById('prROI').textContent=roi+'%';
   document.getElementById('prROI').className='metric-val '+(roi>50?'pos':roi>20?'neu':'neg');
   document.getElementById('prPaybackMonths').textContent=payback?payback+' мес.':'--';
-  document.getElementById('prYearProfit').textContent=(profit*12).toLocaleString('ru')+' PLN';
+  document.getElementById('prYearProfit').textContent=(profit*12).toLocaleString('ru')+' '+(activeCurrency||'PLN');
 }
 
 function updateFormulaDisplay(){
@@ -9664,25 +9959,26 @@ function updateFormulaDisplay(){
   const roi=t.grand>0?Math.round(profit*12/t.grand*100):0;
   const payback=profit>0?Math.ceil(t.grand/profit):0;
   const fmt=n=>n.toLocaleString('ru');
+  const c=activeCurrency||'PLN';
   // Revenue
   const el=id=>document.getElementById(id);
-  if(el('fmRevenueCalc'))el('fmRevenueCalc').textContent=chairs+' × '+ppc+' × '+wd+' × '+fmt(avg)+' = '+fmt(revenue)+' PLN';
-  if(el('s6Revenue'))el('s6Revenue').textContent=fmt(revenue)+' PLN';
+  if(el('fmRevenueCalc'))el('fmRevenueCalc').textContent=chairs+' × '+ppc+' × '+wd+' × '+fmt(avg)+' = '+fmt(revenue)+' '+c;
+  if(el('s6Revenue'))el('s6Revenue').textContent=fmt(revenue)+' '+c;
   // Expenses — total + breakdown
-  if(el('fmExpensesTotal'))el('fmExpensesTotal').textContent=fmt(expenses)+' PLN';
-  if(el('fmExpRent'))el('fmExpRent').textContent=fmt(rentM)+' PLN';
-  if(el('fmExpStaff'))el('fmExpStaff').textContent=fmt(staff)+' PLN';
-  if(el('fmExpFot'))el('fmExpFot').textContent=fmt(fot)+' PLN';
-  if(el('fmExpUtils'))el('fmExpUtils').textContent=fmt(utils)+' PLN';
-  if(el('fmExpMat'))el('fmExpMat').textContent=fmt(mat)+' PLN';
-  if(el('fmExpMkt'))el('fmExpMkt').textContent=fmt(mkt)+' PLN';
-  if(el('fmExpOther'))el('fmExpOther').textContent=fmt(oth)+' PLN';
-  if(el('fmExpTotal2'))el('fmExpTotal2').textContent=fmt(expenses)+' PLN';
-  if(el('fmExpensesCalc'))el('fmExpensesCalc').textContent=fmt(rentM)+' + '+fmt(staff)+' + '+fmt(fot)+' + '+fmt(utils)+' + '+fmt(mat)+' + '+fmt(mkt)+' + '+fmt(oth)+' = '+fmt(expenses)+' PLN';
+  if(el('fmExpensesTotal'))el('fmExpensesTotal').textContent=fmt(expenses)+' '+c;
+  if(el('fmExpRent'))el('fmExpRent').textContent=fmt(rentM)+' '+c;
+  if(el('fmExpStaff'))el('fmExpStaff').textContent=fmt(staff)+' '+c;
+  if(el('fmExpFot'))el('fmExpFot').textContent=fmt(fot)+' '+c;
+  if(el('fmExpUtils'))el('fmExpUtils').textContent=fmt(utils)+' '+c;
+  if(el('fmExpMat'))el('fmExpMat').textContent=fmt(mat)+' '+c;
+  if(el('fmExpMkt'))el('fmExpMkt').textContent=fmt(mkt)+' '+c;
+  if(el('fmExpOther'))el('fmExpOther').textContent=fmt(oth)+' '+c;
+  if(el('fmExpTotal2'))el('fmExpTotal2').textContent=fmt(expenses)+' '+c;
+  if(el('fmExpensesCalc'))el('fmExpensesCalc').textContent=fmt(rentM)+' + '+fmt(staff)+' + '+fmt(fot)+' + '+fmt(utils)+' + '+fmt(mat)+' + '+fmt(mkt)+' + '+fmt(oth)+' = '+fmt(expenses)+' '+c;
   // Profit
   const pEl=el('fmProfitTotal');
-  if(pEl){pEl.textContent=fmt(profit)+' PLN';pEl.style.color=profit>0?'var(--gn)':'var(--rd)'}
-  if(el('fmProfitCalc'))el('fmProfitCalc').textContent=fmt(revenue)+' − '+fmt(expenses)+' = '+fmt(profit)+' PLN';
+  if(pEl){pEl.textContent=fmt(profit)+' '+c;pEl.style.color=profit>0?'var(--gn)':'var(--rd)'}
+  if(el('fmProfitCalc'))el('fmProfitCalc').textContent=fmt(revenue)+' − '+fmt(expenses)+' = '+fmt(profit)+' '+c;
   // Payback
   if(el('fmPaybackVal'))el('fmPaybackVal').textContent=payback?payback+' мес.':'--';
   if(el('fmPaybackCalc'))el('fmPaybackCalc').textContent=fmt(t.grand)+' ÷ '+fmt(Math.max(profit,0))+' = '+(payback?payback+' мес.':'∞');
@@ -9693,6 +9989,8 @@ function updateFormulaDisplay(){
   if(el('fmMarginVal')){el('fmMarginVal').textContent=margin+'%';el('fmMarginVal').style.color=margin>30?'var(--gn)':margin>15?'var(--yl)':'var(--rd)'}
   if(el('fmMarginBar')){el('fmMarginBar').style.width=Math.max(0,Math.min(100,margin))+'%';el('fmMarginBar').style.background=margin>30?'var(--gn)':margin>15?'var(--yl)':'var(--rd)'}
   if(el('fmMarginCalc'))el('fmMarginCalc').textContent=fmt(profit)+' ÷ '+fmt(revenue)+' × 100 = '+margin+'%';
+  // KPI summary (always visible)
+  updateKpiSummary(revenue,expenses,profit,payback);
 }
 // ═══════════════ RIGHT PANEL ═══════════════
 function updateRightPanel(){/* chat is in rpanel now */}
@@ -9785,7 +10083,7 @@ async function sendRpChat(){
     if(_fullReno.length)parts.push('РЕМОНТ ('+_fullReno.length+'):\n'+_fullReno.join('\n'));
     if(_fullDocs.length)parts.push('ДОКУМЕНТЫ ('+_fullDocs.length+'):\n'+_fullDocs.join('\n'));
     if(context.property)parts.push('ОБЪЕКТ: '+context.property.name+', '+context.property.area+'м², '+context.property.city);
-    if(context.budget&&context.budget!=='0')parts.push('БЮДЖЕТ: '+context.budget+' PLN');
+    if(context.budget&&context.budget!=='0')parts.push('БЮДЖЕТ: '+context.budget+' '+(activeCurrency||'PLN'));
     if(context.revenue&&context.revenue!=='0')parts.push('ВЫРУЧКА: '+context.revenue+' PLN/мес');
     context.currentState=parts.length?parts.join('\n\n'):'Концепция пока пустая — ничего не выбрано';
   }
@@ -9913,7 +10211,7 @@ function exportPDF(){
   setFont(10,'normal',GOLD);
   doc.text('Город',M,metaY);doc.text('Площадь',M+60,metaY);doc.text('Инвестиции',M+120,metaY);
   setFont(16,'bold',WHITE);
-  doc.text(city,M,metaY+10);doc.text(area+' м²',M+60,metaY+10);doc.text(t.grand.toLocaleString('ru')+' PLN',M+120,metaY+10);
+  doc.text(city,M,metaY+10);doc.text(area+' м²',M+60,metaY+10);doc.text(t.grand.toLocaleString('ru')+' '+(activeCurrency||'PLN'),M+120,metaY+10);
   // Stats row
   const sy=180;
   const profit=t.revenue-t.expenses;
@@ -9937,37 +10235,37 @@ function exportPDF(){
   doc.setFillColor(...LIGHT_BG);doc.rect(0,0,W,H,'F');
   addSectionTitle('Финансовая модель','📊');
   // Investment breakdown
-  addRow('Депозит + аренда',t.rent.toLocaleString('ru')+' PLN');
-  addRow('Ремонт и модернизация',t.renovation.toLocaleString('ru')+' PLN');
-  addRow('Инженерные системы',t.eng.toLocaleString('ru')+' PLN');
-  addRow('Оборудование',t.equip.toLocaleString('ru')+' PLN');
-  addRow('Документация и лицензии',t.docs.toLocaleString('ru')+' PLN');
+  addRow('Депозит + аренда',t.rent.toLocaleString('ru')+' '+(activeCurrency||'PLN'));
+  addRow('Ремонт и модернизация',t.renovation.toLocaleString('ru')+' '+(activeCurrency||'PLN'));
+  addRow('Инженерные системы',t.eng.toLocaleString('ru')+' '+(activeCurrency||'PLN'));
+  addRow('Оборудование',t.equip.toLocaleString('ru')+' '+(activeCurrency||'PLN'));
+  addRow('Документация и лицензии',t.docs.toLocaleString('ru')+' '+(activeCurrency||'PLN'));
   y+=2;drawLine(y);y+=4;
-  addRow('ИТОГО ИНВЕСТИЦИИ',t.grand.toLocaleString('ru')+' PLN',true);
+  addRow('ИТОГО ИНВЕСТИЦИИ',t.grand.toLocaleString('ru')+' '+(activeCurrency||'PLN'),true);
   y+=8;
   addSectionTitle('Ежемесячные показатели','💰');
   addRow('Кресел',String(t.chairs));
   addRow('Пациентов/день на кресло',String(t.ppc));
   addRow('Рабочих дней/мес',String(t.wd));
-  addRow('Средний чек',t.avgCheck.toLocaleString('ru')+' PLN');
+  addRow('Средний чек',t.avgCheck.toLocaleString('ru')+' '+(activeCurrency||'PLN'));
   y+=2;drawLine(y);y+=4;
-  addRow('Выручка/мес',t.revenue.toLocaleString('ru')+' PLN',true);
+  addRow('Выручка/мес',t.revenue.toLocaleString('ru')+' '+(activeCurrency||'PLN'),true);
   y+=4;
-  addRow('ФОТ (зарплаты)',t.staff.toLocaleString('ru')+' PLN');
-  addRow('ФОТ (налоги ZUS)',t.fot.toLocaleString('ru')+' PLN');
-  addRow('Аренда/мес',t.rentMonth.toLocaleString('ru')+' PLN');
+  addRow('ФОТ (зарплаты)',t.staff.toLocaleString('ru')+' '+(activeCurrency||'PLN'));
+  addRow('ФОТ (налоги ZUS)',t.fot.toLocaleString('ru')+' '+(activeCurrency||'PLN'));
+  addRow('Аренда/мес',t.rentMonth.toLocaleString('ru')+' '+(activeCurrency||'PLN'));
   const prUtils=parseInt(document.getElementById('prUtils')?.value)||0;
   const prMat=parseInt(document.getElementById('prMaterials')?.value)||0;
   const prMark=parseInt(document.getElementById('prMarketing')?.value)||0;
   const prOther=parseInt(document.getElementById('prOther')?.value)||0;
-  addRow('Коммунальные',prUtils.toLocaleString('ru')+' PLN');
-  addRow('Материалы',prMat.toLocaleString('ru')+' PLN');
-  addRow('Маркетинг',prMark.toLocaleString('ru')+' PLN');
-  addRow('Прочее',prOther.toLocaleString('ru')+' PLN');
+  addRow('Коммунальные',prUtils.toLocaleString('ru')+' '+(activeCurrency||'PLN'));
+  addRow('Материалы',prMat.toLocaleString('ru')+' '+(activeCurrency||'PLN'));
+  addRow('Маркетинг',prMark.toLocaleString('ru')+' '+(activeCurrency||'PLN'));
+  addRow('Прочее',prOther.toLocaleString('ru')+' '+(activeCurrency||'PLN'));
   y+=2;drawLine(y);y+=4;
-  addRow('Расходы/мес',t.expenses.toLocaleString('ru')+' PLN',true);
+  addRow('Расходы/мес',t.expenses.toLocaleString('ru')+' '+(activeCurrency||'PLN'),true);
   y+=4;
-  addRow('Прибыль/мес',profit.toLocaleString('ru')+' PLN',true);
+  addRow('Прибыль/мес',profit.toLocaleString('ru')+' '+(activeCurrency||'PLN'),true);
   addRow('Маржинальность',t.revenue>0?Math.round(profit/t.revenue*100)+'%':'—');
   addRow('Окупаемость',roi>0?roi+' мес':'—');
 
@@ -10008,11 +10306,11 @@ function exportPDF(){
       const price=(p.customPrice!=null?p.customPrice:s.price)*(p.qty||1);
       setFont(8,'normal',DARK);doc.text((s.name||'').substring(0,55),M+2,y);
       setFont(8,'normal',GRAY);doc.text('×'+(p.qty||1),M+110,y);
-      setFont(8,'normal',GOLD);doc.text(price.toLocaleString('ru')+' PLN',W-M-2,y,{align:'right'});
+      setFont(8,'normal',GOLD);doc.text(price.toLocaleString('ru')+' '+(activeCurrency||'PLN'),W-M-2,y,{align:'right'});
       y+=5;
     });
     y+=2;drawLine(y);y+=4;
-    addRow('ИТОГО оборудование',t.equip.toLocaleString('ru')+' PLN',true);
+    addRow('ИТОГО оборудование',t.equip.toLocaleString('ru')+' '+(activeCurrency||'PLN'),true);
   } else { addText('Оборудование не выбрано'); }
 
   // ══════ ПЕРСОНАЛ ══════
@@ -10030,12 +10328,12 @@ function exportPDF(){
       checkPage(6);
       setFont(9,'normal',DARK);doc.text((e.name||e.position||'').substring(0,50),M+2,y);
       setFont(8,'normal',GRAY);doc.text(e.type==='full'?'Полный':'Частичный',M+100,y);
-      setFont(9,'normal',GOLD);doc.text(((e.salary||0)*(p.qty||1)).toLocaleString('ru')+' PLN',W-M-2,y,{align:'right'});
+      setFont(9,'normal',GOLD);doc.text(((e.salary||0)*(p.qty||1)).toLocaleString('ru')+' '+(activeCurrency||'PLN'),W-M-2,y,{align:'right'});
       y+=5;
     });
     y+=2;drawLine(y);y+=4;
-    addRow('ФОТ/мес (брутто)',t.staff.toLocaleString('ru')+' PLN',true);
-    addRow('Налоги ZUS',t.fot.toLocaleString('ru')+' PLN');
+    addRow('ФОТ/мес (брутто)',t.staff.toLocaleString('ru')+' '+(activeCurrency||'PLN'),true);
+    addRow('Налоги ZUS',t.fot.toLocaleString('ru')+' '+(activeCurrency||'PLN'));
   } else { addText('Персонал не выбран'); }
 
   // ══════ УСЛУГИ ══════
@@ -10052,7 +10350,7 @@ function exportPDF(){
       const price=p.customPrice!=null?p.customPrice:s.price;
       setFont(8,'normal',DARK);doc.text((s.name||'').substring(0,45),M+2,y);
       setFont(7,'normal',GRAY);doc.text((s.category||'').substring(0,25),M+90,y);
-      setFont(8,'normal',GOLD);doc.text(price.toLocaleString('ru')+' PLN',W-M-2,y,{align:'right'});
+      setFont(8,'normal',GOLD);doc.text(price.toLocaleString('ru')+' '+(activeCurrency||'PLN'),W-M-2,y,{align:'right'});
       y+=5;
     });
   } else { addText('Услуги не выбраны'); }
@@ -10072,11 +10370,11 @@ function exportPDF(){
       checkPage(6);
       const cost=getRenItemCost(id);
       setFont(8,'normal',DARK);doc.text((r.name||'').substring(0,60),M+2,y);
-      setFont(8,'normal',GOLD);doc.text(cost.toLocaleString('ru')+' PLN',W-M-2,y,{align:'right'});
+      setFont(8,'normal',GOLD);doc.text(cost.toLocaleString('ru')+' '+(activeCurrency||'PLN'),W-M-2,y,{align:'right'});
       y+=5;
     });
     y+=2;drawLine(y);y+=4;
-    addRow('ИТОГО ремонт',t.renovation.toLocaleString('ru')+' PLN',true);
+    addRow('ИТОГО ремонт',t.renovation.toLocaleString('ru')+' '+(activeCurrency||'PLN'),true);
   } else { addText('Ремонтные работы не выбраны'); }
 
   // ══════ ДОКУМЕНТАЦИЯ ══════
@@ -10091,11 +10389,11 @@ function exportPDF(){
       if(!d)return;
       checkPage(6);
       setFont(8,'normal',DARK);doc.text((d.name||'').substring(0,60),M+2,y);
-      setFont(8,'normal',GOLD);doc.text((d.cost||d.price||0).toLocaleString('ru')+' PLN',W-M-2,y,{align:'right'});
+      setFont(8,'normal',GOLD);doc.text((d.cost||d.price||0).toLocaleString('ru')+' '+(activeCurrency||'PLN'),W-M-2,y,{align:'right'});
       y+=5;
     });
     y+=2;drawLine(y);y+=4;
-    addRow('ИТОГО документация',t.docs.toLocaleString('ru')+' PLN',true);
+    addRow('ИТОГО документация',t.docs.toLocaleString('ru')+' '+(activeCurrency||'PLN'),true);
   } else { addText('Документы не выбраны'); }
 
   // ══════ ПОШАГОВЫЙ ПЛАН ══════
@@ -10786,15 +11084,24 @@ function cookieAccept(){localStorage.setItem('svita_cookies','accepted');cookieA
 function cookieDecline(){localStorage.setItem('svita_cookies','declined');cookieApply('declined');document.getElementById('cookieConsent').style.display='none';toast('Только необходимые cookie','yl')}
 if(_ck)cookieApply(_ck);
 
-// ═══════════════ GUIDED TOUR v2 ═══════════════
+// ═══════════════ GUIDED TOUR v3 ═══════════════
 const TOUR_STEPS=[
-  {target:'#sidebar',title:'Навигация',text:'Боковая панель — ваш пульт управления. Все разделы, каталоги и аналитика.'},
-  {target:'#tabBar',title:'Этапы концепции',text:'7 вкладок — помещение, ремонт, оснащение, персонал, услуги, концепция, документы. Заполняйте по порядку.'},
-  {target:'.si[data-nav="budget"]',title:'Бюджет',text:'Стартовые вложения, ФОТ, выручка, окупаемость. Считается автоматически на основе ваших данных.'},
-  {target:'.si[data-nav="profit"]',title:'Рентабельность',text:'Прогноз доходов, точка безубыточности и срок окупаемости вашего проекта.'},
-  {target:'#sideNav',title:'Каталоги',text:'Базы данных: помещения, оборудование, сотрудники, подрядчики. Выбирайте — они добавятся в концепцию.'},
-  {target:'.si[data-nav="account"]',title:'Мой Кабинет',text:'Профиль, управление пользователями, тариф и безопасность. Данные сохраняются автоматически.'},
-  {target:null,title:'Готово!',text:'Начните с вкладки Концепция — заполните бренд, город, формат. Прогресс виден в Обзоре. Удачи!'}
+  {target:null,title:'Добро пожаловать в SVITA!',text:'Это ваш конструктор бизнес-концепций. За 7 этапов вы создадите полный план — от помещения до документов. Давайте покажем как всё устроено.',icon:'🚀'},
+  {target:'.si[data-nav="overview"]',title:'Обзор',text:'Главная панель — здесь отображается общий прогресс, ключевые метрики и статус вашего проекта. Начинайте каждый день отсюда.',icon:'📊'},
+  {target:'.si[data-nav="news"]',title:'Новости',text:'Свежие обновления платформы, новые функции и полезные материалы для вашего бизнеса.',icon:'📰'},
+  {target:'.side-grp[data-grp="analytics"] .side-sec',title:'Аналитика',text:'Финансовый блок: бюджет стартовых вложений, прогноз рентабельности, зонирование помещения и расчёт стоимости кабинетов.',icon:'💰',expand:'analytics'},
+  {target:'.si[data-nav="budget"]',title:'Бюджет',text:'Автоматический расчёт стартовых и операционных расходов. Обновляется в реальном времени при изменении параметров.',icon:'👛'},
+  {target:'.si[data-nav="profit"]',title:'Рентабельность',text:'Прогноз доходов, точка безубыточности и срок окупаемости. Основан на ваших данных о ценах и загрузке.',icon:'📈'},
+  {target:'.si[data-nav="zones"]',title:'Зоны',text:'Разбивка помещения по функциональным зонам — приём, кабинеты, стерилизаторная, серверная. Влияет на расчёт площади.',icon:'🗺️'},
+  {target:'.side-grp[data-grp="databases"] .side-sec',title:'Базы данных',text:'6 каталогов: помещения, ремонт, услуги, оборудование, сотрудники, документы. Выбирайте из каталогов — они добавятся в вашу концепцию.',icon:'🗄️',expand:'databases'},
+  {target:'.si[data-nav="db-premises"]',title:'Помещения',text:'Каталог коммерческой недвижимости. Фильтруйте по городу, площади, цене. Выбранное помещение станет основой проекта.',icon:'🏢'},
+  {target:'.si[data-nav="db-renovations"]',title:'Модернизация',text:'Каталог ремонтных работ и материалов с ценами. Выберите нужные — они автоматически добавятся в бюджет.',icon:'🔨'},
+  {target:'.si[data-nav="db-suppliers"]',title:'Оборудование',text:'Мебель, техника, инструменты — всё для оснащения вашего бизнеса. Цены и поставщики.',icon:'🪑'},
+  {target:'.si[data-nav="db-employees"]',title:'Сотрудники',text:'Штатное расписание: должности, зарплаты, количество. Автоматически формирует ФОТ в бюджете.',icon:'👤'},
+  {target:'.si[data-nav="db-docs"]',title:'Документация',text:'Перечень лицензий, разрешений и документов. Чеклист: отмечайте полученные — прогресс виден в Обзоре.',icon:'📜'},
+  {target:'#tabBar',title:'Вкладки этапов',text:'7 вкладок — поэтапное заполнение концепции. Помещение → Ремонт → Оснащение → Персонал → Услуги → Концепция → Документы.',icon:'📋'},
+  {target:'.si[data-nav="account"]',title:'Мой Кабинет',text:'Ваш профиль, сохранённые концепции, тарифный план и настройки безопасности.',icon:'⚙️'},
+  {target:null,title:'Вы готовы!',text:'Начните с заполнения Концепции на первой вкладке — введите бренд, город и формат. Весь прогресс сохраняется автоматически. Удачи!',icon:'🎉'}
 ];
 let tourCur=0,_tourActive=false;
 const _PAD=10;
@@ -10808,79 +11115,53 @@ function tourRender(){
   const vw=window.innerWidth,vh=window.innerHeight;
   svg.style.display='block';
   _tourActive=true;
+  // Block scroll and clicks
+  document.body.style.overflow='hidden';
+  document.body.style.pointerEvents='none';
+  svg.style.pointerEvents='auto';
+  tip.style.pointerEvents='auto';
 
   // Content
   const total=TOUR_STEPS.length;
   document.getElementById('tourStep').textContent='Шаг '+(tourCur+1)+' из '+total;
-  document.getElementById('tourTitle').textContent=s.title;
+  document.getElementById('tourTitle').innerHTML=(s.icon?'<span style="margin-right:6px">'+s.icon+'</span>':'')+s.title;
   document.getElementById('tourText').textContent=s.text;
   document.getElementById('tourBack').style.display=tourCur>0?'inline-flex':'none';
-  document.getElementById('tourNext').textContent=tourCur===total-1?'Начать работу':'Далее';
-  document.getElementById('tourDots').innerHTML=TOUR_STEPS.map(function(_,i){return '<div style="width:'+(i===tourCur?'14px':'6px')+';height:6px;border-radius:3px;background:'+(i===tourCur?'var(--ac)':'var(--bd)')+';transition:all .25s"></div>'}).join('');
+  document.getElementById('tourNext').textContent=tourCur===total-1?'Начать работу':'Далее →';
+  // Progress bar instead of dots
+  const pct=Math.round(((tourCur+1)/total)*100);
+  document.getElementById('tourDots').innerHTML='<div style="width:120px;height:4px;border-radius:2px;background:var(--sf2);overflow:hidden"><div style="width:'+pct+'%;height:100%;background:var(--ac);border-radius:2px;transition:width .3s ease"></div></div><span style="font-size:10px;color:var(--tx3);margin-left:6px">'+pct+'%</span>';
+
+  // Expand sidebar group if needed
+  if(s.expand){
+    const grp=document.querySelector('.side-grp[data-grp="'+s.expand+'"]');
+    if(grp&&grp.classList.contains('collapsed')){
+      grp.classList.remove('collapsed');
+      const _st=_sideGrpState();_st[s.expand]=false;
+      localStorage.setItem('svita_side_grp',JSON.stringify(_st));
+    }
+  }
+
+  // Open mobile sidebar for sidebar targets
+  if(s.target&&(s.target.includes('si[')||s.target.includes('side-grp')||s.target==='#sidebar'||s.target==='#sideNav')){
+    const sb=document.getElementById('sidebar');
+    if(sb&&!sb.classList.contains('mob-open')&&vw<900){
+      sb.classList.add('mob-open');
+      const mo=document.getElementById('mobOverlay');if(mo)mo.classList.add('vis');
+    }
+  }
 
   // Find target
   const el=s.target?document.querySelector(s.target):null;
-  const hasTarget=el&&el.offsetParent!==null; // visible element only
+  if(el){const _g=el.closest('.side-grp');if(_g&&_g.classList.contains('collapsed')){_g.classList.remove('collapsed');const _st=_sideGrpState();_st[_g.dataset.grp]=false;localStorage.setItem('svita_side_grp',JSON.stringify(_st))}}
+  const hasTarget=el&&el.offsetParent!==null;
 
   if(hasTarget){
-    const r=el.getBoundingClientRect();
-    // SVG cutout — hole in overlay
-    cut.setAttribute('x',r.left-_PAD);
-    cut.setAttribute('y',r.top-_PAD);
-    cut.setAttribute('width',r.width+_PAD*2);
-    cut.setAttribute('height',r.height+_PAD*2);
-    // Blue ring
-    ring.style.display='block';
-    ring.style.top=(r.top-_PAD)+'px';ring.style.left=(r.left-_PAD)+'px';
-    ring.style.width=(r.width+_PAD*2)+'px';ring.style.height=(r.height+_PAD*2)+'px';
-
-    // Measure tooltip
-    tip.style.display='block';tip.style.visibility='hidden';tip.style.top='0';tip.style.left='0';
-    const tw=tip.offsetWidth,th=tip.offsetHeight;
-    const gap=16;
-
-    // Find best position: prioritize not overlapping target
-    // Calculate available space in each direction
-    const spaceRight=vw-r.right-gap;
-    const spaceLeft=r.left-gap;
-    const spaceBottom=vh-r.bottom-gap;
-    const spaceTop=r.top-gap;
-
-    let tTop,tLeft;
-    if(spaceRight>=tw){
-      // Right of element
-      tLeft=r.right+gap;
-      tTop=Math.max(8,Math.min(r.top+(r.height-th)/2,vh-th-8));
-    }else if(spaceBottom>=th){
-      // Below element
-      tTop=r.bottom+gap;
-      tLeft=Math.max(8,Math.min(r.left+(r.width-tw)/2,vw-tw-8));
-    }else if(spaceLeft>=tw){
-      // Left of element
-      tLeft=r.left-gap-tw;
-      tTop=Math.max(8,Math.min(r.top+(r.height-th)/2,vh-th-8));
-    }else if(spaceTop>=th){
-      // Above element
-      tTop=r.top-gap-th;
-      tLeft=Math.max(8,Math.min(r.left+(r.width-tw)/2,vw-tw-8));
-    }else{
-      // No room adjacent — place in the biggest open area
-      // Find which half of screen has more room (away from element center)
-      const elemCenterX=r.left+r.width/2;
-      if(elemCenterX<vw/2){
-        // Element on left — put tooltip on right half
-        tLeft=Math.max(vw/2,vw-tw-16);
-        tTop=Math.max(8,(vh-th)/2);
-      }else{
-        // Element on right — put tooltip on left half
-        tLeft=16;
-        tTop=Math.max(8,(vh-th)/2);
-      }
-    }
-    tip.style.top=tTop+'px';tip.style.left=tLeft+'px';
-    tip.style.visibility='visible';
+    // Scroll element into view
+    el.scrollIntoView({block:'nearest',behavior:'smooth'});
+    // Small delay for scroll to settle
+    setTimeout(()=>_positionTour(el,tip,ring,cut,svg,vw,vh),50);
   }else{
-    // No target — center tooltip, no cutout
     cut.setAttribute('width',0);cut.setAttribute('height',0);
     ring.style.display='none';
     tip.style.display='block';tip.style.visibility='hidden';tip.style.top='0';tip.style.left='0';
@@ -10889,6 +11170,47 @@ function tourRender(){
     tip.style.left=Math.max(8,(vw-tw)/2)+'px';
     tip.style.visibility='visible';
   }
+}
+
+function _positionTour(el,tip,ring,cut,svg,vw,vh){
+  const r=el.getBoundingClientRect();
+  cut.setAttribute('x',r.left-_PAD);
+  cut.setAttribute('y',r.top-_PAD);
+  cut.setAttribute('width',r.width+_PAD*2);
+  cut.setAttribute('height',r.height+_PAD*2);
+  ring.style.display='block';
+  ring.style.top=(r.top-_PAD)+'px';ring.style.left=(r.left-_PAD)+'px';
+  ring.style.width=(r.width+_PAD*2)+'px';ring.style.height=(r.height+_PAD*2)+'px';
+
+  tip.style.display='block';tip.style.visibility='hidden';tip.style.top='0';tip.style.left='0';
+  const tw=tip.offsetWidth,th=tip.offsetHeight;
+  const gap=14;
+
+  const spaceRight=vw-r.right-gap;
+  const spaceLeft=r.left-gap;
+  const spaceBottom=vh-r.bottom-gap;
+  const spaceTop=r.top-gap;
+
+  let tTop,tLeft;
+  if(spaceRight>=tw){
+    tLeft=r.right+gap;
+    tTop=Math.max(8,Math.min(r.top-10,vh-th-8));
+  }else if(spaceBottom>=th){
+    tTop=r.bottom+gap;
+    tLeft=Math.max(8,Math.min(r.left+(r.width-tw)/2,vw-tw-8));
+  }else if(spaceLeft>=tw){
+    tLeft=r.left-gap-tw;
+    tTop=Math.max(8,Math.min(r.top-10,vh-th-8));
+  }else if(spaceTop>=th){
+    tTop=r.top-gap-th;
+    tLeft=Math.max(8,Math.min(r.left+(r.width-tw)/2,vw-tw-8));
+  }else{
+    const cx=r.left+r.width/2;
+    tLeft=cx<vw/2?Math.max(vw/2,vw-tw-16):16;
+    tTop=Math.max(8,(vh-th)/2);
+  }
+  tip.style.top=tTop+'px';tip.style.left=tLeft+'px';
+  tip.style.visibility='visible';
 }
 
 function tourNav(d){
@@ -10902,10 +11224,15 @@ function endTour(){
   document.getElementById('tourTip').style.display='none';
   document.getElementById('tourRing').style.display='none';
   _tourActive=false;
+  document.body.style.overflow='';
+  document.body.style.pointerEvents='';
   uSet('svita_onboarded','1');
 }
 function startOnboarding(){
   tourCur=0;
+  // Expand sidebar for desktop
+  const sb=document.getElementById('sidebar');
+  if(sb&&window.innerWidth>=900)sb.classList.add('mob-open');
   tourRender();
 }
 </script>
