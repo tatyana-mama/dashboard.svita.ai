@@ -2131,6 +2131,8 @@ function switchAdminRole(role){
 <option value="all">Все</option>
 <option value="contractor">Подрядчики</option>
 <option value="supplier">Поставщики</option>
+<option value="equipment">Оборудование</option>
+<option value="employee">Сотрудники</option>
 <option value="ai">AI-заметки</option>
 </select>
 <button class="btn sm pr" onclick="openNewNote()" style="padding:8px 14px">+ Заметка</button>
@@ -6103,9 +6105,41 @@ function addNoteFromVendor(vid){
   _notes.push({id:'n_'+Date.now(),title:v.name,body,role:'supplier',refId:vid,ai:false,ts:Date.now()});
   _saveNotes();toast('Заметка добавлена','gn');
 }
+function addNoteFromEquip(eid){
+  const r=DB.suppliers.find(x=>x.id==eid);if(!r)return;
+  const body='Категория: '+r.category+'\nЦена: '+r.price.toLocaleString('ru')+' PLN\nПоставщик: '+(r.supplier||'—')+'\nГарантия: '+(r.warranty||'—');
+  _notes.push({id:'n_'+Date.now(),title:r.name,body,role:'equipment',refId:eid,ai:false,ts:Date.now()});
+  _saveNotes();toast('Заметка добавлена','gn');
+}
+function addNoteFromEmployee(eid){
+  const r=DB.employees.find(x=>x.id==eid);if(!r)return;
+  const body='Специализация: '+r.spec+'\nСтатус: '+r.status+'\nЗП: '+(r.salary||0).toLocaleString('ru')+' PLN/мес';
+  _notes.push({id:'n_'+Date.now(),title:r.name,body,role:'employee',refId:eid,ai:false,ts:Date.now()});
+  _saveNotes();toast('Заметка добавлена','gn');
+}
+// AI usage limiter: trial=5/day, pro=50/day
+const _AI_LIMITS={trial:5,pro:50,unlimited:999};
+function _checkAiLimit(){
+  const plan=(typeof userSubscription!=='undefined'&&userSubscription.plan)||'trial';
+  const limit=_AI_LIMITS[plan]||5;
+  const key='svita_ai_'+new Date().toISOString().slice(0,10);
+  const used=parseInt(localStorage.getItem(key)||'0');
+  if(used>=limit){toast('Лимит AI-запросов: '+limit+'/день. Upgrade для увеличения.','rd');return false}
+  localStorage.setItem(key,String(used+1));
+  return true;
+}
 async function aiGenerateNote(id,role){
+  if(!_checkAiLimit())return;
   let entity,prompt;
-  if(role==='contractor'){
+  if(role==='employee'){
+    const r=DB.employees.find(x=>x.id==id);if(!r){toast('Не найден','rd');return}
+    entity=r;
+    prompt='Ты — AI-аналитик платформы SVITA. Составь краткое досье на сотрудника для владельца бизнеса.\n\nСотрудник: '+r.name+'\nСпециализация: '+r.spec+'\nСтатус: '+r.status+'\nЗП: '+(r.salary||0)+' PLN/мес\n\nНапиши:\n1. Роль в команде (2-3 предложения)\n2. Какие задачи закрывает\n3. Сильные стороны\n4. На что обратить внимание\n5. Рекомендация по развитию\n\nФормат: компактный, деловой, на русском.';
+  }else if(role==='equipment'){
+    const r=DB.suppliers.find(x=>x.id==id);if(!r){toast('Не найден','rd');return}
+    entity=r;
+    prompt='Ты — AI-аналитик платформы SVITA. Составь краткое досье на оборудование для владельца бизнеса.\n\nОборудование: '+r.name+'\nКатегория: '+r.category+'\nЦена: '+r.price+' PLN\nПоставщик: '+(r.supplier||'—')+'\nГарантия: '+(r.warranty||'—')+'\n\nНапиши:\n1. Назначение (2-3 предложения)\n2. Для каких кабинетов/зон подходит\n3. Преимущества выбора\n4. На что обратить внимание при покупке\n5. Альтернативы и рекомендация\n\nФормат: компактный, деловой, на русском.';
+  }else if(role==='contractor'){
     const r=DB.contractors.find(x=>x.id==id);if(!r){toast('Не найден','rd');return}
     entity=r;
     prompt='Ты — AI-аналитик платформы SVITA. Составь краткое досье на подрядчика для владельца бизнеса.\n\nПодрядчик: '+r.name+'\nСпециализация: '+r.spec+'\nГород: '+r.city+'\nСтавка: '+r.price+'\nРейтинг: '+r.rating+'/5\nТелефон: '+r.phone+'\n\nНапиши:\n1. Чем занимается (2-3 предложения)\n2. Для каких работ подходит\n3. Преимущества выбора\n4. На что обратить внимание\n5. Рекомендация по взаимодействию\n\nФормат: компактный, деловой, на русском. Без заголовков секций, просто текст.';
@@ -6130,6 +6164,10 @@ async function aiGenerateNote(id,role){
     // Fallback: generate locally
     const fb=role==='contractor'
       ?entity.name+' — '+entity.spec+'.\n\nРаботает в городе '+entity.city+'. Ставка: '+entity.price+'. Рейтинг: '+entity.rating+'/5.\n\nПодходит для выполнения работ по направлению «'+entity.spec+'». Рекомендуется уточнить сроки и объём до подписания договора.\n\nКонтакт: '+entity.phone
+      :role==='equipment'
+      ?entity.name+' — '+(entity.category||'оборудование')+'.\n\nЦена: '+(entity.price||0)+' PLN. Поставщик: '+(entity.supplier||'—')+'. Гарантия: '+(entity.warranty||'—')+'.\n\nРекомендуется сравнить с аналогами и уточнить условия доставки.'
+      :role==='employee'
+      ?entity.name+' — '+(entity.spec||'сотрудник')+'.\n\nСтатус: '+(entity.status||'—')+'. ЗП: '+(entity.salary||0)+' PLN/мес.\n\nРекомендуется провести собеседование и проверить квалификацию.'
       :entity.name+' — '+(entity.desc||'поставщик')+'\n\nКатегории: '+((entity.tags||[]).join(', ')||'—')+'\nГород: '+(entity.city||'—')+'\n\nПодходит для комплектации оборудованием и материалами. Рекомендуется запросить актуальный прайс и условия доставки.\n\nКонтакт: '+(entity.phone||'—');
     _notes.push({id:'n_'+Date.now(),title:entity.name+' — досье',body:fb,role,refId:id,ai:true,ts:Date.now()});
     _saveNotes();toast('Досье создано (оффлайн)','yl');
@@ -6582,7 +6620,7 @@ function renderSuppliers(){
     const picked=!!DB.pickedEquip[r.id];
     const img=getItemImg('suppliers',r.id);
     const imgHtml=img?`<img class="db-card-img" src="${img}" onclick="openLightbox('suppliers','${r.id}')">`:`<div class="db-card-img-placeholder" onclick="uploadPhoto('suppliers','${r.id}')"><span>&#128247;</span><span>Добавить фото</span></div>`;
-    return `<div class="db-card" style="${picked?'border-color:var(--acbd);background:var(--acbg)':''}">${imgHtml}<div class="db-card-head"><span class="db-card-name">${esc(r.name)}</span><span class="db-card-role" style="background:rgba(139,92,246,.1);color:#d946ef">${esc(r.category)}</span></div><div class="db-card-grid"><div class="db-card-field"><div class="db-card-label">Цена</div><div class="db-card-val" style="color:var(--ac2)">${r.price.toLocaleString('ru')} PLN</div></div><div class="db-card-field"><div class="db-card-label">Поставщик</div><div class="db-card-val">${esc(r.supplier)}</div></div><div class="db-card-field"><div class="db-card-label">Гарантия</div><div class="db-card-val">${esc(r.warranty)}</div></div></div><div class="db-card-actions"><button class="btn sm ${picked?'gn':'pr'}" onclick="togglePickEquip('${r.id}')">${picked?'✓ В оснащении':'+ Товар → Таб 3'}</button><button class="btn sm" onclick="delItem('suppliers','${r.id}')">Удалить</button></div></div>`;
+    return `<div class="db-card" style="${picked?'border-color:var(--acbd);background:var(--acbg)':''}">${imgHtml}<div class="db-card-head"><span class="db-card-name">${esc(r.name)}</span><span class="db-card-role" style="background:rgba(139,92,246,.1);color:#d946ef">${esc(r.category)}</span></div><div class="db-card-grid"><div class="db-card-field"><div class="db-card-label">Цена</div><div class="db-card-val" style="color:var(--ac2)">${r.price.toLocaleString('ru')} PLN</div></div><div class="db-card-field"><div class="db-card-label">Поставщик</div><div class="db-card-val">${esc(r.supplier)}</div></div><div class="db-card-field"><div class="db-card-label">Гарантия</div><div class="db-card-val">${esc(r.warranty)}</div></div></div><div class="db-card-actions"><button class="btn sm ${picked?'gn':'pr'}" onclick="togglePickEquip('${r.id}')">${picked?'✓ В оснащении':'+ Товар → Таб 3'}</button><button class="btn sm" onclick="addNoteFromEquip('${r.id}')" style="color:#78650d">&#128221; В заметки</button><button class="btn sm" onclick="aiGenerateNote('${r.id}','equipment')" style="color:#7c3aed">&#10024; AI-досье</button><button class="btn sm" onclick="delItem('suppliers','${r.id}')">Удалить</button></div></div>`;
   }).join('');
 }
 
@@ -6608,6 +6646,8 @@ function renderEmployees(){
 </div>
 <div class="db-card-actions">
 <button class="btn sm ${picked?'gn':'pr'}" onclick="togglePick('pickedStaff','${r.id}','employees')">${picked?'✓ В штате':'+ В штат → Таб 4'}</button>
+<button class="btn sm" onclick="addNoteFromEmployee('${r.id}')" style="color:#78650d">&#128221; В заметки</button>
+<button class="btn sm" onclick="aiGenerateNote('${r.id}','employee')" style="color:#7c3aed">&#10024; AI-досье</button>
 <button class="btn sm" onclick="editEmployee('${r.id}')" style="color:var(--ac2)">Редактировать</button>
 <button class="btn sm" onclick="delItem('employees','${r.id}')" style="color:var(--rd)">Удалить</button>
 </div></div>`;
