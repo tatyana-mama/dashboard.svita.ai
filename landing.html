@@ -5,7 +5,7 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="SVITA — AI-помощник открытия малого бизнеса. Планируй, контролируй, экономь. Всё в одном месте.">
-<meta name="keywords" content="открытие бизнеса, бизнес план, AI ассистент, стоматология, кофейня, салон красоты, бюджет, подрядчики, поставщики, франшиза">
+<meta name="keywords" content="открытие бизнеса, бизнес план, AI ассистент, стоматология, кофейня, салон красоты, бюджет, подрядчики, поставщики">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://dashboard.svita.ai/landing.html">
 <meta property="og:type" content="website">
@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="SVITA">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVITA — Открой бизнес без потерь">
-<meta name="twitter:description" content="AI-ассистент запуска малого бизнеса. Планирование, подрядчики, поставщики, бюджет — в одном месте.">
+<meta name="twitter:description" content="AI-ассистент запуска малого бизнеса.">
 <title>SVITA — Открой бизнес без потерь</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -24,7 +24,7 @@
 :root{
   --bg:#fafbfe;--sf:#ffffff;--sf2:#f3f5fa;--sf3:#e8ecf4;
   --bd:rgba(0,0,0,.06);--bd2:rgba(0,0,0,.1);
-  --tx:#0f1729;--tx2:rgba(15,23,41,.55);--tx3:rgba(15,23,41,.3);
+  --tx:#0f172a;--tx2:#64748b;--tx3:rgba(15,23,41,.3);
   --ac:#4f6ef7;--ac2:#3b5ce4;--acd:#2845c7;--acbg:rgba(79,110,247,.06);--acbd:rgba(79,110,247,.15);
   --gn:#16a34a;--gnbg:rgba(22,163,74,.06);
   --or:#f59e0b;--orbg:rgba(245,158,11,.06);
@@ -46,30 +46,42 @@ nav{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(255,255,255,
 .btn-p{background:var(--ac);color:#fff;box-shadow:0 2px 8px rgba(79,110,247,.3)}.btn-p:hover{background:var(--ac2);box-shadow:0 4px 16px rgba(79,110,247,.35);transform:translateY(-1px)}
 .btn-g{background:transparent;color:var(--tx);border:1px solid var(--bd2)}.btn-g:hover{background:var(--sf2)}
 .btn-lg{padding:14px 32px;font-size:15px;border-radius:14px}
+.btn-gn{background:var(--gn);color:#fff;box-shadow:0 2px 8px rgba(22,163,74,.3)}.btn-gn:hover{background:#15803d;transform:translateY(-1px)}
+
+/* LANG SWITCHER */
+.lang-switcher{display:flex;align-items:center;gap:2px}
+.lang-switcher button{background:none;border:none;font-size:11px;font-weight:500;color:var(--tx3);cursor:pointer;padding:4px 6px;border-radius:6px;font-family:var(--f);transition:all .15s}
+.lang-switcher button:hover,.lang-switcher button.active{color:var(--ac2);background:var(--acbg)}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 24px 80px;position:relative}
 .hero::before{content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:min(900px,140vw);height:min(900px,140vw);background:radial-gradient(circle,rgba(79,110,247,.07) 0%,rgba(124,58,237,.03) 40%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:1100px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.hero-text{position:relative;z-index:1}
 .hero-pill{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:100px;background:var(--acbg);border:1px solid var(--acbd);font-size:12px;font-weight:600;color:var(--ac2);margin-bottom:28px}
 .hero-pill .dot{width:6px;height:6px;border-radius:50%;background:var(--gn);animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.hero h1{font-size:clamp(32px,5.5vw,64px);font-weight:900;line-height:1.08;letter-spacing:-.03em;max-width:780px;margin-bottom:20px}
+.hero h1{font-size:clamp(32px,4.5vw,56px);font-weight:900;line-height:1.08;letter-spacing:-.03em;margin-bottom:20px}
 .hero h1 .hl{background:linear-gradient(135deg,var(--ac) 0%,#7c5cfc 50%,#a855f7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:clamp(16px,2vw,20px);color:var(--tx2);max-width:560px;line-height:1.6;margin-bottom:40px;font-weight:400}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:56px}
-.hero-proof{display:flex;gap:40px;flex-wrap:wrap;justify-content:center}
-.hero-proof-item{display:flex;flex-direction:column;align-items:center}
-.hero-proof-item .big{font-size:32px;font-weight:900;color:var(--ac2)}
-.hero-proof-item .sm{font-size:11px;color:var(--tx3);margin-top:2px;font-weight:500}
+.hero-sub{font-size:clamp(15px,1.8vw,18px);color:var(--tx2);line-height:1.65;margin-bottom:36px;font-weight:400;max-width:480px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-mascot{display:flex;align-items:center;justify-content:center;position:relative}
+.hero-mascot img{width:100%;max-width:420px;filter:drop-shadow(0 20px 40px rgba(79,110,247,.15));animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero-stats{display:flex;gap:32px;margin-top:40px}
+.hero-stat{display:flex;flex-direction:column}
+.hero-stat .big{font-size:28px;font-weight:900;color:var(--ac2)}
+.hero-stat .sm{font-size:11px;color:var(--tx3);margin-top:2px;font-weight:500}
 
-/* PROBLEM SECTION */
+/* PROBLEM */
 .problem{padding:100px 24px;background:linear-gradient(180deg,var(--bg) 0%,#f0f2fa 100%)}
 .problem-inner{max-width:900px;margin:0 auto;text-align:center}
-.problem-inner .eyebrow{font-size:11px;font-weight:700;color:var(--or);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
-.problem-inner h2{font-size:clamp(24px,3.5vw,40px);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:20px}
-.problem-inner .lead{font-size:16px;color:var(--tx2);max-width:600px;margin:0 auto 48px;line-height:1.65}
+.eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
+.section-h2{font-size:clamp(24px,3.5vw,40px);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:20px}
+.lead{font-size:16px;color:var(--tx2);max-width:600px;margin:0 auto 48px;line-height:1.65}
 .pain-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:900px;margin:0 auto}
-.pain-card{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:28px 24px;text-align:left;position:relative;overflow:hidden}
+.pain-card{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:28px 24px;text-align:left;position:relative;overflow:hidden;transition:all .25s}
+.pain-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
 .pain-card::before{content:attr(data-num);position:absolute;top:12px;right:16px;font-size:48px;font-weight:900;color:var(--sf2);line-height:1}
 .pain-card .ico{font-size:28px;margin-bottom:14px}
 .pain-card h4{font-size:15px;font-weight:700;margin-bottom:6px}
@@ -78,9 +90,6 @@ nav{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(255,255,255,
 /* SOLUTION */
 .solution{padding:100px 24px}
 .solution-inner{max-width:1060px;margin:0 auto}
-.solution-inner .eyebrow{font-size:11px;font-weight:700;color:var(--gn);text-transform:uppercase;letter-spacing:2px;text-align:center;margin-bottom:12px}
-.solution-inner h2{font-size:clamp(24px,3.5vw,40px);font-weight:800;text-align:center;letter-spacing:-.02em;margin-bottom:16px}
-.solution-inner .lead{font-size:16px;color:var(--tx2);text-align:center;max-width:600px;margin:0 auto 56px;line-height:1.65}
 .sol-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
 .sol-card{background:var(--sf);border:1px solid var(--bd);border-radius:18px;padding:32px 28px;transition:all .25s}
 .sol-card:hover{border-color:var(--acbd);box-shadow:0 8px 28px rgba(79,110,247,.08);transform:translateY(-3px)}
@@ -88,11 +97,9 @@ nav{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(255,255,255,
 .sol-card h3{font-size:16px;font-weight:700;margin-bottom:8px}
 .sol-card p{font-size:13px;color:var(--tx2);line-height:1.65}
 
-/* HOW IT WORKS */
+/* HOW */
 .how{padding:100px 24px;background:var(--sf)}
 .how-inner{max-width:900px;margin:0 auto}
-.how-inner .eyebrow{font-size:11px;font-weight:700;color:var(--vi);text-transform:uppercase;letter-spacing:2px;text-align:center;margin-bottom:12px}
-.how-inner h2{font-size:clamp(24px,3.5vw,40px);font-weight:800;text-align:center;letter-spacing:-.02em;margin-bottom:56px}
 .steps{display:flex;flex-direction:column;gap:0;position:relative}
 .steps::before{content:'';position:absolute;left:28px;top:28px;bottom:28px;width:2px;background:linear-gradient(to bottom,var(--acbd),var(--acbd) 50%,transparent);z-index:0}
 .step{display:flex;gap:24px;align-items:flex-start;position:relative;z-index:1;padding:20px 0}
@@ -101,31 +108,24 @@ nav{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(255,255,255,
 .step-body p{font-size:13px;color:var(--tx2);line-height:1.6}
 
 /* SAVINGS */
-.savings{padding:100px 24px;background:linear-gradient(135deg,#0f1729 0%,#1a2744 100%);color:#fff}
+.savings{padding:100px 24px;background:linear-gradient(135deg,#0f172a 0%,#1a2744 100%);color:#fff}
 .savings-inner{max-width:900px;margin:0 auto;text-align:center}
-.savings-inner .eyebrow{font-size:11px;font-weight:700;color:var(--or);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
-.savings-inner h2{font-size:clamp(24px,3.5vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
-.savings-inner .lead{font-size:16px;color:rgba(255,255,255,.55);max-width:560px;margin:0 auto 48px;line-height:1.65}
+.savings-inner .lead{color:rgba(255,255,255,.55)}
 .savings-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
 .savings-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px 20px;text-align:center}
 .savings-card .num{font-size:36px;font-weight:900;margin-bottom:4px}
-.savings-card .num.green{color:#4ade80}
-.savings-card .num.orange{color:#fbbf24}
-.savings-card .num.blue{color:#60a5fa}
+.savings-card .num.green{color:#4ade80}.savings-card .num.orange{color:#fbbf24}.savings-card .num.blue{color:#60a5fa}
 .savings-card .label{font-size:12px;color:rgba(255,255,255,.45)}
 
-/* DOMAINS */
-.domains{padding:100px 24px}
-.domains-inner{max-width:900px;margin:0 auto;text-align:center}
-.domains-inner .eyebrow{font-size:11px;font-weight:700;color:var(--ac2);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
-.domains-inner h2{font-size:clamp(24px,3.5vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
-.domains-inner .lead{font-size:16px;color:var(--tx2);max-width:500px;margin:0 auto 48px;line-height:1.65}
-.dom-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
-.dom-card{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:28px 16px;text-align:center;transition:all .2s}
-.dom-card:hover{border-color:var(--acbd);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.04)}
-.dom-card .ico{font-size:36px;margin-bottom:10px}
-.dom-card h4{font-size:14px;font-weight:700;margin-bottom:4px}
-.dom-card p{font-size:11px;color:var(--tx3)}
+/* NICHES */
+.niches{padding:100px 24px}
+.niches-inner{max-width:900px;margin:0 auto;text-align:center}
+.niche-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.niche-card{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:28px 16px;text-align:center;transition:all .2s}
+.niche-card:hover{border-color:var(--acbd);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.04)}
+.niche-card .ico{font-size:36px;margin-bottom:10px}
+.niche-card h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.niche-card p{font-size:11px;color:var(--tx3)}
 
 /* CTA */
 .cta{padding:100px 24px;text-align:center}
@@ -135,26 +135,37 @@ nav{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(255,255,255,
 .cta-box p{font-size:15px;opacity:.8;margin-bottom:32px;line-height:1.6}
 .cta-box .btn{background:#fff;color:var(--ac2);font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,.12)}.cta-box .btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.18)}
 .cta-sub{margin-top:16px;font-size:12px;opacity:.5}
+.cta-mascot{position:absolute;bottom:-10px;right:24px;width:120px;opacity:.9}
 
 /* FOOTER */
 footer{padding:40px clamp(16px,4vw,48px);border-top:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--tx3)}
 footer a{color:var(--tx2);font-weight:500;transition:color .15s}footer a:hover{color:var(--tx)}
 
 /* MOBILE */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-sub{margin-left:auto;margin-right:auto}
+  .hero-cta{justify-content:center}
+  .hero-mascot img{max-width:280px}
+  .hero-stats{justify-content:center}
+  .hero-mascot{order:-1}
+}
 @media(max-width:768px){
   .nav-r a:not(.btn){display:none}
+  .lang-switcher{display:none}
   .hero{padding:100px 16px 60px}
-  .hero-proof{gap:20px}
-  .hero-proof-item .big{font-size:24px}
+  .hero-stats{gap:20px}
+  .hero-stat .big{font-size:22px}
   .pain-cards{grid-template-columns:1fr}
   .steps::before{left:24px}
   .step-num{width:48px;height:48px;font-size:16px;border-radius:14px}
   .savings-grid{grid-template-columns:repeat(2,1fr)}
   .cta-box{padding:40px 24px;border-radius:20px}
+  .cta-mascot{display:none}
   footer{flex-direction:column;gap:8px;text-align:center}
 }
 @media(max-width:480px){
-  .dom-grid{grid-template-columns:repeat(2,1fr)}
+  .niche-grid{grid-template-columns:repeat(2,1fr)}
   .savings-grid{grid-template-columns:1fr}
 }
 </style>
@@ -165,50 +176,58 @@ footer a{color:var(--tx2);font-weight:500;transition:color .15s}footer a:hover{c
 <nav>
   <div class="nav-logo"><span class="dot"></span> SVITA</div>
   <div class="nav-r">
-    <a href="#problem">Зачем</a>
-    <a href="#how">Как работает</a>
-    <a href="index.html" class="btn btn-g">Войти</a>
-    <a href="index.html#signup" class="btn btn-p">Попробовать</a>
+    <a href="#problem" data-i18n="nav.why">Зачем</a>
+    <a href="#how" data-i18n="nav.how">Как работает</a>
+    <div class="lang-switcher"></div>
+    <a href="index.html" class="btn btn-g" data-i18n="nav.login">Войти</a>
+    <a href="index.html#signup" class="btn btn-p" id="navCta" data-i18n="nav.try">Попробовать</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="hero-pill"><span class="dot"></span> AI-ассистент запуска бизнеса</div>
-  <h1>Не теряй деньги<br>на <span class="hl">хаосе открытия</span></h1>
-  <p class="hero-sub">SVITA собирает все этапы запуска малого бизнеса в одно место. Подрядчики, поставщики, бюджет, помещение, персонал, документы &mdash; под контролем с первого дня.</p>
-  <div class="hero-cta">
-    <a href="index.html#signup" class="btn btn-p btn-lg">Попробовать бесплатно</a>
-    <a href="#how" class="btn btn-g btn-lg">Как это работает</a>
-  </div>
-  <div class="hero-proof">
-    <div class="hero-proof-item"><div class="big">20%</div><div class="sm">бюджета теряется<br>без планирования</div></div>
-    <div class="hero-proof-item"><div class="big">6</div><div class="sm">месяцев экономии<br>на этапе запуска</div></div>
-    <div class="hero-proof-item"><div class="big">1</div><div class="sm">место для всего<br>вместо 10 таблиц</div></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-pill"><span class="dot"></span> <span data-i18n="hero.pill">AI-ассистент запуска бизнеса</span></div>
+      <h1 data-i18n="hero.h1">Не теряйте деньги на <span class="hl">хаосе открытия</span></h1>
+      <p class="hero-sub" data-i18n="hero.sub">SVITA собирает все этапы запуска малого бизнеса в одно место. Подрядчики, поставщики, бюджет, помещение, персонал, документы &mdash; под контролем с первого дня.</p>
+      <div class="hero-cta">
+        <a href="index.html#signup" class="btn btn-p btn-lg" id="heroCta" data-i18n="cta.try">Попробовать бесплатно</a>
+        <a href="#how" class="btn btn-g btn-lg" data-i18n="cta.how">Как это работает</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="big">20%</div><div class="sm" data-i18n="hero.stat1">бюджета теряется<br>без планирования</div></div>
+        <div class="hero-stat"><div class="big">6</div><div class="sm" data-i18n="hero.stat2">месяцев экономии<br>на этапе запуска</div></div>
+        <div class="hero-stat"><div class="big">1</div><div class="sm" data-i18n="hero.stat3">место для всего<br>вместо 10 таблиц</div></div>
+      </div>
+    </div>
+    <div class="hero-mascot">
+      <img src="stickers/cybercat-01-wave.png" alt="Svitiks — AI-маскот SVITA" width="420" height="420">
+    </div>
   </div>
 </section>
 
 <!-- PROBLEM -->
 <section class="problem" id="problem">
   <div class="problem-inner">
-    <div class="eyebrow">Проблема</div>
-    <h2>Открытие бизнеса &mdash; это хаос.<br>И он стоит денег.</h2>
-    <p class="lead">Таблицы в Excel. Переписки в мессенджерах. Контакты подрядчиков на стикерах. Счета в почте. Когда всё разбросано &mdash; вы платите дважды.</p>
+    <div class="eyebrow" style="color:var(--or)" data-i18n="problem.eyebrow">Проблема</div>
+    <h2 class="section-h2" data-i18n="problem.h2">Открытие бизнеса &mdash; это хаос.<br>И он стоит денег.</h2>
+    <p class="lead" data-i18n="problem.lead">Таблицы в Excel. Переписки в мессенджерах. Контакты подрядчиков на стикерах. Когда всё разбросано &mdash; вы платите дважды.</p>
     <div class="pain-cards">
       <div class="pain-card" data-num="01">
         <div class="ico">&#128184;</div>
-        <h4>Лишняя аренда</h4>
-        <p>Каждый месяц простоя помещения &mdash; это аренда, коммуналка и упущенная выручка. Без плана ремонт затягивается на 2-4 месяца.</p>
+        <h4 data-i18n="problem.c1.h">Лишняя аренда</h4>
+        <p data-i18n="problem.c1.p">Каждый месяц простоя помещения &mdash; это аренда, коммуналка и упущенная выручка. Без плана ремонт затягивается на 2-4 месяца.</p>
       </div>
       <div class="pain-card" data-num="02">
         <div class="ico">&#128200;</div>
-        <h4>Перерасход бюджета</h4>
-        <p>Без единой картины расходов легко потратить на 15-20% больше. Подрядчик закладывает лишнее, поставщик навязывает ненужное.</p>
+        <h4 data-i18n="problem.c2.h">Перерасход бюджета</h4>
+        <p data-i18n="problem.c2.p">Без единой картины расходов легко потратить на 15-20% больше. Подрядчик закладывает лишнее, поставщик навязывает ненужное.</p>
       </div>
       <div class="pain-card" data-num="03">
         <div class="ico">&#128337;</div>
-        <h4>Потеря времени</h4>
-        <p>Поиск поставщиков, сравнение цен, координация подрядчиков. Без системы это съедает 30+ часов в неделю.</p>
+        <h4 data-i18n="problem.c3.h">Потеря времени</h4>
+        <p data-i18n="problem.c3.p">Поиск поставщиков, сравнение цен, координация подрядчиков. Без системы это съедает 30+ часов в неделю.</p>
       </div>
     </div>
   </div>
@@ -217,39 +236,39 @@ footer a{color:var(--tx2);font-weight:500;transition:color .15s}footer a:hover{c
 <!-- SOLUTION -->
 <section class="solution" id="solution">
   <div class="solution-inner">
-    <div class="eyebrow">Решение</div>
-    <h2>Всё в одном месте.<br>Всё под контролем.</h2>
-    <p class="lead">SVITA &mdash; это AI-ассистент, который помогает спланировать, организовать и контролировать каждый этап открытия бизнеса.</p>
+    <div class="eyebrow" style="color:var(--gn);text-align:center" data-i18n="solution.eyebrow">Решение</div>
+    <h2 class="section-h2" style="text-align:center" data-i18n="solution.h2">Всё в одном месте. Всё под контролем.</h2>
+    <p class="lead" style="text-align:center" data-i18n="solution.lead">SVITA &mdash; это AI-ассистент, который помогает спланировать и контролировать каждый этап открытия бизнеса.</p>
     <div class="sol-grid">
       <div class="sol-card">
         <div class="sol-icon" style="background:var(--acbg);color:var(--ac2)">&#128203;</div>
-        <h3>Конструктор концепции</h3>
-        <p>Помещение, зоны, кабинеты, оборудование, персонал, услуги &mdash; собирайте бизнес-модель по шагам. AI подсказывает и считает.</p>
+        <h3 data-i18n="sol.c1.h">Конструктор концепции</h3>
+        <p data-i18n="sol.c1.p">Помещение, зоны, кабинеты, оборудование, персонал, услуги &mdash; собирайте бизнес-модель по шагам. AI подсказывает и считает.</p>
       </div>
       <div class="sol-card">
         <div class="sol-icon" style="background:var(--orbg);color:var(--or)">&#128736;</div>
-        <h3>Подрядчики и поставщики</h3>
-        <p>Каталог исполнителей с рейтингами. Назначайте работы, создавайте счета, общайтесь в чате &mdash; без звонков и потерянных переписок.</p>
+        <h3 data-i18n="sol.c2.h">Подрядчики и поставщики</h3>
+        <p data-i18n="sol.c2.p">Каталог исполнителей с рейтингами. Назначайте работы, создавайте счета, общайтесь в чате.</p>
       </div>
       <div class="sol-card">
         <div class="sol-icon" style="background:var(--gnbg);color:var(--gn)">&#128176;</div>
-        <h3>Бюджет и рентабельность</h3>
-        <p>Стартовые вложения, ФОТ, выручка, ROI, точка безубыточности &mdash; всё считается автоматически на основе ваших данных.</p>
+        <h3 data-i18n="sol.c3.h">Бюджет и рентабельность</h3>
+        <p data-i18n="sol.c3.p">Стартовые вложения, ФОТ, выручка, ROI, точка безубыточности &mdash; всё считается автоматически.</p>
       </div>
       <div class="sol-card">
         <div class="sol-icon" style="background:var(--vibg);color:var(--vi)">&#127968;</div>
-        <h3>Схема помещения</h3>
-        <p>Разметьте зоны, расставьте кабинеты, посчитайте площади. Планировка синхронизирована с бюджетом и оборудованием.</p>
+        <h3 data-i18n="sol.c4.h">Схема помещения</h3>
+        <p data-i18n="sol.c4.p">Разметьте зоны, расставьте кабинеты, посчитайте площади. Планировка синхронизирована с бюджетом.</p>
       </div>
       <div class="sol-card">
         <div class="sol-icon" style="background:rgba(239,68,68,.06);color:#ef4444">&#128221;</div>
-        <h3>AI-заметки и досье</h3>
-        <p>AI анализирует каждого подрядчика и поставщика: чем занимается, для чего подходит, на что обратить внимание.</p>
+        <h3 data-i18n="sol.c5.h">AI-заметки и досье</h3>
+        <p data-i18n="sol.c5.p">AI анализирует каждого подрядчика и поставщика: чем занимается, для чего подходит, на что обратить внимание.</p>
       </div>
       <div class="sol-card">
         <div class="sol-icon" style="background:rgba(6,182,212,.06);color:#06b6d4">&#128197;</div>
-        <h3>Контроль исполнения</h3>
-        <p>Переключайтесь на этап исполнения: трекайте работы подрядчиков, документы, закупки &mdash; всё привязано к датам открытия.</p>
+        <h3 data-i18n="sol.c6.h">Контроль исполнения</h3>
+        <p data-i18n="sol.c6.p">Трекайте работы подрядчиков, документы, закупки &mdash; всё привязано к датам открытия.</p>
       </div>
     </div>
   </div>
@@ -258,35 +277,35 @@ footer a{color:var(--tx2);font-weight:500;transition:color .15s}footer a:hover{c
 <!-- HOW IT WORKS -->
 <section class="how" id="how">
   <div class="how-inner">
-    <div class="eyebrow">Как это работает</div>
-    <h2>От идеи до открытия за 4 шага</h2>
+    <div class="eyebrow" style="color:var(--vi);text-align:center" data-i18n="how.eyebrow">Как это работает</div>
+    <h2 class="section-h2" style="text-align:center;margin-bottom:56px" data-i18n="how.h2">От идеи до открытия за 4 шага</h2>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-body">
-          <h4>Выберите тип бизнеса</h4>
-          <p>Стоматология, кофейня, салон красоты, фитнес, общепит &mdash; SVITA адаптируется под вашу нишу с готовыми шаблонами и нормативами.</p>
+          <h4 data-i18n="how.s1.h">Выберите тип бизнеса</h4>
+          <p data-i18n="how.s1.p">Стоматология, кофейня, салон красоты, фитнес, общепит &mdash; SVITA адаптируется под вашу нишу с готовыми шаблонами.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
-          <h4>Соберите концепцию</h4>
-          <p>Заполняйте этапы: помещение, ремонт, оборудование, персонал, прайс. AI подсказывает оптимальные решения и считает бюджет в реальном времени.</p>
+          <h4 data-i18n="how.s2.h">Соберите концепцию</h4>
+          <p data-i18n="how.s2.p">Заполняйте этапы: помещение, ремонт, оборудование, персонал, прайс. AI подсказывает оптимальные решения.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-body">
-          <h4>Подберите исполнителей</h4>
-          <p>Найдите подрядчиков и поставщиков в каталоге. Сравните цены, назначьте работы, контролируйте через чат и счета &mdash; всё в одном окне.</p>
+          <h4 data-i18n="how.s3.h">Подберите исполнителей</h4>
+          <p data-i18n="how.s3.p">Найдите подрядчиков и поставщиков в каталоге. Сравните цены, назначьте работы, контролируйте через чат.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-body">
-          <h4>Контролируйте исполнение</h4>
-          <p>Переключитесь на этап 2: трекайте прогресс, документы, закупки. Открывайтесь вовремя и в рамках бюджета.</p>
+          <h4 data-i18n="how.s4.h">Контролируйте исполнение</h4>
+          <p data-i18n="how.s4.p">Трекайте прогресс, документы, закупки. Открывайтесь вовремя и в рамках бюджета.</p>
         </div>
       </div>
     </div>
@@ -296,43 +315,31 @@ footer a{color:var(--tx2);font-weight:500;transition:color .15s}footer a:hover{c
 <!-- SAVINGS -->
 <section class="savings">
   <div class="savings-inner">
-    <div class="eyebrow">Экономия</div>
-    <h2>Планирование &mdash; это деньги</h2>
-    <p class="lead">Каждый день простоя &mdash; это аренда без дохода. Каждый неучтённый расход &mdash; удар по бюджету. SVITA помогает не терять.</p>
+    <div class="eyebrow" style="color:var(--or)" data-i18n="savings.eyebrow">Экономия</div>
+    <h2 class="section-h2" data-i18n="savings.h2">Планирование &mdash; это деньги</h2>
+    <p class="lead" data-i18n="savings.lead">Каждый день простоя &mdash; аренда без дохода. Каждый неучтённый расход &mdash; удар по бюджету.</p>
     <div class="savings-grid">
-      <div class="savings-card">
-        <div class="num green">-20%</div>
-        <div class="label">перерасхода бюджета<br>при планировании</div>
-      </div>
-      <div class="savings-card">
-        <div class="num orange">-2 мес.</div>
-        <div class="label">сокращение сроков<br>подготовки к открытию</div>
-      </div>
-      <div class="savings-card">
-        <div class="num blue">30+ ч.</div>
-        <div class="label">экономия времени<br>в неделю</div>
-      </div>
-      <div class="savings-card">
-        <div class="num green">1</div>
-        <div class="label">место вместо<br>10 таблиц и чатов</div>
-      </div>
+      <div class="savings-card"><div class="num green">-20%</div><div class="label" data-i18n="savings.c1">перерасхода бюджета<br>при планировании</div></div>
+      <div class="savings-card"><div class="num orange">-2 мес.</div><div class="label" data-i18n="savings.c2">сокращение сроков<br>подготовки</div></div>
+      <div class="savings-card"><div class="num blue">30+ ч.</div><div class="label" data-i18n="savings.c3">экономия времени<br>в неделю</div></div>
+      <div class="savings-card"><div class="num green">1</div><div class="label" data-i18n="savings.c4">место вместо<br>10 таблиц и чатов</div></div>
     </div>
   </div>
 </section>
 
-<!-- DOMAINS -->
-<section class="domains" id="domains">
-  <div class="domains-inner">
-    <div class="eyebrow">Для кого</div>
-    <h2>Любой малый бизнес</h2>
-    <p class="lead">SVITA адаптируется под вашу нишу. Готовые шаблоны, нормативы и каталоги для каждого типа.</p>
-    <div class="dom-grid">
-      <div class="dom-card"><div class="ico">&#129463;</div><h4>Стоматология</h4><p>Клиники, кабинеты, ортодонтия</p></div>
-      <div class="dom-card"><div class="ico">&#9749;</div><h4>Кофейня</h4><p>Specialty, to-go, кондитерская</p></div>
-      <div class="dom-card"><div class="ico">&#128135;</div><h4>Салон красоты</h4><p>Premium, барбершоп, SPA</p></div>
-      <div class="dom-card"><div class="ico">&#128170;</div><h4>Фитнес</h4><p>Зал, студия, йога-центр</p></div>
-      <div class="dom-card"><div class="ico">&#127860;</div><h4>Общепит</h4><p>Ресторан, кафе, кейтеринг</p></div>
-      <div class="dom-card"><div class="ico">&#10024;</div><h4>Ваша ниша</h4><p>Настраивается под любой формат</p></div>
+<!-- FOR WHO -->
+<section class="niches" id="niches">
+  <div class="niches-inner">
+    <div class="eyebrow" style="color:var(--ac2)" data-i18n="niches.eyebrow">Для кого</div>
+    <h2 class="section-h2" data-i18n="niches.h2">Любой малый бизнес</h2>
+    <p class="lead" data-i18n="niches.lead">SVITA адаптируется под вашу нишу. Готовые шаблоны, нормативы и каталоги для каждого формата.</p>
+    <div class="niche-grid">
+      <div class="niche-card"><div class="ico">&#129463;</div><h4 data-i18n="niche.1">Стоматология</h4><p>Клиники, кабинеты</p></div>
+      <div class="niche-card"><div class="ico">&#9749;</div><h4 data-i18n="niche.2">Кофейня</h4><p>Specialty, to-go</p></div>
+      <div class="niche-card"><div class="ico">&#128135;</div><h4 data-i18n="niche.3">Салон красоты</h4><p>Premium, SPA</p></div>
+      <div class="niche-card"><div class="ico">&#128170;</div><h4 data-i18n="niche.4">Фитнес</h4><p>Зал, студия, йога</p></div>
+      <div class="niche-card"><div class="ico">&#127860;</div><h4 data-i18n="niche.5">Общепит</h4><p>Ресторан, кафе</p></div>
+      <div class="niche-card"><div class="ico">&#10024;</div><h4 data-i18n="niche.6">Ваша ниша</h4><p>Любой формат</p></div>
     </div>
   </div>
 </section>
@@ -340,10 +347,11 @@ footer a{color:var(--tx2);font-weight:500;transition:color .15s}footer a:hover{c
 <!-- CTA -->
 <section class="cta" id="cta">
   <div class="cta-box">
-    <h2>Начните планировать сегодня</h2>
-    <p>Бесплатный старт. Без привязки карты. Полный доступ к конструктору &mdash; прямо сейчас.</p>
-    <a href="index.html#signup" class="btn btn-lg">Попробовать бесплатно</a>
-    <div class="cta-sub">Работает на телефоне, планшете и компьютере</div>
+    <h2 data-i18n="cta.h2">Начните сегодня. Бесплатно.</h2>
+    <p data-i18n="cta.p">Без привязки карты. Полный доступ к конструктору &mdash; прямо сейчас.</p>
+    <a href="index.html#signup" class="btn btn-lg" id="bottomCta" data-i18n="cta.try">Попробовать бесплатно</a>
+    <div class="cta-sub" data-i18n="cta.sub">Работает на телефоне, планшете и компьютере</div>
+    <img src="stickers/cybercat-16-rocket.png" class="cta-mascot" alt="Svitiks" width="120" height="120">
   </div>
 </section>
 
@@ -352,7 +360,7 @@ footer a{color:var(--tx2);font-weight:500;transition:color .15s}footer a:hover{c
   <div>SVITA &copy; 2026 &mdash; <a href="https://labs67.com" target="_blank" rel="noopener">LABS67</a></div>
   <div style="display:flex;gap:16px">
     <a href="index.html">Dashboard</a>
-    <a href="mailto:hey@labs67.com">Контакт</a>
+    <a href="mailto:hey@labs67.com" data-i18n="footer.contact">Контакт</a>
   </div>
 </footer>
 
@@ -366,24 +374,30 @@ footer a{color:var(--tx2);font-weight:500;transition:color .15s}footer a:hover{c
   var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0ZGxlb2JqbnpuaXFrcW9tbHJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMzE4MTEsImV4cCI6MjA4NzgwNzgxMX0.AMHtY7zGPemKYCxMy2bqRTOEAp8trA_Slor9wmg7C38';
   // Page view
   fetch(SB_URL+'/rest/v1/page_views',{method:'POST',headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'return=minimal'},body:JSON.stringify({page:'/landing',user_agent:navigator.userAgent,referrer:document.referrer||null})}).catch(function(){});
-  // Auth check — show logged-in state
+  // Auth check
   var sb=supabase.createClient(SB_URL,SB_KEY);
   sb.auth.getSession().then(function(res){
     var s=res.data&&res.data.session;
     if(!s)return;
     var email=s.user.email||'';
     var name=s.user.user_metadata&&s.user.user_metadata.display_name||email.split('@')[0];
+    // Nav
+    var navCta=document.getElementById('navCta');
+    if(navCta){navCta.textContent='Dashboard';navCta.href='index.html'}
     var navR=document.querySelector('.nav-r');
-    if(!navR)return;
-    navR.innerHTML='<span style="font-size:12px;color:var(--tx2)">'+name+'</span><a href="index.html" class="btn btn-p" style="padding:8px 18px">Открыть Dashboard</a>';
-    // Update hero CTA
-    var heroCta=document.querySelector('.hero-cta');
-    if(heroCta)heroCta.innerHTML='<a href="index.html" class="btn btn-p btn-lg">Открыть Dashboard</a><a href="#how" class="btn btn-g btn-lg">Как это работает</a>';
-    // Update bottom CTA
-    var ctaBtn=document.querySelector('.cta-box .btn');
-    if(ctaBtn){ctaBtn.href='index.html';ctaBtn.textContent='Открыть Dashboard'}
+    if(navR){
+      var sp=document.createElement('span');sp.style.cssText='font-size:12px;color:var(--tx2)';sp.textContent=name;
+      navR.insertBefore(sp,navCta);
+    }
+    // Hero CTA
+    var heroCta=document.getElementById('heroCta');
+    if(heroCta){heroCta.textContent='Открыть Dashboard';heroCta.href='index.html'}
+    // Bottom CTA
+    var bottomCta=document.getElementById('bottomCta');
+    if(bottomCta){bottomCta.textContent='Открыть Dashboard';bottomCta.href='index.html'}
   });
 })();
 </script>
+<script src="labs67-i18n.js"></script>
 </body>
 </html>
