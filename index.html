@@ -944,13 +944,204 @@ Apple</button>
 <div class="sec" id="sec-s1">
 <div class="ph"><div><h2>01 &middot; Помещение</h2><div class="ph-s">Объект, планировка, характеристики</div></div><span class="tag t-wip" id="s1Tag">В работе</span></div>
 
-<!-- БЛОК 1: КАРТОЧКА ПОМЕЩЕНИЯ (удаляемая/заменяемая) -->
-<div class="c" id="propertyCardWrap">
+<!-- Объект + Характеристики: 2 колонки -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start">
+
+<!-- БЛОК 1: КАРТОЧКА ПОМЕЩЕНИЯ -->
+<div class="c" id="propertyCardWrap" style="margin:0">
 <div class="ch"><h3>&#127970; Объект</h3><div style="display:flex;gap:6px"><button class="btn sm pr" onclick="openPremisePicker()">Выбрать</button><button class="btn sm gn" onclick="saveProperty()">Сохранить</button><button class="btn sm" style="color:var(--rd)" onclick="clearProperty()">Убрать</button></div></div>
 <div class="cb" id="propertyCardBody">
 <!-- filled by renderProperty() -->
 </div>
 </div>
+
+<!-- БЛОК 4: ХАРАКТЕРИСТИКИ (collapsible) -->
+<div class="c" style="margin:0">
+<div class="ch"><h3>&#128295; Характеристики</h3></div>
+<div class="cb" style="padding:8px 16px">
+<div class="calc-toggle" onclick="toggleCalc(this)"><span class="calc-arrow">&#9654;</span><span>Параметры объекта</span></div>
+<div class="calc-body" id="propParamsBody">
+<div class="g2" style="gap:8px;margin-top:8px">
+
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;margin-bottom:4px">Высота потолков</div>
+<div style="display:flex;gap:4px;align-items:center">
+<span style="font-size:9px;color:var(--tx3)">от</span>
+<input class="price-edit" id="propCeilMin" value="2.7" style="width:40px;text-align:center;font-size:12px" onchange="savePropertyParams()">
+<span style="font-size:9px;color:var(--tx3)">до</span>
+<input class="price-edit" id="propCeilMax" value="3.2" style="width:40px;text-align:center;font-size:12px" onchange="savePropertyParams()">
+<span style="font-size:9px;color:var(--tx3)">м</span>
+</div>
+</div>
+
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;margin-bottom:4px">Отопление</div>
+<div style="display:flex;flex-wrap:wrap;gap:4px" id="propHeating">
+<span class="param-chip" data-val="central" onclick="toggleChip(this)">Центральное</span>
+<span class="param-chip" data-val="electric" onclick="toggleChip(this)">Электрическое</span>
+<span class="param-chip" data-val="gas" onclick="toggleChip(this)">Газовое</span>
+<span class="param-chip" data-val="floor" onclick="toggleChip(this)">Тёплый пол</span>
+<span class="param-chip" data-val="none" onclick="toggleChip(this)">Нет</span>
+</div>
+</div>
+
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;margin-bottom:4px">Окна / витрины</div>
+<div style="display:flex;flex-wrap:wrap;gap:4px" id="propWindows">
+<span class="param-chip" data-val="panoramic" onclick="toggleChip(this)">Панорамные</span>
+<span class="param-chip" data-val="vitrina" onclick="toggleChip(this)">Витрина</span>
+<span class="param-chip" data-val="standard" onclick="toggleChip(this)">Стандартные</span>
+<span class="param-chip" data-val="small" onclick="toggleChip(this)">Маленькие</span>
+<span class="param-chip" data-val="none" onclick="toggleChip(this)">Без окон</span>
+</div>
+</div>
+
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;margin-bottom:4px">Вход</div>
+<div style="display:flex;flex-wrap:wrap;gap:4px" id="propEntrance">
+<span class="param-chip" data-val="street" onclick="toggleChip(this)">С улицы</span>
+<span class="param-chip" data-val="yard" onclick="toggleChip(this)">Со двора</span>
+<span class="param-chip" data-val="lobby" onclick="toggleChip(this)">Через лобби</span>
+<span class="param-chip" data-val="separate" onclick="toggleChip(this)">Отдельный</span>
+</div>
+</div>
+
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;margin-bottom:4px">Водоснабжение</div>
+<div style="display:flex;flex-wrap:wrap;gap:4px" id="propWater">
+<span class="param-chip" data-val="central_w" onclick="toggleChip(this)">Центральное</span>
+<span class="param-chip" data-val="hot" onclick="toggleChip(this)">Горячая вода</span>
+<span class="param-chip" data-val="sewer" onclick="toggleChip(this)">Канализация</span>
+<span class="param-chip" data-val="none_w" onclick="toggleChip(this)">Нет подвода</span>
+</div>
+</div>
+
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;margin-bottom:4px">Электроснабжение</div>
+<div style="display:flex;flex-wrap:wrap;gap:4px" id="propElectric">
+<span class="param-chip" data-val="220" onclick="toggleChip(this)">220В</span>
+<span class="param-chip" data-val="380" onclick="toggleChip(this)">380В (трёхфаз.)</span>
+<span class="param-chip" data-val="high_power" onclick="toggleChip(this)">&gt;30 кВт</span>
+<span class="param-chip" data-val="low_power" onclick="toggleChip(this)">&lt;15 кВт</span>
+</div>
+</div>
+
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;margin-bottom:4px">Вентиляция</div>
+<div style="display:flex;flex-wrap:wrap;gap:4px" id="propVent">
+<span class="param-chip" data-val="natural" onclick="toggleChip(this)">Естественная</span>
+<span class="param-chip" data-val="mechanical" onclick="toggleChip(this)">Механическая</span>
+<span class="param-chip" data-val="ahu" onclick="toggleChip(this)">Приточно-вытяжная</span>
+<span class="param-chip" data-val="ac_ready" onclick="toggleChip(this)">Под кондиционеры</span>
+<span class="param-chip" data-val="none_v" onclick="toggleChip(this)">Нет</span>
+</div>
+</div>
+
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;margin-bottom:4px">Состояние</div>
+<div style="display:flex;flex-wrap:wrap;gap:4px" id="propCondition">
+<span class="param-chip" data-val="shell" onclick="toggleChip(this)">Shell &amp; core</span>
+<span class="param-chip" data-val="rough" onclick="toggleChip(this)">Черновая</span>
+<span class="param-chip" data-val="ready" onclick="toggleChip(this)">Под ключ</span>
+<span class="param-chip" data-val="reno" onclick="toggleChip(this)">Требует ремонта</span>
+<span class="param-chip" data-val="after" onclick="toggleChip(this)">После арендатора</span>
+</div>
+</div>
+
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;margin-bottom:4px">Парковка</div>
+<div style="display:flex;flex-wrap:wrap;gap:4px" id="propParking">
+<span class="param-chip" data-val="own" onclick="toggleChip(this)">Собственная</span>
+<span class="param-chip" data-val="street_p" onclick="toggleChip(this)">Уличная</span>
+<span class="param-chip" data-val="underground" onclick="toggleChip(this)">Подземная</span>
+<span class="param-chip" data-val="paid" onclick="toggleChip(this)">Платная</span>
+<span class="param-chip" data-val="none_p" onclick="toggleChip(this)">Нет</span>
+</div>
+</div>
+
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;margin-bottom:4px">Доступность</div>
+<div style="display:flex;flex-wrap:wrap;gap:4px" id="propAccess">
+<span class="param-chip" data-val="disabled" onclick="toggleChip(this)">Для маломобильных</span>
+<span class="param-chip" data-val="ramp" onclick="toggleChip(this)">Пандус</span>
+<span class="param-chip" data-val="elevator" onclick="toggleChip(this)">Лифт</span>
+<span class="param-chip" data-val="ground" onclick="toggleChip(this)">Первый этаж</span>
+</div>
+</div>
+
+</div><!-- /g2 -->
+
+<div style="margin-top:8px">
+<label style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase;display:block;margin-bottom:3px">Заметки</label>
+<textarea id="propNotes" placeholder="Заметки по помещению..." style="width:100%;min-height:50px;background:var(--sf2);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--tx);font-family:var(--f);font-size:11px;resize:vertical" oninput="savePropertyParams()"></textarea>
+</div>
+</div><!-- /calc-body -->
+</div>
+</div>
+
+<!-- Правая колонка: Площадь + Стоимость -->
+<div style="display:flex;flex-direction:column;gap:12px">
+
+<!-- Площадь и метраж -->
+<div class="c" style="margin:0">
+<div class="ch"><h3>&#128207; Площадь</h3><span style="font-size:9px;color:var(--tx3)">Из карточки</span></div>
+<div class="cb" style="padding:10px 16px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div style="background:var(--sf2);border-radius:8px;padding:10px">
+<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Общая</div>
+<div style="font-size:20px;font-weight:700;color:var(--tx)" id="propArea">--</div>
+<div style="font-size:9px;color:var(--tx3)">м&sup2;</div>
+</div>
+<div style="background:var(--sf2);border-radius:8px;padding:10px">
+<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Полезная</div>
+<div style="font-size:20px;font-weight:700;color:var(--tx)" id="propUsable">--</div>
+<div style="font-size:9px;color:var(--tx3)">м&sup2; (~85%)</div>
+</div>
+<div style="background:var(--sf2);border-radius:8px;padding:10px">
+<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Кабинетов</div>
+<div style="font-size:20px;font-weight:700;color:var(--tx)" id="propCabinets">--</div>
+<div style="font-size:9px;color:var(--tx3)">по 12-15 м&sup2;</div>
+</div>
+<div style="background:var(--sf2);border-radius:8px;padding:10px">
+<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Этаж</div>
+<div style="font-size:20px;font-weight:700;color:var(--tx)" id="propFloor">--</div>
+<div style="font-size:9px;color:var(--tx3)" id="propFloorSub"></div>
+</div>
+</div>
+</div></div>
+
+<!-- Стоимость аренды -->
+<div class="c" id="propertyCostBlock" style="margin:0">
+<div class="ch"><h3>&#128176; Стоимость</h3></div>
+<div class="cb" style="padding:10px 16px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
+<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Аренда / мес.</div>
+<div style="margin-top:4px"><input class="price-edit" data-cost="rent" value="12000" onchange="recalc();saveLoadParams()" style="width:80px;font-size:14px;font-weight:700"> <span style="font-size:10px;color:var(--tx3)">PLN</span></div>
+</div>
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
+<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Депозит</div>
+<div style="margin-top:4px;display:flex;gap:4px;align-items:center"><input class="price-edit" id="depositMonths" value="3" onchange="calcDeposit()" style="width:30px;text-align:center;font-size:14px;font-weight:700"><span style="font-size:10px;color:var(--tx3)">мес.</span></div>
+<div style="font-size:10px;color:var(--ac2);font-weight:600;margin-top:2px"><span id="depositVal">36 000</span> PLN</div>
+</div>
+</div>
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px;margin-bottom:10px">
+<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Модернизация (Таб 2)</div>
+<div style="display:flex;align-items:center;gap:8px;margin-top:4px">
+<span style="font-size:14px;font-weight:700;color:var(--ac2)" id="renCostDisplay">0</span>
+<span style="font-size:10px;color:var(--tx3)">PLN</span>
+<button class="btn sm" onclick="nav('s2')" style="font-size:9px;margin-left:auto">Перейти &rarr;</button>
+</div>
+</div>
+<div style="padding-top:8px;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center">
+<span style="font-size:10px;color:var(--tx2)">Итого:</span>
+<span style="font-size:16px;font-weight:700;color:var(--ac2)" id="s1CostTotal">0 PLN</span>
+</div>
+</div></div>
+
+</div><!-- /right column -->
+
+</div><!-- /grid 2 cols -->
 
 <!-- Кнопка добавить помещение (видна когда карточки нет) -->
 <div id="addPropertyBtn" style="display:none;padding:16px;gap:8px">
@@ -1083,150 +1274,7 @@ Apple</button>
 </div>
 </div></div>
 
-<!-- БЛОК 2: ПЛОЩАДЬ И МЕТРАЖ (зависит от карточки) -->
-<div class="c"><div class="ch"><h3>&#128207; Площадь и метраж</h3><span style="font-size:10px;color:var(--tx3)">Автоматически из карточки</span></div>
-<div class="cb">
-<div class="sts" style="margin-bottom:0">
-<div class="st"><div class="st-l">Общая площадь</div><div class="st-v" id="propArea">--</div><div class="st-s">м&sup2;</div></div>
-<div class="st"><div class="st-l">Полезная площадь</div><div class="st-v" id="propUsable">--</div><div class="st-s">м&sup2; (~85%)</div></div>
-<div class="st"><div class="st-l">Кабинетов вмещает</div><div class="st-v" id="propCabinets">--</div><div class="st-s">по 12-15 м&sup2;</div></div>
-<div class="st"><div class="st-l">Этаж</div><div class="st-v" id="propFloor">--</div><div class="st-s" id="propFloorSub"></div></div>
-</div>
-</div></div>
-
-<!-- БЛОК 3: СТОИМОСТЬ (полная ширина) -->
-<div class="c" id="propertyCostBlock"><div class="ch"><h3>&#128176; Стоимость аренды</h3></div>
-<div class="cb">
-<div class="g3">
-<div class="cost-row" style="flex-direction:column;gap:4px;align-items:flex-start"><label style="font-size:10px;font-weight:600;color:var(--tx3);text-transform:uppercase">Аренда / мес.</label><div class="cost-val"><input class="price-edit" data-cost="rent" value="12000" onchange="recalc();saveLoadParams()" style="width:100px"> PLN</div></div>
-<div class="cost-row" style="flex-direction:column;gap:4px;align-items:flex-start"><label style="font-size:10px;font-weight:600;color:var(--tx3);text-transform:uppercase">Депозит (кол-во мес.)</label><div style="display:flex;gap:6px;align-items:center"><input class="price-edit" id="depositMonths" value="3" onchange="calcDeposit()" style="width:40px;text-align:center"> &times; аренда = <span id="depositVal" style="font-weight:700;color:var(--ac2)">36 000</span> PLN</div></div>
-<div class="cost-row" style="flex-direction:column;gap:4px;align-items:flex-start"><label style="font-size:10px;font-weight:600;color:var(--tx3);text-transform:uppercase">Модернизация (Таб 2)</label><div class="cost-val"><span id="renCostDisplay" style="font-weight:700;color:var(--ac2);min-width:80px">0</span> PLN <button class="btn sm" onclick="nav('s2')" style="margin-left:8px;font-size:9px">Перейти →</button></div></div>
-</div>
-<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center">
-<span style="font-size:12px;color:var(--tx2)">Итого помещение (депозит + ремонт):</span>
-<span style="font-size:18px;font-weight:800;color:var(--ac2)" id="s1CostTotal">0 PLN</span>
-</div>
-</div></div>
-
-<!-- БЛОК 4: ПАРАМЕТРЫ ПОМЕЩЕНИЯ -->
-<div class="c"><div class="ch"><h3>&#128295; Характеристики объекта</h3></div>
-<div class="cb">
-<div class="g2">
-
-<div class="db-card" style="margin:0;padding:12px">
-<div class="db-card-label">Высота потолков</div>
-<div style="display:flex;gap:6px;align-items:center;margin-top:4px">
-<span style="font-size:10px;color:var(--tx3)">от</span>
-<input class="price-edit" id="propCeilMin" value="2.7" style="width:50px;text-align:center" onchange="savePropertyParams()">
-<span style="font-size:10px;color:var(--tx3)">до</span>
-<input class="price-edit" id="propCeilMax" value="3.2" style="width:50px;text-align:center" onchange="savePropertyParams()">
-<span style="font-size:10px;color:var(--tx3)">м</span>
-</div>
-</div>
-
-<div class="db-card" style="margin:0;padding:12px">
-<div class="db-card-label">Отопление</div>
-<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px" id="propHeating">
-<span class="param-chip" data-val="central" onclick="toggleChip(this)">Центральное</span>
-<span class="param-chip" data-val="electric" onclick="toggleChip(this)">Электрическое</span>
-<span class="param-chip" data-val="gas" onclick="toggleChip(this)">Газовое</span>
-<span class="param-chip" data-val="floor" onclick="toggleChip(this)">Тёплый пол</span>
-<span class="param-chip" data-val="none" onclick="toggleChip(this)">Нет</span>
-</div>
-</div>
-
-<div class="db-card" style="margin:0;padding:12px">
-<div class="db-card-label">Окна / витрины</div>
-<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px" id="propWindows">
-<span class="param-chip" data-val="panoramic" onclick="toggleChip(this)">Панорамные</span>
-<span class="param-chip" data-val="vitrina" onclick="toggleChip(this)">Витрина</span>
-<span class="param-chip" data-val="standard" onclick="toggleChip(this)">Стандартные</span>
-<span class="param-chip" data-val="small" onclick="toggleChip(this)">Маленькие</span>
-<span class="param-chip" data-val="none" onclick="toggleChip(this)">Без окон</span>
-</div>
-</div>
-
-<div class="db-card" style="margin:0;padding:12px">
-<div class="db-card-label">Вход</div>
-<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px" id="propEntrance">
-<span class="param-chip" data-val="street" onclick="toggleChip(this)">С улицы</span>
-<span class="param-chip" data-val="yard" onclick="toggleChip(this)">Со двора</span>
-<span class="param-chip" data-val="lobby" onclick="toggleChip(this)">Через лобби</span>
-<span class="param-chip" data-val="separate" onclick="toggleChip(this)">Отдельный</span>
-</div>
-</div>
-
-<div class="db-card" style="margin:0;padding:12px">
-<div class="db-card-label">Водоснабжение</div>
-<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px" id="propWater">
-<span class="param-chip" data-val="central_w" onclick="toggleChip(this)">Центральное</span>
-<span class="param-chip" data-val="hot" onclick="toggleChip(this)">Горячая вода</span>
-<span class="param-chip" data-val="sewer" onclick="toggleChip(this)">Канализация</span>
-<span class="param-chip" data-val="none_w" onclick="toggleChip(this)">Нет подвода</span>
-</div>
-</div>
-
-<div class="db-card" style="margin:0;padding:12px">
-<div class="db-card-label">Электроснабжение</div>
-<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px" id="propElectric">
-<span class="param-chip" data-val="220" onclick="toggleChip(this)">220В</span>
-<span class="param-chip" data-val="380" onclick="toggleChip(this)">380В (трёхфаз.)</span>
-<span class="param-chip" data-val="high_power" onclick="toggleChip(this)">&gt;30 кВт</span>
-<span class="param-chip" data-val="low_power" onclick="toggleChip(this)">&lt;15 кВт</span>
-</div>
-</div>
-
-<div class="db-card" style="margin:0;padding:12px">
-<div class="db-card-label">Вентиляция</div>
-<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px" id="propVent">
-<span class="param-chip" data-val="natural" onclick="toggleChip(this)">Естественная</span>
-<span class="param-chip" data-val="mechanical" onclick="toggleChip(this)">Механическая</span>
-<span class="param-chip" data-val="ahu" onclick="toggleChip(this)">Приточно-вытяжная</span>
-<span class="param-chip" data-val="ac_ready" onclick="toggleChip(this)">Под кондиционеры</span>
-<span class="param-chip" data-val="none_v" onclick="toggleChip(this)">Нет</span>
-</div>
-</div>
-
-<div class="db-card" style="margin:0;padding:12px">
-<div class="db-card-label">Состояние</div>
-<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px" id="propCondition">
-<span class="param-chip" data-val="shell" onclick="toggleChip(this)">Shell &amp; core</span>
-<span class="param-chip" data-val="rough" onclick="toggleChip(this)">Черновая</span>
-<span class="param-chip" data-val="ready" onclick="toggleChip(this)">Под ключ</span>
-<span class="param-chip" data-val="reno" onclick="toggleChip(this)">Требует ремонта</span>
-<span class="param-chip" data-val="after" onclick="toggleChip(this)">После арендатора</span>
-</div>
-</div>
-
-<div class="db-card" style="margin:0;padding:12px">
-<div class="db-card-label">Парковка</div>
-<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px" id="propParking">
-<span class="param-chip" data-val="own" onclick="toggleChip(this)">Собственная</span>
-<span class="param-chip" data-val="street_p" onclick="toggleChip(this)">Уличная</span>
-<span class="param-chip" data-val="underground" onclick="toggleChip(this)">Подземная</span>
-<span class="param-chip" data-val="paid" onclick="toggleChip(this)">Платная</span>
-<span class="param-chip" data-val="none_p" onclick="toggleChip(this)">Нет</span>
-</div>
-</div>
-
-<div class="db-card" style="margin:0;padding:12px">
-<div class="db-card-label">Доступность</div>
-<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px" id="propAccess">
-<span class="param-chip" data-val="disabled" onclick="toggleChip(this)">Для маломобильных</span>
-<span class="param-chip" data-val="ramp" onclick="toggleChip(this)">Пандус</span>
-<span class="param-chip" data-val="elevator" onclick="toggleChip(this)">Лифт</span>
-<span class="param-chip" data-val="ground" onclick="toggleChip(this)">Первый этаж</span>
-</div>
-</div>
-
-</div>
-
-<!-- Дополнительные заметки -->
-<div style="margin-top:12px">
-<label style="font-size:10px;font-weight:600;color:var(--tx3);text-transform:uppercase;display:block;margin-bottom:4px">Заметки по помещению</label>
-<textarea id="propNotes" placeholder="Любые дополнительные заметки..." style="width:100%;min-height:60px;background:var(--sf2);border:1px solid var(--bd);border-radius:6px;padding:10px;color:var(--tx);font-family:var(--f);font-size:12px;resize:vertical" oninput="savePropertyParams()"></textarea>
-</div>
-</div></div>
+<!-- БЛОК 2+3 moved into right column of grid -->
 
 <!-- Комнаты проекта из БД -->
 <div class="c"><div class="ch"><h3>🚪 Комнаты проекта</h3><button class="btn sm pr" onclick="nav('db-premises')">Каталог помещений →</button></div>
