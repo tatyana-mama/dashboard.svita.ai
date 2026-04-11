@@ -628,6 +628,31 @@
 .calc-body.open{max-height:2000px;opacity:1}
 /* Currency rate badge */
 .cur-rate-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:600;color:var(--gn);background:var(--gnbg);padding:2px 8px;border-radius:6px;margin-left:8px}
+/* AI Guide */
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;padding:0 24px 24px}
+.guide-card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;overflow:hidden;transition:box-shadow .2s,transform .15s;cursor:pointer}
+.guide-card:hover{box-shadow:0 6px 20px rgba(0,0,0,.08);transform:translateY(-2px)}
+.guide-card-head{padding:16px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--bd)}
+.guide-card-ico{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.guide-card-title{font-size:13px;font-weight:700;color:var(--tx)}
+.guide-card-desc{font-size:11px;color:var(--tx2);margin-top:2px}
+.guide-card-body{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1),opacity .25s,padding .25s;opacity:0;padding:0 18px}
+.guide-card.open .guide-card-body{max-height:2000px;opacity:1;padding:14px 18px}
+.guide-card-body p{font-size:11px;line-height:1.6;color:var(--tx2);margin:0 0 8px}
+.guide-card-body ul{margin:0 0 8px;padding-left:18px}
+.guide-card-body li{font-size:11px;line-height:1.6;color:var(--tx2);margin-bottom:3px}
+.guide-card-body code{background:var(--sf2);padding:1px 5px;border-radius:4px;font-size:10px;font-family:monospace;color:var(--ac2)}
+.guide-example{background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:10px 14px;margin:8px 0;font-size:11px;color:var(--tx);line-height:1.5}
+.guide-example b{color:var(--ac2);font-weight:600}
+.guide-try-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;border:none;background:linear-gradient(135deg,#8b5cf6,#3b82f6);color:#fff;font-size:10px;font-weight:600;cursor:pointer;margin-top:6px;font-family:var(--f);transition:opacity .15s}
+.guide-try-btn:hover{opacity:.85}
+.guide-tag{display:inline-block;font-size:9px;font-weight:600;padding:2px 8px;border-radius:5px;margin-right:4px}
+.guide-tag.chat{background:#ede9fe;color:#7c3aed}
+.guide-tag.note{background:#dbeafe;color:#2563eb}
+.guide-tag.gen{background:#d1fae5;color:#059669}
+[data-theme=dark] .guide-tag.chat{background:#2e1065;color:#a78bfa}
+[data-theme=dark] .guide-tag.note{background:#1e3a5f;color:#60a5fa}
+[data-theme=dark] .guide-tag.gen{background:#064e3b;color:#34d399}
 </style>
 </head>
 <body>
@@ -1608,6 +1633,105 @@ Apple</button>
 </div><!-- close calc-body profCalcBody -->
 
 </div></div>
+<!-- ═══ AI КОНСТРУКТОР КОНЦЕПЦИИ ═══ -->
+<div class="c" style="border-color:#8b5cf6;background:linear-gradient(135deg,rgba(139,92,246,.05),rgba(59,130,246,.05))">
+<div class="ch" style="border-bottom-color:rgba(139,92,246,.2)"><h3>&#10024; AI-конструктор концепции</h3><span style="font-size:9px;color:var(--tx3)">Jetson AGX Orin &middot; qwen2.5:32b</span></div>
+<div class="cb" style="padding:14px">
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+<!-- Тип бизнеса -->
+<div>
+<label style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Тип бизнеса</label>
+<select id="aiWizBizType" style="width:100%;padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font-size:12px;font-family:var(--f)">
+<option value="dental">Стоматологическая клиника</option>
+<option value="coffee">Кофейня</option>
+<option value="restaurant">Ресторан</option>
+<option value="barbershop">Барбершоп</option>
+<option value="beauty">Салон красоты</option>
+<option value="gym">Тренажёрный зал</option>
+<option value="pharmacy">Аптека</option>
+<option value="veterinary">Ветеринарная клиника</option>
+<option value="co-working">Коворкинг</option>
+<option value="other">Другое</option>
+</select>
+</div>
+<!-- Страна + город -->
+<div>
+<label style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Город / Страна</label>
+<input id="aiWizCity" type="text" placeholder="Варшава, Польша" style="width:100%;padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font-size:12px;font-family:var(--f)">
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px">
+<!-- Площадь -->
+<div>
+<label style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Площадь (м&sup2;)</label>
+<input id="aiWizArea" type="number" placeholder="120" min="20" max="5000" style="width:100%;padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font-size:12px;font-family:var(--f)">
+</div>
+<!-- Рабочие места -->
+<div>
+<label style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px" id="aiWizUnitsLabel">Кресел / столов</label>
+<input id="aiWizUnits" type="number" placeholder="3" min="1" max="100" style="width:100%;padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font-size:12px;font-family:var(--f)">
+</div>
+<!-- Бюджет -->
+<div>
+<label style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Бюджет</label>
+<input id="aiWizBudget" type="text" placeholder="800 000 PLN" style="width:100%;padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font-size:12px;font-family:var(--f)">
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+<!-- Сегмент -->
+<div>
+<label style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Сегмент</label>
+<select id="aiWizSegment" style="width:100%;padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font-size:12px;font-family:var(--f)">
+<option value="economy">Эконом</option>
+<option value="standard" selected>Стандарт</option>
+<option value="premium">Премиум</option>
+<option value="luxury">Люкс</option>
+</select>
+</div>
+<!-- Ориентир -->
+<div>
+<label style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Приоритет</label>
+<select id="aiWizPriority" style="width:100%;padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font-size:12px;font-family:var(--f)">
+<option value="balanced" selected>Сбалансированный</option>
+<option value="min-budget">Минимальный бюджет</option>
+<option value="max-quality">Максимальное качество</option>
+<option value="fast-open">Быстрое открытие</option>
+<option value="max-revenue">Максимальная выручка</option>
+</select>
+</div>
+</div>
+
+<!-- Дополнительные пожелания -->
+<div style="margin-bottom:14px">
+<label style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Дополнительные пожелания (необязательно)</label>
+<textarea id="aiWizNotes" placeholder="Например: детская зона, VIP-кабинет, акцент на имплантологию..." rows="2" style="width:100%;padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font-size:12px;font-family:var(--f);resize:vertical"></textarea>
+</div>
+
+<!-- Что генерировать -->
+<div style="margin-bottom:14px">
+<label style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px">Что сгенерировать</label>
+<div style="display:flex;flex-wrap:wrap;gap:6px">
+<label style="display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--tx);cursor:pointer"><input type="checkbox" id="aiWizRooms" checked> Помещения</label>
+<label style="display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--tx);cursor:pointer"><input type="checkbox" id="aiWizEquip" checked> Оборудование</label>
+<label style="display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--tx);cursor:pointer"><input type="checkbox" id="aiWizStaff" checked> Персонал</label>
+<label style="display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--tx);cursor:pointer"><input type="checkbox" id="aiWizSvc" checked> Услуги</label>
+<label style="display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--tx);cursor:pointer"><input type="checkbox" id="aiWizReno" checked> Ремонт</label>
+<label style="display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--tx);cursor:pointer"><input type="checkbox" id="aiWizDocs"> Документы</label>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:10px">
+<button id="aiWizGenBtn" onclick="aiWizGenerate()" style="padding:10px 24px;border:none;border-radius:10px;background:linear-gradient(135deg,#8b5cf6,#3b82f6);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--f);transition:opacity .15s">&#10024; Сгенерировать концепцию</button>
+<div id="aiWizStatus" style="font-size:11px;color:var(--tx3)"></div>
+</div>
+
+<div id="aiWizPreview" style="display:none;margin-top:14px"></div>
+
+</div></div>
+
 </div><!-- /sec-s6 -->
 
 <!-- ═══ S7: ДОКУМЕНТАЦИЯ ═══ -->
@@ -2109,6 +2233,27 @@ function switchAdminRole(role){
 
 <!-- ZONALITIES per room type -->
 <div id="zonalityCards"></div>
+</div>
+
+<!-- ═══ AI GUIDE: обучение работе с чатботом ═══ -->
+<div class="sec" id="sec-ai-guide">
+<div class="bk" onclick="nav('overview')">&larr; Обзор</div>
+<div class="ph"><div><h2>&#129302; Обучение: AI-ассистент SVITA</h2><div class="ph-s">Как использовать чатбот для построения бизнес-концепции</div></div></div>
+
+<div style="padding:0 24px 16px">
+<div style="background:linear-gradient(135deg,#ede9fe,#dbeafe);border-radius:14px;padding:18px 22px;margin-bottom:16px;border:1px solid #c4b5fd">
+<div style="font-size:14px;font-weight:700;color:#4c1d95;margin-bottom:6px">&#10024; AI-ассистент SVITA — ваш бизнес-аналитик</div>
+<div style="font-size:12px;color:#5b21b6;line-height:1.6">Бот знает вашу концепцию: тип бизнеса, бюджет, выбранное оборудование, персонал и помещения. Он даёт рекомендации на основе реальных данных вашего проекта, а не общих советов.</div>
+</div>
+</div>
+
+<div style="padding:0 24px 10px;display:flex;gap:8px;flex-wrap:wrap">
+<span class="guide-tag chat">Чат-советник</span>
+<span class="guide-tag note">AI-досье</span>
+<span class="guide-tag gen">Генерация концепции</span>
+</div>
+
+<div class="guide-grid" id="guideGrid"></div>
 </div>
 
 <div class="sec" id="sec-news">
@@ -3859,6 +4004,177 @@ function applyBizData(type){
   DB.pickedContractors={};DB.pickedRenovations={};DB.pickedDocs={};
 }
 
+// ═══════════════ AI WIZARD (конструктор) ═══════════════
+// Update label for units based on biz type
+document.getElementById('aiWizBizType').addEventListener('change',function(){
+  const labels={dental:'Кресел',coffee:'Столов',restaurant:'Посадочных мест',barbershop:'Кресел',beauty:'Рабочих мест',gym:'Зон',pharmacy:'Касс',veterinary:'Кабинетов','co-working':'Рабочих мест',other:'Рабочих мест'};
+  document.getElementById('aiWizUnitsLabel').textContent=labels[this.value]||'Рабочих мест';
+});
+
+async function aiWizGenerate(){
+  const btn=document.getElementById('aiWizGenBtn');
+  const status=document.getElementById('aiWizStatus');
+  const preview=document.getElementById('aiWizPreview');
+  btn.disabled=true;btn.style.opacity='0.5';
+  preview.style.display='none';
+
+  const bizType=document.getElementById('aiWizBizType').value;
+  const city=document.getElementById('aiWizCity').value.trim()||'Европа';
+  const area=document.getElementById('aiWizArea').value||'100';
+  const units=document.getElementById('aiWizUnits').value||'3';
+  const budget=document.getElementById('aiWizBudget').value||'';
+  const segment=document.getElementById('aiWizSegment').value;
+  const priority=document.getElementById('aiWizPriority').value;
+  const notes=document.getElementById('aiWizNotes').value.trim();
+  const genRooms=document.getElementById('aiWizRooms').checked;
+  const genEquip=document.getElementById('aiWizEquip').checked;
+  const genStaff=document.getElementById('aiWizStaff').checked;
+  const genSvc=document.getElementById('aiWizSvc').checked;
+  const genReno=document.getElementById('aiWizReno').checked;
+  const genDocs=document.getElementById('aiWizDocs').checked;
+
+  const bizNames={dental:'стоматологическая клиника',coffee:'кофейня',restaurant:'ресторан',barbershop:'барбершоп',beauty:'салон красоты',gym:'тренажёрный зал',pharmacy:'аптека',veterinary:'ветеринарная клиника','co-working':'коворкинг',other:'бизнес'};
+  const unitNames={dental:'кресел',coffee:'столов',restaurant:'посадочных мест',barbershop:'кресел',beauty:'рабочих мест',gym:'зон',pharmacy:'касс',veterinary:'кабинетов','co-working':'рабочих мест',other:'рабочих мест'};
+  const segNames={economy:'эконом-сегмент',standard:'стандарт',premium:'премиум',luxury:'люкс'};
+  const prioNames={balanced:'сбалансированная концепция','min-budget':'минимизация бюджета','max-quality':'максимальное качество оборудования','fast-open':'быстрое открытие','max-revenue':'максимизация выручки'};
+
+  // Collect existing data
+  const _mRooms=Object.keys(DB.pickedRooms||{}).length;
+  const _mStaff=Object.keys(DB.pickedStaff||{}).length;
+  const _mEquip=Object.keys(DB.pickedEquip||{}).length;
+  const _mSvc=Object.keys(DB.pickedServices||{}).length;
+  const _hasData=_mRooms+_mStaff+_mEquip+_mSvc>0;
+  const _stateCtx=_hasData?'\n\nУЖЕ В КОНСТРУКТОРЕ (учти, дополни, не дублируй): помещений: '+_mRooms+', персонала: '+_mStaff+', оборудования: '+_mEquip+', услуг: '+_mSvc+'.':'';
+
+  // Build sections list
+  const sections=[];
+  if(genRooms)sections.push('"rooms": [{"id":1,"name":"Название помещения","type":"Тип зоны","w":ширина,"h":высота,"l":длина,"area":площадь}]');
+  if(genEquip)sections.push('"suppliers": [{"id":1,"name":"Оборудование","category":"Категория","price":число,"supplier":"Производитель","warranty":"срок"}]');
+  if(genStaff)sections.push('"employees": [{"id":1,"name":"Должность","spec":"Специализация","salary":число,"status":"Вакансия","country":"Страна"}]');
+  if(genSvc)sections.push('"services": [{"id":1,"name":"Услуга","category":"Категория","time":"длительность","price":число}]');
+  if(genReno)sections.push('"renovations": [{"id":"r1","name":"Работа","cat":"Категория","price":число}]');
+  if(genDocs)sections.push('"docs": [{"name":"Документ","cat":"Категория","price":число,"required":true}]');
+  sections.push('"cabinetTypes": [{"id":1,"name":"Тип помещения","icon":"emoji","desc":"Описание","minArea":число,"equipCats":["категория"]}]');
+  sections.push('"zones": [{"id":"zone_id","name":"Название","color":"CSS цвет","icon":"emoji"}]');
+
+  const prompt='Ты — старший бизнес-аналитик SVITA AI. Создай полную структуру для конструктора бизнеса.\n\n'
+    +'ПАРАМЕТРЫ ПРОЕКТА:\n'
+    +'- Тип: '+bizNames[bizType]+'\n'
+    +'- Локация: '+city+'\n'
+    +'- Площадь: '+area+' м²\n'
+    +'- Рабочих мест ('+unitNames[bizType]+'): '+units+'\n'
+    +(budget?'- Бюджет: '+budget+'\n':'')
+    +'- Сегмент: '+segNames[segment]+'\n'
+    +'- Приоритет: '+prioNames[priority]+'\n'
+    +(notes?'- Особые пожелания: '+notes+'\n':'')
+    +_stateCtx+'\n\n'
+    +'Ответ СТРОГО в JSON (без markdown, без ```):\n'
+    +'{\n  "name": "Название концепции",\n  "bizType": "'+bizType+'",\n  "bizSubtype": "подтип",\n'
+    +'  "disclaimer": "Концепция сгенерирована AI. Проверьте цены и состав.",\n'
+    +'  '+sections.join(',\n  ')+'\n}\n\n'
+    +'ПРАВИЛА ГЕНЕРАЦИИ:\n'
+    +'1. ВАЛЮТА: используй локальную валюту страны (PLN для Польши, EUR для ЕС, GBP для UK, CZK для Чехии и т.д.)\n'
+    +'2. ЦЕНЫ: реальные рыночные цены 2025-2026 для указанного сегмента и страны. Не округляй до тысяч — давай точные.\n'
+    +'3. ОБОРУДОВАНИЕ: РЕАЛЬНЫЕ бренды (KaVo, Planmeca, A-dec, Sirona, NSK, EMS, W&H, Melag и т.д.). Цена НЕТТО.\n'
+    +'4. ЗАРПЛАТЫ: реальные нетто для данной страны. Учитывай специфику города (столица дороже).\n'
+    +'5. ПОМЕЩЕНИЯ: реальные размеры. Общая площадь всех помещений ≤ '+area+' м². Учитывай коридоры, санузлы, подсобки.\n'
+    +'6. УСЛУГИ: полный прайс-лист с реальными ценами для данного сегмента. Время в минутах.\n'
+    +'7. РЕМОНТ: разбей по категориям (Электрика, Сантехника, Отделка, Вентиляция, Специфика). Цены за работу + материал.\n'
+    +'8. СЕГМЕНТ '+(segment==='economy'?'ЭКОНОМ: минимум оборудования, базовый ремонт, минимальный штат':segment==='premium'?'ПРЕМИУМ: топовое оборудование, дизайнерский ремонт, расширенный штат':segment==='luxury'?'ЛЮКС: флагманское оборудование, VIP-отделка, полный штат + менеджмент':'СТАНДАРТ: надёжное оборудование, качественный ремонт, оптимальный штат')+'\n'
+    +'9. ПРИОРИТЕТ '+(priority==='min-budget'?'МИН. БЮДЖЕТ: экономь где можно, б/у допустимо':priority==='max-quality'?'МАКС. КАЧЕСТВО: лучшие бренды, не экономь на оборудовании':priority==='fast-open'?'БЫСТРОЕ ОТКРЫТИЕ: минимум ремонта, готовое оборудование, аутсорс':'СБАЛАНСИРОВАННЫЙ: оптимум цена/качество')+'\n'
+    +'10. Количество позиций: '+(genEquip?'оборудование 20-60, ':'')+(genStaff?'персонал 5-15, ':'')+(genSvc?'услуги 15-50, ':'')+(genRooms?'помещения 8-15, ':'')+(genReno?'ремонт 15-30':'')
+    +'\n\nТОЛЬКО JSON, ничего больше.';
+
+  // Animated status
+  let secs=0;
+  const msgs=['Анализирую параметры','Подбираю помещения','Формирую оборудование','Подбираю персонал','Составляю прайс-лист','Рассчитываю ремонт','Финализирую'];
+  status.innerHTML='<div style="display:flex;align-items:center;gap:8px"><div class="ai-spin"></div><span id="aiWizMsg">Отправляю...</span></div><div style="margin-top:6px"><div style="height:3px;background:var(--bd);border-radius:2px;overflow:hidden"><div id="aiWizBar" style="height:100%;width:0%;background:linear-gradient(90deg,#8b5cf6,#3b82f6);transition:width 0.5s"></div></div><span id="aiWizTime" style="font-size:9px;color:var(--tx3)">0 сек</span></div>';
+  const timer=setInterval(function(){
+    secs++;
+    var bar=document.getElementById('aiWizBar');
+    var msg=document.getElementById('aiWizMsg');
+    var time=document.getElementById('aiWizTime');
+    if(time)time.textContent=secs+' сек';
+    if(bar)bar.style.width=Math.min(95,secs*2)+'%';
+    if(msg&&secs%5===0){var i=Math.min(Math.floor(secs/5),msgs.length-1);msg.textContent=msgs[i]+'...';}
+  },1000);
+
+  let concept=null;
+  try{
+    var _ctrl=new AbortController();
+    var _timeout=setTimeout(function(){_ctrl.abort()},90000);
+    var res=await fetch(AI_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+AI_KEY},
+      body:JSON.stringify({prompt:prompt,mode:'generate',category:bizType,country:city}),
+      signal:_ctrl.signal
+    });
+    clearTimeout(_timeout);
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    var text='';
+    var reader=res.body.getReader();
+    var decoder=new TextDecoder();
+    while(true){
+      var chunk_result=await reader.read();
+      if(chunk_result.done)break;
+      var chunk=decoder.decode(chunk_result.value,{stream:true});
+      var lines=chunk.split('\n');
+      for(var li=0;li<lines.length;li++){
+        if(!lines[li].startsWith('data: '))continue;
+        try{
+          var obj=JSON.parse(lines[li].slice(6));
+          if(obj.done&&obj.text){text=obj.text;break}
+          if(obj.token)text+=obj.token;
+        }catch(pe){}
+      }
+    }
+    if(!text)throw new Error('empty');
+    var jsonMatch=text.match(/\{[\s\S]*\}/);
+    if(!jsonMatch)throw new Error('no json');
+    concept=JSON.parse(jsonMatch[0].replace(/```json?\n?/g,'').replace(/```/g,'').trim());
+  }catch(e){
+    console.warn('[AI Wizard] Jetson unavailable, using DEMO:',e.message);
+    var demoMsg=document.getElementById('aiWizMsg');if(demoMsg)demoMsg.textContent='Формирую [демо]...';
+    await new Promise(function(r){setTimeout(r,2000)});
+    concept=_getDemoConcept(bizType,bizNames[bizType]+' '+city+' '+area+'м²');
+  }
+
+  clearInterval(timer);
+  var doneBar=document.getElementById('aiWizBar');if(doneBar)doneBar.style.width='100%';
+
+  // Apply concept
+  try{
+    _aiConcept=concept;
+    var empCost=concept.employees?concept.employees.reduce(function(s,e){return s+(e.salary||0)},0):0;
+    var eqCost=concept.suppliers?concept.suppliers.reduce(function(s,e){return s+(e.price||0)},0):0;
+    var rnCost=concept.renovations?concept.renovations.reduce(function(s,e){return s+(e.price||0)},0):0;
+    var svcCount=concept.services?concept.services.length:0;
+    var roomCount=concept.rooms?concept.rooms.length:0;
+
+    preview.style.display='block';
+    preview.innerHTML='<div style="background:var(--gnbg);border:1px solid rgba(26,153,86,.2);border-radius:10px;padding:14px;margin-bottom:10px">'
+      +'<div style="font-size:13px;font-weight:700;color:var(--gn);margin-bottom:8px">&#9989; Концепция готова: '+(concept.name||bizNames[bizType])+'</div>'
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;font-size:11px;color:var(--tx2)">'
+      +(roomCount?'<div>&#127970; Помещений: <b>'+roomCount+'</b></div>':'')
+      +(concept.suppliers?'<div>&#128230; Оборудование: <b>'+concept.suppliers.length+'</b> поз. &middot; '+(eqCost||0).toLocaleString('ru')+' '+((activeProperty&&activeProperty.currency)||'PLN')+'</div>':'')
+      +(concept.employees?'<div>&#129489; Персонал: <b>'+concept.employees.length+'</b> &middot; ФОТ '+empCost.toLocaleString('ru')+'/мес</div>':'')
+      +(svcCount?'<div>&#129657; Услуг: <b>'+svcCount+'</b></div>':'')
+      +(concept.renovations?'<div>&#128736; Ремонт: <b>'+concept.renovations.length+'</b> &middot; '+rnCost.toLocaleString('ru')+'</div>':'')
+      +'</div>'
+      +'<div style="display:flex;gap:8px;margin-top:12px">'
+      +'<button onclick="applyAIConcept();this.textContent=\'✓ Применено\';this.disabled=true;this.style.background=\'var(--gn)\'" style="padding:8px 20px;border:none;border-radius:8px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--f)">&#9989; Применить к концепции</button>'
+      +'<button onclick="document.getElementById(\'aiWizPreview\').querySelector(\'.ai-wiz-detail\').style.display=document.getElementById(\'aiWizPreview\').querySelector(\'.ai-wiz-detail\').style.display===\'none\'?\'block\':\'none\'" style="padding:8px 16px;border:1px solid var(--bd);border-radius:8px;background:var(--sf2);color:var(--tx2);font-size:11px;cursor:pointer;font-family:var(--f)">Подробнее</button>'
+      +'</div></div>'
+      +'<div class="ai-wiz-detail" style="display:none;background:var(--sf2);border-radius:8px;padding:10px;font-size:10px;color:var(--tx3);max-height:300px;overflow-y:auto"><pre style="white-space:pre-wrap;font-family:var(--f)">'+JSON.stringify(concept,null,2).replace(/</g,'&lt;')+'</pre></div>';
+
+    status.innerHTML='<span style="color:var(--gn);font-weight:600">&#9989; Готово за '+secs+' сек</span>';
+  }catch(applyErr){
+    status.innerHTML='<span style="color:var(--rd)">Ошибка обработки: '+applyErr.message+'</span>';
+  }
+
+  btn.disabled=false;btn.style.opacity='1';
+}
+
 // ═══════════════ AI (Jetson AGX Orin — Ollama qwen2.5:32b via Edge Function) ═══════════════
 const AI_URL='https://scyraai-desktop.tail2060da.ts.net/functions/v1/ai-concept';
 const AI_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzc1NTA4NjM0LCJleHAiOjE5MzMxODg2MzR9.4l7IBV5SjC8qZ4iJ-oMdLHP-sPP3O7Ab7eWS3PGkKi8';
@@ -5013,6 +5329,7 @@ function buildSidebar(){
   const _i=n=>'<img src="icons/individual/'+n+'.png" alt="">';
   let html='<div class="si act" data-nav="overview" data-tip="Главная панель: прогресс, метрики и статус"><span class="ico">'+_i('overview')+'</span><span class="sl">Обзор</span></div>';
   html+='<div class="si" data-nav="news" data-tip="Свежие публикации и обновления платформы"><span class="ico">'+_i('news')+'</span><span class="sl">Новости</span></div>';
+  html+='<div class="si" data-nav="ai-guide" data-tip="Обучение работе с AI-ассистентом SVITA"><span class="ico">'+_i('ai-guide')+'</span><span class="sl">AI-ассистент</span></div>';
 
   // ── STAGE 1: Формирование концепции ──
   if(currentStage===1&&(currentRole==='admin'||currentRole==='superadmin'||currentRole==='owner')){
@@ -5149,7 +5466,7 @@ function updateSidebarBadges(){
 // ═══════════════ NAVIGATION ═══════════════
 function getSecNames(){
   const isCoffee=currentBizType&&currentBizType!=='dental';
-  return{overview:'Обзор',s1:'Помещение',s2:'Модернизация',s3:'Оснащение',s4:'Персонал',s5:isCoffee?'Меню':'Услуги населению',s6:'Концепция',s7:'Документация',account:'Личный кабинет',budget:'Бюджет',profit:'Рентабельность',zones:'Зоны',news:'Новости','db-premises':'БД Помещений','db-renovations':'Модернизация и услуги','db-services':isCoffee?'Меню':'Каталог услуг','db-docs':'Каталог документов','db-contractors':'БД Подрядчиков','db-suppliers':'Каталог оборудования','db-employees':'БД Сотрудников','db-vendor-companies':'Поставщики',users:'Пользователи','cabinet-types':isCoffee?'Стоимость помещений':'Типы кабинетов','contractor-works':'Доступные работы','contractor-proposals':'Мои предложения','exec-premises':'Помещения','exec-renovations':'Модернизация','exec-services':'Услуги','exec-equipment':'Оборудование','exec-staff':'Сотрудники','exec-docs':'Документация','exec-contractors':'Исполнители','exec-chat':'Чат',notes:'Заметки',metrics:'Метрики','contractor-orders':'Активные заказы','supplier-requests':'Входящие запросы'};
+  return{overview:'Обзор',s1:'Помещение',s2:'Модернизация',s3:'Оснащение',s4:'Персонал',s5:isCoffee?'Меню':'Услуги населению',s6:'Концепция',s7:'Документация',account:'Личный кабинет',budget:'Бюджет',profit:'Рентабельность',zones:'Зоны',news:'Новости','ai-guide':'AI-ассистент','db-premises':'БД Помещений','db-renovations':'Модернизация и услуги','db-services':isCoffee?'Меню':'Каталог услуг','db-docs':'Каталог документов','db-contractors':'БД Подрядчиков','db-suppliers':'Каталог оборудования','db-employees':'БД Сотрудников','db-vendor-companies':'Поставщики',users:'Пользователи','cabinet-types':isCoffee?'Стоимость помещений':'Типы кабинетов','contractor-works':'Доступные работы','contractor-proposals':'Мои предложения','exec-premises':'Помещения','exec-renovations':'Модернизация','exec-services':'Услуги','exec-equipment':'Оборудование','exec-staff':'Сотрудники','exec-docs':'Документация','exec-contractors':'Исполнители','exec-chat':'Чат',notes:'Заметки',metrics:'Метрики','contractor-orders':'Активные заказы','supplier-requests':'Входящие запросы'};
 }
 const secNames=getSecNames();
 const stageOrder=['s6','s1','s2','s3','s4','s5','s7'];
@@ -5202,6 +5519,7 @@ function nav(id){
   if(id==='exec-equipment')renderExecSection('equipment');
   if(id==='exec-staff')renderExecSection('staff');
   if(id==='exec-docs')renderExecSection('docs');
+  if(id==='ai-guide')renderAiGuide();
   if(id==='notes')renderNotes();
   if(id==='exec-chat')renderChatContacts();
   if(id==='exec-contractors')renderAssignedContractors();
@@ -10997,6 +11315,120 @@ function lbDelete(){
 // Focus email field on load
 document.getElementById('loginEmail').focus();
 updateRightPanel();
+
+// ═══════════════ AI GUIDE ═══════════════
+function renderAiGuide(){
+  const g=document.getElementById('guideGrid');if(!g)return;
+  const cards=[
+    {ico:'&#128172;',bg:'#8b5cf6',tag:'chat',title:'Чат-советник',desc:'Правая панель — ваш аналитик',body:`
+<p>Нажмите кнопку <b>&#10024;</b> внизу справа, чтобы открыть чат с AI-ассистентом.</p>
+<p>Бот видит всё, что вы уже выбрали в конструкторе: помещения, оборудование, персонал, услуги, бюджет. Поэтому отвечает конкретно по вашему проекту.</p>
+<p><b>Что можно спрашивать:</b></p>
+<ul>
+<li>Сколько стоит открыть стоматологию на 3 кресла?</li>
+<li>Какое оборудование нужно для кофейни?</li>
+<li>Хватит ли бюджета 500 000 PLN?</li>
+<li>Какую зарплату платить стоматологу в Варшаве?</li>
+<li>Что я забыл добавить в концепцию?</li>
+</ul>
+<div class="guide-example"><b>Пример:</b> "Мне нужна стоматология в Варшаве, 100м², бюджет 800 000 PLN. Что посоветуешь?"</div>
+<button class="guide-try-btn" onclick="toggleAiChat();nav('overview')">&#10024; Открыть чат</button>`},
+
+    {ico:'&#9889;',bg:'#3b82f6',tag:'chat',title:'Режим действий',desc:'AI добавляет позиции в концепцию',body:`
+<p>Если написать запрос с <b>действием</b> — бот не просто ответит текстом, а предложит конкретные позиции с кнопкой <b>"Применить"</b>.</p>
+<p><b>Ключевые слова действий:</b></p>
+<ul>
+<li><code>добавь</code> — добавить позиции</li>
+<li><code>подбери</code> — подобрать оптимальные варианты</li>
+<li><code>укомплектуй</code> — собрать полный набор</li>
+<li><code>предложи</code> — рекомендации с выбором</li>
+<li><code>заполни</code> — заполнить пустую секцию</li>
+</ul>
+<div class="guide-example"><b>Пример:</b> "Подбери оборудование для хирургического кабинета"<br><b>Результат:</b> AI предложит список с ценами → кнопка "Применить" → позиции добавятся в концепцию</div>
+<div class="guide-example"><b>Пример:</b> "Укомплектуй персонал для клиники на 3 кресла"<br><b>Результат:</b> AI предложит штатное расписание → "Применить" → сотрудники добавлены</div>`},
+
+    {ico:'&#128196;',bg:'#2563eb',tag:'note',title:'AI-досье',desc:'Аналитика по каждой карточке',body:`
+<p>На карточках подрядчиков, поставщиков, оборудования и сотрудников есть кнопка <b>&#10024; AI-досье</b>.</p>
+<p>AI анализирует выбранную позицию и создаёт деловую записку:</p>
+<ul>
+<li>Роль в проекте и какие задачи закрывает</li>
+<li>Сильные стороны и преимущества</li>
+<li>На что обратить внимание</li>
+<li>Рекомендации по развитию/взаимодействию</li>
+</ul>
+<p>Досье сохраняется в <b>Заметки</b> с фиолетовой пометкой AI.</p>
+<div class="guide-example"><b>Пример:</b> Откройте карточку автоклава → нажмите "AI-досье" → бот напишет: для каких кабинетов, плюсы/минусы, аналоги</div>
+<button class="guide-try-btn" onclick="nav('db-suppliers')">&#128230; К оборудованию</button>`},
+
+    {ico:'&#128221;',bg:'#059669',tag:'note',title:'Заметки (В заметки)',desc:'Быстрое сохранение карточек',body:`
+<p>На каждой карточке есть кнопка <b>&#128221; В заметки</b> — сохраняет основные данные позиции в раздел Заметки.</p>
+<p>Заметки делятся по типам:</p>
+<ul>
+<li>&#128119; Подрядчики — исполнители работ</li>
+<li>&#127970; Поставщики — компании-поставщики</li>
+<li>&#128230; Оборудование — мебель и техника</li>
+<li>&#129489; Сотрудники — персонал</li>
+<li>&#10024; AI-заметки — сгенерированные досье</li>
+</ul>
+<p>Каждая заметка содержит <b>мини-карточку</b> — ссылку на исходную запись.</p>
+<button class="guide-try-btn" onclick="nav('notes')">&#128221; К заметкам</button>`},
+
+    {ico:'&#127919;',bg:'#dc2626',tag:'gen',title:'AI-конструктор концепции',desc:'Конструктор собирает проект по параметрам',body:`
+<p>Внизу вкладки <b>Концепция</b> (Таб 1) — <b>AI-конструктор</b>. Вместо свободного текста — заполняете параметры:</p>
+<ul>
+<li>&#127970; <b>Тип бизнеса</b> — стоматология, кофейня, барбершоп и др.</li>
+<li>&#127758; <b>Город и страна</b> — для актуальных цен и зарплат</li>
+<li>&#128208; <b>Площадь</b> и количество рабочих мест</li>
+<li>&#128176; <b>Бюджет</b> — AI подберёт в рамках</li>
+<li>&#127942; <b>Сегмент</b> — эконом, стандарт, премиум, люкс</li>
+<li>&#127919; <b>Приоритет</b> — мин. бюджет, макс. качество, быстрое открытие</li>
+</ul>
+<p>AI получает точные данные и генерирует: помещения, оборудование (реальные бренды), персонал, услуги, ремонт — с ценами для вашего региона.</p>
+<div class="guide-example"><b>Пример:</b> Выбрали "Стоматология", Варшава, 120м², 3 кресла, премиум, бюджет 1М PLN → AI подберёт KaVo/Planmeca установки, персонал с зарплатами для Польши, полный прайс</div>
+<button class="guide-try-btn" onclick="nav('s6');setTimeout(function(){document.getElementById('aiWizGenBtn').scrollIntoView({behavior:'smooth'})},300)">&#128200; К конструктору</button>`},
+
+    {ico:'&#128274;',bg:'#f59e0b',tag:'chat',title:'Лимиты и тарифы',desc:'Сколько запросов доступно',body:`
+<p>AI-запросы ограничены по тарифу:</p>
+<ul>
+<li><b>Trial</b> — 5 запросов в день (чат + досье)</li>
+<li><b>Pro</b> — 50 запросов в день</li>
+<li><b>Unlimited</b> — без ограничений</li>
+</ul>
+<p>Счётчик сбрасывается каждый день в полночь. Генерация концепции и чат расходуют одни и те же лимиты.</p>
+<p>Для увеличения лимита — обновите тариф в <b>Личном кабинете</b>.</p>
+<button class="guide-try-btn" onclick="nav('account')">&#128100; Личный кабинет</button>`},
+
+    {ico:'&#128161;',bg:'#8b5cf6',tag:'chat',title:'Советы для лучших ответов',desc:'Как получить максимум от AI',body:`
+<p><b>Будьте конкретны:</b></p>
+<div class="guide-example">&#10060; "Посоветуй что-нибудь"<br>&#9989; "Какое оборудование нужно для терапевтического кабинета стоматологии?"</div>
+<p><b>Указывайте контекст:</b></p>
+<div class="guide-example">&#10060; "Сколько стоит?"<br>&#9989; "Сколько стоит открыть кофейню на 40м² в Кракове?"</div>
+<p><b>Просите сравнения:</b></p>
+<div class="guide-example">"Сравни два автоклава: B-класс vs N-класс для клиники на 2 кресла"</div>
+<p><b>Уточняйте в диалоге:</b></p>
+<div class="guide-example">"А если бюджет увеличить до 1.5М?" — бот помнит контекст 8 последних сообщений</div>`},
+
+    {ico:'&#128640;',bg:'#06b6d4',tag:'gen',title:'Быстрый старт',desc:'Пошаговый план работы с AI',body:`
+<p><b>Шаг 1.</b> Выберите тип бизнеса в Концепции (Таб 1)</p>
+<p><b>Шаг 2.</b> Откройте чат (&#10024; внизу справа)</p>
+<p><b>Шаг 3.</b> Напишите: <code>Укомплектуй мне стоматологию на 3 кресла в Варшаве</code></p>
+<p><b>Шаг 4.</b> AI предложит оборудование, персонал, услуги — нажмите "Применить"</p>
+<p><b>Шаг 5.</b> Пройдите по табам 2-7 — скорректируйте то, что AI подобрал</p>
+<p><b>Шаг 6.</b> Используйте AI-досье на интересных позициях для глубокого анализа</p>
+<p><b>Шаг 7.</b> Проверьте Бюджет и Рентабельность — AI учтёт все расходы</p>
+<button class="guide-try-btn" onclick="toggleAiChat();nav('s6')">&#128640; Начать</button>`}
+  ];
+  let html='';
+  cards.forEach(function(c,i){
+    html+='<div class="guide-card'+(i===0?' open':'')+'" onclick="this.classList.toggle(\'open\')">';
+    html+='<div class="guide-card-head"><div class="guide-card-ico" style="background:'+c.bg+'20;color:'+c.bg+'">'+c.ico+'</div><div><div class="guide-card-title"><span class="guide-tag '+c.tag+'">'+{chat:'Чат',note:'Досье',gen:'Генерация'}[c.tag]+'</span> '+c.title+'</div><div class="guide-card-desc">'+c.desc+'</div></div></div>';
+    html+='<div class="guide-card-body">'+c.body+'</div>';
+    html+='</div>';
+  });
+  g.innerHTML=html;
+  // Stop card toggle when clicking buttons inside
+  g.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation()})});
+}
 
 // ═══════════════ AI CHAT ═══════════════
 let _aiChatHistory=[];
