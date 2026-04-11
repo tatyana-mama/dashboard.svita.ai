@@ -3358,7 +3358,7 @@ function loadBusinessModel(){
     if(!raw||raw==='{}'){raw=localStorage.getItem('svita_bm');if(raw&&raw!=='{}'){uSet('svita_bm',raw)}}
     // Cross-user fallback removed — security: never load another user's data
     if(!raw||raw==='{}'){
-      const vals=currentRole==='admin'?BM_DEFAULTS:{};
+      const vals=(currentRole==='admin'||currentRole==='superadmin')?BM_DEFAULTS:{};
       BM_FIELDS.forEach(k=>{const el=document.getElementById(k);if(el)el.value=vals[k]||''});
       return;
     }
@@ -4295,7 +4295,7 @@ function updateBizUI(){
   const tag=document.getElementById('sideTag');
   // Only show for admin/owner
   if(!btn)return;
-  if(!['admin','owner'].includes(currentRole)){btn.style.display='none';return}
+  if(!['admin','superadmin','owner'].includes(currentRole)){btn.style.display='none';return}
   btn.style.display='block';
   if(currentBizType&&BIZ_TYPES[currentBizType]){
     const bt=BIZ_TYPES[currentBizType];
@@ -4544,9 +4544,9 @@ async function proceedToRoleSelect(){
       else if(!currentBizType){currentBizType='dental';localStorage.setItem('svita_biz_type','dental')}
       enterApp();return;
     }
-    // First time admin — default to admin role and dental, skip onboarding
-    currentRole='admin';
-    localStorage.setItem('svita_role','admin');
+    // First time admin — default role, skip onboarding
+    currentRole=currentUser.isSuperAdmin?'superadmin':'admin';
+    localStorage.setItem('svita_role',currentRole);
     if(!currentBizType){currentBizType='dental';localStorage.setItem('svita_biz_type','dental')}
     enterApp();
     return;
@@ -4741,7 +4741,7 @@ function enterApp(){
   if(!savedProp){savedProp=localStorage.getItem('svita_property');if(savedProp){uSet('svita_property',savedProp)}}
   // Cross-user property fallback removed — security
   if(savedProp){try{activeProperty=JSON.parse(savedProp)}catch(e){activeProperty=null}}
-  else{activeProperty=currentRole==='admin'?{...DEFAULT_PROPERTY}:null}
+  else{activeProperty=(currentRole==='admin'||currentRole==='superadmin')?{...DEFAULT_PROPERTY}:null}
   try{migrateLocalStorageKeys(currentUser.id)}catch(e){console.error('[SVITA] migrate:',e)}
   try{loadCustomDB()}catch(e){console.error('[SVITA] loadCustomDB:',e)}
   try{loadPicked()}catch(e){console.error('[SVITA] loadPicked:',e)}
@@ -4749,7 +4749,7 @@ function enterApp(){
   try{loadBudgetState();fetchCurrencyRates()}catch(e){console.error('[SVITA] budget:',e)}
   // Auto-pick all default employees if pickedStaff is empty (first launch)
   try{
-  if(!Object.keys(DB.pickedStaff||{}).length&&currentRole==='admin'){
+  if(!Object.keys(DB.pickedStaff||{}).length&&(currentRole==='admin'||currentRole==='superadmin')){
     DB.employees.forEach(e=>{DB.pickedStaff[String(e.id)]={qty:1}});
     savePicked();
   }
@@ -4776,7 +4776,7 @@ function enterApp(){
   const _lb=document.getElementById('langBtn');if(_lb)_lb.textContent=_lang.toUpperCase();
   if(_lang!=='ru')applyI18n();
   // Onboarding for first-time users (not admin)
-  if(currentRole!=='admin'&&!uGet('svita_onboarded')){setTimeout(startOnboarding,500)}
+  if(currentRole!=='admin'&&currentRole!=='superadmin'&&!uGet('svita_onboarded')){setTimeout(startOnboarding,500)}
 }
 
 async function logout(){
@@ -4945,8 +4945,8 @@ document.addEventListener('click',function(e){
       currentRole=role;
       setTimeout(()=>{enterApp()},50);
     }else if(currentUser.isAdmin){
-      currentRole='admin';
-      localStorage.setItem('svita_role','admin');
+      currentRole=currentUser.isSuperAdmin?'superadmin':'admin';
+      localStorage.setItem('svita_role',currentRole);
       setTimeout(()=>{enterApp()},50);
     }else{
       setTimeout(()=>{showOnboarding()},50);
@@ -4971,7 +4971,7 @@ function switchStage(n){
   const bizRow=document.getElementById('sideBizRow');
   if(bizRow)bizRow.style.display=n===1?'flex':'none';
   // Show/hide tab bar (only stage 1)
-  document.getElementById('tabBar').style.display=n===1&&(currentRole==='admin'||currentRole==='owner')?'flex':'none';
+  document.getElementById('tabBar').style.display=n===1&&(currentRole==='admin'||currentRole==='superadmin'||currentRole==='owner')?'flex':'none';
 }
 
 function toggleMobileSidebar(forceClose){
@@ -5015,7 +5015,7 @@ function buildSidebar(){
   html+='<div class="si" data-nav="news" data-tip="Свежие публикации и обновления платформы"><span class="ico">'+_i('news')+'</span><span class="sl">Новости</span></div>';
 
   // ── STAGE 1: Формирование концепции ──
-  if(currentStage===1&&(currentRole==='admin'||currentRole==='owner')){
+  if(currentStage===1&&(currentRole==='admin'||currentRole==='superadmin'||currentRole==='owner')){
     html+=_grpStart('analytics','Аналитика');
     html+='<div class="si" data-nav="budget" data-tip="Финансовый план: стартовые и операционные расходы"><span class="ico">'+_i('budget')+'</span><span class="sl">Бюджет</span></div>';
     html+='<div class="si" data-nav="profit" data-tip="Прогноз доходов, точка безубыточности, окупаемость"><span class="ico">'+_i('profit')+'</span><span class="sl">Рентабельность</span></div>';
@@ -5036,7 +5036,7 @@ function buildSidebar(){
   }
 
   // ── STAGE 2: Закупки и установка ──
-  if(currentStage===2&&(currentRole==='admin'||currentRole==='owner')){
+  if(currentStage===2&&(currentRole==='admin'||currentRole==='superadmin'||currentRole==='owner')){
     const canC=currentRole==='admin'||(typeof userSubscription!=='undefined'&&userSubscription.contractors_access);
     html+='<div class="si" data-nav="notes" data-tip="Записи о подрядчиках и поставщиках"><span class="ico">'+_i('notes')+'</span><span class="sl">Заметки</span></div>';
     html+='<div class="si" data-nav="exec-contractors" data-tip="Привязанные исполнители, задачи и счета"><span class="ico">'+_i('exec-contractors')+'</span><span class="sl">Исполнители</span></div>';
@@ -5126,7 +5126,7 @@ function buildSidebar(){
     });
     el.addEventListener('mouseleave',function(){_tip.style.opacity='0'});
   });
-  document.getElementById('tabBar').style.display=(currentStage===1&&(currentRole==='admin'||currentRole==='owner'))?'flex':'none';
+  document.getElementById('tabBar').style.display=(currentStage===1&&(currentRole==='admin'||currentRole==='superadmin'||currentRole==='owner'))?'flex':'none';
   _sidebarBuilt=true;
   _updateGrpCounts();
   updateSidebarBadges();
@@ -5320,7 +5320,7 @@ function renderPlanDetails(){
   const effectivePlan=currentUser&&currentUser.isSuperAdmin?'admin':s.plan;
   const p=plans[effectivePlan]||plans.trial;
   const badge=document.getElementById('accPlanBadge');
-  if(badge){badge.textContent=effectivePlan==='admin'?'FULL ACCESS':s.plan.toUpperCase();badge.style.background=p.bg;badge.style.color=p.c}
+  if(badge){badge.textContent=effectivePlan==='admin'?'FULL ACCESS':(s.plan||'trial').toUpperCase();badge.style.background=p.bg;badge.style.color=p.c}
   const pn=document.getElementById('accPlanName');if(pn)pn.textContent=p.name;
   const pd=document.getElementById('accPlanDesc');if(pd)pd.textContent=p.desc;
   const pc=document.getElementById('accPlanConcepts');if(pc)pc.textContent=userConcepts.length+' / '+(s.concepts_limit||1);
@@ -5538,6 +5538,7 @@ function showChangePassword(){
 }
 
 async function confirmDeleteAccount(){
+  if(currentUser&&currentUser.isSuperAdmin){toast('Суперадмин не может удалить аккаунт','rd');return}
   if(!confirm('ВНИМАНИЕ! Все ваши данные, концепции и настройки будут безвозвратно удалены. Продолжить?'))return;
   if(!confirm('Вы абсолютно уверены? Это действие НЕЛЬЗЯ отменить.'))return;
   // Delete user data
@@ -5578,7 +5579,7 @@ window._conceptAutoSaveId=setInterval(()=>{if(window._currentConceptId&&document
 function showUpgradeModal(){
   document.getElementById('topUser').classList.remove('open');
   const r=currentRole;
-  const isOwner=r==='admin'||r==='owner';
+  const isOwner=r==='admin'||r==='owner'||r==='superadmin';
   const isContr=r==='contractor';
   const isSupp=r==='supplier';
   const cp=userSubscription.plan;
@@ -9325,7 +9326,7 @@ ${u.notes?`<div style="padding:0 20px 12px;font-size:11px;color:var(--tx3);line-
 <option value="employee" ${u.role==='employee'?'selected':''}>Сотрудник</option>
 <option value="viewer" ${u.role==='viewer'?'selected':''}>Наблюдатель</option>
 </select>
-${u.role!=='admin'?`<select onchange="changeUserPlan('${u.id}',this.value)" style="font-size:10px;padding:4px 8px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);cursor:pointer;font-family:var(--f)">
+${u.role!=='admin'&&u.role!=='superadmin'?`<select onchange="changeUserPlan('${u.id}',this.value)" style="font-size:10px;padding:4px 8px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);cursor:pointer;font-family:var(--f)">
 <option value="trial" ${u.plan==='trial'?'selected':''}>Триал</option>
 <option value="paid" ${u.plan==='paid'?'selected':''}>PRO</option>
 <option value="unlimited" ${u.plan==='unlimited'?'selected':''}>Unlimited</option>
