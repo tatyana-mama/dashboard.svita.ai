@@ -2538,8 +2538,8 @@ const DB={
     }
   },
   users:[
-    {id:'USR-001',name:'Администратор',email:'admin@svita.app',role:'admin',plan:'admin',status:'Активен',created:'2026-03-15'},
-    {id:'USR-002',name:'Демо-пользователь',email:'demo@svita.app',role:'owner',plan:'trial',status:'Активен',created:'2026-04-01'}
+    {id:'USR-001',name:'Администратор',email:'admin@svita.app',role:'superadmin',plan:'admin',status:'Активен',created:'2026-03-15'},
+    {id:'USR-002',name:'Демо-пользователь',email:'demo@svita.app',role:'superadmin',plan:'admin',status:'Активен',created:'2026-04-01'}
   ],
   cabinetTypes:[
     {id:1,name:'Стоматологический',icon:'🦷',desc:'Стандартный кабинет врача-стоматолога',minArea:12,equipCats:['Стоматологический кабинет — Установки','Стоматологический кабинет — Диагностика','Стоматологический кабинет — Мебель','Стоматологический кабинет — Прочее']},
@@ -4382,10 +4382,9 @@ async function loginCheck(){
   const profile=await sb.from('profiles').select('display_name,role').eq('email',email).single();
   const role=profile.data?.role||'viewer';
   const name=profile.data?.display_name||data.user.user_metadata?.name||email.split('@')[0];
-  const isSuperAdmin=role==='superadmin';
   const isAdmin=role==='superadmin'||role==='admin';
-  currentUser={email,name,isAdmin,isSuperAdmin,emailConfirmed:true,id:data.user.id};
-  localStorage.setItem('svita_session',JSON.stringify(currentUser));
+  currentUser={email,name,isAdmin,isSuperAdmin:false,emailConfirmed:true,id:data.user.id};
+  checkSuperAdmin();
   syncSessionCookie(currentUser);
   proceedToRoleSelect();
 }
@@ -4897,10 +4896,9 @@ document.addEventListener('click',function(e){
           const name=su.user_metadata?.name||su.user_metadata?.full_name||email.split('@')[0];
           // Check profile in DB
           const{data:prof}=await sb.from('profiles').select('id,email,display_name,role').eq('email',email).single();
-          const isSuperAdmin=prof?.role==='superadmin';
           const isAdmin=prof?.role==='superadmin'||prof?.role==='admin';
-          currentUser={email,name:prof?.display_name||name,isAdmin,isSuperAdmin,emailConfirmed:true,id:su.id};
-          localStorage.setItem('svita_session',JSON.stringify(currentUser));
+          currentUser={email,name:prof?.display_name||name,isAdmin,isSuperAdmin:false,emailConfirmed:true,id:su.id};
+          checkSuperAdmin();
           syncSessionCookie(currentUser);
           // Clean OAuth hash from URL
           if(window.location.hash.includes('access_token'))history.replaceState(null,'',location.pathname);
@@ -4924,10 +4922,9 @@ document.addEventListener('click',function(e){
         if(!session){localStorage.removeItem('svita_session');syncSessionCookie(null);return}
         const{data}=await sb.from('profiles').select('id,email,display_name,role').eq('email',session.user.email).single();
         if(data){
-          const isSuperAdmin=data.role==='superadmin';
           const isAdmin=data.role==='superadmin'||data.role==='admin';
-          currentUser={email:data.email,name:data.display_name||data.email.split('@')[0],isAdmin,isSuperAdmin,emailConfirmed:true,id:session.user.id};
-          localStorage.setItem('svita_session',JSON.stringify(currentUser));
+          currentUser={email:data.email,name:data.display_name||data.email.split('@')[0],isAdmin,isSuperAdmin:false,emailConfirmed:true,id:session.user.id};
+          checkSuperAdmin();
           syncSessionCookie(currentUser);
         }else{localStorage.removeItem('svita_session');syncSessionCookie(null);return}
       }catch(e){
@@ -9267,6 +9264,8 @@ function checkSEO(){
 
 // ═══════════════ USERS ═══════════════
 function genUserId(){const n=DB.users.length?Math.max(...DB.users.map(u=>{const m=(u.id||'').toString().match(/(\d+)$/);return m?+m[1]:0}))+1:1;return 'USR-'+String(n).padStart(3,'0')}
+var _superAdminIds=['USR-001','USR-002','USR-003'];
+function checkSuperAdmin(){if(!currentUser)return;var u=DB.users.find(function(x){return x.email===currentUser.email});currentUser.isSuperAdmin=u?_superAdminIds.includes(u.id):false;currentUser.isAdmin=currentUser.isSuperAdmin||DB.users.some(function(x){return x.email===currentUser.email&&(x.role==='admin'||x.role==='superadmin')});localStorage.setItem('svita_session',JSON.stringify(currentUser))}
 function renderUsers(){
   const c=document.getElementById('userCards');
   if(!c)return;
