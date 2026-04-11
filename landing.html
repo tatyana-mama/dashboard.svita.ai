@@ -359,11 +359,30 @@ footer a{color:var(--tx2);font-weight:500;transition:color .15s}footer a:hover{c
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"SVITA","applicationCategory":"BusinessApplication","description":"AI-ассистент открытия малого бизнеса. Планирование бюджета, подрядчики, поставщики — в одном месте.","url":"https://dashboard.svita.ai","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"PLN"}}
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (function(){
   var SB_URL='https://ctdleobjnzniqkqomlrq.supabase.co';
   var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0ZGxlb2JqbnpuaXFrcW9tbHJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMzE4MTEsImV4cCI6MjA4NzgwNzgxMX0.AMHtY7zGPemKYCxMy2bqRTOEAp8trA_Slor9wmg7C38';
+  // Page view
   fetch(SB_URL+'/rest/v1/page_views',{method:'POST',headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'return=minimal'},body:JSON.stringify({page:'/landing',user_agent:navigator.userAgent,referrer:document.referrer||null})}).catch(function(){});
+  // Auth check — show logged-in state
+  var sb=supabase.createClient(SB_URL,SB_KEY);
+  sb.auth.getSession().then(function(res){
+    var s=res.data&&res.data.session;
+    if(!s)return;
+    var email=s.user.email||'';
+    var name=s.user.user_metadata&&s.user.user_metadata.display_name||email.split('@')[0];
+    var navR=document.querySelector('.nav-r');
+    if(!navR)return;
+    navR.innerHTML='<span style="font-size:12px;color:var(--tx2)">'+name+'</span><a href="index.html" class="btn btn-p" style="padding:8px 18px">Открыть Dashboard</a>';
+    // Update hero CTA
+    var heroCta=document.querySelector('.hero-cta');
+    if(heroCta)heroCta.innerHTML='<a href="index.html" class="btn btn-p btn-lg">Открыть Dashboard</a><a href="#how" class="btn btn-g btn-lg">Как это работает</a>';
+    // Update bottom CTA
+    var ctaBtn=document.querySelector('.cta-box .btn');
+    if(ctaBtn){ctaBtn.href='index.html';ctaBtn.textContent='Открыть Dashboard'}
+  });
 })();
 </script>
 </body>
