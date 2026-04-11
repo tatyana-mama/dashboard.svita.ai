@@ -608,10 +608,11 @@
 .budget-fill-wrap{height:8px;background:var(--sf2);border-radius:4px;overflow:hidden;margin-top:8px}
 .budget-fill-bar{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--ac),var(--gn));transition:width .4s cubic-bezier(.4,0,.2,1)}
 /* Collapsible calculator blocks */
-.calc-toggle{display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;transition:color .15s}
-.calc-toggle:hover{color:var(--ac2)}
-.calc-toggle .calc-arrow{font-size:10px;transition:transform .25s;color:var(--tx3)}
+.calc-toggle{display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none;transition:all .15s;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:8px 14px;margin:8px 0}
+.calc-toggle:hover{background:var(--sf);border-color:var(--tx3)}
+.calc-toggle .calc-arrow{font-size:10px;transition:transform .25s;color:var(--tx)}
 .calc-toggle.open .calc-arrow{transform:rotate(90deg)}
+.calc-toggle span:last-child{font-size:11px;font-weight:800;color:var(--tx);text-transform:uppercase;letter-spacing:.5px}
 .calc-body{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1),opacity .25s;opacity:0}
 .calc-body.open{max-height:2000px;opacity:1}
 /* Currency rate badge */
@@ -1363,7 +1364,7 @@ Apple</button>
 </div>
 
 <!-- Распределение по этапам (collapsible) -->
-<div class="calc-toggle" onclick="toggleCalc(this)"><span class="calc-arrow">&#9654;</span><span style="font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Распределение по этапам</span></div>
+<div class="calc-toggle" onclick="toggleCalc(this)"><span class="calc-arrow">&#9654;</span><span>Распределение по этапам</span></div>
 <div class="calc-body" id="budgetDistWrap">
 <div id="budgetDistribution" style="padding-top:8px">
 <div class="bdr" data-key="rent" data-pct="15"><div class="bdr-head"><span class="bdr-icon">🏢</span><span class="bdr-name">Помещение (аренда 12 мес.)</span><span class="bdr-pct"><input type="number" class="bdr-pct-in" value="15" min="0" max="100" oninput="updateDistPct(this)">%</span><span class="bdr-val" id="distRent">0</span></div><div class="bdr-bar"><div class="bdr-fill" style="width:15%;background:#3b82f6"></div></div></div>
@@ -1432,7 +1433,7 @@ Apple</button>
 </div>
 </div>
 </div>
-<div class="calc-toggle" onclick="toggleCalc(this)"><span class="calc-arrow">&#9654;</span><span style="font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Редактировать параметры</span></div>
+<div class="calc-toggle" onclick="toggleCalc(this)"><span class="calc-arrow">&#9654;</span><span>Редактировать параметры</span></div>
 <div class="calc-body">
 <div class="g2">
 <div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">BUSINESS TYPE</div><input class="price-edit" id="cType" placeholder="e.g. Dental clinic, Veterinary, Beauty salon..." oninput="updateBmDescription()" style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
@@ -1473,12 +1474,12 @@ Apple</button>
 </div>
 
 <!-- Collapsible calculator details -->
-<div class="calc-toggle" onclick="toggleCalc(this)"><span class="calc-arrow">&#9654;</span><span style="font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Калькулятор — подробности</span></div>
+<div class="calc-toggle" onclick="toggleCalc(this)"><span class="calc-arrow">&#9654;</span><span>Калькулятор — подробности</span></div>
 <div class="calc-body" id="profCalcBody">
 
 <!-- Входные параметры -->
 <div style="margin-bottom:16px">
-<div style="font-size:11px;font-weight:700;color:var(--ac2);text-transform:uppercase;margin-bottom:10px;letter-spacing:1px">&#9881; Входные параметры</div>
+<div style="font-size:11px;font-weight:800;color:var(--tx);text-transform:uppercase;margin-bottom:10px;letter-spacing:1px">&#9881; Входные параметры</div>
 <div class="g2" style="gap:8px">
 <div style="background:var(--sf2);border-radius:10px;padding:12px;display:flex;align-items:center;justify-content:space-between">
 <div><div style="font-size:10px;color:var(--tx3);text-transform:uppercase;font-weight:600">Кресел</div><div style="font-size:9px;color:var(--tx3);margin-top:2px">стоматологических установок</div></div>
