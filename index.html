@@ -9265,14 +9265,14 @@ function checkSEO(){
 // ═══════════════ USERS ═══════════════
 function genUserId(){const n=DB.users.length?Math.max(...DB.users.map(u=>{const m=(u.id||'').toString().match(/(\d+)$/);return m?+m[1]:0}))+1:1;return 'USR-'+String(n).padStart(3,'0')}
 var _superAdminIds=['USR-001','USR-002','USR-003'];
-function checkSuperAdmin(){if(!currentUser)return;var u=DB.users.find(function(x){return x.email===currentUser.email});currentUser.isSuperAdmin=u?_superAdminIds.includes(u.id):false;currentUser.isAdmin=currentUser.isSuperAdmin||DB.users.some(function(x){return x.email===currentUser.email&&(x.role==='admin'||x.role==='superadmin')});localStorage.setItem('svita_session',JSON.stringify(currentUser))}
+function checkSuperAdmin(){if(!currentUser)return;var u=DB.users.find(function(x){return x.email===currentUser.email});var sa=u?_superAdminIds.includes(u.id):false;currentUser.isSuperAdmin=sa;currentUser.isAdmin=sa||DB.users.some(function(x){return x.email===currentUser.email&&(x.role==='admin'||x.role==='superadmin')});if(u&&sa&&u.role!=='superadmin'){u.role='superadmin';u.plan='admin'}localStorage.setItem('svita_session',JSON.stringify(currentUser))}
 function renderUsers(){
   const c=document.getElementById('userCards');
   if(!c)return;
   const q=(document.getElementById('userSearch')?.value||'').toLowerCase().trim();
-  const roleColors={admin:'#3b82f6',owner:'#22c55e',contractor:'#f59e0b',supplier:'#8b5cf6',employee:'#06b6d4',viewer:'#64748b'};
-  const roleGradients={admin:'linear-gradient(135deg,#3b82f6,#1d4ed8)',owner:'linear-gradient(135deg,#22c55e,#15803d)',contractor:'linear-gradient(135deg,#f59e0b,#d97706)',supplier:'linear-gradient(135deg,#8b5cf6,#6d28d9)',employee:'linear-gradient(135deg,#06b6d4,#0891b2)',viewer:'linear-gradient(135deg,#64748b,#475569)'};
-  const roleNames={admin:'Администратор',owner:'Владелец',contractor:'Подрядчик',supplier:'Поставщик',employee:'Сотрудник',viewer:'Наблюдатель'};
+  const roleColors={superadmin:'#dc2626',admin:'#3b82f6',owner:'#22c55e',contractor:'#f59e0b',supplier:'#8b5cf6',employee:'#06b6d4',viewer:'#64748b'};
+  const roleGradients={superadmin:'linear-gradient(135deg,#dc2626,#991b1b)',admin:'linear-gradient(135deg,#3b82f6,#1d4ed8)',owner:'linear-gradient(135deg,#22c55e,#15803d)',contractor:'linear-gradient(135deg,#f59e0b,#d97706)',supplier:'linear-gradient(135deg,#8b5cf6,#6d28d9)',employee:'linear-gradient(135deg,#06b6d4,#0891b2)',viewer:'linear-gradient(135deg,#64748b,#475569)'};
+  const roleNames={superadmin:'Суперадмин',admin:'Администратор',owner:'Владелец',contractor:'Подрядчик',supplier:'Поставщик',employee:'Сотрудник',viewer:'Наблюдатель'};
   const filtered=DB.users.filter(u=>{
     if(!q)return true;
     return (u.name||'').toLowerCase().includes(q)||(u.email||'').toLowerCase().includes(q)||(u.id||'').toString().toLowerCase().includes(q)||(u.phone||'').includes(q);
