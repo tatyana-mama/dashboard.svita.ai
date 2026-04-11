@@ -955,13 +955,80 @@ Apple</button>
 </div>
 </div>
 
-<!-- БЛОК 4: ХАРАКТЕРИСТИКИ (overlay dropdown) -->
-<div class="c" style="margin:0;position:relative;overflow:visible">
-<div class="ch"><h3>&#128295; Характеристики</h3></div>
-<div class="cb" style="padding:8px 16px;overflow:visible">
-<div class="calc-toggle" onclick="toggleCalc(this)"><span class="calc-arrow">&#9654;</span><span>Параметры объекта</span></div>
-<div class="calc-body" id="propParamsBody" style="position:absolute;left:-1px;right:-1px;top:100%;z-index:80;background:var(--sf);border:1px solid var(--bd);border-radius:0 0 14px 14px;box-shadow:0 8px 24px rgba(0,0,0,.12);padding:12px 16px;max-height:70vh;overflow-y:auto">
-<div class="g2" style="gap:8px;margin-top:8px">
+<!-- Правая колонка: Площадь + Стоимость -->
+<div style="display:flex;flex-direction:column;gap:12px">
+
+<!-- Площадь и метраж -->
+<div class="c" style="margin:0">
+<div class="ch"><h3>&#128207; Площадь</h3><span style="font-size:9px;color:var(--tx3)">Из карточки</span></div>
+<div class="cb" style="padding:10px 16px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div style="background:var(--sf2);border-radius:8px;padding:10px">
+<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Общая</div>
+<div style="font-size:20px;font-weight:700;color:var(--tx)" id="propArea">--</div>
+<div style="font-size:9px;color:var(--tx3)">м&sup2;</div>
+</div>
+<div style="background:var(--sf2);border-radius:8px;padding:10px">
+<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Полезная</div>
+<div style="font-size:20px;font-weight:700;color:var(--tx)" id="propUsable">--</div>
+<div style="font-size:9px;color:var(--tx3)">м&sup2; (~85%)</div>
+</div>
+<div style="background:var(--sf2);border-radius:8px;padding:10px">
+<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Кабинетов</div>
+<div style="font-size:20px;font-weight:700;color:var(--tx)" id="propCabinets">--</div>
+<div style="font-size:9px;color:var(--tx3)">по 12-15 м&sup2;</div>
+</div>
+<div style="background:var(--sf2);border-radius:8px;padding:10px">
+<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Этаж</div>
+<div style="font-size:20px;font-weight:700;color:var(--tx)" id="propFloor">--</div>
+<div style="font-size:9px;color:var(--tx3)" id="propFloorSub"></div>
+</div>
+</div>
+</div></div>
+
+<!-- Стоимость аренды -->
+<div class="c" id="propertyCostBlock" style="margin:0">
+<div class="ch"><h3>&#128176; Стоимость</h3></div>
+<div class="cb" style="padding:10px 16px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
+<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Аренда / мес.</div>
+<div style="margin-top:4px"><input class="price-edit" data-cost="rent" value="12000" onchange="recalc();saveLoadParams()" style="width:80px;font-size:14px;font-weight:700"> <span style="font-size:10px;color:var(--tx3)">PLN</span></div>
+</div>
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
+<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Депозит</div>
+<div style="margin-top:4px;display:flex;gap:4px;align-items:center"><input class="price-edit" id="depositMonths" value="3" onchange="calcDeposit()" style="width:30px;text-align:center;font-size:14px;font-weight:700"><span style="font-size:10px;color:var(--tx3)">мес.</span></div>
+<div style="font-size:10px;color:var(--ac2);font-weight:600;margin-top:2px"><span id="depositVal">36 000</span> PLN</div>
+</div>
+</div>
+<div style="padding:8px;border:1px solid var(--bd);border-radius:8px;margin-bottom:10px">
+<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Модернизация (Таб 2)</div>
+<div style="display:flex;align-items:center;gap:8px;margin-top:4px">
+<span style="font-size:14px;font-weight:700;color:var(--ac2)" id="renCostDisplay">0</span>
+<span style="font-size:10px;color:var(--tx3)">PLN</span>
+<button class="btn sm" onclick="nav('s2')" style="font-size:9px;margin-left:auto">Перейти &rarr;</button>
+</div>
+</div>
+<div style="padding-top:8px;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center">
+<span style="font-size:10px;color:var(--tx2)">Итого:</span>
+<span style="font-size:16px;font-weight:700;color:var(--ac2)" id="s1CostTotal">0 PLN</span>
+</div>
+</div></div>
+
+</div><!-- /right column -->
+
+</div><!-- /grid 2 cols -->
+
+<!-- Кнопка добавить помещение (видна когда карточки нет) -->
+<div id="addPropertyBtn" style="display:none;padding:16px;gap:8px">
+<button class="btn pr" onclick="openAddPropertyModal()" style="flex:1">+ Добавить помещение</button>
+<button class="btn" onclick="openPremisePicker()" style="flex:1">&#128209; Выбрать из каталога</button>
+</div>
+
+<!-- ХАРАКТЕРИСТИКИ ОБЪЕКТА (полная ширина) -->
+<div class="c"><div class="ch"><h3>&#128295; Характеристики объекта</h3></div>
+<div class="cb" style="padding:10px 16px">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px">
 
 <div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
 <div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;margin-bottom:4px">Высота потолков</div>
@@ -1069,85 +1136,12 @@ Apple</button>
 </div>
 </div>
 
-</div><!-- /g2 -->
-
+</div>
 <div style="margin-top:8px">
 <label style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase;display:block;margin-bottom:3px">Заметки</label>
 <textarea id="propNotes" placeholder="Заметки по помещению..." style="width:100%;min-height:50px;background:var(--sf2);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--tx);font-family:var(--f);font-size:11px;resize:vertical" oninput="savePropertyParams()"></textarea>
 </div>
-</div><!-- /calc-body -->
-</div>
-</div>
-
-<!-- Правая колонка: Площадь + Стоимость -->
-<div style="display:flex;flex-direction:column;gap:12px">
-
-<!-- Площадь и метраж -->
-<div class="c" style="margin:0">
-<div class="ch"><h3>&#128207; Площадь</h3><span style="font-size:9px;color:var(--tx3)">Из карточки</span></div>
-<div class="cb" style="padding:10px 16px">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-<div style="background:var(--sf2);border-radius:8px;padding:10px">
-<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Общая</div>
-<div style="font-size:20px;font-weight:700;color:var(--tx)" id="propArea">--</div>
-<div style="font-size:9px;color:var(--tx3)">м&sup2;</div>
-</div>
-<div style="background:var(--sf2);border-radius:8px;padding:10px">
-<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Полезная</div>
-<div style="font-size:20px;font-weight:700;color:var(--tx)" id="propUsable">--</div>
-<div style="font-size:9px;color:var(--tx3)">м&sup2; (~85%)</div>
-</div>
-<div style="background:var(--sf2);border-radius:8px;padding:10px">
-<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Кабинетов</div>
-<div style="font-size:20px;font-weight:700;color:var(--tx)" id="propCabinets">--</div>
-<div style="font-size:9px;color:var(--tx3)">по 12-15 м&sup2;</div>
-</div>
-<div style="background:var(--sf2);border-radius:8px;padding:10px">
-<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Этаж</div>
-<div style="font-size:20px;font-weight:700;color:var(--tx)" id="propFloor">--</div>
-<div style="font-size:9px;color:var(--tx3)" id="propFloorSub"></div>
-</div>
-</div>
 </div></div>
-
-<!-- Стоимость аренды -->
-<div class="c" id="propertyCostBlock" style="margin:0">
-<div class="ch"><h3>&#128176; Стоимость</h3></div>
-<div class="cb" style="padding:10px 16px">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
-<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Аренда / мес.</div>
-<div style="margin-top:4px"><input class="price-edit" data-cost="rent" value="12000" onchange="recalc();saveLoadParams()" style="width:80px;font-size:14px;font-weight:700"> <span style="font-size:10px;color:var(--tx3)">PLN</span></div>
-</div>
-<div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
-<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Депозит</div>
-<div style="margin-top:4px;display:flex;gap:4px;align-items:center"><input class="price-edit" id="depositMonths" value="3" onchange="calcDeposit()" style="width:30px;text-align:center;font-size:14px;font-weight:700"><span style="font-size:10px;color:var(--tx3)">мес.</span></div>
-<div style="font-size:10px;color:var(--ac2);font-weight:600;margin-top:2px"><span id="depositVal">36 000</span> PLN</div>
-</div>
-</div>
-<div style="padding:8px;border:1px solid var(--bd);border-radius:8px;margin-bottom:10px">
-<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Модернизация (Таб 2)</div>
-<div style="display:flex;align-items:center;gap:8px;margin-top:4px">
-<span style="font-size:14px;font-weight:700;color:var(--ac2)" id="renCostDisplay">0</span>
-<span style="font-size:10px;color:var(--tx3)">PLN</span>
-<button class="btn sm" onclick="nav('s2')" style="font-size:9px;margin-left:auto">Перейти &rarr;</button>
-</div>
-</div>
-<div style="padding-top:8px;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center">
-<span style="font-size:10px;color:var(--tx2)">Итого:</span>
-<span style="font-size:16px;font-weight:700;color:var(--ac2)" id="s1CostTotal">0 PLN</span>
-</div>
-</div></div>
-
-</div><!-- /right column -->
-
-</div><!-- /grid 2 cols -->
-
-<!-- Кнопка добавить помещение (видна когда карточки нет) -->
-<div id="addPropertyBtn" style="display:none;padding:16px;gap:8px">
-<button class="btn pr" onclick="openAddPropertyModal()" style="flex:1">+ Добавить помещение</button>
-<button class="btn" onclick="openPremisePicker()" style="flex:1">&#128209; Выбрать из каталога</button>
-</div>
 
 <!-- БЛОК 1.5: ПЛАНИРОВКА (конструктор) -->
 <div class="c"><div class="ch"><h3>&#128208; Планировка</h3><div style="display:flex;gap:6px">
