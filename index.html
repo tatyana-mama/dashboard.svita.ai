@@ -955,12 +955,12 @@ Apple</button>
 </div>
 </div>
 
-<!-- БЛОК 4: ХАРАКТЕРИСТИКИ (collapsible) -->
-<div class="c" style="margin:0">
+<!-- БЛОК 4: ХАРАКТЕРИСТИКИ (overlay dropdown) -->
+<div class="c" style="margin:0;position:relative">
 <div class="ch"><h3>&#128295; Характеристики</h3></div>
 <div class="cb" style="padding:8px 16px">
 <div class="calc-toggle" onclick="toggleCalc(this)"><span class="calc-arrow">&#9654;</span><span>Параметры объекта</span></div>
-<div class="calc-body" id="propParamsBody">
+<div class="calc-body" id="propParamsBody" style="position:absolute;left:0;right:0;z-index:80;background:var(--sf);border:1px solid var(--bd);border-radius:0 0 14px 14px;box-shadow:0 8px 24px rgba(0,0,0,.12);padding:12px 16px;max-height:70vh;overflow-y:auto">
 <div class="g2" style="gap:8px;margin-top:8px">
 
 <div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
