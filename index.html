@@ -9267,7 +9267,7 @@ function checkSEO(){
 // ═══════════════ USERS ═══════════════
 function genUserId(){const n=DB.users.length?Math.max(...DB.users.map(u=>{const m=(u.id||'').toString().match(/(\d+)$/);return m?+m[1]:0}))+1:1;return 'USR-'+String(n).padStart(3,'0')}
 var _superAdminIds=['USR-001','USR-002','USR-003'];
-function checkSuperAdmin(){if(!currentUser)return;var u=DB.users.find(function(x){return x.email===currentUser.email});var sa=u?_superAdminIds.includes(u.id):false;currentUser.isSuperAdmin=sa;currentUser.isAdmin=sa||DB.users.some(function(x){return x.email===currentUser.email&&(x.role==='admin'||x.role==='superadmin')});if(u&&sa&&u.role!=='superadmin'){u.role='superadmin';u.plan='admin'}localStorage.setItem('svita_session',JSON.stringify(currentUser))}
+function checkSuperAdmin(){if(!currentUser)return;var u=DB.users.find(function(x){return x.email===currentUser.email});var sa=u?_superAdminIds.includes(u.id):false;currentUser.isSuperAdmin=sa;currentUser.isAdmin=sa||DB.users.some(function(x){return x.email===currentUser.email&&(x.role==='admin'||x.role==='superadmin')});if(sa){if(u){u.role='superadmin';u.plan='admin'}currentRole='superadmin';localStorage.setItem('svita_role','superadmin')}localStorage.setItem('svita_session',JSON.stringify(currentUser))}
 function renderUsers(){
   const c=document.getElementById('userCards');
   if(!c)return;
