@@ -9275,7 +9275,9 @@ function renderUsers(){
   const roleColors={superadmin:'#dc2626',admin:'#3b82f6',owner:'#22c55e',contractor:'#f59e0b',supplier:'#8b5cf6',employee:'#06b6d4',viewer:'#64748b'};
   const roleGradients={superadmin:'linear-gradient(135deg,#dc2626,#991b1b)',admin:'linear-gradient(135deg,#3b82f6,#1d4ed8)',owner:'linear-gradient(135deg,#22c55e,#15803d)',contractor:'linear-gradient(135deg,#f59e0b,#d97706)',supplier:'linear-gradient(135deg,#8b5cf6,#6d28d9)',employee:'linear-gradient(135deg,#06b6d4,#0891b2)',viewer:'linear-gradient(135deg,#64748b,#475569)'};
   const roleNames={superadmin:'Суперадмин',admin:'Администратор',owner:'Владелец',contractor:'Подрядчик',supplier:'Поставщик',employee:'Сотрудник',viewer:'Наблюдатель'};
+  const isSA=currentUser&&currentUser.isSuperAdmin;
   const filtered=DB.users.filter(u=>{
+    if(!isSA&&u.role==='superadmin')return false;
     if(!q)return true;
     return (u.name||'').toLowerCase().includes(q)||(u.email||'').toLowerCase().includes(q)||(u.id||'').toString().toLowerCase().includes(q)||(u.phone||'').includes(q);
   });
@@ -9338,10 +9340,11 @@ ${currentUser&&currentUser.isSuperAdmin?`<button onclick="deleteUser('${u.id}')"
   html+='</div>';
   c.innerHTML=html;
   renderRoleCabinets();
-  document.getElementById('usersTotal').textContent=DB.users.length;
-  document.getElementById('usersAdmins').textContent=DB.users.filter(u=>u.role==='admin').length;
-  document.getElementById('usersOwners').textContent=DB.users.filter(u=>u.role==='owner').length;
-  document.getElementById('usersOther').textContent=DB.users.filter(u=>!['admin','owner'].includes(u.role)).length;
+  var vis=isSA?DB.users:DB.users.filter(u=>u.role!=='superadmin');
+  document.getElementById('usersTotal').textContent=vis.length;
+  document.getElementById('usersAdmins').textContent=vis.filter(u=>u.role==='admin'||u.role==='superadmin').length;
+  document.getElementById('usersOwners').textContent=vis.filter(u=>u.role==='owner').length;
+  document.getElementById('usersOther').textContent=vis.filter(u=>!['admin','owner','superadmin'].includes(u.role)).length;
 }
 function renderRoleCabinets(){
   const c=document.getElementById('roleCabinets');
