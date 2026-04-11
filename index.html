@@ -106,17 +106,28 @@
 .chat-cat-item:last-child{border-bottom:none}
 #chatAddBtn.open{background:var(--ac);color:#fff;border-color:var(--ac);transform:rotate(45deg)}
 /* ═══ NOTES (Apple Notes style) ═══ */
-.notes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;padding:0 24px 24px}
-.note-card{background:linear-gradient(180deg,#fefce8 0%,#fef9c3 100%);border:1px solid #e5d9a0;border-radius:4px;padding:0;min-height:180px;display:flex;flex-direction:column;box-shadow:2px 3px 12px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);position:relative;transition:transform .15s,box-shadow .15s;cursor:default;overflow:hidden}
+.notes-grid{display:grid;grid-template-columns:1fr;gap:16px;padding:0 24px 24px;max-width:900px}
+.note-card{background:linear-gradient(180deg,#fefce8 0%,#fef9c3 100%);border:1px solid #e5d9a0;border-radius:4px;padding:0;display:flex;flex-direction:column;box-shadow:2px 3px 12px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);position:relative;transition:all .25s;cursor:default;overflow:hidden}
 .note-card::before{content:'';position:absolute;top:0;left:0;right:0;height:28px;background:repeating-linear-gradient(to bottom,transparent 0px,transparent 26px,#d4c98a 26px,#d4c98a 28px);pointer-events:none;opacity:.4}
 .note-card:hover{transform:translateY(-2px);box-shadow:2px 5px 18px rgba(0,0,0,.12)}
-.note-head{padding:10px 12px 6px;display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1}
-.note-title{font-size:12px;font-weight:700;color:#78650d;line-height:1.3;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.note-head{padding:10px 14px 6px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;cursor:pointer;user-select:none}
+.note-title{font-size:13px;font-weight:700;color:#78650d;line-height:1.3;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .note-role{font-size:8px;font-weight:700;padding:2px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:.3px;flex-shrink:0;margin-left:6px}
-.note-body{padding:4px 12px 10px;font-size:11px;color:#5c4f0e;line-height:1.55;flex:1;overflow:hidden;white-space:pre-wrap;word-break:break-word}
-.note-foot{padding:6px 12px;border-top:1px dashed #d4c98a;display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#a09050}
+.note-collapse-arrow{font-size:10px;color:#a09050;transition:transform .2s;margin-left:8px;flex-shrink:0}
+.note-card.open .note-collapse-arrow{transform:rotate(90deg)}
+.note-body{padding:4px 14px 10px;font-size:12px;color:#5c4f0e;line-height:1.55;overflow:hidden;white-space:pre-wrap;word-break:break-word;max-height:0;opacity:0;transition:max-height .3s,opacity .2s,padding .2s;padding-top:0;padding-bottom:0}
+.note-card.open .note-body{max-height:600px;opacity:1;padding:4px 14px 10px}
+.note-ref{padding:0 14px;overflow:hidden;max-height:0;opacity:0;transition:max-height .3s,opacity .2s}
+.note-card.open .note-ref{max-height:80px;opacity:1;padding:6px 14px}
+.note-ref-card{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:6px;background:rgba(120,101,13,.08);border:1px solid rgba(120,101,13,.15);cursor:pointer;transition:background .15s;font-size:11px;color:#78650d}
+.note-ref-card:hover{background:rgba(120,101,13,.15)}
+.note-foot{padding:6px 14px;border-top:1px dashed #d4c98a;display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#a09050}
 .note-del{opacity:0;transition:opacity .15s;cursor:pointer;font-size:12px;padding:2px}
 .note-card:hover .note-del{opacity:.7}
+.notes-pager{display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 24px 20px;font-size:12px;color:var(--tx2)}
+.notes-pager button{padding:6px 14px;border:1px solid var(--bd);border-radius:8px;background:var(--sf2);color:var(--tx);font-size:11px;cursor:pointer;font-family:var(--f);transition:all .15s}
+.notes-pager button:hover:not(:disabled){background:var(--sf);border-color:var(--tx3)}
+.notes-pager button:disabled{opacity:.3;cursor:default}
 .note-del:hover{opacity:1!important;color:#c0392b}
 .note-ai{background:linear-gradient(135deg,#ede9fe 0%,#ddd6fe 100%);border-color:#c4b5fd}
 .note-ai .note-title{color:#5b21b6}
@@ -1001,14 +1012,6 @@ Apple</button>
 <div style="font-size:10px;color:var(--ac2);font-weight:600;margin-top:2px"><span id="depositVal">36 000</span> PLN</div>
 </div>
 </div>
-<div style="padding:8px;border:1px solid var(--bd);border-radius:8px;margin-bottom:10px">
-<div style="font-size:9px;font-weight:600;color:var(--tx3);text-transform:uppercase">Модернизация (Таб 2)</div>
-<div style="display:flex;align-items:center;gap:8px;margin-top:4px">
-<span style="font-size:14px;font-weight:700;color:var(--ac2)" id="renCostDisplay">0</span>
-<span style="font-size:10px;color:var(--tx3)">PLN</span>
-<button class="btn sm" onclick="nav('s2')" style="font-size:9px;margin-left:auto">Перейти &rarr;</button>
-</div>
-</div>
 <div style="padding-top:8px;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center">
 <span style="font-size:10px;color:var(--tx2)">Итого:</span>
 <span style="font-size:16px;font-weight:700;color:var(--ac2)" id="s1CostTotal">0 PLN</span>
@@ -1025,9 +1028,10 @@ Apple</button>
 <button class="btn" onclick="openPremisePicker()" style="flex:1">&#128209; Выбрать из каталога</button>
 </div>
 
-<!-- ХАРАКТЕРИСТИКИ ОБЪЕКТА (полная ширина) -->
-<div class="c"><div class="ch"><h3>&#128295; Характеристики объекта</h3></div>
-<div class="cb" style="padding:10px 16px">
+<!-- ДОПОЛНИТЕЛЬНЫЕ ПАРАМЕТРЫ ПОМЕЩЕНИЯ (collapsible) -->
+<div class="c"><div class="ch" style="cursor:pointer" onclick="this.parentElement.classList.toggle('chars-open');this.querySelector('.chars-arrow').style.transform=this.parentElement.classList.contains('chars-open')?'rotate(90deg)':''"><h3>&#128295; Дополнительные параметры помещения</h3><span class="chars-arrow" style="font-size:10px;color:var(--tx3);transition:transform .2s;margin-left:8px">&#9654;</span></div>
+<div class="cb" style="padding:10px 16px;max-height:0;overflow:hidden;padding-top:0;padding-bottom:0;transition:max-height .35s ease,padding .25s ease">
+<style>.chars-open>.cb{max-height:2000px!important;padding-top:10px!important;padding-bottom:10px!important}</style>
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px">
 
 <div style="padding:8px;border:1px solid var(--bd);border-radius:8px">
@@ -2151,6 +2155,7 @@ function switchAdminRole(role){
 <button class="btn sm pr" onclick="openNewNote()" style="padding:8px 14px">+ Заметка</button>
 </div>
 <div id="notesGrid" class="notes-grid"></div>
+<div id="notesPager" class="notes-pager" style="display:none"></div>
 </div>
 
 <!-- ═══ STAGE 2: CHAT ═══ -->
@@ -6083,26 +6088,57 @@ function confirmInvoice(email,name){
 
 // ═══════════════ NOTES SYSTEM ═══════════════
 var _notes=JSON.parse(localStorage.getItem('svita_notes')||'[]');
+var _notesPage=0;
+var _notesPerPage=3;
 function _saveNotes(){localStorage.setItem('svita_notes',JSON.stringify(_notes))}
+function toggleNoteCollapse(el){el.closest('.note-card').classList.toggle('open')}
+function _noteRoleLabel(r){return r==='contractor'?'Подрядчик':r==='supplier'?'Поставщик':r==='equipment'?'Оборудование':r==='employee'?'Сотрудник':'Заметка'}
+function _noteRoleColor(r){return r==='contractor'?'background:rgba(249,115,22,.12);color:#f59e0b':r==='equipment'?'background:rgba(217,70,239,.12);color:#d946ef':r==='employee'?'background:rgba(34,197,94,.12);color:var(--gn)':'background:rgba(139,92,246,.12);color:#8b5cf6'}
+function _noteRefCard(n){
+  if(!n.refId||!n.role)return '';
+  var src=null,navTarget='';
+  if(n.role==='contractor'){src=DB.contractors.find(function(x){return x.id==n.refId});navTarget='db-contractors'}
+  else if(n.role==='supplier'){src=DB.vendorCompanies.find(function(x){return x.id==n.refId});navTarget='db-vendors'}
+  else if(n.role==='equipment'){src=DB.suppliers.find(function(x){return x.id==n.refId});navTarget='db-suppliers'}
+  else if(n.role==='employee'){src=DB.employees.find(function(x){return x.id==n.refId});navTarget='db-employees'}
+  if(!src)return '';
+  var name=src.name||'';
+  var sub=n.role==='contractor'?(src.spec||''):n.role==='equipment'?(src.category||''):n.role==='employee'?(src.spec||''):(src.city||'');
+  return '<div class="note-ref"><div class="note-ref-card" onclick="nav(\''+navTarget+'\')" title="Перейти к карточке">&#128279; '+esc(name)+(sub?' · '+esc(sub):'')+'</div></div>';
+}
 function renderNotes(){
-  const el=document.getElementById('notesGrid');if(!el)return;
-  const q=(document.getElementById('notesSearch')?.value||'').toLowerCase().trim();
-  const f=document.getElementById('notesFilter')?.value||'all';
-  let list=_notes.slice().sort((a,b)=>b.ts-a.ts);
-  if(q)list=list.filter(n=>(n.title||'').toLowerCase().includes(q)||(n.body||'').toLowerCase().includes(q));
-  if(f==='ai')list=list.filter(n=>n.ai);
-  else if(f!=='all')list=list.filter(n=>n.role===f);
-  if(!list.length){el.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px"><div style="font-size:32px;margin-bottom:12px;opacity:.3">&#128221;</div><div style="font-size:12px;color:var(--tx3)">Нет заметок</div><div style="font-size:11px;color:var(--tx3);margin-top:4px">Нажмите «В заметки» на карточке подрядчика или поставщика</div></div>';return}
-  el.innerHTML=list.map(n=>{
-    const roleColor=n.role==='contractor'?'background:rgba(249,115,22,.12);color:#f59e0b':'background:rgba(139,92,246,.12);color:#8b5cf6';
-    const roleLabel=n.role==='contractor'?'Подрядчик':'Поставщик';
-    const date=new Date(n.ts).toLocaleDateString('ru',{day:'numeric',month:'short'});
-    return '<div class="note-card'+(n.ai?' note-ai':'')+'">'
-      +'<div class="note-head"><div class="note-title">'+esc(n.title)+'</div><span class="note-role" style="'+roleColor+'">'+roleLabel+'</span></div>'
+  var el=document.getElementById('notesGrid');if(!el)return;
+  var pager=document.getElementById('notesPager');
+  var q=(document.getElementById('notesSearch')?.value||'').toLowerCase().trim();
+  var f=document.getElementById('notesFilter')?.value||'all';
+  var list=_notes.slice().sort(function(a,b){return b.ts-a.ts});
+  if(q)list=list.filter(function(n){return(n.title||'').toLowerCase().includes(q)||(n.body||'').toLowerCase().includes(q)});
+  if(f==='ai')list=list.filter(function(n){return n.ai});
+  else if(f!=='all')list=list.filter(function(n){return n.role===f});
+  if(!list.length){el.innerHTML='<div style="text-align:center;padding:40px"><div style="font-size:32px;margin-bottom:12px;opacity:.3">&#128221;</div><div style="font-size:12px;color:var(--tx3)">Нет заметок</div><div style="font-size:11px;color:var(--tx3);margin-top:4px">Нажмите «В заметки» на карточке</div></div>';if(pager)pager.style.display='none';return}
+  var totalPages=Math.ceil(list.length/_notesPerPage);
+  if(_notesPage>=totalPages)_notesPage=totalPages-1;
+  if(_notesPage<0)_notesPage=0;
+  var start=_notesPage*_notesPerPage;
+  var page=list.slice(start,start+_notesPerPage);
+  el.innerHTML=page.map(function(n){
+    var rc=_noteRoleColor(n.role);
+    var rl=_noteRoleLabel(n.role);
+    var date=new Date(n.ts).toLocaleDateString('ru',{day:'numeric',month:'short'});
+    var ref=_noteRefCard(n);
+    return '<div class="note-card">'
+      +'<div class="note-head" onclick="toggleNoteCollapse(this)"><div class="note-title">'+esc(n.title)+'</div><span class="note-role" style="'+rc+'">'+rl+'</span><span class="note-collapse-arrow">&#9654;</span></div>'
       +'<div class="note-body">'+esc(n.body)+'</div>'
-      +'<div class="note-foot"><span>'+(n.ai?'&#10024; AI-досье · ':'')+date+'</span><span class="note-del" onclick="delNote(\''+n.id+'\')" title="Удалить">&#128465;</span></div>'
+      +ref
+      +'<div class="note-foot"><span>'+(n.ai?'&#10024; AI · ':'')+date+'</span><span class="note-del" onclick="delNote(\''+n.id+'\')" title="Удалить">&#128465;</span></div>'
       +'</div>';
   }).join('');
+  if(pager){
+    if(totalPages>1){
+      pager.style.display='flex';
+      pager.innerHTML='<button onclick="_notesPage--;renderNotes()"'+((_notesPage<=0)?' disabled':'')+'>← Назад</button><span>'+(_notesPage+1)+' / '+totalPages+'</span><button onclick="_notesPage++;renderNotes()"'+((_notesPage>=totalPages-1)?' disabled':'')+'>Вперёд →</button>';
+    }else{pager.style.display='none'}
+  }
 }
 function delNote(id){_notes=_notes.filter(n=>n.id!==id);_saveNotes();renderNotes()}
 function addNoteFromContractor(cid){
@@ -6609,7 +6645,7 @@ function resetRoleOverview(){
 function renderContractors(){
   const c=document.getElementById('contractorCards');if(!c)return;
   c.innerHTML=DB.contractors.map(r=>{
-    return `<div class="db-card"><div class="db-card-head"><span class="db-card-name">${esc(r.name)}</span><span class="db-card-role" style="background:rgba(249,115,22,.1);color:var(--or)">${esc(r.spec)}</span></div><div class="db-card-grid"><div class="db-card-field"><div class="db-card-label">Город</div><div class="db-card-val">${esc(r.city)}</div></div><div class="db-card-field"><div class="db-card-label">Ставка</div><div class="db-card-val">${esc(r.price)}</div></div><div class="db-card-field"><div class="db-card-label">Рейтинг</div><div class="db-card-val">${r.rating} ★</div></div><div class="db-card-field"><div class="db-card-label">Контакт</div><div class="db-card-val">${esc(r.phone)}</div></div></div><div class="db-card-actions"><button class="btn sm" onclick="addNoteFromContractor('${r.id}')" style="color:#78650d">&#128221; В заметки</button><button class="btn sm" onclick="aiGenerateNote('${r.id}','contractor')" style="color:#7c3aed">&#10024; AI-досье</button></div></div>`;
+    return `<div class="db-card"><div class="db-card-head"><span class="db-card-name">${esc(r.name)}</span><span class="db-card-role" style="background:rgba(249,115,22,.1);color:var(--or)">${esc(r.spec)}</span></div><div class="db-card-grid"><div class="db-card-field"><div class="db-card-label">Город</div><div class="db-card-val">${esc(r.city)}</div></div><div class="db-card-field"><div class="db-card-label">Ставка</div><div class="db-card-val">${esc(r.price)}</div></div><div class="db-card-field"><div class="db-card-label">Рейтинг</div><div class="db-card-val">${r.rating} ★</div></div><div class="db-card-field"><div class="db-card-label">Контакт</div><div class="db-card-val">${esc(r.phone)}</div></div></div><div class="db-card-actions"><button class="btn sm" onclick="addNoteFromContractor('${r.id}')" style="color:#78650d" title="Сохранить в раздел Заметки">&#128221; В заметки</button><button class="btn sm" onclick="aiGenerateNote('${r.id}','contractor')" style="color:#7c3aed" title="Сгенерировать AI-досье с анализом">&#10024; AI-досье</button></div></div>`;
   }).join('');
 }
 
@@ -6618,7 +6654,7 @@ function renderVendors(){
   if(!DB.vendorCompanies.length){c.innerHTML='<div style="padding:24px;text-align:center;color:var(--tx3);font-size:12px">Нет поставщиков</div>';return}
   c.innerHTML=DB.vendorCompanies.map(v=>{
     const tags=(v.tags||[]).map(t=>`<span style="display:inline-block;font-size:9px;padding:2px 8px;border-radius:4px;background:var(--acbg);color:var(--ac2);margin:2px">${esc(t)}</span>`).join('');
-    return `<div class="db-card"><div class="db-card-head"><span class="db-card-name">${esc(v.name)}</span><span class="db-card-role" style="background:rgba(139,92,246,.1);color:#8b5cf6">${esc(v.city||'')}</span></div><div style="padding:0 16px 8px;font-size:11px;color:var(--tx2);line-height:1.4">${esc(v.desc)}</div>${tags?`<div style="padding:0 16px 8px">${tags}</div>`:''}<div class="db-card-grid"><div class="db-card-field"><div class="db-card-label">Телефон</div><div class="db-card-val">${esc(v.phone||'—')}</div></div><div class="db-card-field"><div class="db-card-label">Сайт</div><div class="db-card-val">${v.website?`<a href="${safeHref('https://'+v.website)}" target="_blank" rel="noopener" style="color:var(--ac2);text-decoration:none">${esc(v.website)}</a>`:'—'}</div></div></div><div class="db-card-actions"><button class="btn sm" onclick="addNoteFromVendor('${v.id}')" style="color:#78650d">&#128221; В заметки</button><button class="btn sm" onclick="aiGenerateNote('${v.id}','supplier')" style="color:#7c3aed">&#10024; AI-досье</button><button class="btn sm" onclick="delVendor('${v.id}')">Удалить</button></div></div>`;
+    return `<div class="db-card"><div class="db-card-head"><span class="db-card-name">${esc(v.name)}</span><span class="db-card-role" style="background:rgba(139,92,246,.1);color:#8b5cf6">${esc(v.city||'')}</span></div><div style="padding:0 16px 8px;font-size:11px;color:var(--tx2);line-height:1.4">${esc(v.desc)}</div>${tags?`<div style="padding:0 16px 8px">${tags}</div>`:''}<div class="db-card-grid"><div class="db-card-field"><div class="db-card-label">Телефон</div><div class="db-card-val">${esc(v.phone||'—')}</div></div><div class="db-card-field"><div class="db-card-label">Сайт</div><div class="db-card-val">${v.website?`<a href="${safeHref('https://'+v.website)}" target="_blank" rel="noopener" style="color:var(--ac2);text-decoration:none">${esc(v.website)}</a>`:'—'}</div></div></div><div class="db-card-actions"><button class="btn sm" onclick="addNoteFromVendor('${v.id}')" style="color:#78650d" title="Сохранить в раздел Заметки">&#128221; В заметки</button><button class="btn sm" onclick="aiGenerateNote('${v.id}','supplier')" style="color:#7c3aed" title="Сгенерировать AI-досье с анализом">&#10024; AI-досье</button><button class="btn sm" onclick="delVendor('${v.id}')">Удалить</button></div></div>`;
   }).join('');
 }
 function delVendor(id){
@@ -6633,7 +6669,7 @@ function renderSuppliers(){
     const picked=!!DB.pickedEquip[r.id];
     const img=getItemImg('suppliers',r.id);
     const imgHtml=img?`<img class="db-card-img" src="${img}" onclick="openLightbox('suppliers','${r.id}')">`:`<div class="db-card-img-placeholder" onclick="uploadPhoto('suppliers','${r.id}')"><span>&#128247;</span><span>Добавить фото</span></div>`;
-    return `<div class="db-card" style="${picked?'border-color:var(--acbd);background:var(--acbg)':''}">${imgHtml}<div class="db-card-head"><span class="db-card-name">${esc(r.name)}</span><span class="db-card-role" style="background:rgba(139,92,246,.1);color:#d946ef">${esc(r.category)}</span></div><div class="db-card-grid"><div class="db-card-field"><div class="db-card-label">Цена</div><div class="db-card-val" style="color:var(--ac2)">${r.price.toLocaleString('ru')} PLN</div></div><div class="db-card-field"><div class="db-card-label">Поставщик</div><div class="db-card-val">${esc(r.supplier)}</div></div><div class="db-card-field"><div class="db-card-label">Гарантия</div><div class="db-card-val">${esc(r.warranty)}</div></div></div><div class="db-card-actions"><button class="btn sm ${picked?'gn':'pr'}" onclick="togglePickEquip('${r.id}')">${picked?'✓ В оснащении':'+ Товар → Таб 3'}</button><button class="btn sm" onclick="addNoteFromEquip('${r.id}')" style="color:#78650d">&#128221; В заметки</button><button class="btn sm" onclick="aiGenerateNote('${r.id}','equipment')" style="color:#7c3aed">&#10024; AI-досье</button><button class="btn sm" onclick="delItem('suppliers','${r.id}')">Удалить</button></div></div>`;
+    return `<div class="db-card" style="${picked?'border-color:var(--acbd);background:var(--acbg)':''}">${imgHtml}<div class="db-card-head"><span class="db-card-name">${esc(r.name)}</span><span class="db-card-role" style="background:rgba(139,92,246,.1);color:#d946ef">${esc(r.category)}</span></div><div class="db-card-grid"><div class="db-card-field"><div class="db-card-label">Цена</div><div class="db-card-val" style="color:var(--ac2)">${r.price.toLocaleString('ru')} PLN</div></div><div class="db-card-field"><div class="db-card-label">Поставщик</div><div class="db-card-val">${esc(r.supplier)}</div></div><div class="db-card-field"><div class="db-card-label">Гарантия</div><div class="db-card-val">${esc(r.warranty)}</div></div></div><div class="db-card-actions"><button class="btn sm ${picked?'gn':'pr'}" onclick="togglePickEquip('${r.id}')">${picked?'✓ В оснащении':'+ Товар → Таб 3'}</button><button class="btn sm" onclick="addNoteFromEquip('${r.id}')" style="color:#78650d" title="Сохранить в раздел Заметки">&#128221; В заметки</button><button class="btn sm" onclick="aiGenerateNote('${r.id}','equipment')" style="color:#7c3aed" title="Сгенерировать AI-досье с анализом">&#10024; AI-досье</button><button class="btn sm" onclick="delItem('suppliers','${r.id}')">Удалить</button></div></div>`;
   }).join('');
 }
 
@@ -6659,8 +6695,8 @@ function renderEmployees(){
 </div>
 <div class="db-card-actions">
 <button class="btn sm ${picked?'gn':'pr'}" onclick="togglePick('pickedStaff','${r.id}','employees')">${picked?'✓ В штате':'+ В штат → Таб 4'}</button>
-<button class="btn sm" onclick="addNoteFromEmployee('${r.id}')" style="color:#78650d">&#128221; В заметки</button>
-<button class="btn sm" onclick="aiGenerateNote('${r.id}','employee')" style="color:#7c3aed">&#10024; AI-досье</button>
+<button class="btn sm" onclick="addNoteFromEmployee('${r.id}')" style="color:#78650d" title="Сохранить в раздел Заметки">&#128221; В заметки</button>
+<button class="btn sm" onclick="aiGenerateNote('${r.id}','employee')" style="color:#7c3aed" title="Сгенерировать AI-досье с анализом">&#10024; AI-досье</button>
 <button class="btn sm" onclick="editEmployee('${r.id}')" style="color:var(--ac2)">Редактировать</button>
 <button class="btn sm" onclick="delItem('employees','${r.id}')" style="color:var(--rd)">Удалить</button>
 </div></div>`;
