@@ -869,7 +869,7 @@ Apple</button>
 <button class="btn" onclick="nav('overview')">&larr; Обзор</button>
 <button class="btn pr" onclick="nextStage()">Далее &rarr;</button>
 </div>
-<button class="top-upgrade" onclick="showUpgradeModal()">&#9889; Upgrade</button>
+<button class="top-upgrade" id="topUpgradeBtn" onclick="showUpgradeModal()">&#9889; Upgrade</button>
 <div style="position:relative;display:inline-block" id="langWrap">
 <button class="top-lang" id="langBtn" onclick="document.getElementById('langDrop').style.display=document.getElementById('langDrop').style.display==='block'?'none':'block'" style="background:none;border:1px solid var(--bd);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;cursor:pointer;color:var(--tx)">RU</button>
 <div id="langDrop" style="display:none;position:absolute;right:0;top:100%;margin-top:4px;background:var(--sf);border:1px solid var(--bd);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.1);z-index:999;min-width:100px;padding:4px 0"></div>
@@ -1769,7 +1769,7 @@ function switchAdminRole(role){
 <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd)">
 <div><div style="font-size:12px;font-weight:600">Последний вход</div><div style="font-size:10px;color:var(--tx3)" id="accLastLogin">—</div></div>
 </div>
-<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0">
+<div id="accDeleteRow" style="display:flex;align-items:center;justify-content:space-between;padding:8px 0">
 <div><div style="font-size:12px;font-weight:600;color:var(--rd)">Удалить аккаунт</div><div style="font-size:10px;color:var(--tx3)">Все данные будут безвозвратно удалены</div></div>
 <button class="btn sm" style="color:var(--rd);border-color:var(--rd)" onclick="confirmDeleteAccount()">Удалить</button>
 </div>
@@ -3611,7 +3611,7 @@ function loadPropertyParams(){
 let currentRole=null;
 let currentUser=null;
 let currentStage=parseInt(localStorage.getItem('svita_stage'))||1;
-const ROLE_COLORS={admin:'linear-gradient(135deg,var(--ac),#8b5cf6)',owner:'linear-gradient(135deg,var(--gn),#059669)',contractor:'linear-gradient(135deg,var(--or),var(--yl))',supplier:'linear-gradient(135deg,#8b5cf6,#d946ef)',employee:'linear-gradient(135deg,#06b6d4,var(--ac))'};
+const ROLE_COLORS={superadmin:'linear-gradient(135deg,#dc2626,#991b1b)',admin:'linear-gradient(135deg,var(--ac),#8b5cf6)',owner:'linear-gradient(135deg,var(--gn),#059669)',contractor:'linear-gradient(135deg,var(--or),var(--yl))',supplier:'linear-gradient(135deg,#8b5cf6,#d946ef)',employee:'linear-gradient(135deg,#06b6d4,var(--ac))'};
 const ROLE_NAMES={superadmin:'Суперадмин',admin:'Администратор',owner:'Владелец',contractor:'Подрядчик',supplier:'Поставщик',employee:'Сотрудник'};
 
 // ── Cross-subdomain session cookie on .svita.ai ──
@@ -4684,9 +4684,10 @@ function enterApp(){
   if(_sa){_sa.style.background=ROLE_COLORS[currentRole];_sa.textContent=currentUser.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase()}
   if(_sn)_sn.textContent=currentUser.name;
   if(_sr)_sr.textContent=ROLE_NAMES[currentRole];
-  document.getElementById('roleLabel').textContent=ROLE_NAMES[currentRole];
-  document.getElementById('roleLabel').style.background=currentRole==='admin'?'rgba(59,130,246,.1)':currentRole==='contractor'?'rgba(249,115,22,.1)':currentRole==='supplier'?'rgba(139,92,246,.1)':currentRole==='employee'?'rgba(6,182,212,.1)':'rgba(34,197,94,.1)';
-  document.getElementById('roleLabel').style.color=currentRole==='admin'?'var(--ac2)':currentRole==='contractor'?'var(--or)':currentRole==='supplier'?'#d946ef':currentRole==='employee'?'#06b6d4':'var(--gn)';
+  document.getElementById('roleLabel').textContent=currentUser.isSuperAdmin?'Суперадмин':(ROLE_NAMES[currentRole]||currentRole);
+  document.getElementById('roleLabel').style.background=currentRole==='superadmin'?'rgba(220,38,38,.1)':currentRole==='admin'?'rgba(59,130,246,.1)':currentRole==='contractor'?'rgba(249,115,22,.1)':currentRole==='supplier'?'rgba(139,92,246,.1)':currentRole==='employee'?'rgba(6,182,212,.1)':'rgba(34,197,94,.1)';
+  document.getElementById('roleLabel').style.color=currentRole==='superadmin'?'#dc2626':currentRole==='admin'?'var(--ac2)':currentRole==='contractor'?'var(--or)':currentRole==='supplier'?'#d946ef':currentRole==='employee'?'#06b6d4':'var(--gn)';
+  var _upBtn=document.getElementById('topUpgradeBtn');if(_upBtn)_upBtn.style.display=currentUser.isSuperAdmin?'none':'';
   updateTopUser();
   logAction('login','auth',null,{method:'session',role:currentRole});
   // Save role + biz type in localStorage
@@ -5308,6 +5309,7 @@ async function renderAccount(){
   const isAdmin=currentRole==='admin'||currentRole==='superadmin';
   const manTab=document.querySelector('.cab-tab[data-cab="cab-manage"]');
   if(manTab)manTab.style.display=isAdmin?'':'none';
+  var _delRow=document.getElementById('accDeleteRow');if(_delRow)_delRow.style.display=currentUser.isSuperAdmin?'none':'';
   // Восстановить активный таб
   switchCabTab(_activeCabTab);
 }
