@@ -1390,19 +1390,58 @@ Apple</button>
 <!-- Бизнес-модель -->
 <div class="c"><div class="ch"><h3>&#127973; Бизнес-модель</h3><button class="btn sm gn" id="bmSaveBtn" onclick="saveBusinessModel()">Сохранить</button></div>
 <div class="cb">
+<!-- Описание модели (всегда видно) -->
+<div id="bmDescription" style="margin-bottom:14px">
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px" id="bmCards">
+<div style="background:var(--sf);border-radius:10px;padding:14px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Тип бизнеса</div>
+<div style="font-size:14px;font-weight:700;color:var(--tx);margin-top:4px" id="bmTypeVal">--</div>
+</div>
+<div style="background:var(--sf);border-radius:10px;padding:14px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Бренд</div>
+<div style="font-size:14px;font-weight:700;color:var(--ac2);margin-top:4px" id="bmBrandVal">--</div>
+</div>
+<div style="background:var(--sf);border-radius:10px;padding:14px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Город</div>
+<div style="font-size:14px;font-weight:700;color:var(--tx);margin-top:4px" id="bmCityVal">--</div>
+</div>
+<div style="background:var(--sf);border-radius:10px;padding:14px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Открытие</div>
+<div style="font-size:14px;font-weight:700;color:var(--ac2);margin-top:4px" id="bmDateVal">--</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px" id="bmCards2">
+<div style="background:var(--sf);border-radius:10px;padding:12px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Формат</div>
+<div style="font-size:12px;font-weight:600;color:var(--tx);margin-top:4px" id="bmFormatVal">--</div>
+</div>
+<div style="background:var(--sf);border-radius:10px;padding:12px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Аудитория</div>
+<div style="font-size:12px;font-weight:600;color:var(--tx);margin-top:4px" id="bmAudienceVal">--</div>
+</div>
+<div style="background:var(--sf);border-radius:10px;padding:12px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">УТП</div>
+<div style="font-size:12px;font-weight:600;color:var(--tx);margin-top:4px" id="bmUspVal">--</div>
+</div>
+<div style="background:var(--sf);border-radius:10px;padding:12px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Технологии</div>
+<div style="font-size:12px;font-weight:600;color:var(--gn);margin-top:4px" id="bmTechVal">--</div>
+</div>
+</div>
+</div>
 <div class="calc-toggle" onclick="toggleCalc(this)"><span class="calc-arrow">&#9654;</span><span style="font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Редактировать параметры</span></div>
 <div class="calc-body">
 <div class="g2">
-<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">BUSINESS TYPE</div><input class="price-edit" id="cType" placeholder="e.g. Dental clinic, Veterinary, Beauty salon..." style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
-<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">BRAND NAME</div><input class="price-edit" id="cBrand" placeholder="Your brand or clinic name" style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
-<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">CITY</div><input class="price-edit" id="cCity" placeholder="e.g. Warsaw, Poland" style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
-<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">TARGET OPENING</div><input class="price-edit" id="cDate" placeholder="e.g. September 2026" style="font-size:13px;font-weight:700;margin-top:4px;width:100%;color:var(--ac2)"></div>
+<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">BUSINESS TYPE</div><input class="price-edit" id="cType" placeholder="e.g. Dental clinic, Veterinary, Beauty salon..." oninput="updateBmDescription()" style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
+<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">BRAND NAME</div><input class="price-edit" id="cBrand" placeholder="Your brand or clinic name" oninput="updateBmDescription()" style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
+<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">CITY</div><input class="price-edit" id="cCity" placeholder="e.g. Warsaw, Poland" oninput="updateBmDescription()" style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
+<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">TARGET OPENING</div><input class="price-edit" id="cDate" placeholder="e.g. September 2026" oninput="updateBmDescription()" style="font-size:13px;font-weight:700;margin-top:4px;width:100%;color:var(--ac2)"></div>
 </div>
 <div class="g2" style="margin-top:12px">
-<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">FORMAT</div><input class="price-edit" id="cFormat" placeholder="e.g. Premium, Economy, Mid-range" style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
-<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">TARGET AUDIENCE</div><input class="price-edit" id="cAudience" placeholder="e.g. Age 25-55, middle+ class, families" style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
-<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">USP</div><input class="price-edit" id="cUsp" placeholder="What makes you different? e.g. AI-powered, painless" style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
-<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">TECHNOLOGY</div><input class="price-edit" id="cTech" placeholder="e.g. CBCT 3D, CAD/CAM, Digital workflow" style="font-size:13px;font-weight:700;margin-top:4px;width:100%;color:var(--gn)"></div>
+<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">FORMAT</div><input class="price-edit" id="cFormat" placeholder="e.g. Premium, Economy, Mid-range" oninput="updateBmDescription()" style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
+<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">TARGET AUDIENCE</div><input class="price-edit" id="cAudience" placeholder="e.g. Age 25-55, middle+ class, families" oninput="updateBmDescription()" style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
+<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">USP</div><input class="price-edit" id="cUsp" placeholder="What makes you different? e.g. AI-powered, painless" oninput="updateBmDescription()" style="font-size:13px;font-weight:700;margin-top:4px;width:100%"></div>
+<div class="db-card" style="margin:0;padding:12px"><div class="db-card-label">TECHNOLOGY</div><input class="price-edit" id="cTech" placeholder="e.g. CBCT 3D, CAD/CAM, Digital workflow" oninput="updateBmDescription()" style="font-size:13px;font-weight:700;margin-top:4px;width:100%;color:var(--gn)"></div>
 </div>
 </div><!-- close calc-body business model -->
 </div></div>
@@ -3255,6 +3294,11 @@ function loadBusinessModel(){
     LOAD_PARAMS.forEach(k=>{const el=document.getElementById(k);if(el&&bm[k])el.value=bm[k]});
     if(bm._rent){const rentEl=document.querySelector('[data-cost="rent"]');if(rentEl)rentEl.value=bm._rent}
   }catch(e){}
+  updateBmDescription();
+}
+function updateBmDescription(){
+  const m={cType:'bmTypeVal',cBrand:'bmBrandVal',cCity:'bmCityVal',cDate:'bmDateVal',cFormat:'bmFormatVal',cAudience:'bmAudienceVal',cUsp:'bmUspVal',cTech:'bmTechVal'};
+  Object.entries(m).forEach(([src,dst])=>{const s=document.getElementById(src),d=document.getElementById(dst);if(s&&d)d.textContent=s.value||'--'});
 }
 
 /* ═══ BUDGET / CURRENCY / DISTRIBUTION ═══ */
