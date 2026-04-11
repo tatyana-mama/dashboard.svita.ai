@@ -1384,7 +1384,7 @@ Apple</button>
 <div style="display:none">
 <span id="budgetTotal">0</span><span id="budgetMonthly">0</span><span id="budgetPayback">--</span>
 <span id="budgetRent">0</span><span id="budgetReno">0</span><span id="budgetEquip">0</span>
-<span id="budgetStaff">0</span><span id="budgetDocs">0</span><span id="budgetMkt">0</span><span id="budgetGrand">0</span>
+<span id="budgetStaff">0</span><span id="budgetDocs">0</span><span id="budgetMkt">0</span><span id="budgetGrandHidden">0</span>
 </div>
 
 <!-- Бизнес-модель -->
@@ -1824,7 +1824,7 @@ function switchAdminRole(role){
 <div class="sec" id="sec-db-services">
 <div class="bk" onclick="nav('overview')">&larr; Обзор</div>
 <div class="ph"><div><h2>&#128203; Услуги оказываемые населению</h2><div class="ph-s">Услуги и цены текущей концепции</div></div><div style="display:flex;gap:6px"><button class="btn sm pr" onclick="openModal('service')">+ Услуга</button><button class="btn sm" onclick="addServiceCategory()">+ Категория</button></div></div>
-<div class="sts" id="svcStats" style="grid-template-columns:repeat(4,1fr)">
+<div class="sts" id="svcStats2" style="grid-template-columns:repeat(4,1fr)">
 <div class="st"><div class="st-l">Всего</div><div class="st-v" id="svcTotalCount">0</div></div>
 <div class="st"><div class="st-l">Категорий</div><div class="st-v" id="svcCatCount">0</div></div>
 <div class="st"><div class="st-l">Ср. цена</div><div class="st-v" id="svcAvgPriceDb">0</div></div>
