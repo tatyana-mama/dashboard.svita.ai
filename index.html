@@ -3612,7 +3612,7 @@ let currentRole=null;
 let currentUser=null;
 let currentStage=parseInt(localStorage.getItem('svita_stage'))||1;
 const ROLE_COLORS={admin:'linear-gradient(135deg,var(--ac),#8b5cf6)',owner:'linear-gradient(135deg,var(--gn),#059669)',contractor:'linear-gradient(135deg,var(--or),var(--yl))',supplier:'linear-gradient(135deg,#8b5cf6,#d946ef)',employee:'linear-gradient(135deg,#06b6d4,var(--ac))'};
-const ROLE_NAMES={admin:'Администратор',owner:'Владелец',contractor:'Подрядчик',supplier:'Поставщик',employee:'Сотрудник'};
+const ROLE_NAMES={superadmin:'Суперадмин',admin:'Администратор',owner:'Владелец',contractor:'Подрядчик',supplier:'Поставщик',employee:'Сотрудник'};
 
 // ── Cross-subdomain session cookie on .svita.ai ──
 function syncSessionCookie(data){
@@ -4720,6 +4720,7 @@ function enterApp(){
     if(!DB.users.find(u=>u.email===currentUser.email)){
       DB.users.push({id:genUserId(),name:currentUser.name,email:currentUser.email,role:currentRole,plan:'trial',status:'Активен',created:new Date().toISOString().slice(0,10)});
     }
+    checkSuperAdmin();
     // Load all users from admin_users for admin panel
     if(currentRole==='admin'||currentRole==='superadmin'){
       sb.from('profiles').select('id,user_id,email,display_name,role,plan,status,created_at').then(({data:rows})=>{
@@ -5276,7 +5277,7 @@ async function renderAccount(){
   const av=document.getElementById('accAvatar');if(av){av.style.background=bg;av.textContent=initials}
   const an=document.getElementById('accName');if(an)an.textContent=sanitize(u.name);
   const ae=document.getElementById('accEmail');if(ae)ae.textContent=u.email;
-  const ar=document.getElementById('accRoleBadge');if(ar){ar.textContent=ROLE_NAMES[currentRole]||currentRole;ar.style.background=currentRole==='admin'?'rgba(59,130,246,.1)':'var(--acbg)'}
+  const ar=document.getElementById('accRoleBadge');if(ar){ar.textContent=currentUser.isSuperAdmin?'Суперадмин':(ROLE_NAMES[currentRole]||currentRole);ar.style.background=currentUser.isSuperAdmin?'rgba(220,38,38,.1)':currentRole==='admin'?'rgba(59,130,246,.1)':'var(--acbg)';ar.style.color=currentUser.isSuperAdmin?'#dc2626':''}
   if(window._renderRoleSwitch)_renderRoleSwitch();
   // Form fields
   document.getElementById('acc_name').value=u.name||'';
@@ -5313,10 +5314,11 @@ async function renderAccount(){
 
 function renderPlanDetails(){
   const s=userSubscription;
-  const plans={trial:{name:'Пробный план',desc:'1 концепция, базовые функции',bg:'var(--sf2)',c:'var(--tx3)'},pro:{name:'Pro',desc:'5 концепций, полный прайс-лист',bg:'linear-gradient(135deg,#3b82f6,#6366f1)',c:'#fff'},unlimited:{name:'Unlimited',desc:'∞ концепций, все функции',bg:'linear-gradient(135deg,#c9a96e,#e8c97a)',c:'#000'}};
-  const p=plans[s.plan]||plans.trial;
+  const plans={admin:{name:'Full Access',desc:'Полный доступ, все функции',bg:'linear-gradient(135deg,#dc2626,#991b1b)',c:'#fff'},trial:{name:'Пробный план',desc:'1 концепция, базовые функции',bg:'var(--sf2)',c:'var(--tx3)'},pro:{name:'Pro',desc:'5 концепций, полный прайс-лист',bg:'linear-gradient(135deg,#3b82f6,#6366f1)',c:'#fff'},unlimited:{name:'Unlimited',desc:'∞ концепций, все функции',bg:'linear-gradient(135deg,#c9a96e,#e8c97a)',c:'#000'}};
+  const effectivePlan=currentUser&&currentUser.isSuperAdmin?'admin':s.plan;
+  const p=plans[effectivePlan]||plans.trial;
   const badge=document.getElementById('accPlanBadge');
-  if(badge){badge.textContent=s.plan.toUpperCase();badge.style.background=p.bg;badge.style.color=p.c}
+  if(badge){badge.textContent=effectivePlan==='admin'?'FULL ACCESS':s.plan.toUpperCase();badge.style.background=p.bg;badge.style.color=p.c}
   const pn=document.getElementById('accPlanName');if(pn)pn.textContent=p.name;
   const pd=document.getElementById('accPlanDesc');if(pd)pd.textContent=p.desc;
   const pc=document.getElementById('accPlanConcepts');if(pc)pc.textContent=userConcepts.length+' / '+(s.concepts_limit||1);
@@ -9283,7 +9285,7 @@ function renderUsers(){
     const rc=roleColors[u.role]||'#64748b';
     const rg=roleGradients[u.role]||roleGradients.viewer;
     const initials=(u.name||'').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-    const planLabel=u.role==='admin'?'FULL ACCESS':u.plan==='paid'?'PRO':u.plan==='unlimited'?'UNLIMITED':'TRIAL';
+    const planLabel=u.role==='superadmin'||u.role==='admin'?'FULL ACCESS':u.plan==='paid'?'PRO':u.plan==='unlimited'?'UNLIMITED':'TRIAL';
     const planColor=u.role==='admin'||u.plan==='paid'||u.plan==='unlimited'?'#3b82f6':'#eab308';
     const isOnline=u.status==='Активен';
     html+=`<div style="background:var(--sf);border:1px solid var(--bd);border-radius:16px;overflow:hidden;transition:all .2s;position:relative" onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.08)'" onmouseleave="this.style.transform='';this.style.boxShadow=''">
