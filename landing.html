@@ -48,10 +48,14 @@ nav{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(255,255,255,
 .btn-lg{padding:14px 32px;font-size:15px;border-radius:14px}
 .btn-gn{background:var(--gn);color:#fff;box-shadow:0 2px 8px rgba(22,163,74,.3)}.btn-gn:hover{background:#15803d;transform:translateY(-1px)}
 
-/* LANG SWITCHER */
-.lang-switcher{display:flex;align-items:center;gap:2px}
-.lang-switcher button{background:none;border:none;font-size:11px;font-weight:500;color:var(--tx3);cursor:pointer;padding:4px 6px;border-radius:6px;font-family:var(--f);transition:all .15s}
-.lang-switcher button:hover,.lang-switcher button.active{color:var(--ac2);background:var(--acbg)}
+/* LANG SWITCHER — override labs67-i18n.js dark theme */
+.lang-current{border-color:var(--bd2)!important;color:var(--tx)!important;font-weight:600!important;border-radius:10px!important;padding:6px 12px!important}
+.lang-current:hover{border-color:var(--ac)!important}
+.lang-dropdown{background:rgba(255,255,255,.96)!important;backdrop-filter:blur(20px)!important;border:1px solid var(--bd)!important;border-radius:14px!important;box-shadow:0 12px 40px rgba(0,0,0,.1),0 0 0 1px rgba(0,0,0,.04)!important;padding:6px!important;min-width:140px!important}
+.lang-opt{color:var(--tx2)!important;border-radius:8px!important;padding:8px 14px!important;font-weight:500!important}
+.lang-opt:hover{background:var(--acbg)!important;color:var(--ac2)!important}
+.lang-opt.active{color:var(--ac2)!important;font-weight:700!important;background:var(--acbg)!important}
+.lang-dropdown::-webkit-scrollbar-thumb{background:var(--bd2)!important}
 
 /* HERO */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 24px 80px;position:relative}
@@ -153,6 +157,7 @@ footer a{color:var(--tx2);font-weight:500;transition:color .15s}footer a:hover{c
 @media(max-width:768px){
   .nav-r a:not(.btn){display:none}
   .lang-switcher{display:none}
+  .labs67-lang{display:none}
   .hero{padding:100px 16px 60px}
   .hero-stats{gap:20px}
   .hero-stat .big{font-size:22px}
@@ -188,9 +193,9 @@ footer a{color:var(--tx2);font-weight:500;transition:color .15s}footer a:hover{c
 <section class="hero" id="top">
   <div class="hero-inner">
     <div class="hero-text">
-      <div class="hero-pill"><span class="dot"></span> <span data-i18n="hero.pill">AI-ассистент запуска бизнеса</span></div>
-      <h1 data-i18n="hero.h1">Не теряйте деньги на <span class="hl">хаосе открытия</span></h1>
-      <p class="hero-sub" data-i18n="hero.sub">SVITA собирает все этапы запуска малого бизнеса в одно место. Подрядчики, поставщики, бюджет, помещение, персонал, документы &mdash; под контролем с первого дня.</p>
+      <div class="hero-pill"><span class="dot"></span> <span data-i18n="hero.pill">AI-консультант с детальным конструктором</span></div>
+      <h1 data-i18n="hero.h1">Создавайте бизнесы<br><span class="hl">и управляйте ими</span> качественно</h1>
+      <p class="hero-sub" data-i18n="hero.sub">SVITA &mdash; AI-конструктор, который проведёт вас от идеи до открытия. Заполните 7 этапов &mdash; получите готовую бизнес-модель с бюджетом, командой, поставщиками и планом запуска.</p>
       <div class="hero-cta">
         <a href="index.html#signup" class="btn btn-p btn-lg" id="heroCta" data-i18n="cta.try">Попробовать бесплатно</a>
         <a href="#how" class="btn btn-g btn-lg" data-i18n="cta.how">Как это работает</a>
@@ -236,14 +241,14 @@ footer a{color:var(--tx2);font-weight:500;transition:color .15s}footer a:hover{c
 <!-- SOLUTION -->
 <section class="solution" id="solution">
   <div class="solution-inner">
-    <div class="eyebrow" style="color:var(--gn);text-align:center" data-i18n="solution.eyebrow">Решение</div>
-    <h2 class="section-h2" style="text-align:center" data-i18n="solution.h2">Всё в одном месте. Всё под контролем.</h2>
-    <p class="lead" style="text-align:center" data-i18n="solution.lead">SVITA &mdash; это AI-ассистент, который помогает спланировать и контролировать каждый этап открытия бизнеса.</p>
+    <div class="eyebrow" style="color:var(--gn);text-align:center" data-i18n="solution.eyebrow">Детальный конструктор</div>
+    <h2 class="section-h2" style="text-align:center" data-i18n="solution.h2">7 этапов. Один AI-консультант.<br>Полная картина бизнеса.</h2>
+    <p class="lead" style="text-align:center" data-i18n="solution.lead">Наполните конструктор &mdash; и SVITA рассчитает бюджет, подберёт исполнителей, составит план запуска. Чем детальнее вы заполните &mdash; тем точнее результат.</p>
     <div class="sol-grid">
       <div class="sol-card">
         <div class="sol-icon" style="background:var(--acbg);color:var(--ac2)">&#128203;</div>
         <h3 data-i18n="sol.c1.h">Конструктор концепции</h3>
-        <p data-i18n="sol.c1.p">Помещение, зоны, кабинеты, оборудование, персонал, услуги &mdash; собирайте бизнес-модель по шагам. AI подсказывает и считает.</p>
+        <p data-i18n="sol.c1.p">Помещение, зоны, кабинеты, оборудование, персонал, услуги &mdash; заполняйте пошагово. AI анализирует и считает за вас.</p>
       </div>
       <div class="sol-card">
         <div class="sol-icon" style="background:var(--orbg);color:var(--or)">&#128736;</div>
@@ -278,34 +283,34 @@ footer a{color:var(--tx2);font-weight:500;transition:color .15s}footer a:hover{c
 <section class="how" id="how">
   <div class="how-inner">
     <div class="eyebrow" style="color:var(--vi);text-align:center" data-i18n="how.eyebrow">Как это работает</div>
-    <h2 class="section-h2" style="text-align:center;margin-bottom:56px" data-i18n="how.h2">От идеи до открытия за 4 шага</h2>
+    <h2 class="section-h2" style="text-align:center;margin-bottom:56px" data-i18n="how.h2">Изучите. Наполните. Управляйте.</h2>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-body">
-          <h4 data-i18n="how.s1.h">Выберите тип бизнеса</h4>
-          <p data-i18n="how.s1.p">Стоматология, кофейня, салон красоты, фитнес, общепит &mdash; SVITA адаптируется под вашу нишу с готовыми шаблонами.</p>
+          <h4 data-i18n="how.s1.h">Изучите конструктор</h4>
+          <p data-i18n="how.s1.p">7 этапов: концепция, помещение, ремонт, оборудование, персонал, услуги, документы. Каждый &mdash; детальный раздел с AI-подсказками.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
-          <h4 data-i18n="how.s2.h">Соберите концепцию</h4>
-          <p data-i18n="how.s2.p">Заполняйте этапы: помещение, ремонт, оборудование, персонал, прайс. AI подсказывает оптимальные решения.</p>
+          <h4 data-i18n="how.s2.h">Наполните данными</h4>
+          <p data-i18n="how.s2.p">Чем детальнее вы заполните &mdash; тем точнее расчёты. AI-консультант анализирует каждый параметр и рассчитывает бюджет в реальном времени.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-body">
-          <h4 data-i18n="how.s3.h">Подберите исполнителей</h4>
-          <p data-i18n="how.s3.p">Найдите подрядчиков и поставщиков в каталоге. Сравните цены, назначьте работы, контролируйте через чат.</p>
+          <h4 data-i18n="how.s3.h">Получите готовую модель</h4>
+          <p data-i18n="how.s3.p">Бюджет, рентабельность, план помещения, список подрядчиков и поставщиков &mdash; полная картина для принятия решений.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-body">
-          <h4 data-i18n="how.s4.h">Контролируйте исполнение</h4>
-          <p data-i18n="how.s4.p">Трекайте прогресс, документы, закупки. Открывайтесь вовремя и в рамках бюджета.</p>
+          <h4 data-i18n="how.s4.h">Управляйте запуском</h4>
+          <p data-i18n="how.s4.p">Назначайте исполнителей, контролируйте сроки и закупки, ведите документацию. Всё в одном месте до и после открытия.</p>
         </div>
       </div>
     </div>
@@ -380,21 +385,32 @@ footer a{color:var(--tx2);font-weight:500;transition:color .15s}footer a:hover{c
     var s=res.data&&res.data.session;
     if(!s)return;
     var email=s.user.email||'';
-    var name=s.user.user_metadata&&s.user.user_metadata.display_name||email.split('@')[0];
-    // Nav
-    var navCta=document.getElementById('navCta');
-    if(navCta){navCta.textContent='Dashboard';navCta.href='index.html'}
+    var meta=s.user.user_metadata||{};
+    var name=meta.display_name||email.split('@')[0];
+    var initials=(name||'?').split(' ').map(function(w){return w[0]}).join('').substring(0,2).toUpperCase();
+    // Nav — replace login/cta with avatar + Dashboard button
     var navR=document.querySelector('.nav-r');
     if(navR){
-      var sp=document.createElement('span');sp.style.cssText='font-size:12px;color:var(--tx2)';sp.textContent=name;
-      navR.insertBefore(sp,navCta);
+      // Remove "Войти" button
+      var loginBtn=navR.querySelector('.btn-g');
+      if(loginBtn)loginBtn.remove();
+      // Replace CTA with Dashboard
+      var navCta=document.getElementById('navCta');
+      if(navCta){navCta.textContent='Dashboard';navCta.href='index.html';navCta.removeAttribute('data-i18n')}
+      // Add avatar like in dashboard
+      var av=document.createElement('a');
+      av.href='index.html';
+      av.style.cssText='width:36px;height:36px;border-radius:10px;background:var(--ac);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 2px 8px rgba(79,110,247,.25)';
+      av.textContent=initials;
+      av.title=name+' ('+email+')';
+      navR.insertBefore(av,navCta);
     }
     // Hero CTA
     var heroCta=document.getElementById('heroCta');
-    if(heroCta){heroCta.textContent='Открыть Dashboard';heroCta.href='index.html'}
+    if(heroCta){heroCta.textContent='Открыть Dashboard';heroCta.href='index.html';heroCta.removeAttribute('data-i18n')}
     // Bottom CTA
     var bottomCta=document.getElementById('bottomCta');
-    if(bottomCta){bottomCta.textContent='Открыть Dashboard';bottomCta.href='index.html'}
+    if(bottomCta){bottomCta.textContent='Открыть Dashboard';bottomCta.href='index.html';bottomCta.removeAttribute('data-i18n')}
   });
 })();
 </script>
