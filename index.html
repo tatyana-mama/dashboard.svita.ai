@@ -1380,39 +1380,12 @@ Apple</button>
 <div style="margin-top:8px;text-align:right"><span id="curRateBadge" class="cur-rate-badge" style="display:none">1 EUR = ? PLN</span></div>
 </div></div>
 
-<!-- ═══ СВОДНЫЙ БЮДЖЕТ (автосборка) ═══ -->
-<div class="c"><div class="ch"><h3>&#128202; Сводка из этапов</h3><span style="font-size:10px;color:var(--tx3)">Автоматически из каталогов</span></div>
-<div class="cb">
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
-<div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px;text-align:center">
-<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Общие инвестиции</div>
-<div style="font-size:22px;font-weight:800;color:var(--ac2);margin-top:4px" id="budgetTotal">0</div>
-<div style="font-size:10px;color:var(--tx3)" class="cur-label">PLN</div>
+<!-- Сводка перенесена в sec-budget -->
+<div style="display:none">
+<span id="budgetTotal">0</span><span id="budgetMonthly">0</span><span id="budgetPayback">--</span>
+<span id="budgetRent">0</span><span id="budgetReno">0</span><span id="budgetEquip">0</span>
+<span id="budgetStaff">0</span><span id="budgetDocs">0</span><span id="budgetMkt">0</span><span id="budgetGrand">0</span>
 </div>
-<div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px;text-align:center">
-<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Ежемесячные расходы</div>
-<div style="font-size:22px;font-weight:800;color:var(--rd);margin-top:4px" id="budgetMonthly">0</div>
-<div style="font-size:10px;color:var(--tx3)" class="cur-label">PLN</div>
-</div>
-<div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px;text-align:center">
-<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Окупаемость</div>
-<div style="font-size:22px;font-weight:800;color:var(--gn);margin-top:4px" id="budgetPayback">--</div>
-<div style="font-size:10px;color:var(--tx3)">мес</div>
-</div>
-</div>
-<div class="calc-toggle" onclick="toggleCalc(this)"><span class="calc-arrow">&#9654;</span><span style="font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px">Детализация</span></div>
-<div class="calc-body">
-<div style="display:grid;grid-template-columns:1fr auto;gap:3px 12px;font-size:11px;padding:8px 4px 0">
-<span style="color:var(--tx2)">&#127970; Помещение (аренда × 12 мес.)</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetRent">0</span>
-<span style="color:var(--tx2)">&#128736; Ремонт и модернизация</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetReno">0</span>
-<span style="color:var(--tx2)">&#128230; Оборудование</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetEquip">0</span>
-<span style="color:var(--tx2)">&#129489; ФОТ (первые 3 мес.)</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetStaff">0</span>
-<span style="color:var(--tx2)">&#128203; Документация и лицензии</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetDocs">0</span>
-<span style="color:var(--tx2)">&#128200; Маркетинг (запуск)</span><span style="font-weight:600;text-align:right;color:var(--tx)" id="budgetMkt">0</span>
-<span style="font-weight:800;color:var(--tx);border-top:2px solid var(--acbd);padding-top:6px;margin-top:4px">ИТОГО</span><span style="font-weight:800;color:var(--ac2);text-align:right;border-top:2px solid var(--acbd);padding-top:6px;margin-top:4px" id="budgetGrand">0</span>
-</div>
-</div><!-- close calc-body -->
-</div></div>
 
 <!-- Бизнес-модель -->
 <div class="c"><div class="ch"><h3>&#127973; Бизнес-модель</h3><button class="btn sm gn" id="bmSaveBtn" onclick="saveBusinessModel()">Сохранить</button></div>
