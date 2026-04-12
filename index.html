@@ -2460,7 +2460,7 @@ uk:{
 }
 };
 function t(s){if(_lang==='ru'||!I18N[_lang])return s;return I18N[_lang][s]||s}
-function setLang(lang){_lang=lang;_revDict=null;localStorage.setItem('svita_lang',lang);document.cookie='svita_lang='+lang+';path=/;max-age=31536000;domain=.svita.ai;SameSite=Lax';try{buildSidebar();renderAll();recalc()}catch(e){}applyI18n();const b=document.getElementById('langBtn');if(b)b.textContent=lang.toUpperCase();const d=document.getElementById('langDrop');if(d)d.style.display='none'}
+function setLang(lang){_lang=lang;_revDict=null;localStorage.setItem('svita_lang',lang);document.cookie='svita_lang='+lang+';path=/;max-age=31536000;domain=.svita.ai;SameSite=Lax';location.reload()}
 const _LANGS=['be','de','en','es','fr','it','ja','ko','pl','pt','ru','uk'];
 const _LANG_NAMES={be:'Беларуская',de:'Deutsch',en:'English',es:'Español',fr:'Français',it:'Italiano',ja:'日本語',ko:'한국어',pl:'Polski',pt:'Português',ru:'Русский',uk:'Українська'};
 function _initLangDrop(){const d=document.getElementById('langDrop');if(!d)return;d.innerHTML=_LANGS.map(l=>'<div onclick="setLang(\''+l+'\')" style="padding:6px 14px;font-size:12px;cursor:pointer;white-space:nowrap;color:var(--tx);font-weight:'+(l===_lang?'700':'400')+'"'+(l===_lang?' class="active"':'')+'>'+l.toUpperCase()+' — '+_LANG_NAMES[l]+'</div>').join('');d.querySelectorAll('div').forEach(el=>{el.onmouseenter=function(){this.style.background='var(--sf2)'};el.onmouseleave=function(){this.style.background='none'}})}
