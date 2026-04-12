@@ -5588,7 +5588,7 @@ function buildSidebar(){
 
   // ── STAGE 2: Закупки и установка ──
   if(currentStage===2&&(currentRole==='admin'||currentRole==='superadmin'||currentRole==='owner')){
-    const canC=currentRole==='admin'||(typeof userSubscription!=='undefined'&&userSubscription.contractors_access);
+    const canC=currentRole==='admin'||currentRole==='superadmin'||(typeof userSubscription!=='undefined'&&userSubscription.contractors_access);
     html+='<div class="si" data-nav="notes" data-tip="Записи о подрядчиках и поставщиках"><span class="ico">'+_i('notes')+'</span><span class="sl">Заметки</span></div>';
     html+='<div class="si" data-nav="exec-contractors" data-tip="Привязанные исполнители, задачи и счета"><span class="ico">'+_i('exec-contractors')+'</span><span class="sl">Исполнители</span></div>';
     html+='<div class="si'+(canC?'':' locked')+'" data-nav="'+(canC?'exec-chat':'upgrade-gate')+'" data-tip="Чат с подрядчиками и поставщиками"><span class="ico">'+_i('exec-chat')+'</span><span class="sl">Чат</span>'+(canC?'':'<span class="sb" style="background:rgba(201,169,110,.15);color:#c9a96e;font-size:8px">&#128274; PRO</span>')+'</div>';
@@ -6744,6 +6744,7 @@ function addNoteFromEmployee(eid){
 // AI usage limiter: trial=5/day, pro=50/day
 const _AI_LIMITS={trial:5,pro:50,unlimited:999};
 function _checkAiLimit(){
+  if(currentRole==='superadmin'||currentRole==='admin'||(typeof currentUser!=='undefined'&&currentUser&&currentUser.isSuperAdmin))return true;
   const plan=(typeof userSubscription!=='undefined'&&userSubscription.plan)||'trial';
   const limit=_AI_LIMITS[plan]||5;
   const key='svita_ai_'+new Date().toISOString().slice(0,10);
