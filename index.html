@@ -819,7 +819,7 @@ Apple</button>
 <div id="loginStep25" style="display:none">
 <div style="font-size:14px;font-weight:700;margin-bottom:4px">Что открываем?</div>
 <div style="font-size:11px;color:var(--tx3);margin-bottom:14px">Выберите тип бизнеса</div>
-<div id="bizTypeCards" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px"></div>
+<!-- PIVOT 2026-04-12: dental only, biz type selector hidden --><div id="bizTypeCards" style="display:none;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px"></div>
 <div id="bizSubtypeWrap" style="display:none;margin-bottom:14px">
 <div style="font-size:12px;font-weight:600;margin-bottom:8px;color:var(--tx2)" id="bizSubtypeLabel">Уточните формат</div>
 <div id="bizSubtypeCards" style="display:grid;gap:6px"></div>
@@ -2426,7 +2426,9 @@ function switchAdminRole(role){
 // ═══ TOAST (global) ═══
 function toast(msg,type){const d=document.createElement('div');d.textContent=msg;Object.assign(d.style,{position:'fixed',top:'20px',right:'20px',padding:'12px 24px',borderRadius:'8px',color:'#fff',fontSize:'14px',zIndex:'99999',background:type==='rd'?'#ef4444':type==='yl'?'#eab308':'#22c55e',boxShadow:'0 4px 12px rgba(0,0,0,.3)',transition:'opacity .3s'});document.body.appendChild(d);setTimeout(()=>{d.style.opacity='0';setTimeout(()=>d.remove(),300)},3000)}
 // ═══════════════ I18N ENGINE ═══════════════
-let _lang=localStorage.getItem('svita_lang')||(document.cookie.match(/(?:^|;\s*)svita_lang=([a-z]{2})/)||[])[1]||'ru';
+// PIVOT 2026-04-12: dental PL only — default PL, allow only PL/EN
+let _lang=localStorage.getItem('svita_lang')||(document.cookie.match(/(?:^|;\s*)svita_lang=([a-z]{2})/)||[])[1]||'pl';
+if(_lang!=='pl'&&_lang!=='en'){_lang='pl';try{localStorage.setItem('svita_lang','pl')}catch(e){}}
 const I18N={en:{
 'Конструктор клиники':'Clinic Constructor','Войти':'Sign In','Пароль':'Password','Минимум 8 символов':'Minimum 8 characters','ИЛИ':'OR','Забыли пароль?':'Forgot password?','Нет аккаунта?':'No account?','Регистрация':'Sign Up','Зарегистрироваться':'Register','Уже есть аккаунт?':'Already have an account?','Введите email и пароль':'Enter email and password','Неверный email или пароль':'Invalid email or password','Ошибка сервера':'Server error','Входим...':'Signing in...','Заполните все поля':'Fill in all fields','Пароль минимум 6 символов':'Password minimum 6 characters','Регистрируем...':'Registering...','Ошибка регистрации':'Registration error','Аккаунт создан! Войдите с вашим email и паролем.':'Account created! Sign in with your email and password.','Слишком много попыток. Подождите 10 минут.':'Too many attempts. Wait 10 minutes.','Supabase не загружен':'Supabase not loaded','Отправить повторно':'Resend','Отправляем...':'Sending...','Отправлено повторно!':'Resent!',
 'Восстановление пароля':'Password Recovery','Введите email и мы отправим ссылку для сброса':'Enter email and we will send a reset link','Отправить ссылку':'Send Link','Назад ко входу':'Back to sign in','Новый пароль':'New Password','Введите новый пароль для вашего аккаунта':'Enter a new password for your account','Повторите пароль':'Confirm password','Сохранить пароль':'Save Password','Введите email':'Enter email','Пароль изменён!':'Password changed!',
@@ -2517,7 +2519,8 @@ uk:{
 };
 function t(s){if(_lang==='ru'||!I18N[_lang])return s;return I18N[_lang][s]||s}
 function setLang(lang){_lang=lang;_revDict=null;localStorage.setItem('svita_lang',lang);document.cookie='svita_lang='+lang+';path=/;max-age=31536000;domain=.svita.ai;SameSite=Lax';location.reload()}
-const _LANGS=['be','de','en','es','fr','it','ja','ko','pl','pt','ru','uk'];
+// PIVOT 2026-04-12: dental PL only — keep PL+EN
+const _LANGS=['pl','en'];
 const _LANG_NAMES={be:'Беларуская',de:'Deutsch',en:'English',es:'Español',fr:'Français',it:'Italiano',ja:'日本語',ko:'한국어',pl:'Polski',pt:'Português',ru:'Русский',uk:'Українська'};
 function _initLangDrop(){const d=document.getElementById('langDrop');if(!d)return;d.innerHTML=_LANGS.map(l=>'<div onclick="setLang(\''+l+'\')" style="padding:6px 14px;font-size:12px;cursor:pointer;white-space:nowrap;color:var(--tx);font-weight:'+(l===_lang?'700':'400')+'"'+(l===_lang?' class="active"':'')+'>'+l.toUpperCase()+' — '+_LANG_NAMES[l]+'</div>').join('');d.querySelectorAll('div').forEach(el=>{el.onmouseenter=function(){this.style.background='var(--sf2)'};el.onmouseleave=function(){this.style.background='none'}})}
 document.addEventListener('DOMContentLoaded',function(){_initLangDrop();document.getElementById('langBtn').textContent=_lang.toUpperCase();document.addEventListener('click',function(e){const w=document.getElementById('langWrap');const d=document.getElementById('langDrop');if(w&&d&&!w.contains(e.target))d.style.display='none'})})
@@ -4260,10 +4263,14 @@ const AI_URL=SVITA_GW;
 const AI_KEY='';
 
 // Universal streaming helper: calls gateway, yields tokens, returns full text
+// PIVOT 2026-04-12: dental PL only — never invent numbers, always cite source.
+const _AI_HONESTY_DIRECTIVE='[HONESTY RULES — STRICT] You are SVITA, a planner for opening DENTAL practices in POLAND only. Rules: (1) If you do not know a price/regulation/salary from verified data — say "не знаю, проверь у поставщика/юриста" — NEVER invent numbers. (2) Every concrete number you give MUST be marked with source and date (e.g. "KaVo PL prijslijst 2026-04"). (3) Never quote "30% economy" or "1 hour to launch" — these claims are banned. (4) Only Polish dental clinics — refuse all other niches/countries. (5) Refer to Świtlica (Bydgoszcz, opening Sept 2026) as the first reference case. ';
 async function svitaStream(opts){
   // opts: {message, mode:'chat'|'generate', context, history, max_tokens, onToken, signal}
   // 1) Сначала пробуем Jetson через Tailscale (стрим). Работает только если клиент в TS-сети.
   // 2) Если недоступен — fallback на публичный Supabase edge function ai-chat (без стрима, симулируем).
+  // PIVOT: prepend honesty directive to every message
+  if(opts.message&&!opts.message.startsWith('[HONESTY')){opts.message=_AI_HONESTY_DIRECTIVE+opts.message}
   try{
     const url=SVITA_GW+'/'+(opts.mode||'chat');
     const ctrl=new AbortController();

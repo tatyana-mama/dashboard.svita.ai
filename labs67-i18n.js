@@ -27,23 +27,16 @@
 (function () {
   'use strict';
 
-  var LANGS = ['be','de','en','es','fr','it','ja','ko','pl','pt','ru','uk'];
-
-  var LABELS = {
-    be: 'BY', de: 'DE', en: 'EN', es: 'ES', fr: 'FR', it: 'IT',
-    ja: 'JP', ko: 'KR', pl: 'PL', pt: 'PT', ru: 'RU', uk: 'UA'
-  };
-
-  var SHORT = {
-    be:'BY', de:'DE', en:'EN', es:'ES', fr:'FR', it:'IT',
-    ja:'JP', ko:'KR', pl:'PL', pt:'PT', ru:'RU', uk:'UA'
-  };
+  // PIVOT 2026-04-12: dental PL only — keep PL+EN
+  var LANGS = ['pl','en'];
+  var LABELS = { pl: 'PL', en: 'EN' };
+  var SHORT  = { pl: 'PL', en: 'EN' };
 
   function isMobile() { return window.innerWidth <= 768; }
 
   var STORAGE_KEY = 'labs67lang';
-  var cur = localStorage.getItem(STORAGE_KEY) || 'be';
-  if (LANGS.indexOf(cur) === -1) cur = 'be';
+  var cur = localStorage.getItem(STORAGE_KEY) || 'pl';
+  if (LANGS.indexOf(cur) === -1) cur = 'pl';
 
   /* ── Resolve translation dict → always returns { key: { lang: val } } ── */
   function resolveDict() {
