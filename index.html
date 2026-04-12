@@ -7690,12 +7690,8 @@ function setEquipFilter(cat){
 }
 let _equipCatsOpen=false;
 function toggleEquipMoreCats(){
-  const m=document.getElementById('equipMoreCats');
-  const b=document.getElementById('equipToggleMore');
-  if(!m||!b)return;
   _equipCatsOpen=!_equipCatsOpen;
-  m.style.display=_equipCatsOpen?'contents':'none';
-  b.textContent=_equipCatsOpen?'Свернуть':b.dataset.label;
+  renderEquip();
 }
 
 function navToEquip(cat){
@@ -7749,13 +7745,16 @@ function renderEquip(){
       fhtml+=`<button class="btn sm ${active?'pr':''}" onclick="setEquipFilter('${esc(cat).replace(/'/g,"\\'")}')" style="font-size:11px;padding:5px 14px;border-radius:20px">${esc(cat)} <span style="opacity:.5;font-size:10px">${allGroups[cat].length}</span></button>`;
     });
     if(allCatKeys.length>maxVisible){
-      const moreLabel='+'+String(allCatKeys.length-maxVisible)+' ещё';
-      fhtml+=`<button class="btn sm" id="equipToggleMore" data-label="${moreLabel}" onclick="toggleEquipMoreCats()" style="font-size:11px;padding:5px 14px;border-radius:20px;color:var(--ac2)">${_equipCatsOpen?'Свернуть':moreLabel}</button>`;
+      const moreCount=allCatKeys.length-maxVisible;
+      if(!_equipCatsOpen){
+        fhtml+=`<button class="btn sm" onclick="toggleEquipMoreCats()" style="font-size:11px;padding:5px 14px;border-radius:20px;color:var(--ac2)">+${moreCount} ещё</button>`;
+      }
       fhtml+=`<span id="equipMoreCats" style="display:${_equipCatsOpen?'contents':'none'}">`;
       allCatKeys.slice(maxVisible).forEach(cat=>{
         const active=equipFilter===cat;
         fhtml+=`<button class="btn sm ${active?'pr':''}" onclick="setEquipFilter('${esc(cat).replace(/'/g,"\\'")}')" style="font-size:11px;padding:5px 14px;border-radius:20px">${esc(cat)} <span style="opacity:.5;font-size:10px">${allGroups[cat].length}</span></button>`;
       });
+      fhtml+=`<button class="btn sm" onclick="toggleEquipMoreCats()" style="font-size:11px;padding:5px 14px;border-radius:20px;color:var(--tx3)">Свернуть</button>`;
       fhtml+=`</span>`;
     }
     fb.innerHTML=fhtml;
