@@ -3997,14 +3997,18 @@ const BIZ_DATA={
 // Apply biz-type data to DB
 async function applyBizData(type){
   const data=BIZ_DATA[type];
-  if(!data)return;
-  DB.employees=JSON.parse(JSON.stringify(data.employees||DB.employees));
-  DB.services=JSON.parse(JSON.stringify(data.services||DB.services));
-  DB.rooms=JSON.parse(JSON.stringify(data.rooms||DB.rooms));
-  DB.zones=JSON.parse(JSON.stringify(data.zones||DB.zones));
-  DB.cabinetTypes=JSON.parse(JSON.stringify(data.cabinetTypes||DB.cabinetTypes));
-  if(data.renovations)DB.renovations=JSON.parse(JSON.stringify(data.renovations));
-  if(data.vendorCompanies)DB.vendorCompanies=JSON.parse(JSON.stringify(data.vendorCompanies));
+  if(data){
+    DB.employees=JSON.parse(JSON.stringify(data.employees||DB.employees));
+    DB.services=JSON.parse(JSON.stringify(data.services||DB.services));
+    DB.rooms=JSON.parse(JSON.stringify(data.rooms||DB.rooms));
+    DB.zones=JSON.parse(JSON.stringify(data.zones||DB.zones));
+    DB.cabinetTypes=JSON.parse(JSON.stringify(data.cabinetTypes||DB.cabinetTypes));
+    if(data.renovations)DB.renovations=JSON.parse(JSON.stringify(data.renovations));
+    if(data.vendorCompanies)DB.vendorCompanies=JSON.parse(JSON.stringify(data.vendorCompanies));
+  }else if(type&&type!=='dental'){
+    // No inline preset for this type — start with clean staff/services/rooms (AI Wizard populates)
+    DB.employees=[];DB.services=[];DB.rooms=[];DB.zones=[];DB.cabinetTypes=[];
+  }
   // Load equipment from JSON (type-specific + common)
   const equipMap={dental:'dental',coffee:'coffee',beauty:'beauty',fitness:'fitness',food:'food'};
   const eqFile=equipMap[type];
@@ -4245,6 +4249,119 @@ async function svitaStream(opts){
 // Non-streaming quick call (for notes, dossiers etc.)
 async function svitaChat(message,context,history,maxTokens){
   return svitaStream({message,mode:'chat',context,history,max_tokens:maxTokens||512});
+}
+
+// ═══ SVITA AI AGENT — actions system ═══
+// Model returns text with ```actions JSON blocks, frontend executes them
+const SVITA_ACTIONS={
+  // Set business type
+  setBizType:function(p){if(p.type&&BIZ_DATA[p.type]){currentBizType=p.type;applyBizData(p.type);buildSidebar();renderAll();return'Тип бизнеса: '+p.type}return'Неизвестный тип: '+p.type},
+  // Navigate to section
+  navigate:function(p){if(p.section){nav(p.section);return'Перешёл в: '+p.section}return'Нет секции'},
+  // Add rooms
+  addRooms:function(p){
+    if(!Array.isArray(p.items))return'Нет items';
+    let added=0;
+    p.items.forEach(function(r){
+      const id=r.id||'r_'+Date.now()+'_'+(++added);
+      const room={id:id,name:r.name||'Комната',type:r.type||'Другое',area:r.area||20,zone:r.zone||'Общая',w:r.w||5,h:r.h||4};
+      if(!DB.rooms.find(function(x){return x.name===room.name})){DB.rooms.push(room);DB.pickedRooms[room.id]=true}
+    });
+    savePicked();renderAll();recalc();return'Добавлено помещений: '+added;
+  },
+  // Add staff
+  addStaff:function(p){
+    if(!Array.isArray(p.items))return'Нет items';
+    let added=0;
+    p.items.forEach(function(e){
+      const id=e.id||Date.now()+(++added);
+      const emp={id:id,name:e.name||e.position||'Сотрудник',spec:e.spec||e.position||'',salary:e.salary||0,status:e.status||'Вакансия',type:e.type||'full'};
+      if(!DB.employees.find(function(x){return x.name===emp.name})){DB.employees.push(emp);DB.pickedStaff[emp.id]={qty:1}}
+    });
+    savePicked();renderAll();recalc();return'Добавлено сотрудников: '+added;
+  },
+  // Add equipment
+  addEquipment:function(p){
+    if(!Array.isArray(p.items))return'Нет items';
+    let added=0;
+    p.items.forEach(function(e){
+      const id=e.id||Date.now()+(++added);
+      const eq={id:id,name:e.name||'Оборудование',category:e.category||'Другое',price:e.price||0,supplier:e.supplier||'—',warranty:e.warranty||'—'};
+      if(!DB.suppliers.find(function(x){return x.name===eq.name})){DB.suppliers.push(eq);DB.pickedEquip[eq.id]={qty:e.qty||1}}
+    });
+    savePicked();renderAll();recalc();return'Добавлено оборудования: '+added;
+  },
+  // Add services
+  addServices:function(p){
+    if(!Array.isArray(p.items))return'Нет items';
+    let added=0;
+    p.items.forEach(function(s){
+      const id=s.id||Date.now()+(++added);
+      const svc={id:id,name:s.name||'Услуга',category:s.category||'Другое',price:s.price||0,time:s.duration||s.time||30};
+      if(!DB.services.find(function(x){return x.name===svc.name})){DB.services.push(svc);DB.pickedServices[svc.id]={qty:1}}
+    });
+    savePicked();renderAll();recalc();return'Добавлено услуг: '+added;
+  },
+  // Add renovations
+  addRenovations:function(p){
+    if(!Array.isArray(p.items))return'Нет items';
+    let added=0;
+    p.items.forEach(function(r){
+      const id=r.id||'ren_'+Date.now()+'_'+(++added);
+      const ren={id:id,name:r.name||'Работа',cat:r.cat||r.category||'Другое',price:r.price||0};
+      if(!DB.renovations.find(function(x){return x.name===ren.name})){DB.renovations.push(ren);DB.pickedRenovations[ren.id]={qty:1}}
+    });
+    savePicked();renderAll();recalc();return'Добавлено работ: '+added;
+  },
+  // Set concept name
+  setConceptName:function(p){
+    if(p.name){document.title='SVITA — '+p.name;const h=document.querySelector('.concept-name');if(h)h.textContent=p.name;return'Концепция: '+p.name}
+    return'Нет имени';
+  },
+  // Summary — recalculate
+  recalculate:function(){recalc();return'Пересчёт выполнен'}
+};
+
+// Parse and execute actions from AI response
+function execSvitaActions(text){
+  const results=[];
+  // Match ```actions ... ``` or ```json ... ``` blocks with action array
+  const blocks=text.match(/```(?:actions|json)?\s*\n?([\s\S]*?)```/g);
+  if(!blocks)return results;
+  blocks.forEach(function(block){
+    const inner=block.replace(/```(?:actions|json)?\s*\n?/,'').replace(/```$/,'').trim();
+    try{
+      let actions=JSON.parse(inner);
+      if(!Array.isArray(actions))actions=[actions];
+      actions.forEach(function(a){
+        const fn=SVITA_ACTIONS[a.action||a.type];
+        if(fn){
+          const res=fn(a.params||a.data||a);
+          results.push({action:a.action||a.type,result:res});
+        }
+      });
+    }catch(e){console.warn('[SVITA] action parse error:',e)}
+  });
+  return results;
+}
+
+// Build context about current state for AI
+function getSvitaContext(){
+  const rooms=Object.keys(DB.pickedRooms||{}).length;
+  const staff=Object.keys(DB.pickedStaff||{}).length;
+  const equip=Object.keys(DB.pickedEquip||{}).length;
+  const svcs=Object.keys(DB.pickedServices||{}).length;
+  const renos=Object.keys(DB.pickedRenovations||{}).length;
+  const totalEquipCost=Object.keys(DB.pickedEquip||{}).reduce(function(s,id){const item=DB.suppliers.find(function(x){return x.id==id});return s+(item?item.price:0)},0);
+  const totalStaffCost=Object.keys(DB.pickedStaff||{}).reduce(function(s,id){const item=DB.employees.find(function(x){return x.id==id});return s+(item?item.salary:0)},0);
+  return{
+    bizType:currentBizType||'dental',
+    concept:document.title.replace('SVITA — ',''),
+    section:cur||'overview',
+    rooms:rooms,equipment:equip,staff:staff,services:svcs,renovations:renos,
+    equipCost:totalEquipCost,staffCost:totalStaffCost,
+    availableBizTypes:Object.keys(BIZ_DATA||{}).join(', ')
+  };
 }
 
 let _aiGenTimer=null;
@@ -4638,9 +4755,8 @@ async function confirmBizChange(){
   if(currentBizSubtype)localStorage.setItem('svita_biz_subtype',currentBizSubtype);
   // Apply data if changed
   if(changed){
-    if(BIZ_DATA[currentBizType]){
-      await applyBizData(currentBizType);
-    }
+    // Always call applyBizData — it loads equipment JSON even when no inline BIZ_DATA preset
+    await applyBizData(currentBizType);
     // Auto-pick employees
     DB.employees.forEach(e=>{DB.pickedStaff[String(e.id)]={qty:1}});
     savePicked();
@@ -5041,7 +5157,7 @@ function selectBizSubtype(id){
 async function enterApp(){
   if(!currentRole||!currentUser)return;
   // Apply business-type data (load equipment from JSON)
-  if(currentBizType&&BIZ_DATA[currentBizType]){
+  if(currentBizType){
     await applyBizData(currentBizType);
   }
   document.getElementById('loginScreen').style.display='none';
