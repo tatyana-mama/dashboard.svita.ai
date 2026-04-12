@@ -342,6 +342,7 @@
 .zone-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;margin-bottom:20px;transition:border-color .2s}
 .zone-card:hover{border-color:var(--bd2)}
 .zone-head{padding:16px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;user-select:none}
+.zone-body,.zone-body *,.ph,.ph *,.note-body,.note-body *,#academyContent,#academyContent *{-webkit-user-select:text;user-select:text}
 .zone-head:hover{background:var(--sf2)}
 .zone-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 .zone-info{flex:1}
@@ -2280,15 +2281,16 @@ function switchAdminRole(role){
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
     <select id="academyCountry" onchange="renderAcademy()" style="padding:7px 12px;border:1px solid var(--bd);border-radius:8px;font-size:12px;background:var(--sf);color:var(--tx);font-family:var(--f);max-height:400px">
       <option value="pl">🇵🇱 Польша</option>
+      <option value="de">🇩🇪 Германия</option>
+      <option value="cz">🇨🇿 Чехия</option>
+      <option value="es">🇪🇸 Испания</option>
       <option value="at" disabled>🇦🇹 Австрия (скоро)</option>
       <option value="be" disabled>🇧🇪 Бельгия (скоро)</option>
       <option value="bg" disabled>🇧🇬 Болгария (скоро)</option>
       <option value="uk" disabled>🇬🇧 Великобритания (скоро)</option>
       <option value="hu" disabled>🇭🇺 Венгрия (скоро)</option>
-      <option value="de" disabled>🇩🇪 Германия (скоро)</option>
       <option value="dk" disabled>🇩🇰 Дания (скоро)</option>
       <option value="ie" disabled>🇮🇪 Ирландия (скоро)</option>
-      <option value="es" disabled>🇪🇸 Испания (скоро)</option>
       <option value="it" disabled>🇮🇹 Италия (скоро)</option>
       <option value="nl" disabled>🇳🇱 Нидерланды (скоро)</option>
       <option value="no" disabled>🇳🇴 Норвегия (скоро)</option>
@@ -2299,7 +2301,6 @@ function switchAdminRole(role){
       <option value="fi" disabled>🇫🇮 Финляндия (скоро)</option>
       <option value="fr" disabled>🇫🇷 Франция (скоро)</option>
       <option value="hr" disabled>🇭🇷 Хорватия (скоро)</option>
-      <option value="cz" disabled>🇨🇿 Чехия (скоро)</option>
       <option value="ch" disabled>🇨🇭 Швейцария (скоро)</option>
       <option value="se" disabled>🇸🇪 Швеция (скоро)</option>
       <option value="ee" disabled>🇪🇪 Эстония (скоро)</option>
