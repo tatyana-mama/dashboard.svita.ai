@@ -12021,6 +12021,51 @@ async function sendAiChat(){
   }
 }
 
+// Detailed AI reply triggered automatically after handoff from landing.
+// The landing shows a teaser; the dashboard generates the full plan ahead of the user.
+async function _handoffDetailedReply(query,kind){
+  if(_aiChatStreaming)return;
+  if(!_checkAiLimit())return; // counts against daily quota
+  const aiEl=_rpChatAppend('ai','Готовлю развёрнутый план...');
+  _aiChatStreaming=true;
+  try{
+    const lang=(typeof _lang!=='undefined'&&_lang)||'ru';
+    const langName=(_LANG_NAMES[lang]||'Russian (Русский)');
+    const sys='[Reply strictly in '+langName+'.] '
+      +'The user opened svita.ai landing chat and wrote: "'+query+'" (detected category: '+kind+'). '
+      +'They just clicked through to the dashboard. Pre-empt them with a COMPLETE detailed business plan. '
+      +'Use these sections (clear headings, concrete numbers, EU/PL context if not specified): '
+      +'1) Помещение — площадь, район, аренда €/мес. '
+      +'2) Команда — позиции, штат, ФОТ €/мес. '
+      +'3) Оборудование — конкретные бренды и поставщики, цены. '
+      +'4) Документы — лицензии, разрешения для страны пользователя. '
+      +'5) Старт-бюджет — разбивка по статьям. '
+      +'6) Окупаемость — выручка/мес, маржа, срок ROI. '
+      +'Финал: 1 короткий вопрос, чтобы уточнить ключевой параметр. '
+      +'Пиши развёрнуто, по-деловому, с цифрами. Markdown списки разрешены.';
+    const reply=await svitaStream({
+      message:sys,
+      mode:'chat',
+      context:{lang:lang,lang_name:langName,handoff:true,kind:kind,query:query},
+      history:[],
+      max_tokens:4096,
+      onToken:function(tok,full){
+        aiEl.innerHTML=_mdToHtml(full)+'<span style="display:inline-block;width:2px;height:12px;background:var(--ac2);animation:blink 1s infinite;vertical-align:middle;margin-left:2px"></span>';
+        const m=document.getElementById('rpChatMessages');if(m)m.scrollTop=m.scrollHeight;
+      }
+    });
+    const clean=(reply||'').replace(/\[GENERATE_CONCEPT:.*?\]/,'').trim();
+    aiEl.innerHTML=_mdToHtml(clean)+'<span style="display:block;font-size:9px;color:var(--tx3);margin-top:4px">SVITA AI · продолжение с svita.ai</span>';
+    _aiChatHistory.push({role:'assistant',content:clean});
+    _saveChatHistory();
+  }catch(e){
+    aiEl.innerHTML='Не удалось загрузить развёрнутый план. Напиши вопрос — отвечу прямо здесь.';
+    aiEl.style.color='var(--rd)';
+  }finally{
+    _aiChatStreaming=false;
+  }
+}
+
 // ── Handoff from svita.ai landing chat: continue conversation seamlessly ──
 function _consumeHandoff(){
   try{
@@ -12037,16 +12082,13 @@ function _consumeHandoff(){
       _aiChatHistory.push({role:'user',content:data.u});
       _rpChatAppend('user',data.u);
     }
-    if(data.b){
-      _aiChatHistory.push({role:'assistant',content:data.b});
-      _rpChatAppend('ai',data.b);
-    }
-    const bridge='👋 Я продолжаю с того, что мы обсуждали на главной. Расскажи подробнее, что ты задумал — соберём концепцию вместе.';
-    _aiChatHistory.push({role:'assistant',content:bridge});
-    _rpChatAppend('ai',bridge);
+    // Note: we intentionally do NOT replay the short landing teaser (data.b)
+    // — the dashboard delivers the deep version below.
     _saveChatHistory();
     // Auto-open right panel so user sees the continuation
     try{const rp=document.getElementById('rpanel');if(rp)rp.classList.add('open')}catch(e){}
+    // Fire detailed AI generation for the original query (pre-empts the user)
+    if(data.u)setTimeout(function(){_handoffDetailedReply(data.u,data.k||'generic')},400);
     return true;
   }catch(e){return false}
 }
