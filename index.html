@@ -2269,6 +2269,36 @@ function switchAdminRole(role){
 <div id="dashNewsGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding:0 24px 24px"></div>
 </div>
 
+<!-- ═══ АКАДЕМИЯ — важная информация по стране и концепции ═══ -->
+<div class="sec" id="sec-academy">
+<div class="bk" onclick="nav('overview')">&larr; Обзор</div>
+<div class="ph">
+  <div>
+    <h2>🎓 Академия SVITA</h2>
+    <div class="ph-s">Важная информация для открытия бизнеса в выбранной стране</div>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <select id="academyCountry" onchange="renderAcademy()" style="padding:7px 12px;border:1px solid var(--bd);border-radius:8px;font-size:12px;background:var(--sf);color:var(--tx);font-family:var(--f)">
+      <option value="pl">🇵🇱 Польша</option>
+      <option value="de" disabled>🇩🇪 Германия (скоро)</option>
+      <option value="es" disabled>🇪🇸 Испания (скоро)</option>
+      <option value="it" disabled>🇮🇹 Италия (скоро)</option>
+      <option value="cz" disabled>🇨🇿 Чехия (скоро)</option>
+      <option value="fr" disabled>🇫🇷 Франция (скоро)</option>
+    </select>
+    <select id="academyBiz" onchange="renderAcademy()" style="padding:7px 12px;border:1px solid var(--bd);border-radius:8px;font-size:12px;background:var(--sf);color:var(--tx);font-family:var(--f)">
+      <option value="auto">Текущая концепция</option>
+      <option value="coffee">☕ Кофейня</option>
+      <option value="food">🍽️ Ресторан</option>
+      <option value="dental">🦷 Стоматология</option>
+      <option value="beauty">💄 Салон красоты</option>
+      <option value="fitness">💪 Фитнес</option>
+    </select>
+  </div>
+</div>
+<div id="academyContent" style="padding:0 24px 24px"></div>
+</div>
+
 <!-- ═══ STAGE 2: EXECUTION SECTIONS ═══ -->
 <div class="sec" id="sec-exec-premises"><div class="bk" onclick="nav('overview')">&larr; Обзор</div><div class="ph"><h2>&#127970; Помещения — исполнение</h2></div><div id="execPremises" class="exec-list"></div></div>
 <div class="sec" id="sec-exec-renovations"><div class="bk" onclick="nav('overview')">&larr; Обзор</div><div class="ph"><h2>&#128736; Модернизация — исполнение</h2></div><div id="execRenovations" class="exec-list"></div></div>
@@ -5496,6 +5526,7 @@ function buildSidebar(){
   const _i=n=>'<img src="icons/individual/'+n+'.png" alt="">';
   let html='<div class="si act" data-nav="overview" data-tip="Главная панель: прогресс, метрики и статус"><span class="ico">'+_i('overview')+'</span><span class="sl">Обзор</span></div>';
   html+='<div class="si" data-nav="news" data-tip="Свежие публикации и обновления платформы"><span class="ico">'+_i('news')+'</span><span class="sl">Новости</span></div>';
+  html+='<div class="si" data-nav="academy" data-tip="Академия: законы, налоги, лицензии — для каждой страны и концепции"><span class="ico">🎓</span><span class="sl">Академия</span></div>';
   html+='<div class="si" data-nav="ai-guide" data-tip="Обучение работе с AI-ассистентом SVITA"><span class="ico">'+_i('ai-guide')+'</span><span class="sl">AI-ассистент</span></div>';
 
   // ── STAGE 1: Формирование концепции ──
@@ -5687,6 +5718,7 @@ function nav(id){
   if(id==='exec-staff')renderExecSection('staff');
   if(id==='exec-docs')renderExecSection('docs');
   if(id==='ai-guide')renderAiGuide();
+  if(id==='academy')renderAcademy();
   if(id==='notes')renderNotes();
   if(id==='exec-chat')renderChatContacts();
   if(id==='exec-contractors')renderAssignedContractors();
@@ -11583,6 +11615,68 @@ document.getElementById('loginEmail').focus();
 updateRightPanel();
 
 // ═══════════════ AI GUIDE ═══════════════
+// ═══════════════ АКАДЕМИЯ — важная инфо по странам и концепциям ═══════════════
+const ACADEMY_BIZ_LABEL={coffee:'☕ Кофейня',food:'🍽️ Ресторан',dental:'🦷 Стоматология',beauty:'💄 Салон красоты',fitness:'💪 Фитнес'};
+const _academyCache={};
+async function renderAcademy(){
+  const c=document.getElementById('academyContent');if(!c)return;
+  const country=(document.getElementById('academyCountry')||{}).value||'pl';
+  let biz=(document.getElementById('academyBiz')||{}).value||'auto';
+  if(biz==='auto')biz=currentBizType||'coffee';
+  // Sync selectors
+  const _bs=document.getElementById('academyBiz');if(_bs&&_bs.value==='auto'){/*keep auto*/}
+  const cacheKey=country+'/'+biz;
+  c.innerHTML='<div style="padding:32px;text-align:center;color:var(--tx3);font-size:13px">Загрузка академии...</div>';
+  try{
+    let data=_academyCache[cacheKey];
+    if(!data){
+      const r=await fetch('data/academy/'+country+'/'+biz+'.json');
+      if(!r.ok)throw new Error('404');
+      data=await r.json();
+      _academyCache[cacheKey]=data;
+    }
+    let html='<div style="background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(139,92,246,.08));border:1px solid var(--bd);border-radius:14px;padding:18px 22px;margin-bottom:18px">';
+    html+='<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><div style="font-size:24px">🎓</div><div style="flex:1;min-width:200px"><div style="font-size:16px;font-weight:700;color:var(--tx)">'+esc(data.biz_name_ru||biz)+' в '+esc(data.country_name_ru||country.toUpperCase())+'</div><div style="font-size:11px;color:var(--tx3);margin-top:2px">'+(data.sections||[]).length+' разделов · обновлено '+esc(data.updated||'—')+'</div></div></div>';
+    html+='<div style="font-size:11px;color:var(--tx3);margin-top:10px;line-height:1.5">⚠️ Информация носит справочный характер. Перед регистрацией бизнеса проверяйте актуальные данные на официальных порталах (см. раздел «Полезные ссылки»).</div>';
+    html+='</div>';
+    (data.sections||[]).forEach((s,si)=>{
+      const open=si<2?' open':'';
+      html+='<div class="zone-card" style="margin-bottom:10px">';
+      html+='<div class="zone-head" onclick="toggleAcademySection('+si+')">';
+      html+='<div class="zone-icon" style="background:rgba(59,130,246,.08);color:var(--ac2);font-size:18px">'+(s.icon||'📌')+'</div>';
+      html+='<div class="zone-info"><div class="zone-name">'+esc(s.title||'')+'</div><div class="zone-desc">'+(s.items||[]).length+' пунктов</div></div>';
+      html+='<span class="zone-arrow'+open+'" id="acArrow'+si+'">&#9654;</span>';
+      html+='</div>';
+      html+='<div class="zone-body'+open+'" id="acBody'+si+'"><div style="padding:14px 18px;display:flex;flex-direction:column;gap:12px">';
+      (s.items||[]).forEach(it=>{
+        html+='<div style="border-left:3px solid var(--ac);padding:10px 14px;background:var(--sf2);border-radius:8px">';
+        html+='<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap"><div style="flex:1;min-width:200px"><div style="font-size:12px;font-weight:700;color:var(--tx);margin-bottom:4px">'+esc(it.name||'')+'</div>';
+        if(it.desc)html+='<div style="font-size:11px;color:var(--tx2);line-height:1.55">'+esc(it.desc)+'</div>';
+        html+='</div>';
+        const meta=[];
+        if(it.price_pln!=null&&it.price_pln!==0)meta.push('<span style="color:var(--ac2);font-weight:700">'+Number(it.price_pln).toLocaleString('ru')+' PLN</span>');
+        else if(it.price_pln===0)meta.push('<span style="color:var(--gn);font-weight:700">бесплатно</span>');
+        if(it.time_days!=null)meta.push('<span style="color:var(--tx3)">⏱ '+it.time_days+' дн.</span>');
+        if(meta.length)html+='<div style="font-size:11px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;flex-shrink:0">'+meta.join('')+'</div>';
+        html+='</div>';
+        if(it.link)html+='<div style="margin-top:6px"><a href="'+esc(it.link)+'" target="_blank" rel="noopener" style="font-size:10px;color:var(--ac2);text-decoration:none">🔗 '+esc(it.link)+'</a></div>';
+        html+='</div>';
+      });
+      html+='</div></div></div>';
+    });
+    c.innerHTML=html;
+  }catch(e){
+    c.innerHTML='<div style="padding:48px 24px;text-align:center"><div style="font-size:36px;margin-bottom:12px">📚</div><div style="font-size:14px;font-weight:700;color:var(--tx);margin-bottom:6px">Данные ещё готовятся</div><div style="font-size:12px;color:var(--tx3);max-width:420px;margin:0 auto;line-height:1.6">Раздел «'+esc(ACADEMY_BIZ_LABEL[biz]||biz)+'» для выбранной страны находится в разработке.<br>Скоро здесь появится подробная информация: юридические формы, налоги, лицензии, найм, помещения, сроки и подводные камни.</div></div>';
+  }
+}
+function toggleAcademySection(i){
+  const b=document.getElementById('acBody'+i);
+  const a=document.getElementById('acArrow'+i);
+  if(!b)return;
+  b.classList.toggle('open');
+  if(a)a.classList.toggle('open');
+}
+
 function renderAiGuide(){
   const g=document.getElementById('guideGrid');if(!g)return;
   const cards=[
