@@ -2209,39 +2209,12 @@ function switchAdminRole(role){
     <div class="ph-s">Важная информация для открытия бизнеса в выбранной стране</div>
   </div>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-    <select id="academyCountry" onchange="renderAcademy()" style="padding:7px 12px;border:1px solid var(--bd);border-radius:8px;font-size:12px;background:var(--sf);color:var(--tx);font-family:var(--f);max-height:400px">
+    <!-- PIVOT 2026-04-12: dental PL only —страны и ниши свернуты -->
+    <select id="academyCountry" onchange="renderAcademy()" style="padding:7px 12px;border:1px solid var(--bd);border-radius:8px;font-size:12px;background:var(--sf);color:var(--tx);font-family:var(--f)">
       <option value="pl">🇵🇱 Польша</option>
-      <option value="de">🇩🇪 Германия</option>
-      <option value="cz">🇨🇿 Чехия</option>
-      <option value="es">🇪🇸 Испания</option>
-      <option value="at" disabled>🇦🇹 Австрия (скоро)</option>
-      <option value="be" disabled>🇧🇪 Бельгия (скоро)</option>
-      <option value="bg" disabled>🇧🇬 Болгария (скоро)</option>
-      <option value="uk" disabled>🇬🇧 Великобритания (скоро)</option>
-      <option value="hu" disabled>🇭🇺 Венгрия (скоро)</option>
-      <option value="dk" disabled>🇩🇰 Дания (скоро)</option>
-      <option value="ie" disabled>🇮🇪 Ирландия (скоро)</option>
-      <option value="it" disabled>🇮🇹 Италия (скоро)</option>
-      <option value="nl" disabled>🇳🇱 Нидерланды (скоро)</option>
-      <option value="no" disabled>🇳🇴 Норвегия (скоро)</option>
-      <option value="pt" disabled>🇵🇹 Португалия (скоро)</option>
-      <option value="ro" disabled>🇷🇴 Румыния (скоро)</option>
-      <option value="sk" disabled>🇸🇰 Словакия (скоро)</option>
-      <option value="si" disabled>🇸🇮 Словения (скоро)</option>
-      <option value="fi" disabled>🇫🇮 Финляндия (скоро)</option>
-      <option value="fr" disabled>🇫🇷 Франция (скоро)</option>
-      <option value="hr" disabled>🇭🇷 Хорватия (скоро)</option>
-      <option value="ch" disabled>🇨🇭 Швейцария (скоро)</option>
-      <option value="se" disabled>🇸🇪 Швеция (скоро)</option>
-      <option value="ee" disabled>🇪🇪 Эстония (скоро)</option>
     </select>
     <select id="academyBiz" onchange="renderAcademy()" style="padding:7px 12px;border:1px solid var(--bd);border-radius:8px;font-size:12px;background:var(--sf);color:var(--tx);font-family:var(--f)">
-      <option value="auto">Текущая концепция</option>
-      <option value="coffee">☕ Кофейня</option>
-      <option value="food">🍽️ Ресторан</option>
       <option value="dental">🦷 Стоматология</option>
-      <option value="beauty">💄 Салон красоты</option>
-      <option value="fitness">💪 Фитнес</option>
     </select>
   </div>
 </div>
@@ -3954,7 +3927,7 @@ async function applyBizData(type){
     DB.employees=[];DB.services=[];DB.rooms=[];DB.zones=[];DB.cabinetTypes=[];
   }
   // Load equipment from JSON (type-specific + common)
-  const equipMap={dental:'dental',coffee:'coffee',beauty:'beauty',fitness:'fitness',food:'food'};
+  const equipMap={dental:'dental'}; // PIVOT 2026-04-12
   const eqFile=equipMap[type];
   if(eqFile){
     try{
@@ -11610,7 +11583,7 @@ async function renderAcademy(){
   const c=document.getElementById('academyContent');if(!c)return;
   const country=(document.getElementById('academyCountry')||{}).value||'pl';
   let biz=(document.getElementById('academyBiz')||{}).value||'auto';
-  if(biz==='auto')biz=currentBizType||'coffee';
+  if(biz==='auto')biz=currentBizType||'dental';
   // Sync selectors
   const _bs=document.getElementById('academyBiz');if(_bs&&_bs.value==='auto'){/*keep auto*/}
   const cacheKey=country+'/'+biz;
