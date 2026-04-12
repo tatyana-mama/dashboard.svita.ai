@@ -2358,7 +2358,7 @@ function toast(msg,type){const d=document.createElement('div');d.textContent=msg
 // ═══════════════ I18N ENGINE ═══════════════
 // PIVOT 2026-04-12: dental PL only — default PL, allow only PL/EN
 let _lang=localStorage.getItem('svita_lang')||(document.cookie.match(/(?:^|;\s*)svita_lang=([a-z]{2})/)||[])[1]||'pl';
-if(_lang!=='pl'&&_lang!=='en'){_lang='pl';try{localStorage.setItem('svita_lang','pl')}catch(e){}}
+if(['pl','en','be','uk'].indexOf(_lang)===-1){_lang='pl';try{localStorage.setItem('svita_lang','pl')}catch(e){}}
 const I18N={en:{
 'Конструктор клиники':'Clinic Constructor','Войти':'Sign In','Пароль':'Password','Минимум 8 символов':'Minimum 8 characters','ИЛИ':'OR','Забыли пароль?':'Forgot password?','Нет аккаунта?':'No account?','Регистрация':'Sign Up','Зарегистрироваться':'Register','Уже есть аккаунт?':'Already have an account?','Введите email и пароль':'Enter email and password','Неверный email или пароль':'Invalid email or password','Ошибка сервера':'Server error','Входим...':'Signing in...','Заполните все поля':'Fill in all fields','Пароль минимум 6 символов':'Password minimum 6 characters','Регистрируем...':'Registering...','Ошибка регистрации':'Registration error','Аккаунт создан! Войдите с вашим email и паролем.':'Account created! Sign in with your email and password.','Слишком много попыток. Подождите 10 минут.':'Too many attempts. Wait 10 minutes.','Supabase не загружен':'Supabase not loaded','Отправить повторно':'Resend','Отправляем...':'Sending...','Отправлено повторно!':'Resent!',
 'Восстановление пароля':'Password Recovery','Введите email и мы отправим ссылку для сброса':'Enter email and we will send a reset link','Отправить ссылку':'Send Link','Назад ко входу':'Back to sign in','Новый пароль':'New Password','Введите новый пароль для вашего аккаунта':'Enter a new password for your account','Повторите пароль':'Confirm password','Сохранить пароль':'Save Password','Введите email':'Enter email','Пароль изменён!':'Password changed!',
@@ -2450,8 +2450,8 @@ uk:{
 function t(s){if(_lang==='ru'||!I18N[_lang])return s;return I18N[_lang][s]||s}
 function setLang(lang){_lang=lang;_revDict=null;localStorage.setItem('svita_lang',lang);document.cookie='svita_lang='+lang+';path=/;max-age=31536000;domain=.svita.ai;SameSite=Lax';location.reload()}
 // PIVOT 2026-04-12: dental PL only — keep PL+EN
-const _LANGS=['pl','en'];
-const _LANG_NAMES={be:'Беларуская',de:'Deutsch',en:'English',es:'Español',fr:'Français',it:'Italiano',ja:'日本語',ko:'한국어',pl:'Polski',pt:'Português',ru:'Русский',uk:'Українська'};
+const _LANGS=['pl','en','be','uk'];
+const _LANG_NAMES={pl:'Polski',en:'English',be:'Беларуская',uk:'Українська'};
 function _initLangDrop(){const d=document.getElementById('langDrop');if(!d)return;d.innerHTML=_LANGS.map(l=>'<div onclick="setLang(\''+l+'\')" style="padding:6px 14px;font-size:12px;cursor:pointer;white-space:nowrap;color:var(--tx);font-weight:'+(l===_lang?'700':'400')+'"'+(l===_lang?' class="active"':'')+'>'+l.toUpperCase()+' — '+_LANG_NAMES[l]+'</div>').join('');d.querySelectorAll('div').forEach(el=>{el.onmouseenter=function(){this.style.background='var(--sf2)'};el.onmouseleave=function(){this.style.background='none'}})}
 document.addEventListener('DOMContentLoaded',function(){_initLangDrop();document.getElementById('langBtn').textContent=_lang.toUpperCase();document.addEventListener('click',function(e){const w=document.getElementById('langWrap');const d=document.getElementById('langDrop');if(w&&d&&!w.contains(e.target))d.style.display='none'})})
 function applyI18n(){const dict=_lang!=='ru'&&I18N[_lang]?I18N[_lang]:null;const rev=_lang==='ru'?_buildRevDict():null;if(!dict&&!rev)return;const walk=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);while(walk.nextNode()){const n=walk.currentNode;const txt=n.textContent.trim();if(!txt||txt.length<2)continue;if(n.parentElement&&(n.parentElement.tagName==='SCRIPT'||n.parentElement.tagName==='STYLE'))continue;if(dict&&dict[txt]){n.textContent=n.textContent.replace(txt,dict[txt])}else if(rev&&rev[txt]){n.textContent=n.textContent.replace(txt,rev[txt])}}document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(el=>{const p=el.placeholder;if(dict&&dict[p])el.placeholder=dict[p];else if(rev&&rev[p])el.placeholder=rev[p]});document.querySelectorAll('[title]').forEach(el=>{const v=el.title;if(dict&&dict[v])el.title=dict[v];else if(rev&&rev[v])el.title=rev[v]});document.querySelectorAll('option').forEach(el=>{const v=el.textContent.trim();if(dict&&dict[v])el.textContent=dict[v];else if(rev&&rev[v])el.textContent=rev[v]})}
@@ -6718,10 +6718,10 @@ function _updateAiQuotaUI(){
   else{el.style.color='var(--tx3)'}
 }
 // Map UI lang code → human language name for AI prompt directive
-const _LANG_NAMES={be:'Belarusian (беларуская)',de:'German (Deutsch)',en:'English',es:'Spanish (Español)',fr:'French (Français)',it:'Italian (Italiano)',ja:'Japanese (日本語)',ko:'Korean (한국어)',pl:'Polish (Polski)',pt:'Portuguese (Português)',ru:'Russian (Русский)',uk:'Ukrainian (Українська)'};
+const _LANG_NAMES_FULL={pl:'Polish (Polski)',en:'English',be:'Belarusian (беларуская)',uk:'Ukrainian (Українська)'};
 function _aiLangDirective(){
-  const code=(typeof _lang!=='undefined'&&_lang)||'ru';
-  const name=_LANG_NAMES[code]||'Russian (Русский)';
+  const code=(typeof _lang!=='undefined'&&_lang)||'pl';
+  const name=_LANG_NAMES_FULL[code]||'Polish (Polski)';
   return '[Reply strictly in '+name+'. The user prefers this language for the entire response.] ';
 }
 async function aiGenerateNote(id,role){
@@ -10896,8 +10896,8 @@ async function sendRpChat(){
   };
   if(activeProperty)context.property={name:activeProperty.name,area:activeProperty.area,city:activeProperty.city};
   // Inject UI language so the AI replies in the user-selected language
-  context.lang=(typeof _lang!=='undefined'&&_lang)||'ru';
-  context.lang_name=(_LANG_NAMES[context.lang]||'Russian (Русский)');
+  context.lang=(typeof _lang!=='undefined'&&_lang)||'pl';
+  context.lang_name=(_LANG_NAMES_FULL[context.lang]||'Polish (Polski)');
 
   const aiEl=_rpChatAppend('ai','Анализирую...');
   _aiChatStreaming=true;
@@ -11952,8 +11952,8 @@ async function _handoffDetailedReply(query,kind){
   const aiEl=_rpChatAppend('ai','Готовлю развёрнутый план...');
   _aiChatStreaming=true;
   try{
-    const lang=(typeof _lang!=='undefined'&&_lang)||'ru';
-    const langName=(_LANG_NAMES[lang]||'Russian (Русский)');
+    const lang=(typeof _lang!=='undefined'&&_lang)||'pl';
+    const langName=(_LANG_NAMES_FULL[lang]||'Polish (Polski)');
     const sys='[Reply strictly in '+langName+'.] '
       +'The user opened svita.ai landing chat and wrote: "'+query+'" (detected category: '+kind+'). '
       +'They just clicked through to the dashboard. Pre-empt them with a COMPLETE detailed business plan. '
