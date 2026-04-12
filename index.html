@@ -9590,6 +9590,19 @@ function checkSEO(){
 function genUserId(){const n=DB.users.length?Math.max(...DB.users.map(u=>{const m=(u.id||'').toString().match(/(\d+)$/);return m?+m[1]:0}))+1:1;return 'USR-'+String(n).padStart(3,'0')}
 var _superAdminIds=['USR-001','USR-002','USR-003'];
 function checkSuperAdmin(){if(!currentUser)return;var u=DB.users.find(function(x){return x.email===currentUser.email});var sa=u?_superAdminIds.includes(u.id):false;currentUser.isSuperAdmin=sa;currentUser.isAdmin=sa||DB.users.some(function(x){return x.email===currentUser.email&&(x.role==='admin'||x.role==='superadmin')});if(sa){if(u){u.role='superadmin';u.plan='admin'}currentRole='superadmin';localStorage.setItem('svita_role','superadmin')}localStorage.setItem('svita_session',JSON.stringify(currentUser))}
+function _userStats(u){
+  // What this user has connected
+  var rooms=Object.keys(DB.pickedRooms||{}).length;
+  var equip=Object.keys(DB.pickedEquip||{}).length;
+  var staff=Object.keys(DB.pickedStaff||{}).length;
+  var svc=Object.keys(DB.pickedServices||{}).length;
+  var reno=Object.keys(DB.pickedRenovations||{}).length;
+  var docs=Object.keys(DB.pickedDocs||{}).length;
+  var budget=document.getElementById('totalBudgetInput')?document.getElementById('totalBudgetInput').value:'0';
+  var bizType=currentBizType||'—';
+  var bizNames={dental:'Стоматология',coffee:'Кофейня',restaurant:'Ресторан',barbershop:'Барбершоп',beauty:'Салон красоты',gym:'Тренажёрный зал',pharmacy:'Аптека',veterinary:'Ветклиника','co-working':'Коворкинг'};
+  return {rooms:rooms,equip:equip,staff:staff,svc:svc,reno:reno,docs:docs,budget:budget,bizType:bizNames[bizType]||bizType};
+}
 function renderUsers(){
   const c=document.getElementById('userCards');
   if(!c)return;
@@ -9604,7 +9617,7 @@ function renderUsers(){
     return (u.name||'').toLowerCase().includes(q)||(u.email||'').toLowerCase().includes(q)||(u.id||'').toString().toLowerCase().includes(q)||(u.phone||'').includes(q);
   });
   let html=q&&!filtered.length?'<div style="text-align:center;padding:40px;color:var(--tx3);font-size:13px">Ничего не найдено</div>':'';
-  html+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px">';
+  html+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px;align-items:start">';
   filtered.forEach(u=>{
     const rc=roleColors[u.role]||'#64748b';
     const rg=roleGradients[u.role]||roleGradients.viewer;
@@ -9612,29 +9625,87 @@ function renderUsers(){
     const planLabel=u.role==='superadmin'||u.role==='admin'?'FULL ACCESS':u.plan==='paid'?'PRO':u.plan==='unlimited'?'UNLIMITED':'TRIAL';
     const planColor=u.role==='admin'||u.plan==='paid'||u.plan==='unlimited'?'#3b82f6':'#eab308';
     const isOnline=u.status==='Активен';
-    html+=`<div style="background:var(--sf);border:1px solid var(--bd);border-radius:16px;overflow:hidden;transition:all .2s;position:relative" onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.08)'" onmouseleave="this.style.transform='';this.style.boxShadow=''">
+    const st=_userStats(u);
+    const uid='ucard_'+u.id.replace(/[^a-zA-Z0-9]/g,'');
+    html+=`<div id="${uid}" style="background:var(--sf);border:1px solid var(--bd);border-radius:16px;overflow:hidden;transition:all .2s;position:relative">
 <div style="height:4px;background:${rg}"></div>
-<div style="padding:20px 20px 0">
+<div style="padding:16px 20px;cursor:pointer" onclick="document.getElementById('${uid}_body').style.display=document.getElementById('${uid}_body').style.display==='none'?'block':'none';this.querySelector('.ucard-arrow').style.transform=document.getElementById('${uid}_body').style.display==='none'?'':'rotate(180deg)'">
 <div style="display:flex;gap:14px;align-items:center">
 <div style="position:relative">
-<div style="width:56px;height:56px;border-radius:16px;background:${rg};display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;font-weight:700;letter-spacing:1px;box-shadow:0 4px 12px ${rc}40">${initials||'?'}</div>
-<div style="position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;border-radius:50%;background:${isOnline?'#22c55e':'#94a3b8'};border:2.5px solid var(--sf)"></div>
+<div style="width:48px;height:48px;border-radius:14px;background:${rg};display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;font-weight:700;letter-spacing:1px;box-shadow:0 4px 12px ${rc}40">${initials||'?'}</div>
+<div style="position:absolute;bottom:-2px;right:-2px;width:12px;height:12px;border-radius:50%;background:${isOnline?'#22c55e':'#94a3b8'};border:2px solid var(--sf)"></div>
 </div>
 <div style="flex:1;min-width:0">
-<div style="font-weight:700;font-size:15px;line-height:1.3">${esc(u.name)}</div>
-<div style="font-size:11px;color:var(--tx2);margin-top:2px">${esc(u.email)}</div>
-<div style="font-size:10px;color:var(--tx3);margin-top:3px;font-family:monospace;letter-spacing:.5px">${esc(u.id)}</div>
+<div style="font-weight:700;font-size:14px;line-height:1.3">${esc(u.name)}</div>
+<div style="font-size:10px;color:var(--tx2);margin-top:1px">${esc(u.email)}</div>
+</div>
+<div style="display:flex;gap:4px;align-items:center;flex-shrink:0">
+<span style="font-size:9px;padding:3px 8px;border-radius:6px;background:${rc}15;color:${rc};font-weight:700">${roleNames[u.role]||u.role}</span>
+<span style="font-size:9px;padding:3px 8px;border-radius:6px;background:${planColor}15;color:${planColor};font-weight:700">${planLabel}</span>
+<span class="ucard-arrow" style="font-size:10px;color:var(--tx3);transition:transform .2s;margin-left:4px">&#9660;</span>
 </div>
 </div>
 </div>
-<div style="padding:14px 20px;display:flex;gap:6px;flex-wrap:wrap">
-<span style="font-size:10px;padding:4px 10px;border-radius:8px;background:${rc}15;color:${rc};font-weight:700;letter-spacing:.3px">${roleNames[u.role]||u.role}</span>
-<span style="font-size:10px;padding:4px 10px;border-radius:8px;background:${planColor}15;color:${planColor};font-weight:700;letter-spacing:.3px">${planLabel}</span>
-<span style="font-size:10px;padding:4px 10px;border-radius:8px;background:${isOnline?'rgba(34,197,94,.08)':'rgba(148,163,184,.08)'};color:${isOnline?'#22c55e':'#94a3b8'};font-weight:600">${u.status||'Неактивен'}</span>
-${u.created?`<span style="font-size:10px;padding:4px 10px;border-radius:8px;background:rgba(100,116,139,.06);color:var(--tx3)">c ${u.created}</span>`:''}
+
+<div id="${uid}_body" style="display:none">
+<!-- Полная информация -->
+<div style="padding:0 20px 12px;border-top:1px solid var(--bd)">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:12px">
+<div style="font-size:10px;color:var(--tx3)">ID: <span style="font-family:monospace;color:var(--tx2)">${esc(u.id)}</span></div>
+<div style="font-size:10px;color:var(--tx3)">Статус: <span style="color:${isOnline?'var(--gn)':'var(--tx3)'};font-weight:600">${u.status||'Неактивен'}</span></div>
+<div style="font-size:10px;color:var(--tx3)">Регистрация: <span style="color:var(--tx2)">${u.created||'—'}</span></div>
+<div style="font-size:10px;color:var(--tx3)">Телефон: <span style="color:var(--tx2)">${u.phone||'—'}</span></div>
 </div>
-${u.phone?`<div style="padding:0 20px 8px;font-size:11px;color:var(--tx2)">${esc(u.phone)}</div>`:''}
-${u.notes?`<div style="padding:0 20px 12px;font-size:11px;color:var(--tx3);line-height:1.5">${esc(u.notes)}</div>`:''}
+${u.notes?`<div style="font-size:10px;color:var(--tx3);margin-top:8px;padding:6px 10px;background:var(--sf2);border-radius:6px;line-height:1.5">${esc(u.notes)}</div>`:''}
+</div>
+
+<!-- Категория бизнеса и капитал -->
+<div style="padding:0 20px 12px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Бизнес</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div style="background:var(--sf2);border-radius:8px;padding:8px 10px">
+<div style="font-size:9px;color:var(--tx3)">Категория</div>
+<div style="font-size:12px;font-weight:700;color:var(--tx)">${st.bizType}</div>
+</div>
+<div style="background:var(--sf2);border-radius:8px;padding:8px 10px">
+<div style="font-size:9px;color:var(--tx3)">Капитал (бюджет)</div>
+<div style="font-size:12px;font-weight:700;color:var(--ac2)">${st.budget?Number(st.budget).toLocaleString('ru'):'-'} ${(activeProperty&&activeProperty.currency)||'PLN'}</div>
+</div>
+</div>
+</div>
+
+<!-- Что подключено -->
+<div style="padding:0 20px 12px">
+<div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Подключено к концепции</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+<div style="background:${st.rooms?'rgba(59,130,246,.06)':'var(--sf2)'};border:1px solid ${st.rooms?'rgba(59,130,246,.15)':'var(--bd)'};border-radius:8px;padding:8px;text-align:center">
+<div style="font-size:16px;font-weight:800;color:${st.rooms?'#3b82f6':'var(--tx3)'}">${st.rooms}</div>
+<div style="font-size:9px;color:var(--tx3)">Помещений</div>
+</div>
+<div style="background:${st.equip?'rgba(139,92,246,.06)':'var(--sf2)'};border:1px solid ${st.equip?'rgba(139,92,246,.15)':'var(--bd)'};border-radius:8px;padding:8px;text-align:center">
+<div style="font-size:16px;font-weight:800;color:${st.equip?'#8b5cf6':'var(--tx3)'}">${st.equip}</div>
+<div style="font-size:9px;color:var(--tx3)">Оборудование</div>
+</div>
+<div style="background:${st.staff?'rgba(6,182,212,.06)':'var(--sf2)'};border:1px solid ${st.staff?'rgba(6,182,212,.15)':'var(--bd)'};border-radius:8px;padding:8px;text-align:center">
+<div style="font-size:16px;font-weight:800;color:${st.staff?'#06b6d4':'var(--tx3)'}">${st.staff}</div>
+<div style="font-size:9px;color:var(--tx3)">Персонал</div>
+</div>
+<div style="background:${st.svc?'rgba(34,197,94,.06)':'var(--sf2)'};border:1px solid ${st.svc?'rgba(34,197,94,.15)':'var(--bd)'};border-radius:8px;padding:8px;text-align:center">
+<div style="font-size:16px;font-weight:800;color:${st.svc?'#22c55e':'var(--tx3)'}">${st.svc}</div>
+<div style="font-size:9px;color:var(--tx3)">Услуг</div>
+</div>
+<div style="background:${st.reno?'rgba(245,158,11,.06)':'var(--sf2)'};border:1px solid ${st.reno?'rgba(245,158,11,.15)':'var(--bd)'};border-radius:8px;padding:8px;text-align:center">
+<div style="font-size:16px;font-weight:800;color:${st.reno?'#f59e0b':'var(--tx3)'}">${st.reno}</div>
+<div style="font-size:9px;color:var(--tx3)">Ремонт</div>
+</div>
+<div style="background:${st.docs?'rgba(239,68,68,.06)':'var(--sf2)'};border:1px solid ${st.docs?'rgba(239,68,68,.15)':'var(--bd)'};border-radius:8px;padding:8px;text-align:center">
+<div style="font-size:16px;font-weight:800;color:${st.docs?'#ef4444':'var(--tx3)'}">${st.docs}</div>
+<div style="font-size:9px;color:var(--tx3)">Документы</div>
+</div>
+</div>
+</div>
+
+<!-- Управление -->
 <div style="border-top:1px solid var(--bd);padding:12px 20px;display:flex;gap:8px;justify-content:space-between;align-items:center">
 <div style="display:flex;gap:6px;flex-wrap:wrap">
 <select onchange="changeUserRole('${u.id}',this.value)" style="font-size:10px;padding:4px 8px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);cursor:pointer;font-family:var(--f)">
@@ -9655,6 +9726,7 @@ ${u.role!=='admin'&&u.role!=='superadmin'?`<select onchange="changeUserPlan('${u
 <button onclick="editUser('${u.id}')" style="width:32px;height:32px;border-radius:8px;border:1px solid var(--bd);background:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .15s" onmouseenter="this.style.background='var(--ac2)';this.style.color='#fff';this.style.borderColor='var(--ac2)'" onmouseleave="this.style.background='var(--bg)';this.style.color='inherit';this.style.borderColor='var(--bd)'" title="Редактировать">&#9998;</button>
 <button onclick="changePassword('${u.id}','${esc(u.name)}')" style="width:32px;height:32px;border-radius:8px;border:1px solid var(--bd);background:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .15s" onmouseenter="this.style.background='var(--or)';this.style.color='#fff';this.style.borderColor='var(--or)'" onmouseleave="this.style.background='var(--bg)';this.style.color='inherit';this.style.borderColor='var(--bd)'" title="Сменить пароль">&#128273;</button>
 ${currentUser&&currentUser.isSuperAdmin?`<button onclick="deleteUser('${u.id}')" style="width:32px;height:32px;border-radius:8px;border:1px solid var(--bd);background:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--rd);transition:all .15s" onmouseenter="this.style.background='var(--rd)';this.style.color='#fff';this.style.borderColor='var(--rd)'" onmouseleave="this.style.background='var(--bg)';this.style.color='var(--rd)';this.style.borderColor='var(--bd)'" title="Удалить пользователя (только superadmin)">&#10005;</button>`:''}
+</div>
 </div>
 </div>
 </div>`;
