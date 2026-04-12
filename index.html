@@ -4242,38 +4242,74 @@ const AI_KEY='';
 // Universal streaming helper: calls gateway, yields tokens, returns full text
 async function svitaStream(opts){
   // opts: {message, mode:'chat'|'generate', context, history, max_tokens, onToken, signal}
-  const url=SVITA_GW+'/'+(opts.mode||'chat');
-  const res=await fetch(url,{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-      message:opts.message||opts.prompt||'',
-      mode:opts.mode||'chat',
-      context:opts.context||{},
-      history:opts.history||[],
-      max_tokens:opts.max_tokens||1024
-    }),
-    signal:opts.signal||null
-  });
-  if(!res.ok)throw new Error('AI HTTP '+res.status);
-  const reader=res.body.getReader();
-  const decoder=new TextDecoder();
-  let full='';
-  while(true){
-    const{value,done}=await reader.read();
-    if(done)break;
-    const chunk=decoder.decode(value,{stream:true});
-    for(const line of chunk.split('\n')){
-      if(!line.startsWith('data: '))continue;
-      try{
-        const obj=JSON.parse(line.slice(6));
-        if(obj.error)throw new Error(obj.error);
-        if(obj.token){full+=obj.token;if(opts.onToken)opts.onToken(obj.token,full)}
-        if(obj.done){full=obj.text||full;return full}
-      }catch(e){if(e.message!=='Unexpected end of JSON input')throw e}
+  // 1) Сначала пробуем Jetson через Tailscale (стрим). Работает только если клиент в TS-сети.
+  // 2) Если недоступен — fallback на публичный Supabase edge function ai-chat (без стрима, симулируем).
+  try{
+    const url=SVITA_GW+'/'+(opts.mode||'chat');
+    const ctrl=new AbortController();
+    const tmo=setTimeout(()=>ctrl.abort(),3500); // быстрый отбой если Jetson недоступен
+    const res=await fetch(url,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        message:opts.message||opts.prompt||'',
+        mode:opts.mode||'chat',
+        context:opts.context||{},
+        history:opts.history||[],
+        max_tokens:opts.max_tokens||1024
+      }),
+      signal:opts.signal||ctrl.signal
+    });
+    clearTimeout(tmo);
+    if(!res.ok)throw new Error('AI HTTP '+res.status);
+    const reader=res.body.getReader();
+    const decoder=new TextDecoder();
+    let full='';
+    while(true){
+      const{value,done}=await reader.read();
+      if(done)break;
+      const chunk=decoder.decode(value,{stream:true});
+      for(const line of chunk.split('\n')){
+        if(!line.startsWith('data: '))continue;
+        try{
+          const obj=JSON.parse(line.slice(6));
+          if(obj.error)throw new Error(obj.error);
+          if(obj.token){full+=obj.token;if(opts.onToken)opts.onToken(obj.token,full)}
+          if(obj.done){full=obj.text||full;return full}
+        }catch(e){if(e.message!=='Unexpected end of JSON input')throw e}
+      }
     }
+    if(full)return full;
+    throw new Error('empty stream');
+  }catch(jetsonErr){
+    // Fallback: Supabase edge function ai-chat (Anthropic Claude)
+    const res=await fetch(SB_URL+'/functions/v1/ai-chat',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+SB_KEY},
+      body:JSON.stringify({
+        message:opts.message||opts.prompt||'',
+        context:opts.context||{},
+        history:opts.history||[],
+        mode:opts.mode==='generate'?'actions':undefined
+      }),
+      signal:opts.signal||null
+    });
+    if(!res.ok)throw new Error('AI HTTP '+res.status);
+    const data=await res.json();
+    if(!data.reply)throw new Error('Пустой ответ');
+    const full=data.reply;
+    // Симулируем стрим — выдаём чанками по словам, чтобы UI обновлялся плавно
+    if(opts.onToken){
+      const words=full.split(/(\s+)/);
+      let acc='';
+      for(let i=0;i<words.length;i++){
+        acc+=words[i];
+        opts.onToken(words[i],acc);
+        if(i%4===3)await new Promise(r=>setTimeout(r,12));
+      }
+    }
+    return full;
   }
-  return full;
 }
 
 // Non-streaming quick call (for notes, dossiers etc.)
