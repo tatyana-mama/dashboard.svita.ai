@@ -1,0 +1,115 @@
+{
+  "country": "DE",
+  "country_name_ru": "Германия",
+  "biz_type": "coffee",
+  "biz_name_ru": "Кофейня",
+  "currency": "EUR",
+  "updated": "2026-04",
+  "sections": [
+    {
+      "id": "legal_form", "title": "Юридическая форма", "icon": "⚖️",
+      "items": [
+        {"name": "Einzelunternehmen (Gewerbe)", "desc": "ИП — самая простая форма для одного владельца. Регистрация в Gewerbeamt ~30 EUR. Полная личная ответственность. Подходит для первой кофейни без партнёров.", "price_pln": 130, "time_days": 1, "link": "https://www.bmwk.de/Redaktion/DE/Dossier/existenzgruendung.html"},
+        {"name": "GbR (Gesellschaft bürgerlichen Rechts)", "desc": "Партнёрское товарищество для 2+ соучредителей. Регистрация в Gewerbeamt, без минимального капитала. Партнёры отвечают солидарно личным имуществом.", "price_pln": 200, "time_days": 3},
+        {"name": "UG (haftungsbeschränkt) — мини-GmbH", "desc": "ООО с ограниченной ответственностью от 1 EUR уставного капитала. 25% прибыли откладывается в резерв до 25000 EUR. Регистрация через нотариуса 300-800 EUR.", "price_pln": 2500, "time_days": 14, "link": "https://www.ihk.de"},
+        {"name": "GmbH", "desc": "Полноценное ООО, минимальный капитал 25000 EUR (12500 на счёт при регистрации). Регистрация через нотариуса + Handelsregister 700-1500 EUR. Стандарт для сетей и инвестиций.", "price_pln": 6500, "time_days": 21},
+        {"name": "Когда что выбирать", "desc": "Einzelunternehmen: первая кофейня, оборот <100k EUR. UG: защита активов при минимальных вложениях. GmbH: сеть, франшиза, инвесторы, аренда >5000 EUR/мес.", "price_pln": 0, "time_days": 0}
+      ]
+    },
+    {
+      "id": "registration", "title": "Регистрация бизнеса", "icon": "📋",
+      "items": [
+        {"name": "Gewerbeanmeldung", "desc": "Регистрация в Gewerbeamt (промышленная палата города). 20-65 EUR в зависимости от города. Нужен паспорт + ВНЖ для иностранцев. Финансовая полиция уведомляется автоматически.", "price_pln": 200, "time_days": 1, "link": "https://www.gewerbeamt.de"},
+        {"name": "Steuerliche Erfassung (Finanzamt)", "desc": "Налоговая анкета через ELSTER online. Получение Steuernummer для ИП и USt-IdNr для бизнеса с EU-партнёрами. Бесплатно, срок 2-6 недель.", "price_pln": 0, "time_days": 28, "link": "https://www.elster.de"},
+        {"name": "IHK-Mitgliedschaft", "desc": "Обязательное членство в Industrie- und Handelskammer (торгово-промышленная палата). Взнос 30-300 EUR/год для малых, до 2000+ EUR для крупных. Первые 2 года для маленького оборота — бесплатно.", "price_pln": 800, "time_days": 14, "link": "https://www.ihk.de"},
+        {"name": "Handelsregister (для GmbH/UG)", "desc": "Регистрация в торговом реестре через нотариуса. 300-700 EUR нотариус + 150-300 EUR пошлина. Срок 1-3 недели.", "price_pln": 4000, "time_days": 14},
+        {"name": "Берлин/Мюнхен — особые требования", "desc": "В Берлине процесс через Bezirksamt, в Мюнхене через Kreisverwaltungsreferat. Запись на термин в популярных городах ждать 2-6 недель — бронируйте заранее онлайн.", "price_pln": 0, "time_days": 21}
+      ]
+    },
+    {
+      "id": "permits", "title": "Лицензии и разрешения", "icon": "🪪",
+      "items": [
+        {"name": "Gaststättenkonzession", "desc": "Концессия для общепита с алкоголем. Выдаётся Ordnungsamt после проверки благонадёжности (Führungszeugnis ~13 EUR), знаний (IHK-Unterrichtung ~30-100 EUR), помещения. Стоимость лицензии 150-1000 EUR.", "price_pln": 2500, "time_days": 60, "link": "https://www.ihk.de/themen/recht-und-steuern/gewerberecht/gaststaettenrecht"},
+        {"name": "Gesundheitszeugnis (медсправка)", "desc": "Belehrung по §43 IfSG для всех работников с едой. Однократное обучение в Gesundheitsamt + сертификат. 25-30 EUR. Действует бессрочно при ежегодном повторении на месте работы.", "price_pln": 130, "time_days": 7, "link": "https://www.bzga.de"},
+        {"name": "GEMA лицензия на музыку", "desc": "Аналог польского ZAiKS. Обязательна для фоновой музыки. Кофейня 50-100 м² ~15-50 EUR/мес. Регистрация онлайн.", "price_pln": 150, "time_days": 14, "link": "https://www.gema.de"},
+        {"name": "Sondernutzungserlaubnis (летний сад)", "desc": "Разрешение на столики на тротуаре от Bezirksamt. Берлин: 5-15 EUR/м²/мес. Мюнхен: 10-30 EUR/м²/мес. Срок 4-8 недель.", "price_pln": 600, "time_days": 42},
+        {"name": "Brandschutz (пожарная безопасность)", "desc": "Для помещений >200 м² или с >50 посетителями — обязательное Brandschutzgutachten от инженера 800-3000 EUR. Огнетушители, эвакуационные планы, путь эвакуации обязательны для всех.", "price_pln": 4000, "time_days": 21}
+      ]
+    },
+    {
+      "id": "sanitary", "title": "Санитарные нормы (Hygiene)", "icon": "🧼",
+      "items": [
+        {"name": "HACCP-Konzept", "desc": "Hazard Analysis and Critical Control Points — обязательно для всех заведений общепита. План контроля точек: приём, хранение, обработка, подача. Шаблон IHK или консультант 500-1500 EUR.", "price_pln": 4000, "time_days": 14, "link": "https://www.bvl.bund.de"},
+        {"name": "Требования к помещению", "desc": "Раздельные зоны: подготовка/хранение/туалеты для гостей и персонала. 2 раковины (руки + посуда). Стены до 2 м моющиеся. Принудительная вентиляция. Минимум 1 туалет на 50 гостей.", "price_pln": 0, "time_days": 0},
+        {"name": "Lebensmittelüberwachung", "desc": "Контроль продовольствия — внеплановые проверки от Veterinär- und Lebensmittelaufsichtsamt. Раз в 1-3 года. Документация HACCP, журналы температур, чистоты — обязательны.", "price_pln": 0, "time_days": 0},
+        {"name": "Обучение персонала", "desc": "Все работники с едой проходят §43-Belehrung перед началом работы и повторно ежегодно. Внутреннее обучение фиксируется в журнале. 25-30 EUR на сотрудника.", "price_pln": 130, "time_days": 1}
+      ]
+    },
+    {
+      "id": "taxes", "title": "Налоги", "icon": "💰",
+      "items": [
+        {"name": "Einkommensteuer (PIT для ИП)", "desc": "Прогрессивная шкала 0-45%. Базовый необлагаемый минимум 2026: ~12000 EUR/год. Эффективная ставка для оборота 100k EUR/год: ~25-30%.", "price_pln": 0, "time_days": 0, "link": "https://www.elster.de"},
+        {"name": "Körperschaftsteuer (CIT для GmbH/UG)", "desc": "Корпоративный налог 15% + Solidaritätszuschlag 5.5% от налога = ~15.8%. Плюс Gewerbesteuer (промысловый налог) 7-17% в зависимости от муниципалитета. Итого 23-32%.", "price_pln": 0, "time_days": 0},
+        {"name": "Umsatzsteuer (VAT)", "desc": "Стандарт 19%, льготная 7% для еды/напитков навынос. В заведении напитки 19%, еда 7%. Освобождение Kleinunternehmer при обороте <22000 EUR — без VAT, но и без вычета.", "price_pln": 0, "time_days": 7, "link": "https://www.bzst.de"},
+        {"name": "Gewerbesteuer", "desc": "Промысловый налог. Базовая ставка 3.5%, умножается на муниципальный коэффициент Hebesatz: Берлин 410%, Мюнхен 490%, Гамбург 470%, Лейпциг 460%. Освобождение до 24500 EUR прибыли для ИП.", "price_pln": 0, "time_days": 0},
+        {"name": "Krankenversicherung (медстраховка)", "desc": "Обязательная медстраховка для ИП: gesetzlich (KK) от 200 EUR/мес или privat от 350 EUR/мес. Около 14-16% от прибыли для законной страховки.", "price_pln": 1200, "time_days": 14},
+        {"name": "Kasse (фискальная касса)", "desc": "С 2020 года обязательна TSE-сертифицированная касса (Technische Sicherheitseinrichtung). Цена 400-1500 EUR + ~10-30 EUR/мес обслуживания.", "price_pln": 3500, "time_days": 7, "link": "https://www.bsi.bund.de"}
+      ]
+    },
+    {
+      "id": "hiring", "title": "Найм персонала", "icon": "👥",
+      "items": [
+        {"name": "Vollzeit (полный трудовой)", "desc": "Полная защита: отпуск 24-30 дней, больничный, декретные. Работодатель платит ~20-21% сверху брутто (Sozialversicherung). Минимум 2026: 12.82 EUR/час = ~2200 EUR/мес брутто. Стоимость работодателя ~2700 EUR.", "price_pln": 12000, "time_days": 7},
+        {"name": "Minijob (450/520 EUR-Job)", "desc": "Подработка до 538 EUR/мес (2026, индексируется). Работодатель платит ~30% сверху (паушально), работник — 0. Стандарт для бариста-студентов и подмен.", "price_pln": 2500, "time_days": 1, "link": "https://www.minijob-zentrale.de"},
+        {"name": "Werkstudent", "desc": "Студенческий контракт до 20 ч/нед в учебное время, без ZUS со стороны студента. Минимум брутто = почасовая. Популярно для обслуживания.", "price_pln": 1800, "time_days": 3},
+        {"name": "Типичные зарплаты бариста 2026", "desc": "Берлин: 13-17 EUR/час брутто. Мюнхен: 14-19 EUR. Гамбург: 13-16 EUR. Восток (Лейпциг, Дрезден): 12.82-14 EUR. Главный бариста: 2800-3500 EUR/мес.", "price_pln": 14000, "time_days": 0},
+        {"name": "Иностранные работники", "desc": "EU-граждане — без разрешений. Не-EU: Aufenthaltstitel + Arbeitserlaubnis от Ausländerbehörde. Украинцы под §24 — упрощённо. Беларусы — полная процедура (3-6 мес, ~100-300 EUR).", "price_pln": 1000, "time_days": 90}
+      ]
+    },
+    {
+      "id": "location", "title": "Помещение", "icon": "🏢",
+      "items": [
+        {"name": "Аренда в Берлине", "desc": "Mitte, Prenzlauer Berg, Kreuzberg: 25-50 EUR/м²/мес. Friedrichshain, Neukölln: 18-35 EUR. Спальные: 12-22 EUR. Кофейня 60-100 м² = 1500-5000 EUR/мес.", "price_pln": 13000, "time_days": 30},
+        {"name": "Аренда в Мюнхене", "desc": "Самый дорогой город Германии. Центр: 35-70 EUR/м²/мес. Schwabing, Glockenbach: 30-55 EUR. Окраины: 18-30 EUR. Для 80 м² — 2400-5600 EUR/мес.", "price_pln": 18000, "time_days": 30},
+        {"name": "Аренда в Гамбурге/Кёльне/Франкфурте", "desc": "Гамбург St. Pauli/Sternschanze: 20-40 EUR. Кёльн Belgisches Viertel: 18-35 EUR. Франкфурт центр: 25-45 EUR. Для 80 м² — 1500-3500 EUR/мес.", "price_pln": 11000, "time_days": 30},
+        {"name": "Условия Mietvertrag", "desc": "Стандарт: 5-10 лет (Gewerbemietvertrag), залог 3 месячных аренды, индексация по индексу потребительских цен. Каникулы на ремонт 2-3 мес — нужно договариваться.", "price_pln": 25000, "time_days": 14},
+        {"name": "Ремонт под кофейню", "desc": "Базовый: 800-1500 EUR/м². Дизайнерский: 1500-3500 EUR/м². Для 80 м² — от 64000 до 280000 EUR. Германские нормы строже польских (вентиляция, пожарка).", "price_pln": 600000, "time_days": 60},
+        {"name": "Оборудование", "desc": "Эспрессо-машина проф (La Marzocco/Slayer/Faema): 6000-25000 EUR. Кофемолки: 1500-4000 EUR. Холодильники, витрины, мебель: 20000-50000 EUR. Итого 35000-100000 EUR.", "price_pln": 250000, "time_days": 30}
+      ]
+    },
+    {
+      "id": "timeline", "title": "Сроки открытия", "icon": "⏱️",
+      "items": [
+        {"name": "Месяц 1: концепция и помещение", "desc": "Поиск локации (в Берлине/Мюнхене 1-3 месяца), переговоры с Vermieter, подписание Mietvertrag. Параллельно регистрация Gewerbe и финансовая анкета.", "price_pln": 30000, "time_days": 30},
+        {"name": "Месяц 2-3: согласования", "desc": "Bauantrag для перестроек (4-12 недель в Германии — большой риск задержек!). Подача на Gaststättenkonzession, IHK-Unterrichtung. Заказ TSE-кассы и оборудования.", "price_pln": 20000, "time_days": 60},
+        {"name": "Месяц 3-5: ремонт", "desc": "Строительство по немецким нормам (DIN). Параллельно — наём персонала (бариста сложно найти в больших городах), Belehrung §43, разработка HACCP.", "price_pln": 350000, "time_days": 90},
+        {"name": "Месяц 6: открытие", "desc": "Финальная инспекция Gesundheitsamt + Veterinäramt, получение Gaststättenkonzession, тестовый запуск (Soft Opening), маркетинг. От идеи до открытия реалистично 5-7 месяцев.", "price_pln": 40000, "time_days": 30},
+        {"name": "Общий бюджет запуска", "desc": "Малая (40-60 м²): 80000-150000 EUR. Средняя (70-100 м², норм. ремонт): 150000-300000 EUR. Премиум (дизайн, 100+ м²): 300000-700000 EUR. Дороже Польши в 1.5-2 раза.", "price_pln": 1200000, "time_days": 180}
+      ]
+    },
+    {
+      "id": "pitfalls", "title": "Подводные камни", "icon": "⚠️",
+      "items": [
+        {"name": "Длительность Bauantrag", "desc": "Главный убийца сроков. Согласование перестройки помещения в Bauamt — 6-16 недель. В Берлине часто >6 месяцев. Закладывайте буфер в финмодель: каждый месяц задержки = аренда впустую."},
+        {"name": "Сложность увольнения", "desc": "Kündigungsschutzgesetz после 6 месяцев работы — практически невозможно уволить без причины. Используйте Probezeit (испытательный срок) до 6 мес максимально внимательно."},
+        {"name": "Налоговый берлин-эффект (Kleinunternehmer ловушка)", "desc": "Освобождение от VAT при <22000 EUR кажется выгодным, но не даёт вычета VAT с инвестиций (ремонт, оборудование). Для начинающей кофейни — обычно невыгодно, лучше сразу платить VAT."},
+        {"name": "Steuerberater обязателен", "desc": "Немецкая бухгалтерия сложная (Lohnsteuer, USt-Voranmeldung каждый месяц, Bilanz). Без бухгалтера-консультанта (Steuerberater) практически нереально. Стоимость 200-800 EUR/мес."},
+        {"name": "Текучка персонала в больших городах", "desc": "Берлин/Мюнхен — катастрофа с наймом. Бариста меняют работу каждые 4-8 месяцев. Конкурируют сети (Starbucks, Espresso House, The Barn). Обязательны бонусы и атмосфера."},
+        {"name": "Сезонность и отпуска", "desc": "Август — массовые отпуска немцев → в туристических локациях рост, в офисных — провал на 20-30%. Декабрь сильный (рождественские рынки)."}
+      ]
+    },
+    {
+      "id": "links", "title": "Полезные ссылки", "icon": "🔗",
+      "items": [
+        {"name": "BMWK — портал предпринимателя", "desc": "Главный портал Минэкономики по созданию бизнеса.", "price_pln": 0, "time_days": 0, "link": "https://www.bmwk.de/Redaktion/DE/Dossier/existenzgruendung.html"},
+        {"name": "IHK", "desc": "Промышленно-торговая палата. Бесплатные консультации, IHK-Unterrichtung для общепита.", "price_pln": 0, "time_days": 0, "link": "https://www.ihk.de"},
+        {"name": "ELSTER", "desc": "Электронный налоговый портал. Обязательна регистрация для всех бизнесов.", "price_pln": 0, "time_days": 0, "link": "https://www.elster.de"},
+        {"name": "Bundesanstalt für Lebensmittel (BVL)", "desc": "Федеральное ведомство по продовольствию. HACCP, нормы, шаблоны.", "price_pln": 0, "time_days": 0, "link": "https://www.bvl.bund.de"},
+        {"name": "GEMA", "desc": "Авторские права, лицензия на музыку.", "price_pln": 0, "time_days": 0, "link": "https://www.gema.de"},
+        {"name": "Minijob-Zentrale", "desc": "Центр оформления подработок.", "price_pln": 0, "time_days": 0, "link": "https://www.minijob-zentrale.de"},
+        {"name": "Gründerplattform", "desc": "Государственная платформа для основателей бизнеса с шаблонами и калькуляторами.", "price_pln": 0, "time_days": 0, "link": "https://www.gruenderplattform.de"},
+        {"name": "Speciality Coffee Association Germany", "desc": "Сертификация бариста, чемпионаты, профессиональное сообщество.", "price_pln": 0, "time_days": 0, "link": "https://www.scae.de"}
+      ]
+    }
+  ]
+}
