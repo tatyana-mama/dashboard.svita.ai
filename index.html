@@ -2054,7 +2054,12 @@ function switchAdminRole(role){
 <div class="sec" id="sec-db-suppliers">
 <div class="bk" onclick="nav('overview')">&larr; Обзор</div>
 <div class="ph"><div><h2>&#128230; БД Оборудования</h2><div class="ph-s">Каталог оборудования — добавляйте в проект</div></div><button class="btn sm or" onclick="openModal('supplier')">+ Новый товар</button></div>
-<div id="equipFilterBar" style="display:flex;gap:6px;flex-wrap:wrap;padding:8px 0"></div>
+<!-- Search -->
+<div style="margin-bottom:12px"><input type="text" id="equipSearch" placeholder="Поиск по названию, бренду, поставщику..." oninput="renderEquip()" style="width:100%;padding:10px 16px 10px 36px;border:1px solid var(--bd);border-radius:12px;background:var(--sf);color:var(--tx);font-size:13px;font-family:var(--f);outline:none;transition:border .2s;background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22 fill=%22%2394a3b8%22 viewBox=%220 0 16 16%22><path d=%22M11.742 10.344a6.5 6.5 0 10-1.397 1.398h-.001l3.85 3.85a1 1 0 001.415-1.414l-3.85-3.85zm-5.242.656a5 5 0 110-10 5 5 0 010 10z%22/></svg>');background-repeat:no-repeat;background-position:12px center;background-size:14px" onfocus="this.style.borderColor='var(--ac2)'" onblur="this.style.borderColor='var(--bd)'"></div>
+<!-- Stats -->
+<div id="equipStats" class="sts" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px"></div>
+<!-- Filter bar -->
+<div id="equipFilterBar" style="display:flex;gap:6px;flex-wrap:wrap;padding:0 0 12px"></div>
 <div id="equipCards"></div>
 </div>
 
@@ -7665,52 +7670,102 @@ function navToEquip(cat){
 function renderEquip(){
   const c=document.getElementById('equipCards');
   if(!c)return;
-  if(!DB.suppliers.length){c.innerHTML='<div style="padding:24px;text-align:center;color:var(--tx3);font-size:12px">Загрузка оборудования из базы данных...</div>';return}
+  if(!DB.suppliers.length){c.innerHTML='<div style="padding:48px;text-align:center;color:var(--tx3);font-size:13px">Загрузка оборудования из базы данных...</div>';return}
   const openZones=new Set();
   c.querySelectorAll('[id^="zoneBody"]').forEach(el=>{if(el.classList.contains('open'))openZones.add(el.id.replace('zoneBody',''))});
-  const allGroups={};
-  DB.suppliers.forEach(r=>{const cat=r.category||'Другое';if(!allGroups[cat])allGroups[cat]=[];allGroups[cat].push(r)});
-  const allCatKeys=Object.keys(allGroups).sort((a,b)=>allGroups[b].length-allGroups[a].length);
 
-  // Filter bar
+  // Search filter
+  const searchVal=(document.getElementById('equipSearch')||{}).value||'';
+  const searchLow=searchVal.toLowerCase().trim();
+
+  const allGroups={};
+  DB.suppliers.forEach(r=>{
+    if(searchLow){
+      const hay=((r.name||'')+(r.supplier||'')+(r.warranty||'')+(r.category||'')).toLowerCase();
+      if(!hay.includes(searchLow))return;
+    }
+    const cat=r.category||'Другое';
+    if(!allGroups[cat])allGroups[cat]=[];
+    allGroups[cat].push(r);
+  });
+  const allCatKeys=Object.keys(allGroups).sort((a,b)=>allGroups[b].length-allGroups[a].length);
+  const totalShown=allCatKeys.reduce((s,k)=>s+allGroups[k].length,0);
+
+  // Stats cards
+  const picked=DB.pickedEquip||{};
+  const pickedCount=Object.keys(picked).length;
+  const totalCost=Object.keys(picked).reduce((s,id)=>{const item=DB.suppliers.find(x=>x.id==id);const p=picked[id];return s+(p&&p.customPrice!=null?p.customPrice:item?item.price:0)*(p?p.qty||1:1)},0);
+  const suppliersSet=new Set(DB.suppliers.map(r=>r.supplier).filter(Boolean));
+  const sbox=document.getElementById('equipStats');
+  if(sbox)sbox.innerHTML=`
+    <div class="st"><div class="st-l">Каталог</div><div class="st-v">${totalShown}</div><div class="st-s">позиций${searchLow?' найдено':''}</div></div>
+    <div class="st"><div class="st-l">Категорий</div><div class="st-v">${allCatKeys.length}</div><div class="st-s">групп</div></div>
+    <div class="st"><div class="st-l">В оснащении</div><div class="st-v" style="color:var(--gn)">${pickedCount}</div><div class="st-s">добавлено</div></div>
+    <div class="st"><div class="st-l">Стоимость</div><div class="st-v" style="color:var(--ac2)">${totalCost?totalCost.toLocaleString('ru'):'0'}</div><div class="st-s">PLN</div></div>`;
+
+  // Filter bar — top 12 categories as pills, rest hidden
   const fb=document.getElementById('equipFilterBar');
   if(fb){
-    let fhtml=`<button class="btn sm ${!equipFilter?'pr':''}" onclick="setEquipFilter(null)" style="font-size:10px;padding:4px 10px">Все (${DB.suppliers.length})</button>`;
-    allCatKeys.forEach(cat=>{
+    const maxVisible=12;
+    let fhtml=`<button class="btn sm ${!equipFilter?'pr':''}" onclick="setEquipFilter(null)" style="font-size:11px;padding:5px 14px;border-radius:20px">Все</button>`;
+    allCatKeys.slice(0,maxVisible).forEach(cat=>{
       const active=equipFilter===cat;
-      fhtml+=`<button class="btn sm ${active?'pr':''}" onclick="setEquipFilter('${esc(cat).replace(/'/g,"\\'")}')" style="font-size:10px;padding:4px 10px">${esc(cat)} (${allGroups[cat].length})</button>`;
+      fhtml+=`<button class="btn sm ${active?'pr':''}" onclick="setEquipFilter('${esc(cat).replace(/'/g,"\\'")}')" style="font-size:11px;padding:5px 14px;border-radius:20px">${esc(cat)} <span style="opacity:.5;font-size:10px">${allGroups[cat].length}</span></button>`;
     });
+    if(allCatKeys.length>maxVisible){
+      fhtml+=`<button class="btn sm" onclick="document.getElementById('equipMoreCats').style.display=this.style.display='none';document.getElementById('equipMoreCats').style.display='contents'" style="font-size:11px;padding:5px 14px;border-radius:20px;color:var(--ac2)">+${allCatKeys.length-maxVisible} ещё</button>`;
+      fhtml+=`<span id="equipMoreCats" style="display:none">`;
+      allCatKeys.slice(maxVisible).forEach(cat=>{
+        const active=equipFilter===cat;
+        fhtml+=`<button class="btn sm ${active?'pr':''}" onclick="setEquipFilter('${esc(cat).replace(/'/g,"\\'")}')" style="font-size:11px;padding:5px 14px;border-radius:20px">${esc(cat)} <span style="opacity:.5;font-size:10px">${allGroups[cat].length}</span></button>`;
+      });
+      fhtml+=`</span>`;
+    }
     fb.innerHTML=fhtml;
   }
 
   const groups=equipFilter?{[equipFilter]:allGroups[equipFilter]||[]}:allGroups;
   const catKeys=Object.keys(groups).sort((a,b)=>(groups[b]||[]).length-(groups[a]||[]).length);
-  const picked=DB.pickedEquip||{};
-  const pickedCount=Object.keys(picked).length;
-  const shown=catKeys.reduce((s,k)=>s+(groups[k]||[]).length,0);
 
-  let html=`<div style="padding:8px 16px;font-size:11px;color:var(--tx2);border-bottom:1px solid var(--bd)">${equipFilter?'Фильтр: <strong>'+esc(equipFilter)+'</strong> · ':''}<strong>${shown}</strong> позиций в <strong>${catKeys.length}</strong> категориях · Добавлено в оснащение: <strong>${pickedCount}</strong></div>`;
+  if(!catKeys.length){
+    c.innerHTML=`<div style="padding:48px;text-align:center;color:var(--tx3)"><div style="font-size:32px;margin-bottom:8px">&#128269;</div><div style="font-size:13px">Ничего не найдено по запросу «${esc(searchLow)}»</div></div>`;
+    return;
+  }
 
+  let html='';
   catKeys.forEach((cat,zi)=>{
     const items=groups[cat];
     const zc=ZONE_COLORS[zi%ZONE_COLORS.length];
     const icon=ZONE_ICONS[cat]||'&#128230;';
     const catPicked=items.filter(r=>!!picked[r.id]).length;
-    const zOpen=openZones.has(String(zi));
+    const catTotal=items.reduce((s,r)=>s+r.price,0);
+    const pct=items.length?Math.round(catPicked/items.length*100):0;
+    const zOpen=openZones.has(String(zi))||(equipFilter&&catKeys.length<=3);
 
-    html+=`<div class="zone-card" id="zone-${zi}">`;
+    html+=`<div class="zone-card" id="zone-${zi}" style="margin-bottom:12px">`;
     html+=`<div class="zone-head" onclick="toggleZone(${zi})">`;
-    html+=`<div class="zone-icon" style="background:${zc.bg};color:${zc.color}">${icon}</div>`;
-    html+=`<div class="zone-info"><div class="zone-name">${cat}</div><div class="zone-desc">${items.length} позиций</div></div>`;
-    html+=`<div class="zone-meta"><div class="zone-count">${catPicked} / ${items.length} добавлено</div></div>`;
+    html+=`<div class="zone-icon" style="background:${zc.bg};color:${zc.color};border-radius:14px">${icon}</div>`;
+    html+=`<div class="zone-info"><div class="zone-name">${esc(cat)}</div><div class="zone-desc">${items.length} позиций · от ${Math.min(...items.map(r=>r.price)).toLocaleString('ru')} до ${Math.max(...items.map(r=>r.price)).toLocaleString('ru')} PLN</div></div>`;
+    html+=`<div class="zone-meta">`;
+    if(catPicked>0)html+=`<div style="font-size:11px;font-weight:700;color:var(--gn)">${catPicked} выбрано</div>`;
+    html+=`<div class="zone-count">${catPicked} / ${items.length}</div>`;
+    html+=`</div>`;
     html+=`<span class="zone-arrow${zOpen?' open':''}" id="zoneArrow${zi}">&#9654;</span>`;
     html+=`</div>`;
-    html+=`<div class="zone-bar"><div class="zone-bar-fill" id="zoneBar${zi}" style="width:${items.length?Math.round(catPicked/items.length*100):0}%;background:${zc.color}"></div></div>`;
-    html+=`<div class="zone-body${zOpen?' open':''}" id="zoneBody${zi}"><div class="zone-items">`;
+    html+=`<div class="zone-bar"><div class="zone-bar-fill" id="zoneBar${zi}" style="width:${pct}%;background:${zc.color}"></div></div>`;
+    html+=`<div class="zone-body${zOpen?' open':''}" id="zoneBody${zi}"><div class="zone-items" style="padding:8px 16px 12px">`;
     items.forEach(r=>{
       const added=!!picked[r.id];
-      const gq=encodeURIComponent(r.name+' купить Польша');
-      html+=`<div class="ci cost-row" style="padding:8px 0"><div class="ct" style="flex:1;min-width:0">${esc(r.name)}<div class="ct-sub">${esc(r.supplier)} · ${esc(r.warranty)} <a href="https://www.google.com/search?q=${gq}" target="_blank" rel="noopener" style="color:var(--ac2);text-decoration:none;font-size:10px;margin-left:4px" title="Найти в Google">&#128269; Google</a></div></div><div class="cost-val" style="flex-shrink:0">${r.price.toLocaleString('ru')} PLN</div><button class="btn sm ${added?'gn':'pr'}" onclick="togglePickEquip('${r.id}')" style="flex-shrink:0;min-width:90px">${added?'✓ Добавлено':'+ В оснащение'}</button></div>`;
+      const gq=encodeURIComponent(r.name+(r.supplier?' '+r.supplier:'')+' купить Польша');
+      const imgHtml=r.img?`<img src="${esc(r.img)}" alt="" style="width:40px;height:40px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--sf2)" onerror="this.style.display='none'">`:`<div style="width:40px;height:40px;border-radius:8px;background:var(--sf2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;color:var(--tx3)">${icon}</div>`;
+      html+=`<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--bd)">`;
+      html+=imgHtml;
+      html+=`<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r.name)}</div><div style="font-size:11px;color:var(--tx3);margin-top:2px;display:flex;align-items:center;gap:6px;flex-wrap:wrap"><span>${esc(r.supplier||'—')}</span>`;
+      if(r.warranty)html+=`<span style="opacity:.5">·</span><span style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(r.warranty)}</span>`;
+      html+=`<a href="https://www.google.com/search?q=${gq}" target="_blank" rel="noopener" style="color:var(--ac2);text-decoration:none;font-size:10px" title="Найти в Google">&#128269;</a></div></div>`;
+      html+=`<div style="text-align:right;flex-shrink:0;min-width:80px"><div style="font-size:14px;font-weight:700;color:var(--tx)">${r.price.toLocaleString('ru')}</div><div style="font-size:10px;color:var(--tx3)">PLN</div></div>`;
+      html+=`<button class="btn sm ${added?'gn':'pr'}" onclick="togglePickEquip('${r.id}')" style="flex-shrink:0;min-width:32px;width:32px;height:32px;padding:0;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px" title="${added?'Убрать из оснащения':'Добавить в оснащение'}">${added?'✓':'+'}</button>`;
+      html+=`</div>`;
     });
     html+=`</div></div></div>`;
   });
