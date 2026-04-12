@@ -3747,6 +3747,7 @@ function syncSessionCookie(data){
 }
 
 // ═══════════════ BUSINESS TYPES ═══════════════
+// PIVOT 2026-04-12: dental PL only — coffee/beauty/fitness/food removed
 const BIZ_TYPES={
   dental:{icon:'🦷',name:'Стоматология',color:'#06b6d4',subtypes:[
     {id:'dental_general',name:'Общая стоматология',desc:'Терапия, хирургия, ортопедия'},
@@ -3755,32 +3756,6 @@ const BIZ_TYPES={
     {id:'dental_ortho',name:'Ортодонтическая клиника',desc:'Брекеты, элайнеры, исправление прикуса'},
     {id:'dental_implant',name:'Имплантология',desc:'Имплантация и протезирование'},
     {id:'dental_premium',name:'Премиум клиника',desc:'VIP-обслуживание, полный спектр'}
-  ]},
-  coffee:{icon:'☕',name:'Кофейня',color:'#92400e',subtypes:[
-    {id:'coffee_classic',name:'Классическая кофейня',desc:'Кофе, напитки, лёгкие снеки'},
-    {id:'coffee_bakery',name:'Кофейня-пекарня',desc:'Свежая выпечка + кофе'},
-    {id:'coffee_confection',name:'Кофейня-кондитерская',desc:'Торты, десерты, кофе'},
-    {id:'coffee_island',name:'Кофе-остров',desc:'Островная стойка в ТЦ'},
-    {id:'coffee_cowork',name:'Кофейня-коворкинг',desc:'Рабочее пространство + кофе'},
-    {id:'coffee_roastery',name:'Кофейня-обжарка',desc:'Своя обжарка, specialty coffee'}
-  ]},
-  beauty:{icon:'💅',name:'Салон красоты',color:'#d946ef',subtypes:[
-    {id:'beauty_general',name:'Универсальный салон',desc:'Парикмахер, маникюр, косметология'},
-    {id:'beauty_barber',name:'Барбершоп',desc:'Мужские стрижки и бритьё'},
-    {id:'beauty_nail',name:'Ногтевая студия',desc:'Маникюр, педикюр, nail-art'},
-    {id:'beauty_cosmo',name:'Косметологическая клиника',desc:'Инъекции, лазер, аппаратная косметология'}
-  ]},
-  fitness:{icon:'💪',name:'Фитнес',color:'#ea580c',subtypes:[
-    {id:'fit_gym',name:'Тренажёрный зал',desc:'Зал со свободными весами и тренажёрами'},
-    {id:'fit_studio',name:'Фитнес-студия',desc:'Групповые занятия, йога, пилатес'},
-    {id:'fit_crossfit',name:'CrossFit бокс',desc:'Функциональный тренинг'},
-    {id:'fit_martial',name:'Зал единоборств',desc:'Бокс, MMA, борьба'}
-  ]},
-  food:{icon:'🍕',name:'Общепит',color:'#dc2626',subtypes:[
-    {id:'food_restaurant',name:'Ресторан',desc:'Полноценная кухня, зал, бар'},
-    {id:'food_fast',name:'Фастфуд',desc:'Быстрая еда, конвейер'},
-    {id:'food_dark',name:'Dark kitchen',desc:'Кухня только на доставку'},
-    {id:'food_bar',name:'Бар',desc:'Напитки, закуски, атмосфера'}
   ]}
 };
 let currentBizType=null; // e.g. 'dental'
