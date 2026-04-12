@@ -4256,7 +4256,7 @@ async function svitaStream(opts){
         mode:opts.mode||'chat',
         context:opts.context||{},
         history:opts.history||[],
-        max_tokens:opts.max_tokens||1024
+        max_tokens:opts.max_tokens||4096
       }),
       signal:opts.signal||ctrl.signal
     });
@@ -4314,7 +4314,7 @@ async function svitaStream(opts){
 
 // Non-streaming quick call (for notes, dossiers etc.)
 async function svitaChat(message,context,history,maxTokens){
-  return svitaStream({message,mode:'chat',context,history,max_tokens:maxTokens||512});
+  return svitaStream({message,mode:'chat',context,history,max_tokens:maxTokens||4096});
 }
 
 // ═══ SVITA AI AGENT — actions system ═══
@@ -10952,7 +10952,7 @@ async function sendRpChat(){
       mode:'chat',
       context:context,
       history:_aiChatHistory.slice(-8),
-      max_tokens:1024,
+      max_tokens:4096,
       onToken:function(tok,full){
         aiEl.innerHTML=_mdToHtml(full)+'<span style="display:inline-block;width:2px;height:12px;background:var(--ac2);animation:blink 1s infinite;vertical-align:middle;margin-left:2px"></span>';
         aiEl.parentNode.scrollTop=aiEl.parentNode.scrollHeight;
@@ -11945,7 +11945,7 @@ async function sendAiChat(){
       mode:'chat',
       context:context,
       history:_aiChatHistory.slice(-8),
-      max_tokens:1024,
+      max_tokens:4096,
       onToken:function(tok,full){
         aiEl.textContent=full;
         if(chatMsgs)chatMsgs.scrollTop=chatMsgs.scrollHeight;
