@@ -3989,17 +3989,35 @@ const BIZ_DATA={
 };
 
 // Apply biz-type data to DB
-function applyBizData(type){
+async function applyBizData(type){
   const data=BIZ_DATA[type];
   if(!data)return;
   DB.employees=JSON.parse(JSON.stringify(data.employees||DB.employees));
   DB.services=JSON.parse(JSON.stringify(data.services||DB.services));
   DB.rooms=JSON.parse(JSON.stringify(data.rooms||DB.rooms));
-  DB.suppliers=JSON.parse(JSON.stringify(data.suppliers||DB.suppliers));
   DB.zones=JSON.parse(JSON.stringify(data.zones||DB.zones));
   DB.cabinetTypes=JSON.parse(JSON.stringify(data.cabinetTypes||DB.cabinetTypes));
   if(data.renovations)DB.renovations=JSON.parse(JSON.stringify(data.renovations));
   if(data.vendorCompanies)DB.vendorCompanies=JSON.parse(JSON.stringify(data.vendorCompanies));
+  // Load equipment from JSON (type-specific + common)
+  const equipMap={dental:'dental',coffee:'coffee',beauty:'beauty',fitness:'fitness',food:'food'};
+  const eqFile=equipMap[type];
+  if(eqFile){
+    try{
+      const[spec,common]=await Promise.all([
+        fetch('data/equipment/'+eqFile+'.json').then(r=>r.json()),
+        fetch('data/equipment/common.json').then(r=>r.json())
+      ]);
+      DB.suppliers=[...spec,...common].map(function(e){return{
+        id:e.id,name:e.name+(e.model?' '+e.model:''),
+        category:e.category||'Другое',price:e.price_pln||0,
+        supplier:e.supplier||e.brand||'—',warranty:e.specs||'—',
+        notes:'',img:e.image||null
+      }});
+    }catch(e){console.warn('[SVITA] equipment load:',e);DB.suppliers=data.suppliers||DB.suppliers}
+  }else{
+    DB.suppliers=JSON.parse(JSON.stringify(data.suppliers||DB.suppliers));
+  }
   // Reset picked items (new concept = clean slate)
   DB.pickedStaff={};DB.pickedEquip={};DB.pickedServices={};DB.pickedRooms={};
   DB.pickedContractors={};DB.pickedRenovations={};DB.pickedDocs={};
@@ -4586,10 +4604,8 @@ async function confirmBizChange(){
   if(currentBizSubtype)localStorage.setItem('svita_biz_subtype',currentBizSubtype);
   // Apply data if changed
   if(changed){
-    if(currentBizType!=='dental'&&BIZ_DATA[currentBizType]){
-      applyBizData(currentBizType);
-    }else if(currentBizType==='dental'){
-      location.reload();return;
+    if(BIZ_DATA[currentBizType]){
+      await applyBizData(currentBizType);
     }
     // Auto-pick employees
     DB.employees.forEach(e=>{DB.pickedStaff[String(e.id)]={qty:1}});
@@ -4988,11 +5004,11 @@ function selectBizSubtype(id){
   });
 }
 
-function enterApp(){
+async function enterApp(){
   if(!currentRole||!currentUser)return;
-  // Apply business-type data if not dental (dental = default DB)
-  if(currentBizType&&currentBizType!=='dental'&&BIZ_DATA[currentBizType]){
-    applyBizData(currentBizType);
+  // Apply business-type data (load equipment from JSON)
+  if(currentBizType&&BIZ_DATA[currentBizType]){
+    await applyBizData(currentBizType);
   }
   document.getElementById('loginScreen').style.display='none';
   document.getElementById('loginScreen').classList.add('hidden');

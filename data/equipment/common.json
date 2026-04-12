@@ -1,0 +1,37 @@
+[
+  {"id":100,"name":"Стойка ресепшн","category":"Мебель общая","brand":"IKEA Business","model":"BEKANT","price_pln":3200,"supplier":"IKEA","image":null,"specs":"160×80 см, регулируемая высота, белый/дуб"},
+  {"id":101,"name":"Кресло офисное (администратор)","category":"Мебель общая","brand":"IKEA","model":"MARKUS","price_pln":999,"supplier":"IKEA","image":null,"specs":"Эргономичное, сетка, подлокотники"},
+  {"id":102,"name":"Диван для зоны ожидания (2-мест.)","category":"Мебель общая","brand":"IKEA","model":"LANDSKRONA","price_pln":2499,"supplier":"IKEA","image":null,"specs":"2-местный, кожзам, 164×89 см"},
+  {"id":103,"name":"Журнальный столик","category":"Мебель общая","brand":"IKEA","model":"LACK","price_pln":79,"supplier":"IKEA","image":null,"specs":"55×55 см, чёрный/белый"},
+  {"id":104,"name":"Вешалка напольная","category":"Мебель общая","brand":"IKEA","model":"TJUSIG","price_pln":149,"supplier":"IKEA","image":null,"specs":"Белый/чёрный, 6 крючков"},
+  {"id":105,"name":"Шкаф для персонала (локеры)","category":"Мебель общая","brand":"Metalkas","model":"SUM 420W","price_pln":1800,"supplier":"Metalkas","image":null,"specs":"4 секции, замки, сталь RAL 7035"},
+  {"id":106,"name":"Стул для клиента (зона ожидания)","category":"Мебель общая","brand":"IKEA","model":"EKEDALEN","price_pln":249,"supplier":"IKEA","image":null,"specs":"Складируемый, дерево/текстиль"},
+
+  {"id":200,"name":"POS-терминал","category":"IT и кассовое","brand":"SumUp","model":"Solo","price_pln":499,"supplier":"SumUp","image":null,"specs":"Сенсорный, NFC, Wi-Fi, принтер чеков"},
+  {"id":201,"name":"Кассовый аппарат (фискальный)","category":"IT и кассовое","brand":"Posnet","model":"Ergo","price_pln":1990,"supplier":"Posnet","image":null,"specs":"Фискальный, ПО, онлайн, Польша"},
+  {"id":202,"name":"Ноутбук (администрация)","category":"IT и кассовое","brand":"Lenovo","model":"ThinkPad E16","price_pln":3499,"supplier":"x-kom","image":null,"specs":"i5, 16GB, 512GB SSD, 16\""},
+  {"id":203,"name":"Роутер Wi-Fi","category":"IT и кассовое","brand":"TP-Link","model":"Archer AX55","price_pln":349,"supplier":"x-kom","image":null,"specs":"Wi-Fi 6, двухдиапазонный, 4 антенны"},
+  {"id":204,"name":"IP-камера внутренняя","category":"IT и кассовое","brand":"Hikvision","model":"DS-2CD1143G2-I","price_pln":399,"supplier":"Ivel","image":null,"specs":"4MP, PoE, ИК 30м, IP67"},
+  {"id":205,"name":"Видеорегистратор (NVR)","category":"IT и кассовое","brand":"Hikvision","model":"DS-7604NI-K1","price_pln":799,"supplier":"Ivel","image":null,"specs":"4 канала, 4K, 1×HDD до 6TB"},
+  {"id":206,"name":"Планшет для клиентов","category":"IT и кассовое","brand":"Samsung","model":"Galaxy Tab A9","price_pln":799,"supplier":"x-kom","image":null,"specs":"8.7\", 4GB/64GB, Wi-Fi"},
+  {"id":207,"name":"Принтер МФУ","category":"IT и кассовое","brand":"HP","model":"LaserJet MFP M234dw","price_pln":1199,"supplier":"x-kom","image":null,"specs":"Лазер, ч/б, дуплекс, Wi-Fi, скан"},
+  {"id":208,"name":"UPS (бесперебойник)","category":"IT и кассовое","brand":"APC","model":"Back-UPS 750VA","price_pln":449,"supplier":"x-kom","image":null,"specs":"750VA/410W, 4 розетки, USB"},
+
+  {"id":300,"name":"Кондиционер сплит-система","category":"Климат","brand":"Samsung","model":"Wind-Free AR12","price_pln":3200,"supplier":"Klimatyzacja24","image":null,"specs":"3.5kW, инвертор, Wi-Fi, R32"},
+  {"id":301,"name":"Очиститель воздуха","category":"Климат","brand":"Xiaomi","model":"Smart Air Purifier 4","price_pln":699,"supplier":"x-kom","image":null,"specs":"HEPA 13, до 48 м², Wi-Fi"},
+  {"id":302,"name":"Обогреватель конвекторный","category":"Климат","brand":"Atlantic","model":"F119 1500W","price_pln":599,"supplier":"Leroy Merlin","image":null,"specs":"1500W, электронный термостат, настенный"},
+
+  {"id":400,"name":"Вывеска световая (лайтбокс)","category":"Вывеска и навигация","brand":"—","model":"Custom","price_pln":4500,"supplier":"SignGroup","image":null,"specs":"LED, одностороняя, 200×50 см, монтаж"},
+  {"id":401,"name":"Информационная табличка","category":"Вывеска и навигация","brand":"—","model":"Custom","price_pln":150,"supplier":"SignGroup","image":null,"specs":"A4, акрил, гравировка"},
+  {"id":402,"name":"Наклейки на витрину","category":"Вывеска и навигация","brand":"—","model":"Custom","price_pln":800,"supplier":"SignGroup","image":null,"specs":"Плоттерная резка, брендинг"},
+
+  {"id":500,"name":"Аптечка первой помощи","category":"Безопасность","brand":"PharmaBox","model":"DIN 13157","price_pln":189,"supplier":"Apteka","image":null,"specs":"Стандарт DIN, настенный бокс"},
+  {"id":501,"name":"Огнетушитель порошковый","category":"Безопасность","brand":"Boxmet","model":"GP-2x ABC","price_pln":89,"supplier":"Castorama","image":null,"specs":"2 кг, ABC, давление 15 бар"},
+  {"id":502,"name":"Система пожарной сигнализации","category":"Безопасность","brand":"Ajax","model":"FireProtect","price_pln":349,"supplier":"Ajax Systems","image":null,"specs":"Дымовой+тепловой, беспроводной, 85 дБ"},
+
+  {"id":600,"name":"Уборочный комплект (тележка)","category":"Хозяйственное","brand":"Vileda","model":"UltraSpeed Pro","price_pln":599,"supplier":"Makro","image":null,"specs":"Тележка, ведро, моп, отжим"},
+  {"id":601,"name":"Пылесос профессиональный","category":"Хозяйственное","brand":"Karcher","model":"T 10/1","price_pln":1399,"supplier":"Karcher","image":null,"specs":"10л, 1250W, HEPA, тихий 57 дБ"},
+  {"id":602,"name":"Диспенсер бумажных полотенец","category":"Хозяйственное","brand":"Tork","model":"H2 Xpress","price_pln":189,"supplier":"Makro","image":null,"specs":"Настенный, ABS пластик, ZZ-сложение"},
+  {"id":603,"name":"Диспенсер жидкого мыла","category":"Хозяйственное","brand":"Tork","model":"S4","price_pln":129,"supplier":"Makro","image":null,"specs":"Сенсорный, 1л, настенный"},
+  {"id":604,"name":"Мусорная корзина с педалью","category":"Хозяйственное","brand":"Brabantia","model":"newIcon 30L","price_pln":299,"supplier":"Makro","image":null,"specs":"30л, педаль, внутреннее ведро"}
+]
