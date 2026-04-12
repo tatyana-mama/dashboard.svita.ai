@@ -11,828 +11,828 @@
   ],
   "items": [
     {
-      "cat": "Регистрация компании",
-      "name": "Регистрация ООО в KRS",
-      "desc": "Судебный реестр (KRS) — акт нотариуса, устав, подача",
+      "cat": "Rejestracja firmy",
+      "name": "Rejestracja sp. z o.o. w KRS",
+      "desc": "Krajowy Rejestr Sądowy (KRS) — akt notarialny, umowa spółki, złożenie wniosku",
       "price": 1500,
       "required": true,
-      "note": "Для чего: юридическая регистрация компании, получение KRS-номера.\nГде: Sąd Rejonowy (районный суд) по месту регистрации или онлайн через S24 (s24.ms.gov.pl).\nСроки: 7–14 рабочих дней (суд), 1 день (S24). Делать первым — без KRS нельзя NIP, REGON, счёт.\nДокументы: устав (umowa spółki), акт нотариуса, заявление KRS-W3."
+      "note": "Po co: prawna rejestracja spółki, uzyskanie numeru KRS.\nGdzie: Sąd Rejonowy właściwy dla siedziby lub online przez S24 (s24.ms.gov.pl).\nTerminy: 7–14 dni roboczych (sąd), 1 dzień (S24). Zrobić w pierwszej kolejności — bez KRS nie ma NIP, REGON ani konta.\nDokumenty: umowa spółki, akt notarialny, wniosek KRS-W3."
     },
     {
-      "cat": "Регистрация компании",
-      "name": "Запись в CEIDG (для ИП)",
-      "desc": "Центральный реестр — альтернатива KRS, бесплатно онлайн",
+      "cat": "Rejestracja firmy",
+      "name": "Wpis do CEIDG (dla JDG)",
+      "desc": "Centralna Ewidencja — alternatywa dla KRS, bezpłatnie online",
       "price": 0,
       "required": false,
-      "note": "Для чего: регистрация индивидуального предпринимателя (ИП) вместо ООО.\nГде: ceidg.gov.pl или лично в уженде гмины.\nСроки: 1 рабочий день. Бесплатно.\nВажно: ИП отвечает всем имуществом. Для клиники рекомендуется ООО (sp. z o.o.)."
+      "note": "Po co: rejestracja jednoosobowej działalności gospodarczej (JDG) zamiast sp. z o.o.\nGdzie: ceidg.gov.pl lub osobiście w urzędzie gminy.\nTerminy: 1 dzień roboczy. Bezpłatnie.\nWażne: JDG odpowiada całym majątkiem. Dla kliniki rekomendowana sp. z o.o."
     },
     {
-      "cat": "Регистрация компании",
-      "name": "NIP — налоговый номер",
-      "desc": "Выдаётся налоговой автоматически при регистрации",
+      "cat": "Rejestracja firmy",
+      "name": "NIP — numer identyfikacji podatkowej",
+      "desc": "Nadawany automatycznie przez urząd skarbowy przy rejestracji",
       "price": 0,
       "required": true,
-      "note": "Для чего: идентификация налогоплательщика, обязателен для счетов и договоров.\nГде: Urząd Skarbowy (налоговая) — выдаётся автоматически при регистрации в KRS/CEIDG.\nСроки: 3–7 дней после KRS. При S24 — в тот же день.\nВажно: без NIP нельзя открыть счёт и начать работу."
+      "note": "Po co: identyfikacja podatnika, obowiązkowy dla faktur i umów.\nGdzie: Urząd Skarbowy — nadawany automatycznie przy rejestracji w KRS/CEIDG.\nTerminy: 3–7 dni po KRS. Przy S24 — tego samego dnia.\nWażne: bez NIP nie można otworzyć konta ani rozpocząć działalności."
     },
     {
-      "cat": "Регистрация компании",
-      "name": "REGON — статистический номер",
-      "desc": "Выдаётся ГУС автоматически",
+      "cat": "Rejestracja firmy",
+      "name": "REGON — numer statystyczny",
+      "desc": "Nadawany automatycznie przez GUS",
       "price": 0,
       "required": true,
-      "note": "Для чего: статистический учёт. Требуется для RPWDL, банка, договоров.\nГде: GUS (Główny Urząd Statystyczny) — автоматически при KRS/CEIDG.\nСроки: 7 дней после KRS (обычно одновременно с NIP).\nВажно: проверить код PKD 86.23.Z (стоматология) в заявлении."
+      "note": "Po co: ewidencja statystyczna. Wymagany do RPWDL, banku, umów.\nGdzie: GUS (Główny Urząd Statystyczny) — automatycznie przy KRS/CEIDG.\nTerminy: 7 dni po KRS (zwykle jednocześnie z NIP).\nWażne: sprawdzić kod PKD 86.23.Z (stomatologia) we wniosku."
     },
     {
-      "cat": "Регистрация компании",
-      "name": "VAT-R — регистрация НДС",
-      "desc": "Подача в налоговую. Стоматология может быть освобождена от НДС",
+      "cat": "Rejestracja firmy",
+      "name": "VAT-R — rejestracja VAT",
+      "desc": "Zgłoszenie do urzędu skarbowego. Stomatologia może być zwolniona z VAT",
       "price": 170,
       "required": true,
-      "note": "Для чего: регистрация как плательщика НДС (или освобождение от НДС).\nГде: Urząd Skarbowy — форма VAT-R.\nСроки: подать до начала деятельности. Обработка 7–14 дней.\nВажно: мед. услуги освобождены от НДС (ст. 43), но оборудование и ремонт — с НДС 23%. Консультация с бухгалтером обязательна."
+      "note": "Po co: rejestracja jako podatnik VAT (lub zwolnienie z VAT).\nGdzie: Urząd Skarbowy — formularz VAT-R.\nTerminy: złożyć przed rozpoczęciem działalności. Rozpatrzenie 7–14 dni.\nWażne: usługi medyczne są zwolnione z VAT (art. 43), ale wyposażenie i remont — z VAT 23%. Konsultacja z księgowym obowiązkowa."
     },
     {
-      "cat": "Регистрация компании",
-      "name": "Расчётный счёт",
-      "desc": "Банковский счёт + терминал. Обязательно для ООО",
+      "cat": "Rejestracja firmy",
+      "name": "Rachunek firmowy",
+      "desc": "Rachunek bankowy + terminal. Obowiązkowy dla sp. z o.o.",
       "price": 200,
       "required": true,
-      "note": "Для чего: обязательный расчётный счёт ООО. Все платежи >15 000 PLN — только через банк.\nГде: любой банк (ING, mBank, PKO — хорошие условия для sp. z o.o.).\nСроки: 1–3 дня после получения NIP и REGON.\nВажно: указать счёт в Urzędzie Skarbowym (форма NIP-8)."
+      "note": "Po co: obowiązkowy rachunek firmowy sp. z o.o. Wszystkie płatności >15 000 PLN — tylko przez bank.\nGdzie: dowolny bank (ING, mBank, PKO — dobre warunki dla sp. z o.o.).\nTerminy: 1–3 dni po uzyskaniu NIP i REGON.\nWażne: zgłosić rachunek w Urzędzie Skarbowym (formularz NIP-8)."
     },
     {
-      "cat": "Регистрация компании",
-      "name": "Печать компании",
-      "desc": "Круглая печать с NIP, REGON, названием и адресом",
+      "cat": "Rejestracja firmy",
+      "name": "Pieczątka firmowa",
+      "desc": "Pieczątka z NIP, REGON, nazwą i adresem",
       "price": 120,
       "required": true,
-      "note": "Для чего: официальные документы, договоры, рецепты.\nГде: любая пичатальня (drukarnia pieczątek) — заказ онлайн или лично.\nСроки: 1–2 дня. Заказывать после получения NIP и REGON.\nВажно: на печати должны быть: название, NIP, REGON, адрес."
+      "note": "Po co: oficjalne dokumenty, umowy, recepty.\nGdzie: dowolna drukarnia pieczątek — zamówienie online lub osobiście.\nTerminy: 1–2 dni. Zamawiać po uzyskaniu NIP i REGON.\nWażne: na pieczątce muszą być: nazwa, NIP, REGON, adres."
     },
     {
-      "cat": "Регистрация компании",
-      "name": "Бухгалтерские услуги (год)",
-      "desc": "Бухгалтерское бюро — обязательное ведение бухгалтерии",
+      "cat": "Rejestracja firmy",
+      "name": "Usługi księgowe (rok)",
+      "desc": "Biuro rachunkowe — obowiązkowe prowadzenie księgowości",
       "price": 12000,
       "required": true,
-      "note": "Для чего: обязательное ведение полной бухгалтерии для sp. z o.o.\nГде: бухгалтерское бюро (biuro rachunkowe) — искать специализирующееся на медицине.\nСроки: договор до начала деятельности. ~1000 PLN/мес.\nВажно: бюро должно знать специфику НДС в медицине и кассовые аппараты."
+      "note": "Po co: obowiązkowe prowadzenie pełnej księgowości dla sp. z o.o.\nGdzie: biuro rachunkowe — szukać specjalizującego się w medycynie.\nTerminy: umowa przed rozpoczęciem działalności. ~1000 PLN/mies.\nWażne: biuro musi znać specyfikę VAT w medycynie i kas fiskalnych."
     },
     {
-      "cat": "Медицинская регистрация (RPWDL)",
-      "name": "Запись в RPWDL",
-      "desc": "Реестр медицинских учреждений. Через воеводу",
+      "cat": "Rejestracja medyczna (RPWDL)",
+      "name": "Wpis do RPWDL",
+      "desc": "Rejestr Podmiotów Wykonujących Działalność Leczniczą. Przez wojewodę",
       "price": 500,
       "required": true,
-      "note": "Для чего: без записи в RPWDL клиника не может легально принимать пациентов.\nГде: Urząd Wojewódzki (воеводский уженд) — онлайн через rpwdl.ezdrowie.gov.pl.\nСроки: 30 дней на рассмотрение. Подавать после получения заключения PSSE.\nДокументы: регламент, декларация соответствия, данные руководителя, заключение PSSE."
+      "note": "Po co: bez wpisu do RPWDL klinika nie może legalnie przyjmować pacjentów.\nGdzie: Urząd Wojewódzki — online przez rpwdl.ezdrowie.gov.pl.\nTerminy: 30 dni na rozpatrzenie. Składać po uzyskaniu opinii PSSE.\nDokumenty: regulamin, oświadczenie o spełnieniu warunków, dane kierownika, opinia PSSE."
     },
     {
-      "cat": "Медицинская регистрация (RPWDL)",
-      "name": "Организационный регламент",
-      "desc": "Структура клиники, виды услуг, права пациентов",
+      "cat": "Rejestracja medyczna (RPWDL)",
+      "name": "Regulamin organizacyjny",
+      "desc": "Struktura kliniki, rodzaje usług, prawa pacjenta",
       "price": 2000,
       "required": true,
-      "note": "Для чего: обязательный документ для RPWDL — описывает структуру и правила работы клиники.\nГде: подготовить самостоятельно или с юристом по мед. праву.\nСроки: до подачи в RPWDL. Подготовка 1–2 недели.\nСодержание: виды услуг, часы работы, права пациентов, структура, зона обслуживания."
+      "note": "Po co: obowiązkowy dokument do RPWDL — opisuje strukturę i zasady pracy kliniki.\nGdzie: przygotować samodzielnie lub z prawnikiem prawa medycznego.\nTerminy: przed złożeniem do RPWDL. Przygotowanie 1–2 tygodnie.\nTreść: rodzaje usług, godziny pracy, prawa pacjenta, struktura, obszar działania."
     },
     {
-      "cat": "Медицинская регистрация (RPWDL)",
-      "name": "Медицинский руководитель",
-      "desc": "Врач с мин. 5 лет стажа. Подаётся в RPWDL",
+      "cat": "Rejestracja medyczna (RPWDL)",
+      "name": "Kierownik podmiotu leczniczego",
+      "desc": "Lekarz z min. 5-letnim stażem. Zgłaszany w RPWDL",
       "price": 0,
       "required": true,
-      "note": "Для чего: закон требует назначения мед. руководителя (kierownik podmiotu leczniczego).\nГде: указывается в заявлении RPWDL.\nСроки: до подачи в RPWDL.\nТребования: врач-стоматолог с PWZ + мин. 5 лет стажа. Может быть владелец."
+      "note": "Po co: prawo wymaga wyznaczenia kierownika podmiotu leczniczego.\nGdzie: wskazywany we wniosku RPWDL.\nTerminy: przed złożeniem do RPWDL.\nWymagania: lekarz dentysta z PWZ + min. 5 lat stażu. Może być właściciel."
     },
     {
-      "cat": "Медицинская регистрация (RPWDL)",
-      "name": "Декларация соответствия условиям",
-      "desc": "Декларация соответствия помещения и оборудования",
+      "cat": "Rejestracja medyczna (RPWDL)",
+      "name": "Oświadczenie o spełnieniu warunków",
+      "desc": "Oświadczenie o zgodności lokalu i wyposażenia",
       "price": 0,
       "required": true,
-      "note": "Для чего: подтверждение что помещение и оборудование соответствуют требованиям.\nГде: заполняется при подаче в RPWDL.\nСроки: подаётся вместе с заявлением RPWDL.\nВажно: это самодекларация — но PSSE может проверить. Ложная декларация = штраф."
+      "note": "Po co: potwierdzenie, że lokal i wyposażenie spełniają wymagania.\nGdzie: wypełniane przy składaniu wniosku RPWDL.\nTerminy: składane razem z wnioskiem RPWDL.\nWażne: to samooświadczenie — ale PSSE może zweryfikować. Fałszywe oświadczenie = kara."
     },
     {
-      "cat": "Медицинская регистрация (RPWDL)",
-      "name": "Юридическая консультация RPWDL",
-      "desc": "Юрист по медицинскому праву — подготовка документов",
+      "cat": "Rejestracja medyczna (RPWDL)",
+      "name": "Konsultacja prawna RPWDL",
+      "desc": "Prawnik prawa medycznego — przygotowanie dokumentów",
       "price": 3000,
       "required": false,
-      "note": "Для чего: юрист проверяет документы и помогает избежать отказа в регистрации.\nГде: юридическая фирма специализирующаяся на prawo medyczne.\nСроки: 1–2 недели на подготовку пакета.\nВажно: экономит время и снижает риск отказа. Окупается."
+      "note": "Po co: prawnik sprawdza dokumenty i pomaga uniknąć odmowy rejestracji.\nGdzie: kancelaria specjalizująca się w prawie medycznym.\nTerminy: 1–2 tygodnie na przygotowanie pakietu.\nWażne: oszczędza czas i zmniejsza ryzyko odmowy. Zwraca się."
     },
     {
-      "cat": "Санэпиднадзор (PSSE)",
-      "name": "Технологический проект кабинета",
-      "desc": "Архитектурный план: зоны, потоки, вентиляция, водоснабжение",
+      "cat": "Nadzór sanitarny (PSSE)",
+      "name": "Projekt technologiczny gabinetu",
+      "desc": "Plan architektoniczny: strefy, ciągi komunikacyjne, wentylacja, wodociąg",
       "price": 6000,
       "required": true,
-      "note": "Для чего: обязательный проект для получения заключения PSSE. Описывает все технические решения.\nГде: архитектор с опытом мед. проектирования.\nСроки: 2–4 недели. Делать параллельно с ремонтом.\nСодержание: зоны (чистая/грязная), потоки пациентов и персонала, вентиляция, водоснабжение, отделка."
+      "note": "Po co: obowiązkowy projekt do uzyskania opinii PSSE. Opisuje wszystkie rozwiązania techniczne.\nGdzie: architekt z doświadczeniem w projektowaniu obiektów medycznych.\nTerminy: 2–4 tygodnie. Robić równolegle z remontem.\nTreść: strefy (czysta/brudna), ciągi pacjentów i personelu, wentylacja, wodociąg, wykończenie."
     },
     {
-      "cat": "Санэпиднадзор (PSSE)",
-      "name": "Санитарное заключение PSSE",
-      "desc": "Инспекция помещения перед открытием. Без этого нельзя RPWDL",
+      "cat": "Nadzór sanitarny (PSSE)",
+      "name": "Opinia sanitarna PSSE",
+      "desc": "Inspekcja lokalu przed otwarciem. Bez niej nie ma RPWDL",
       "price": 0,
       "required": true,
-      "note": "Для чего: без положительного заключения PSSE невозможна запись в RPWDL.\nГде: Powiatowa Stacja Sanitarno-Epidemiologiczna по месту клиники.\nСроки: подать заявление → инспекция в течение 14 дней → заключение 7 дней.\nВажно: инспектор проверяет помещение лично. Всё должно соответствовать проекту."
+      "note": "Po co: bez pozytywnej opinii PSSE niemożliwy jest wpis do RPWDL.\nGdzie: Powiatowa Stacja Sanitarno-Epidemiologiczna właściwa dla lokalu kliniki.\nTerminy: złożyć wniosek → inspekcja w ciągu 14 dni → opinia w 7 dni.\nWażne: inspektor sprawdza lokal osobiście. Wszystko musi być zgodne z projektem."
     },
     {
-      "cat": "Санэпиднадзор (PSSE)",
-      "name": "Анализ воды",
-      "desc": "Бактериология, химия. Аккредитованная лаборатория. Раз в год",
+      "cat": "Nadzór sanitarny (PSSE)",
+      "name": "Badanie wody",
+      "desc": "Bakteriologia, chemia. Akredytowane laboratorium. Raz w roku",
       "price": 800,
       "required": true,
-      "note": "Для чего: подтверждение качества воды в установках (unit). Обязательно ежегодно.\nГде: аккредитованная лаборатория (np. WSSE, SGS, Bureau Veritas).\nСроки: результат 5–7 дней. Делать до инспекции PSSE и далее ежегодно.\nВажно: проверяются Legionella, Pseudomonas, общее микробное число."
+      "note": "Po co: potwierdzenie jakości wody w unitach stomatologicznych. Obowiązkowe corocznie.\nGdzie: akredytowane laboratorium (np. WSSE, SGS, Bureau Veritas).\nTerminy: wynik 5–7 dni. Wykonać przed inspekcją PSSE, a następnie corocznie.\nWażne: sprawdzane są Legionella, Pseudomonas, ogólna liczba mikroorganizmów."
     },
     {
-      "cat": "Санэпиднадзор (PSSE)",
-      "name": "Анализ воздуха",
-      "desc": "Чистота воздуха в кабинетах. Обязательно при кондиционировании",
+      "cat": "Nadzór sanitarny (PSSE)",
+      "name": "Badanie powietrza",
+      "desc": "Czystość powietrza w gabinetach. Obowiązkowe przy klimatyzacji",
       "price": 700,
       "required": true,
-      "note": "Для чего: проверка чистоты воздуха — особенно при наличии кондиционирования.\nГде: аккредитованная лаборатория.\nСроки: результат 5–7 дней. До инспекции PSSE.\nВажно: при наличии кондиционера — обязательно. Проверяются грибки, бактерии."
+      "note": "Po co: sprawdzenie czystości powietrza — szczególnie przy klimatyzacji.\nGdzie: akredytowane laboratorium.\nTerminy: wynik 5–7 dni. Przed inspekcją PSSE.\nWażne: przy klimatyzacji — obowiązkowe. Sprawdzane są grzyby i bakterie."
     },
     {
-      "cat": "Санэпиднадзор (PSSE)",
-      "name": "Программа гигиены PPC",
-      "desc": "Процедуры мытья, дезинфекции, стерилизации по зонам",
+      "cat": "Nadzór sanitarny (PSSE)",
+      "name": "Plan higieny PPC",
+      "desc": "Procedury mycia, dezynfekcji, sterylizacji w poszczególnych strefach",
       "price": 3500,
       "required": true,
-      "note": "Для чего: обязательная программа поддержания чистоты и стерильности.\nГде: подготовить с помощью специалиста по гигиене или купить шаблон + адаптировать.\nСроки: до инспекции PSSE. Подготовка 1–2 недели.\nСодержание: мытьё рук, дезинфекция поверхностей, стерилизация инструментов, обработка зон."
+      "note": "Po co: obowiązkowy plan utrzymania czystości i sterylności.\nGdzie: przygotować z pomocą specjalisty ds. higieny lub kupić szablon i dostosować.\nTerminy: przed inspekcją PSSE. Przygotowanie 1–2 tygodnie.\nTreść: mycie rąk, dezynfekcja powierzchni, sterylizacja narzędzi, obsługa stref."
     },
     {
-      "cat": "Санэпиднадзор (PSSE)",
-      "name": "Договор на стирку мед. одежды",
-      "desc": "Профессиональная прачечная с сертификатом",
+      "cat": "Nadzór sanitarny (PSSE)",
+      "name": "Umowa na pranie odzieży medycznej",
+      "desc": "Profesjonalna pralnia z certyfikatem",
       "price": 500,
       "required": true,
-      "note": "Для чего: медицинскую одежду нельзя стирать дома — только профессиональная прачечная.\nГде: pralnia z certyfikatem (прачечная с сертификатом) — искать «pralnia medyczna».\nСроки: договор до начала работы.\nВажно: прачечная должна иметь сертификат на стирку мед. текстиля. ~500 PLN/год."
+      "note": "Po co: odzieży medycznej nie można prać w domu — tylko profesjonalna pralnia.\nGdzie: pralnia z certyfikatem — szukać „pralnia medyczna”.\nTerminy: umowa przed rozpoczęciem działalności.\nWażne: pralnia musi mieć certyfikat na pranie tekstyliów medycznych. ~500 PLN/rok."
     },
     {
-      "cat": "Санэпиднадзор (PSSE)",
-      "name": "Договор ДДД (дезинсекция)",
-      "desc": "Периодическая обработка от насекомых и грызунов",
+      "cat": "Nadzór sanitarny (PSSE)",
+      "name": "Umowa DDD (dezynfekcja, dezynsekcja, deratyzacja)",
+      "desc": "Okresowe zabiegi przeciwko owadom i gryzoniom",
       "price": 1200,
       "required": true,
-      "note": "Для чего: обязательная профилактическая дезинсекция и дератизация.\nГде: фирма DDD с лицензией.\nСроки: договор до начала работы. Обработка 2–4 раза в год.\nВажно: инспектор PSSE проверяет наличие договора и протоколов обработки."
+      "note": "Po co: obowiązkowa profilaktyczna dezynsekcja i deratyzacja.\nGdzie: firma DDD z licencją.\nTerminy: umowa przed rozpoczęciem działalności. Zabiegi 2–4 razy w roku.\nWażne: inspektor PSSE sprawdza umowę i protokoły zabiegów."
     },
     {
-      "cat": "Санэпиднадзор (PSSE)",
-      "name": "Журнал санитарного контроля",
-      "desc": "Журнал для фиксации проверок санэпиднадзора",
+      "cat": "Nadzór sanitarny (PSSE)",
+      "name": "Książka kontroli sanitarnej",
+      "desc": "Książka do wpisywania wyników kontroli sanitarnych",
       "price": 50,
       "required": true,
-      "note": "Для чего: обязательный журнал, куда инспектор PSSE записывает результаты проверок.\nГде: купить в канцелярском магазине или заказать онлайн.\nСроки: иметь с первого дня работы.\nВажно: храните на рецепции — инспектор попросит при проверке."
+      "note": "Po co: obowiązkowa książka, do której inspektor PSSE wpisuje wyniki kontroli.\nGdzie: kupić w sklepie papierniczym lub zamówić online.\nTerminy: mieć od pierwszego dnia działalności.\nWażne: przechowywać w recepcji — inspektor poprosi podczas kontroli."
     },
     {
-      "cat": "Санэпиднадзор (PSSE)",
-      "name": "Проверка вентиляции",
-      "desc": "Ежегодный протокол эффективности вентиляции",
+      "cat": "Nadzór sanitarny (PSSE)",
+      "name": "Kontrola wentylacji",
+      "desc": "Coroczny protokół skuteczności wentylacji",
       "price": 1500,
       "required": true,
-      "note": "Для чего: подтверждение что вентиляция работает по нормам (кратность воздухообмена).\nГде: фирма с лицензией на проверку вентиляции (kominiarstwo).\nСроки: до инспекции PSSE, далее ежегодно.\nНормы: кабинет — 6 обменов/час, стерилизаторная — 10, рентген — 10."
+      "note": "Po co: potwierdzenie, że wentylacja działa zgodnie z normami (krotność wymian powietrza).\nGdzie: firma z licencją na kontrolę wentylacji (kominiarstwo).\nTerminy: przed inspekcją PSSE, a następnie corocznie.\nNorma: gabinet — 6 wymian/godz., sterylizatornia — 10, rentgen — 10."
     },
     {
-      "cat": "Пожарная безопасность",
-      "name": "Инструкция пожарной безопасности",
-      "desc": "Обязательна для помещений >1000 м³ или >50 человек",
+      "cat": "Bezpieczeństwo pożarowe",
+      "name": "Instrukcja bezpieczeństwa pożarowego",
+      "desc": "Obowiązkowa dla lokali >1000 m³ lub >50 osób",
       "price": 2500,
       "required": true,
-      "note": "Для чего: instrukcja bezpieczeństwa pożarowego (IBP) — обязательна по закону.\nГде: подготовить специалист по пожарной безопасности (rzeczoznawca p.poż.).\nСроки: до начала работы. Подготовка 1–2 недели.\nСодержание: план эвакуации, условия защиты, обязанности, схема здания."
+      "note": "Po co: instrukcja bezpieczeństwa pożarowego (IBP) — wymagana prawem.\nGdzie: przygotowuje rzeczoznawca ds. zabezpieczeń przeciwpożarowych (rzeczoznawca p.poż.).\nTerminy: przed rozpoczęciem działalności. Przygotowanie 1–2 tygodnie.\nTreść: plan ewakuacji, warunki ochrony, obowiązki, schemat budynku."
     },
     {
-      "cat": "Пожарная безопасность",
-      "name": "Проверка огнетушителей",
-      "desc": "Ежегодный осмотр. Мин. 1 огнетушитель на 100 м²",
+      "cat": "Bezpieczeństwo pożarowe",
+      "name": "Przegląd gaśnic",
+      "desc": "Coroczny przegląd. Min. 1 gaśnica na 100 m²",
       "price": 500,
       "required": true,
-      "note": "Для чего: обязательный ежегодный техосмотр огнетушителей.\nГде: сертифицированная фирма по обслуживанию (konserwacja gaśnic).\nСроки: первая проверка при установке, далее ежегодно.\nНорма: мин. 1 огнетушитель на 100 м², мин. 2 кг порошка. Тип ABC."
+      "note": "Po co: obowiązkowy coroczny przegląd techniczny gaśnic.\nGdzie: certyfikowana firma konserwacyjna (konserwacja gaśnic).\nTerminy: pierwszy przegląd przy montażu, następnie corocznie.\nNorma: min. 1 gaśnica na 100 m², min. 2 kg proszku. Typ ABC."
     },
     {
-      "cat": "Пожарная безопасность",
-      "name": "Эвакуационная разметка",
-      "desc": "Фотолюминесцентные знаки, план эвакуации, аварийное освещение",
+      "cat": "Bezpieczeństwo pożarowe",
+      "name": "Oznakowanie ewakuacyjne",
+      "desc": "Znaki fotoluminescencyjne, plan ewakuacji, oświetlenie awaryjne",
       "price": 1500,
       "required": true,
-      "note": "Для чего: обязательная маркировка путей эвакуации и аварийное освещение.\nГде: фирма по пожарной безопасности + электрик для аварийного освещения.\nСроки: до начала работы.\nВключает: знаки EXIT, фотолюминесцентные стрелки, план эвакуации на стене, аварийные светильники."
+      "note": "Po co: obowiązkowe oznakowanie dróg ewakuacji i oświetlenie awaryjne.\nGdzie: firma p.poż. + elektryk do oświetlenia awaryjnego.\nTerminy: przed rozpoczęciem działalności.\nObejmuje: znaki EXIT, fotoluminescencyjne strzałki, plan ewakuacji na ścianie, oprawy awaryjne."
     },
     {
-      "cat": "Пожарная безопасность",
-      "name": "Обучение пожарной безопасности",
-      "desc": "Обучение персонала пожарной безопасности. Раз в год",
+      "cat": "Bezpieczeństwo pożarowe",
+      "name": "Szkolenie przeciwpożarowe",
+      "desc": "Szkolenie personelu z ochrony p.poż. Raz w roku",
       "price": 800,
       "required": true,
-      "note": "Для чего: все сотрудники должны знать правила эвакуации и использования огнетушителей.\nГде: инструктор по пожарной безопасности или онлайн-курс с сертификатом.\nСроки: до начала работы каждого сотрудника, далее ежегодно.\nВажно: протокол обучения хранить — инспектор проверяет."
+      "note": "Po co: wszyscy pracownicy muszą znać zasady ewakuacji i obsługi gaśnic.\nGdzie: instruktor p.poż. lub kurs online z certyfikatem.\nTerminy: przed rozpoczęciem pracy każdego pracownika, następnie corocznie.\nWażne: protokół szkolenia przechowywać — inspektor sprawdza."
     },
     {
-      "cat": "Пожарная безопасность",
-      "name": "Приёмка пожарной охраны",
-      "desc": "Инспекция при смене назначения помещения",
+      "cat": "Bezpieczeństwo pożarowe",
+      "name": "Odbiór straży pożarnej",
+      "desc": "Inspekcja przy zmianie sposobu użytkowania lokalu",
       "price": 0,
       "required": false,
-      "note": "Для чего: если помещение меняет назначение (например, было офисом → стало клиникой).\nГде: Komenda Powiatowa Państwowej Straży Pożarnej.\nСроки: подать заявление → инспекция в течение 14 дней.\nВажно: не всегда требуется — уточнить у проектировщика."
+      "note": "Po co: jeśli lokal zmienia sposób użytkowania (np. biuro → klinika).\nGdzie: Komenda Powiatowa Państwowej Straży Pożarnej.\nTerminy: złożyć wniosek → inspekcja w ciągu 14 dni.\nWażne: nie zawsze wymagane — potwierdzić u projektanta."
     },
     {
-      "cat": "Помещение и строительство",
-      "name": "Договор аренды (нотариальный)",
-      "desc": "Нотариальное заверение для RPWDL. Мин. 5-10 лет",
+      "cat": "Lokal i budowa",
+      "name": "Umowa najmu (notarialna)",
+      "desc": "Poświadczenie notarialne dla RPWDL. Min. 5–10 lat",
       "price": 1500,
       "required": true,
-      "note": "Для чего: нотариальный договор аренды — для RPWDL и для защиты инвестиций.\nГде: нотариус (notariusz).\nСроки: до начала ремонта.\nВажно: мин. 5 лет (лучше 10). Указать разрешение на мед. деятельность, ремонт, вывеску. Бронировать до подписания!"
+      "note": "Po co: notarialna umowa najmu — dla RPWDL i ochrony inwestycji.\nGdzie: notariusz.\nTerminy: przed rozpoczęciem remontu.\nWażne: min. 5 lat (lepiej 10). Wpisać zgodę na działalność medyczną, remont, szyld. Rezerwować przed podpisaniem!"
     },
     {
-      "cat": "Помещение и строительство",
-      "name": "Изменение назначения помещения",
-      "desc": "Если помещение не было медицинским — строительный надзор",
+      "cat": "Lokal i budowa",
+      "name": "Zmiana sposobu użytkowania lokalu",
+      "desc": "Jeśli lokal nie był medyczny — nadzór budowlany",
       "price": 2000,
       "required": false,
-      "note": "Для чего: если помещение было жильём/офисом — нужно изменить назначение на мед.\nГде: Starostwo Powiatowe (строительный надзор).\nСроки: 30–65 дней.\nВажно: может потребоваться разрешение на строительство. Уточнить заранее."
+      "note": "Po co: jeśli lokal był mieszkaniem/biurem — trzeba zmienić sposób użytkowania na medyczny.\nGdzie: Starostwo Powiatowe (nadzór budowlany).\nTerminy: 30–65 dni.\nWażne: może być wymagane pozwolenie na budowę. Potwierdzić wcześniej."
     },
     {
-      "cat": "Помещение и строительство",
-      "name": "Разрешение на строительство",
-      "desc": "При перепланировке / изменении несущих конструкций",
+      "cat": "Lokal i budowa",
+      "name": "Pozwolenie na budowę",
+      "desc": "Przy przebudowie / zmianach w konstrukcji nośnej",
       "price": 500,
       "required": false,
-      "note": "Для чего: если ремонт затрагивает несущие стены или существенно меняет планировку.\nГде: Starostwo Powiatowe — заявление + проект.\nСроки: 30–65 дней.\nВажно: если ремонт не затрагивает несущих — достаточно zgłoszenie (уведомления)."
+      "note": "Po co: jeśli remont narusza ściany nośne lub istotnie zmienia układ.\nGdzie: Starostwo Powiatowe — wniosek + projekt.\nTerminy: 30–65 dni.\nWażne: jeśli remont nie narusza elementów nośnych — wystarczy zgłoszenie."
     },
     {
-      "cat": "Помещение и строительство",
-      "name": "Строительный проект адаптации",
-      "desc": "Проект перепланировки: электрика, вода, вентиляция",
+      "cat": "Lokal i budowa",
+      "name": "Projekt budowlany adaptacji",
+      "desc": "Projekt przebudowy: elektryka, woda, wentylacja",
       "price": 15000,
       "required": true,
-      "note": "Для чего: полный проект адаптации помещения под стоматологию.\nГде: архитектурное бюро с опытом мед. проектирования.\nСроки: 3–6 недель. Делать ДО ремонта.\nВключает: перепланировку, электрику (380В для установок), водоснабжение, вентиляцию, канализацию."
+      "note": "Po co: pełny projekt adaptacji lokalu pod stomatologię.\nGdzie: biuro architektoniczne z doświadczeniem w projektowaniu obiektów medycznych.\nTerminy: 3–6 tygodni. Wykonać PRZED remontem.\nObejmuje: przebudowę, elektrykę (380 V dla unitów), wodociąg, wentylację, kanalizację."
     },
     {
-      "cat": "Помещение и строительство",
-      "name": "Технический приём",
-      "desc": "Протокол от руководителя стройки после ремонта",
+      "cat": "Lokal i budowa",
+      "name": "Odbiór techniczny",
+      "desc": "Protokół od kierownika budowy po remoncie",
       "price": 2000,
       "required": true,
-      "note": "Для чего: протокол технической приёмки после завершения ремонта.\nГде: руководитель стройки (kierownik budowy) — назначается при ремонте.\nСроки: сразу после завершения ремонта, до инспекции PSSE.\nВажно: без протокола нельзя получить заключение PSSE."
+      "note": "Po co: protokół odbioru technicznego po zakończeniu remontu.\nGdzie: kierownik budowy — wyznaczany przy remoncie.\nTerminy: zaraz po zakończeniu remontu, przed inspekcją PSSE.\nWażne: bez protokołu nie można uzyskać opinii PSSE."
     },
     {
-      "cat": "Помещение и строительство",
-      "name": "Проверка электроустановки",
-      "desc": "Заземление, изоляция, УЗО. Протокол от электрика",
+      "cat": "Lokal i budowa",
+      "name": "Pomiary instalacji elektrycznej",
+      "desc": "Uziemienie, izolacja, RCD. Protokół od elektryka",
       "price": 1500,
       "required": true,
-      "note": "Для чего: обязательный протокол исправности электроустановки.\nГде: электрик с квалификацией SEP (uprawnienia pomiarowe).\nСроки: после монтажа электрики, до PSSE. Далее каждые 5 лет.\nПроверяется: изоляция, заземление, УЗО, медицинское заземление кабинетов."
+      "note": "Po co: obowiązkowy protokół sprawności instalacji elektrycznej.\nGdzie: elektryk z uprawnieniami SEP (uprawnienia pomiarowe).\nTerminy: po montażu instalacji, przed PSSE. Następnie co 5 lat.\nSprawdzane: izolacja, uziemienie, RCD, medyczne uziemienie gabinetów."
     },
     {
-      "cat": "Помещение и строительство",
-      "name": "Протокол дымохода/вентиляции",
-      "desc": "Проверка вентиляции, дымоходов. Ежегодный",
+      "cat": "Lokal i budowa",
+      "name": "Protokół kominiarski / wentylacji",
+      "desc": "Kontrola wentylacji i przewodów kominowych. Coroczna",
       "price": 500,
       "required": true,
-      "note": "Для чего: обязательная ежегодная проверка технического состояния.\nГде: kominiarz (трубочист) с лицензией.\nСроки: ежегодно. Первый раз — до PSSE.\nВажно: протокол хранить — проверяется при каждой инспекции."
+      "note": "Po co: obowiązkowa coroczna kontrola stanu technicznego.\nGdzie: kominiarz z uprawnieniami.\nTerminy: corocznie. Pierwszy raz — przed PSSE.\nWażne: protokół przechowywać — sprawdzany przy każdej inspekcji."
     },
     {
-      "cat": "Помещение и строительство",
-      "name": "Энергетический сертификат",
-      "desc": "С 2023 обязателен при аренде",
+      "cat": "Lokal i budowa",
+      "name": "Świadectwo charakterystyki energetycznej",
+      "desc": "Od 2023 obowiązkowe przy najmie",
       "price": 800,
       "required": false,
-      "note": "Для чего: świadectwo charakterystyki energetycznej — обязательно при аренде/продаже с 2023.\nГде: сертифицированный аудитор (audytor energetyczny).\nСроки: до подписания договора аренды.\nВажно: обычно делает арендодатель. Уточнить."
+      "note": "Po co: świadectwo charakterystyki energetycznej — obowiązkowe przy najmie/sprzedaży od 2023.\nGdzie: certyfikowany audytor energetyczny.\nTerminy: przed podpisaniem umowy najmu.\nWażne: zwykle wykonuje wynajmujący. Potwierdzić."
     },
     {
-      "cat": "Защита данных (RODO)",
-      "name": "Политика защиты данных",
-      "desc": "Реестр процессов, DPIA для медданных, политика конфиденциальности",
+      "cat": "Ochrona danych (RODO)",
+      "name": "Polityka ochrony danych",
+      "desc": "Rejestr czynności przetwarzania, DPIA dla danych medycznych, polityka prywatności",
       "price": 3000,
       "required": true,
-      "note": "Для чего: комплексная документация по защите персональных данных (RODO/GDPR).\nГде: юрист/фирма по RODO или IOD.\nСроки: до начала приёма пациентов.\nВключает: политика конфиденциальности, DPIA (оценка рисков для медданных), реестр процессов, согласия."
+      "note": "Po co: kompleksowa dokumentacja ochrony danych osobowych (RODO).\nGdzie: prawnik/firma specjalizująca się w RODO lub IOD.\nTerminy: przed rozpoczęciem przyjmowania pacjentów.\nObejmuje: polityka prywatności, DPIA (ocena ryzyka dla danych medycznych), rejestr czynności, zgody."
     },
     {
-      "cat": "Защита данных (RODO)",
-      "name": "Инспектор защиты данных (IOD)",
-      "desc": "Обязателен для медучреждений (ст. 9 RODO)",
+      "cat": "Ochrona danych (RODO)",
+      "name": "Inspektor Ochrony Danych (IOD)",
+      "desc": "Obowiązkowy dla podmiotów leczniczych (art. 9 RODO)",
       "price": 4000,
       "required": true,
-      "note": "Для чего: обработка мед. данных (ст. 9 RODO) → обязательно назначить IOD.\nГде: внешний IOD (аутсорсинг) — ~4000 PLN/год, или штатный сотрудник.\nСроки: до начала работы. Уведомить UODO о назначении.\nВажно: IOD проводит аудиты, обучения, отвечает на запросы пациентов."
+      "note": "Po co: przetwarzanie danych medycznych (art. 9 RODO) → obowiązkowe powołanie IOD.\nGdzie: zewnętrzny IOD (outsourcing) — ~4000 PLN/rok, lub pracownik etatowy.\nTerminy: przed rozpoczęciem działalności. Zgłosić powołanie do UODO.\nWażne: IOD prowadzi audyty, szkolenia, odpowiada na wnioski pacjentów."
     },
     {
-      "cat": "Защита данных (RODO)",
-      "name": "Реестр операций обработки данных",
-      "desc": "Ст. 30 RODO. Список всех процессов обработки данных",
+      "cat": "Ochrona danych (RODO)",
+      "name": "Rejestr czynności przetwarzania",
+      "desc": "Art. 30 RODO. Lista wszystkich procesów przetwarzania danych",
       "price": 0,
       "required": true,
-      "note": "Для чего: обязательный реестр по ст. 30 RODO — что, зачем, как долго, кому.\nГде: IOD или юрист по RODO готовит.\nСроки: до начала работы.\nСодержание: каждый процесс (запись на приём, мед. карта, зарплата) — цель, основание, срок хранения."
+      "note": "Po co: obowiązkowy rejestr wg art. 30 RODO — co, po co, jak długo, komu.\nGdzie: przygotowuje IOD lub prawnik RODO.\nTerminy: przed rozpoczęciem działalności.\nTreść: każdy proces (rejestracja wizyty, dokumentacja medyczna, kadry-płace) — cel, podstawa, okres przechowywania."
     },
     {
-      "cat": "Защита данных (RODO)",
-      "name": "Договоры поручения данных",
-      "desc": "С лабораториями, IT, бухгалтерией, облачными сервисами",
+      "cat": "Ochrona danych (RODO)",
+      "name": "Umowy powierzenia danych",
+      "desc": "Z laboratoriami, IT, księgowością, usługami chmurowymi",
       "price": 1500,
       "required": true,
-      "note": "Для чего: если передаёте данные третьим лицам (лаборатория, бухгалтерия, IT) — нужен договор.\nГде: шаблоны от IOD/юриста.\nСроки: до начала сотрудничества с каждым контрагентом.\nВажно: без договора передача данных = нарушение RODO. Штрафы до 4% оборота."
+      "note": "Po co: jeśli przekazujesz dane osobom trzecim (laboratorium, księgowość, IT) — wymagana umowa.\nGdzie: szablony od IOD/prawnika.\nTerminy: przed rozpoczęciem współpracy z każdym kontrahentem.\nWażne: bez umowy przekazanie danych = naruszenie RODO. Kary do 4% obrotu."
     },
     {
-      "cat": "Защита данных (RODO)",
-      "name": "Обучение RODO",
-      "desc": "Ежегодное обучение персонала с протоколом",
+      "cat": "Ochrona danych (RODO)",
+      "name": "Szkolenie RODO",
+      "desc": "Coroczne szkolenie personelu z protokołem",
       "price": 1000,
       "required": true,
-      "note": "Для чего: все сотрудники с доступом к данным должны быть обучены.\nГде: IOD проводит или внешний тренер.\nСроки: до начала работы каждого сотрудника, далее ежегодно.\nВажно: хранить протокол обучения — UODO проверяет."
+      "note": "Po co: wszyscy pracownicy z dostępem do danych muszą być przeszkoleni.\nGdzie: szkolenie prowadzi IOD lub trener zewnętrzny.\nTerminy: przed rozpoczęciem pracy każdego pracownika, następnie corocznie.\nWażne: przechowywać protokół szkolenia — UODO sprawdza."
     },
     {
-      "cat": "Защита данных (RODO)",
-      "name": "IT-система по RODO",
-      "desc": "Шифрование, контроль доступа, бэкапы, логирование",
+      "cat": "Ochrona danych (RODO)",
+      "name": "System IT zgodny z RODO",
+      "desc": "Szyfrowanie, kontrola dostępu, kopie zapasowe, logowanie",
       "price": 5000,
       "required": true,
-      "note": "Для чего: техническая защита данных — шифрование, контроль доступа, бэкапы.\nГде: IT-компания или специалист.\nСроки: до запуска мед. ПО.\nВключает: шифрование дисков, VPN, firewall, контроль доступа по ролям, ежедневные бэкапы, логирование."
+      "note": "Po co: techniczna ochrona danych — szyfrowanie, kontrola dostępu, kopie zapasowe.\nGdzie: firma IT lub specjalista.\nTerminy: przed uruchomieniem oprogramowania medycznego.\nObejmuje: szyfrowanie dysków, VPN, firewall, kontrola dostępu wg ról, codzienne kopie zapasowe, logowanie."
     },
     {
-      "cat": "Защита данных (RODO)",
-      "name": "Уведомление в UODO",
-      "desc": "При назначении IOD — уведомление в орган защиты данных",
+      "cat": "Ochrona danych (RODO)",
+      "name": "Zgłoszenie do UODO",
+      "desc": "Przy powołaniu IOD — zgłoszenie do organu ochrony danych",
       "price": 0,
       "required": true,
-      "note": "Для чего: закон обязывает уведомить UODO о назначении IOD.\nГде: biznes.gov.pl или через ePUAP.\nСроки: в течение 14 дней после назначения IOD.\nВажно: бесплатно. Без уведомления — штраф."
+      "note": "Po co: prawo nakłada obowiązek zgłoszenia powołania IOD do UODO.\nGdzie: biznes.gov.pl lub przez ePUAP.\nTerminy: w ciągu 14 dni od powołania IOD.\nWażne: bezpłatnie. Brak zgłoszenia — kara."
     },
     {
-      "cat": "Отходы и экология (BDO)",
-      "name": "Запись в BDO",
-      "desc": "База данных об отходах. Обязателен для медотходов",
+      "cat": "Odpady i ekologia (BDO)",
+      "name": "Wpis do BDO",
+      "desc": "Baza Danych o Odpadach. Obowiązkowa dla odpadów medycznych",
       "price": 0,
       "required": true,
-      "note": "Для чего: обязательная регистрация в Bazie Danych o Odpadach для медучреждений.\nГде: bdo.mos.gov.pl — онлайн.\nСроки: до начала работы. Регистрация 1–7 дней.\nВажно: без BDO нельзя передавать мед. отходы. Штраф до 1 000 000 PLN."
+      "note": "Po co: obowiązkowa rejestracja w Bazie Danych o Odpadach dla podmiotów leczniczych.\nGdzie: bdo.mos.gov.pl — online.\nTerminy: przed rozpoczęciem działalności. Rejestracja 1–7 dni.\nWażne: bez BDO nie można przekazywać odpadów medycznych. Kara do 1 000 000 PLN."
     },
     {
-      "cat": "Отходы и экология (BDO)",
-      "name": "Договор на вывоз мед. отходов",
-      "desc": "Инфекционные отходы, амальгама, RTG-отходы",
+      "cat": "Odpady i ekologia (BDO)",
+      "name": "Umowa na odbiór odpadów medycznych",
+      "desc": "Odpady zakaźne, amalgamat, odpady RTG",
       "price": 6000,
       "required": true,
-      "note": "Для чего: мед. отходы нельзя выбрасывать в обычный мусор — только лицензированная фирма.\nГде: фирма с разрешением на мед. отходы (np. Remondis, Eco-ABC).\nСроки: договор до начала работы. ~6000 PLN/год.\nВажно: красные мешки (инфекционные), жёлтые контейнеры (острые), амальгама отдельно."
+      "note": "Po co: odpadów medycznych nie można wyrzucać do zwykłego kosza — tylko licencjonowana firma.\nGdzie: firma z pozwoleniem na odpady medyczne (np. Remondis, Eco-ABC).\nTerminy: umowa przed rozpoczęciem działalności. ~6000 PLN/rok.\nWażne: czerwone worki (zakaźne), żółte pojemniki (ostre), amalgamat osobno."
     },
     {
-      "cat": "Отходы и экология (BDO)",
-      "name": "Контейнеры для отходов",
-      "desc": "Красные (инфекционные), жёлтые (острые), чёрные (прочие)",
+      "cat": "Odpady i ekologia (BDO)",
+      "name": "Pojemniki na odpady",
+      "desc": "Czerwone (zakaźne), żółte (ostre), czarne (pozostałe)",
       "price": 2000,
       "required": true,
-      "note": "Для чего: правильная сегрегация мед. отходов по цветам.\nГде: медицинский магазин или фирма по вывозу (часто включено в договор).\nСроки: до начала работы.\nНорма: красные — инфекционные, жёлтые — острые (иглы), чёрные — бытовые. В каждом кабинете."
+      "note": "Po co: prawidłowa segregacja odpadów medycznych wg kolorów.\nGdzie: sklep medyczny lub firma odbierająca (często w ramach umowy).\nTerminy: przed rozpoczęciem działalności.\nNorma: czerwone — zakaźne, żółte — ostre (igły), czarne — komunalne. W każdym gabinecie."
     },
     {
-      "cat": "Отходы и экология (BDO)",
-      "name": "Учёт отходов (год)",
-      "desc": "Карты передачи, годовой отчёт до 15 марта",
+      "cat": "Odpady i ekologia (BDO)",
+      "name": "Ewidencja odpadów (rok)",
+      "desc": "Karty przekazania, sprawozdanie roczne do 15 marca",
       "price": 500,
       "required": true,
-      "note": "Для чего: обязательная отчётность по мед. отходам в системе BDO.\nГде: bdo.mos.gov.pl — ежемесячные карты + годовой отчёт.\nСроки: годовой отчёт до 15 марта. Карты — при каждой передаче.\nВажно: вести можно самостоятельно или поручить фирме по вывозу."
+      "note": "Po co: obowiązkowa sprawozdawczość z odpadów medycznych w systemie BDO.\nGdzie: bdo.mos.gov.pl — comiesięczne karty + sprawozdanie roczne.\nTerminy: sprawozdanie roczne do 15 marca. Karty — przy każdym przekazaniu.\nWażne: można prowadzić samodzielnie lub zlecić firmie odbierającej."
     },
     {
-      "cat": "Отходы и экология (BDO)",
-      "name": "Сепаратор амальгамы",
-      "desc": "Обязателен с 2019 (EU 2017/852). ISO 11143, >95%",
+      "cat": "Odpady i ekologia (BDO)",
+      "name": "Separator amalgamatu",
+      "desc": "Obowiązkowy od 2019 (UE 2017/852). ISO 11143, >95%",
       "price": 4000,
       "required": true,
-      "note": "Для чего: EU регламент 2017/852 — обязательно улавливание ртути из амальгамы.\nГде: у поставщика стоматологического оборудования (встраивается в установку).\nСроки: до начала работы.\nНорма: ISO 11143, эффективность >95%. Ежегодное обслуживание."
+      "note": "Po co: rozporządzenie UE 2017/852 — obowiązkowe wychwytywanie rtęci z amalgamatu.\nGdzie: u dostawcy sprzętu stomatologicznego (montowany w unit).\nTerminy: przed rozpoczęciem działalności.\nNorma: ISO 11143, skuteczność >95%. Coroczny serwis."
     },
     {
-      "cat": "Страхование",
-      "name": "ОС медучреждения",
-      "desc": "Обязательное: мин. 75 000 EUR/событие, 350 000 EUR/год",
+      "cat": "Ubezpieczenia",
+      "name": "OC podmiotu leczniczego",
+      "desc": "Obowiązkowe: min. 75 000 EUR/zdarzenie, 350 000 EUR/rok",
       "price": 5000,
       "required": true,
-      "note": "Для чего: обязательное страхование ответственности мед. учреждения (OC podmiotu leczniczego).\nГде: страховые компании (PZU, Warta, Allianz — спец. программы для медиков).\nСроки: до начала приёма пациентов.\nМинимум: 75 000 EUR на случай, 350 000 EUR в год (Rozporządzenie MF)."
+      "note": "Po co: obowiązkowe ubezpieczenie odpowiedzialności cywilnej podmiotu leczniczego (OC podmiotu leczniczego).\nGdzie: towarzystwa ubezpieczeniowe (PZU, Warta, Allianz — specjalne programy dla medyków).\nTerminy: przed rozpoczęciem przyjmowania pacjentów.\nMinimum: 75 000 EUR na zdarzenie, 350 000 EUR/rok (Rozporządzenie MF)."
     },
     {
-      "cat": "Страхование",
-      "name": "ОС стоматолога",
-      "desc": "Индивидуальный полис для каждого врача. Мин. 75 000 EUR",
+      "cat": "Ubezpieczenia",
+      "name": "OC lekarza stomatologa",
+      "desc": "Indywidualna polisa dla każdego lekarza. Min. 75 000 EUR",
       "price": 2500,
       "required": true,
-      "note": "Для чего: индивидуальное ОС каждого стоматолога — дополнительно к ОС учреждения.\nГде: через OIL (врачебную палату) или напрямую в страховой.\nСроки: до начала работы врача.\nМинимум: 75 000 EUR на случай. ~2500 PLN/год на врача."
+      "note": "Po co: indywidualne OC każdego stomatologa — dodatkowo do OC podmiotu.\nGdzie: przez OIL (izbę lekarską) lub bezpośrednio w towarzystwie.\nTerminy: przed rozpoczęciem pracy lekarza.\nMinimum: 75 000 EUR na zdarzenie. ~2500 PLN/rok na lekarza."
     },
     {
-      "cat": "Страхование",
-      "name": "Страхование имущества",
-      "desc": "Оборудование, ремонт, запасы. Рекомендуется all-risk",
+      "cat": "Ubezpieczenia",
+      "name": "Ubezpieczenie mienia",
+      "desc": "Sprzęt, remont, zapasy. Zalecane all-risk",
       "price": 3000,
       "required": false,
-      "note": "Для чего: защита инвестиций — оборудование стоит 300-500K PLN.\nГде: страховая компания — полис all-risk.\nСроки: до установки оборудования.\nПокрывает: пожар, залив, кража, вандализм, поломка. Рекомендуется с франшизой 1000 PLN."
+      "note": "Po co: ochrona inwestycji — sprzęt kosztuje 300–500 tys. PLN.\nGdzie: towarzystwo ubezpieczeniowe — polisa all-risk.\nTerminy: przed montażem sprzętu.\nPokrywa: pożar, zalanie, kradzież, wandalizm, awarię. Zalecane z udziałem własnym 1000 PLN."
     },
     {
-      "cat": "Страхование",
-      "name": "Страхование от потери дохода",
-      "desc": "Покрытие простоя: пожар, затопление, эпидемия",
+      "cat": "Ubezpieczenia",
+      "name": "Ubezpieczenie od utraty dochodu",
+      "desc": "Pokrycie przestoju: pożar, zalanie, epidemia",
       "price": 2000,
       "required": false,
-      "note": "Для чего: покрытие потери дохода при вынужденном простое.\nГде: страховая — дополнение к полису имущества.\nСроки: рекомендуется с первого дня.\nПокрывает: простой из-за пожара, залива, аварии оборудования. 3–12 мес покрытия."
+      "note": "Po co: pokrycie utraty dochodu przy wymuszonym przestoju.\nGdzie: towarzystwo — uzupełnienie polisy mienia.\nTerminy: zalecane od pierwszego dnia.\nPokrywa: przestój z powodu pożaru, zalania, awarii sprzętu. 3–12 mies. pokrycia."
     },
     {
-      "cat": "Страхование",
-      "name": "ОС работодателя",
-      "desc": "Несчастные случаи на производстве",
+      "cat": "Ubezpieczenia",
+      "name": "OC pracodawcy",
+      "desc": "Wypadki przy pracy",
       "price": 1500,
       "required": false,
-      "note": "Для чего: ответственность за несчастные случаи сотрудников на работе.\nГде: страховая компания.\nСроки: до приёма первого сотрудника.\nВажно: рекомендуется при наличии >3 сотрудников. Покрывает травмы, проф. заболевания."
+      "note": "Po co: odpowiedzialność za wypadki pracowników w pracy.\nGdzie: towarzystwo ubezpieczeniowe.\nTerminy: przed zatrudnieniem pierwszego pracownika.\nWażne: zalecane przy >3 pracownikach. Pokrywa urazy, choroby zawodowe."
     },
     {
-      "cat": "Страхование",
-      "name": "Киберстрахование",
-      "desc": "Утечки медданных, ransomware, штрафы RODO",
+      "cat": "Ubezpieczenia",
+      "name": "Ubezpieczenie cybernetyczne",
+      "desc": "Wycieki danych medycznych, ransomware, kary RODO",
       "price": 2000,
       "required": false,
-      "note": "Для чего: защита от кибератак — медданные = высокая ценность для хакеров.\nГде: специализированные страховые (np. CyberEdge, Hiscox).\nСроки: рекомендуется с момента запуска IT-систем.\nПокрывает: утечки данных, ransomware, штрафы RODO, расследование инцидента."
+      "note": "Po co: ochrona przed cyberatakami — dane medyczne = wysoka wartość dla hakerów.\nGdzie: wyspecjalizowane towarzystwa (np. CyberEdge, Hiscox).\nTerminy: zalecane od uruchomienia systemów IT.\nPokrywa: wycieki danych, ransomware, kary RODO, dochodzenie incydentu."
     },
     {
-      "cat": "НФЗ / Частная практика",
-      "name": "Прейскурант услуг (обязательный)",
-      "desc": "Прейскурант вывешен в приёмной — по закону о мед. деятельности",
+      "cat": "NFZ / Praktyka prywatna",
+      "name": "Cennik usług (obowiązkowy)",
+      "desc": "Cennik wywieszony w poczekalni — zgodnie z ustawą o działalności leczniczej",
       "price": 500,
       "required": true,
-      "note": "Для чего: закон о мед. деятельности обязывает вывесить прейскурант в приёмной.\nГде: подготовить самостоятельно, распечатать и оформить.\nСроки: до начала приёма пациентов.\nВажно: должен быть видимым, актуальным. Также опубликовать на сайте."
+      "note": "Po co: ustawa o działalności leczniczej nakazuje wywiesić cennik w poczekalni.\nGdzie: przygotować samodzielnie, wydrukować i oprawić.\nTerminy: przed rozpoczęciem przyjmowania pacjentów.\nWażne: musi być widoczny i aktualny. Opublikować również na stronie."
     },
     {
-      "cat": "НФЗ / Частная практика",
-      "name": "Контракт с НФЗ",
-      "desc": "Конкурсная процедура. Для частной клиники необязателен",
+      "cat": "NFZ / Praktyka prywatna",
+      "name": "Kontrakt z NFZ",
+      "desc": "Procedura konkursowa. Dla prywatnej kliniki nieobowiązkowy",
       "price": 3000,
       "required": false,
-      "note": "Для чего: приём пациентов по гос. страховке (НФЗ) — конкурсная процедура.\nГде: Oddział Wojewódzki NFZ — конкурс на kontraktowanie.\nСроки: конкурсы объявляются периодически. Подготовка заявки 2–4 недели.\nВажно: для частной клиники НЕ обязателен. Но может привлечь пациентов."
+      "note": "Po co: przyjmowanie pacjentów w ramach ubezpieczenia NFZ — procedura konkursowa.\nGdzie: Oddział Wojewódzki NFZ — konkurs na kontraktowanie.\nTerminy: konkursy ogłaszane okresowo. Przygotowanie oferty 2–4 tygodnie.\nWażne: dla prywatnej kliniki NIE jest obowiązkowy. Ale może przyciągnąć pacjentów."
     },
     {
-      "cat": "НФЗ / Частная практика",
-      "name": "eWUŚ — система расчётов НФЗ",
-      "desc": "Только при контракте с НФЗ",
+      "cat": "NFZ / Praktyka prywatna",
+      "name": "eWUŚ — system rozliczeń NFZ",
+      "desc": "Tylko przy kontrakcie z NFZ",
       "price": 2000,
       "required": false,
-      "note": "Для чего: электронная верификация пациентов по НФЗ.\nГде: подключение через NFZ после получения контракта.\nСроки: после заключения контракта с НФЗ.\nВажно: только если есть контракт НФЗ."
+      "note": "Po co: elektroniczna weryfikacja uprawnień pacjentów NFZ.\nGdzie: podłączenie przez NFZ po zawarciu kontraktu.\nTerminy: po zawarciu kontraktu z NFZ.\nWażne: tylko jeśli jest kontrakt z NFZ."
     },
     {
-      "cat": "НФЗ / Частная практика",
-      "name": "Электронная мед. документация (EDM)",
-      "desc": "Обязательна с 2021. P1, э-рецепт, э-направление",
+      "cat": "NFZ / Praktyka prywatna",
+      "name": "Elektroniczna Dokumentacja Medyczna (EDM)",
+      "desc": "Obowiązkowa od 2021. P1, e-recepta, e-skierowanie",
       "price": 5000,
       "required": true,
-      "note": "Для чего: с 2021 обязательно вести документацию электронно + э-рецепты.\nГде: мед. ПО с интеграцией P1 (Mediporta, Dental4Windows, KS-Medis, Comarch Optimed).\nСроки: до начала приёма пациентов.\nВключает: карточки пациентов, э-рецепты (e-recepta), э-направления (e-skierowanie)."
+      "note": "Po co: od 2021 obowiązkowe prowadzenie dokumentacji elektronicznie + e-recepty.\nGdzie: oprogramowanie medyczne z integracją P1 (Mediporta, Dental4Windows, KS-Medis, Comarch Optimed).\nTerminy: przed rozpoczęciem przyjmowania pacjentów.\nObejmuje: karty pacjentów, e-recepty, e-skierowania."
     },
     {
-      "cat": "НФЗ / Частная практика",
-      "name": "Доступ к P1/P2",
-      "desc": "Платформа э-здоровье. Сертификат ZUS, доверенный профиль",
+      "cat": "NFZ / Praktyka prywatna",
+      "name": "Dostęp do P1/P2",
+      "desc": "Platforma e-zdrowie. Certyfikat ZUS, Profil Zaufany",
       "price": 0,
       "required": true,
-      "note": "Для чего: подключение к платформе e-Zdrowie (P1) для э-рецептов и документации.\nГде: gabinet.gov.pl — через Profil Zaufany или сертификат ZUS.\nСроки: до начала работы. Активация 1–3 дня.\nВажно: каждый врач должен иметь свой доступ. Нужен Profil Zaufany."
+      "note": "Po co: podłączenie do platformy e-Zdrowie (P1) dla e-recept i dokumentacji.\nGdzie: gabinet.gov.pl — przez Profil Zaufany lub certyfikat ZUS.\nTerminy: przed rozpoczęciem działalności. Aktywacja 1–3 dni.\nWażne: każdy lekarz musi mieć własny dostęp. Wymagany Profil Zaufany."
     },
     {
-      "cat": "НФЗ / Частная практика",
-      "name": "Онлайн-касса",
-      "desc": "Обязательна для стоматологии с 01.07.2021",
+      "cat": "NFZ / Praktyka prywatna",
+      "name": "Kasa fiskalna online",
+      "desc": "Obowiązkowa dla stomatologii od 01.07.2021",
       "price": 3500,
       "required": true,
-      "note": "Для чего: с 01.07.2021 стоматология обязана иметь онлайн-кассу (kasa fiskalna online).\nГде: авторизованный дилер касс (np. Posnet, Novitus, Elzab).\nСроки: до первого приёма пациента.\nВажно: касса должна передавать данные в налоговую онлайн. Штраф за отсутствие — до 180 дневных ставок."
+      "note": "Po co: od 01.07.2021 stomatologia ma obowiązek posiadać kasę fiskalną online.\nGdzie: autoryzowany dealer kas (np. Posnet, Novitus, Elzab).\nTerminy: przed pierwszą wizytą pacjenta.\nWażne: kasa musi przekazywać dane do urzędu skarbowego online. Kara za brak — do 180 stawek dziennych."
     },
     {
-      "cat": "НФЗ / Частная практика",
-      "name": "Информационная табличка",
-      "desc": "Название, адрес, NIP, часы работы, телефон, руководитель",
+      "cat": "NFZ / Praktyka prywatna",
+      "name": "Tablica informacyjna",
+      "desc": "Nazwa, adres, NIP, godziny pracy, telefon, kierownik",
       "price": 500,
       "required": true,
-      "note": "Для чего: закон обязывает разместить табличку с данными учреждения.\nГде: изготовить в рекламном агентстве.\nСроки: до открытия.\nСодержание: название, адрес, NIP, часы работы, телефон, ФИО руководителя."
+      "note": "Po co: prawo nakłada obowiązek umieszczenia tablicy z danymi podmiotu.\nGdzie: wykonać w agencji reklamowej.\nTerminy: przed otwarciem.\nTreść: nazwa, adres, NIP, godziny pracy, telefon, imię i nazwisko kierownika."
     },
     {
-      "cat": "Персонал и лицензии",
-      "name": "Право на врачебную деятельность (PWZ)",
-      "desc": "Окружная врачебная палата",
+      "cat": "Personel i licencje",
+      "name": "Prawo Wykonywania Zawodu (PWZ)",
+      "desc": "Okręgowa Izba Lekarska",
       "price": 0,
       "required": true,
-      "note": "Для чего: каждый врач-стоматолог обязан иметь PWZ для легальной практики.\nГде: Okręgowa Izba Lekarska (OIL) по месту жительства врача.\nСроки: до начала работы врача. Для иностранных дипломов — 2–6 мес.\nВажно: проверить PWZ каждого врача на nil.org.pl."
+      "note": "Po co: każdy lekarz dentysta musi mieć PWZ do legalnego wykonywania zawodu.\nGdzie: Okręgowa Izba Lekarska (OIL) właściwa dla miejsca zamieszkania lekarza.\nTerminy: przed rozpoczęciem pracy lekarza. Dla dyplomów zagranicznych — 2–6 mies.\nWażne: zweryfikować PWZ każdego lekarza na nil.org.pl."
     },
     {
-      "cat": "Персонал и лицензии",
-      "name": "Членство в OIL",
-      "desc": "Членский взнос ~120 PLN/мес на врача",
+      "cat": "Personel i licencje",
+      "name": "Członkostwo w OIL",
+      "desc": "Składka ~120 PLN/mies. na lekarza",
       "price": 1440,
       "required": true,
-      "note": "Для чего: обязательное членство в Okręgowej Izbie Lekarskiej для каждого врача.\nГде: OIL по месту работы.\nСроки: до начала работы.\nВзнос: ~120 PLN/мес на врача. Без членства PWZ недействительно."
+      "note": "Po co: obowiązkowe członkostwo w Okręgowej Izbie Lekarskiej dla każdego lekarza.\nGdzie: OIL właściwa dla miejsca pracy.\nTerminy: przed rozpoczęciem pracy.\nSkładka: ~120 PLN/mies. na lekarza. Bez członkostwa PWZ jest nieważne."
     },
     {
-      "cat": "Персонал и лицензии",
-      "name": "Медосмотры сотрудников",
-      "desc": "Первичные и периодические. Медицина труда",
+      "cat": "Personel i licencje",
+      "name": "Badania pracownicze",
+      "desc": "Wstępne i okresowe. Medycyna pracy",
       "price": 2500,
       "required": true,
-      "note": "Для чего: обязательные медосмотры по Kodeks Pracy — первичные и периодические.\nГде: lekarz medycyny pracy (врач медицины труда) — договор с клиникой МТ.\nСроки: первичный осмотр ДО начала работы. Периодические — по графику.\nВажно: без осмотра нельзя допускать к работе. ~250 PLN/сотрудника."
+      "note": "Po co: obowiązkowe badania wg Kodeksu Pracy — wstępne i okresowe.\nGdzie: lekarz medycyny pracy — umowa z poradnią MP.\nTerminy: badanie wstępne PRZED rozpoczęciem pracy. Okresowe — wg harmonogramu.\nWażne: bez badania nie można dopuścić do pracy. ~250 PLN/pracownika."
     },
     {
-      "cat": "Персонал и лицензии",
-      "name": "Санитарная книжка",
-      "desc": "Для контактирующих с пациентами",
+      "cat": "Personel i licencje",
+      "name": "Książeczka sanitarno-epidemiologiczna",
+      "desc": "Dla osób mających kontakt z pacjentami",
       "price": 1500,
       "required": true,
-      "note": "Для чего: książeczka sanepidowska — для всех контактирующих с пациентами.\nГде: lekarz medycyny pracy или Sanepid.\nСроки: до начала работы каждого сотрудника.\nВключает: анализы на носительство, флюорография. ~150 PLN/сотрудника."
+      "note": "Po co: książeczka sanepidowska — dla wszystkich mających kontakt z pacjentami.\nGdzie: lekarz medycyny pracy lub Sanepid.\nTerminy: przed rozpoczęciem pracy każdego pracownika.\nObejmuje: badania na nosicielstwo, zdjęcie RTG klatki piersiowej. ~150 PLN/pracownika."
     },
     {
-      "cat": "Персонал и лицензии",
-      "name": "Вводный инструктаж по охране труда",
-      "desc": "До начала работы. Общий + на рабочем месте",
+      "cat": "Personel i licencje",
+      "name": "Szkolenie wstępne BHP",
+      "desc": "Przed rozpoczęciem pracy. Ogólne + stanowiskowe",
       "price": 800,
       "required": true,
-      "note": "Для чего: szkolenie wstępne BHP — обязательно до допуска к работе.\nГде: специалист BHP (служба охраны труда) — договор.\nСроки: в первый рабочий день, ДО начала работы.\nВключает: общий инструктаж (ogólny) + на рабочем месте (stanowiskowy)."
+      "note": "Po co: szkolenie wstępne BHP — obowiązkowe przed dopuszczeniem do pracy.\nGdzie: specjalista BHP (służba bhp) — umowa.\nTerminy: w pierwszym dniu roboczym, PRZED rozpoczęciem pracy.\nObejmuje: instruktaż ogólny + stanowiskowy."
     },
     {
-      "cat": "Персонал и лицензии",
-      "name": "Периодический инструктаж по охране труда",
-      "desc": "Раз в 5 лет для мед., раз в 3 года для остальных",
+      "cat": "Personel i licencje",
+      "name": "Szkolenie okresowe BHP",
+      "desc": "Raz na 5 lat dla medyków, raz na 3 lata dla pozostałych",
       "price": 600,
       "required": true,
-      "note": "Для чего: обязательное периодическое обучение BHP.\nГде: специалист BHP или онлайн-курс с сертификатом.\nСроки: мед. персонал — каждые 5 лет, остальные — каждые 3 года.\nВажно: хранить протоколы и сертификаты."
+      "note": "Po co: obowiązkowe szkolenia okresowe BHP.\nGdzie: specjalista BHP lub kurs online z certyfikatem.\nTerminy: personel medyczny — co 5 lat, pozostali — co 3 lata.\nWażne: przechowywać protokoły i certyfikaty."
     },
     {
-      "cat": "Персонал и лицензии",
-      "name": "Обучение первой помощи",
-      "desc": "Сертификат AED/BLS для мед. персонала",
+      "cat": "Personel i licencje",
+      "name": "Szkolenie z pierwszej pomocy",
+      "desc": "Certyfikat AED/BLS dla personelu medycznego",
       "price": 1200,
       "required": true,
-      "note": "Для чего: мед. персонал обязан уметь оказывать первую помощь + использовать AED.\nГде: курсы BLS/AED (np. Польский Красный Крест, Wośp).\nСроки: до начала работы. Обновление каждые 2 года.\nВключает: BLS (базовая реанимация), AED (дефибриллятор), анафилаксия."
+      "note": "Po co: personel medyczny musi umieć udzielać pierwszej pomocy + obsługiwać AED.\nGdzie: kursy BLS/AED (np. PCK, WOŚP).\nTerminy: przed rozpoczęciem pracy. Odnowienie co 2 lata.\nObejmuje: BLS (podstawowa resuscytacja), AED (defibrylator), anafilaksja."
     },
     {
-      "cat": "Персонал и лицензии",
-      "name": "Трудовые договоры / Б2Б",
-      "desc": "Трудовые договоры, регламент труда и оплаты",
+      "cat": "Personel i licencje",
+      "name": "Umowy o pracę / B2B",
+      "desc": "Umowy o pracę, regulamin pracy i wynagradzania",
       "price": 2000,
       "required": true,
-      "note": "Для чего: оформление трудовых отношений по Kodeks Pracy или umowa B2B.\nГде: юрист по трудовому праву или HR-специалист.\nСроки: до начала работы каждого сотрудника.\nВключает: umowa o pracę / B2B, regulamin pracy, regulamin wynagradzania (при >50 сотрудников)."
+      "note": "Po co: uregulowanie stosunku pracy wg Kodeksu Pracy lub umowy B2B.\nGdzie: prawnik prawa pracy lub specjalista HR.\nTerminy: przed rozpoczęciem pracy każdego pracownika.\nObejmuje: umowa o pracę / B2B, regulamin pracy, regulamin wynagradzania (przy >50 pracownikach)."
     },
     {
-      "cat": "Персонал и лицензии",
-      "name": "Нострификация диплома",
-      "desc": "Для врачей с дипломом не из ЕС",
+      "cat": "Personel i licencje",
+      "name": "Nostryfikacja dyplomu",
+      "desc": "Dla lekarzy z dyplomem spoza UE",
       "price": 3500,
       "required": false,
-      "note": "Для чего: признание иностранного диплома стоматолога в Польше.\nГде: медицинский университет в Польше (nostryfikacja).\nСроки: 3–6 мес. Может потребоваться экзамен.\nВажно: дипломы ЕС признаются автоматически. Для не-ЕС — обязательна нострификация."
+      "note": "Po co: uznanie zagranicznego dyplomu lekarza dentysty w Polsce.\nGdzie: uniwersytet medyczny w Polsce (nostryfikacja).\nTerminy: 3–6 mies. Może być wymagany egzamin.\nWażne: dyplomy UE uznawane są automatycznie. Spoza UE — wymagana nostryfikacja."
     },
     {
-      "cat": "Оборудование и сертификация",
-      "name": "Технические паспорта оборудования",
-      "desc": "Паспорт + инструкция на польском для каждого устройства",
+      "cat": "Wyposażenie i certyfikacja",
+      "name": "Paszporty techniczne urządzeń",
+      "desc": "Paszport + instrukcja w języku polskim dla każdego urządzenia",
       "price": 0,
       "required": true,
-      "note": "Для чего: каждое мед. устройство должно иметь паспорт и инструкцию на польском.\nГде: поставщик оборудования предоставляет при покупке.\nСроки: при покупке/установке.\nВажно: хранить в доступном месте. Инспектор PSSE проверяет."
+      "note": "Po co: każde urządzenie medyczne musi mieć paszport i instrukcję po polsku.\nGdzie: dostawca sprzętu dostarcza przy zakupie.\nTerminy: przy zakupie/montażu.\nWażne: przechowywać w dostępnym miejscu. Inspektor PSSE sprawdza."
     },
     {
-      "cat": "Оборудование и сертификация",
-      "name": "Проверка автоклава (год)",
-      "desc": "Валидация стерилизации. Bowie-Dick, биологические тесты",
+      "cat": "Wyposażenie i certyfikacja",
+      "name": "Walidacja autoklawu (rok)",
+      "desc": "Walidacja sterylizacji. Bowie-Dick, testy biologiczne",
       "price": 2500,
       "required": true,
-      "note": "Для чего: ежегодная валидация стерилизации — обязательна.\nГде: аккредитованная фирма по валидации (np. Getinge, MMM).\nСроки: при установке, далее ежегодно.\nТесты: Bowie-Dick (ежедневно), биологические (еженедельно), физические (каждый цикл)."
+      "note": "Po co: coroczna walidacja sterylizacji — obowiązkowa.\nGdzie: akredytowana firma walidacyjna (np. Getinge, MMM).\nTerminy: przy instalacji, następnie corocznie.\nTesty: Bowie-Dick (codziennie), biologiczne (co tydzień), fizyczne (każdy cykl)."
     },
     {
-      "cat": "Оборудование и сертификация",
-      "name": "Поверка и калибровка",
-      "desc": "Автоклав, установка, компрессор, полимеризационная лампа",
+      "cat": "Wyposażenie i certyfikacja",
+      "name": "Legalizacja i kalibracja",
+      "desc": "Autoklaw, unit, sprężarka, lampa polimeryzacyjna",
       "price": 3000,
       "required": true,
-      "note": "Для чего: регулярная поверка точности мед. оборудования.\nГде: сервисные центры производителей или аккредитованные лаборатории.\nСроки: ежегодно или по графику производителя.\nВключает: автоклав, установка, компрессор, радиовизиограф, полимеризационная лампа."
+      "note": "Po co: regularna kontrola dokładności sprzętu medycznego.\nGdzie: serwisy producentów lub akredytowane laboratoria.\nTerminy: corocznie lub wg harmonogramu producenta.\nObejmuje: autoklaw, unit, sprężarkę, radiowizjograf, lampę polimeryzacyjną."
     },
     {
-      "cat": "Оборудование и сертификация",
-      "name": "Декларация соответствия CE",
-      "desc": "Маркировка CE обязательна. Проверить при покупке",
+      "cat": "Wyposażenie i certyfikacja",
+      "name": "Deklaracja zgodności CE",
+      "desc": "Oznakowanie CE obowiązkowe. Sprawdzić przy zakupie",
       "price": 0,
       "required": true,
-      "note": "Для чего: все мед. изделия в ЕС должны иметь маркировку CE.\nГде: проверить при покупке у поставщика.\nСроки: при покупке.\nВажно: без CE использование запрещено. Проверять сертификат + декларацию соответствия."
+      "note": "Po co: wszystkie wyroby medyczne w UE muszą mieć oznakowanie CE.\nGdzie: sprawdzić przy zakupie u dostawcy.\nTerminy: przy zakupie.\nWażne: bez CE używanie zabronione. Sprawdzać certyfikat + deklarację zgodności."
     },
     {
-      "cat": "Оборудование и сертификация",
-      "name": "ТО стоматологической установки (год)",
-      "desc": "Ежегодное обслуживание + калибровка",
+      "cat": "Wyposażenie i certyfikacja",
+      "name": "Serwis unitu stomatologicznego (rok)",
+      "desc": "Coroczny serwis + kalibracja",
       "price": 4000,
       "required": true,
-      "note": "Для чего: обязательное ежегодное ТО стоматологических установок.\nГде: авторизованный сервис производителя.\nСроки: ежегодно. ~4000 PLN на установку.\nВключает: калибровка, замена фильтров, проверка шлангов, турбин, микромоторов."
+      "note": "Po co: obowiązkowy coroczny serwis unitów stomatologicznych.\nGdzie: autoryzowany serwis producenta.\nTerminy: corocznie. ~4000 PLN za unit.\nObejmuje: kalibracja, wymiana filtrów, kontrola węży, turbin, mikromotorów."
     },
     {
-      "cat": "Оборудование и сертификация",
-      "name": "ТО компрессора (год)",
-      "desc": "Безмасляный компрессор. Проверка раз в 6 мес + фильтры",
+      "cat": "Wyposażenie i certyfikacja",
+      "name": "Serwis sprężarki (rok)",
+      "desc": "Sprężarka bezolejowa. Kontrola co 6 mies. + filtry",
       "price": 1500,
       "required": true,
-      "note": "Для чего: безмасляный компрессор — критическое оборудование. Обязательное ТО.\nГде: сервис производителя (Cattani, Dürr, Ekom).\nСроки: проверка каждые 6 мес, полное ТО ежегодно.\nВключает: замена фильтров, проверка давления, осушитель, конденсат."
+      "note": "Po co: sprężarka bezolejowa — sprzęt krytyczny. Obowiązkowy serwis.\nGdzie: serwis producenta (Cattani, Dürr, Ekom).\nTerminy: kontrola co 6 mies., pełny serwis corocznie.\nObejmuje: wymiana filtrów, kontrola ciśnienia, osuszacz, kondensat."
     },
     {
-      "cat": "Оборудование и сертификация",
-      "name": "Журнал проверок оборудования",
-      "desc": "Журнал проверок для каждого устройства",
+      "cat": "Wyposażenie i certyfikacja",
+      "name": "Książka kontroli sprzętu",
+      "desc": "Książka kontroli dla każdego urządzenia",
       "price": 200,
       "required": true,
-      "note": "Для чего: обязательный журнал для фиксации всех ТО и проверок каждого устройства.\nГде: купить или завести электронно.\nСроки: с первого дня.\nВажно: каждая проверка записывается с датой, описанием, подписью."
+      "note": "Po co: obowiązkowa książka do rejestrowania wszystkich serwisów i kontroli każdego urządzenia.\nGdzie: kupić lub prowadzić elektronicznie.\nTerminy: od pierwszego dnia.\nWażne: każda kontrola wpisywana z datą, opisem, podpisem."
     },
     {
-      "cat": "Радиационная безопасность (RTG)",
-      "name": "Разрешение PAA на рентген",
-      "desc": "Государственное агентство атомистики. Заявление/разрешение",
+      "cat": "Bezpieczeństwo radiologiczne (RTG)",
+      "name": "Zezwolenie PAA na rentgen",
+      "desc": "Państwowa Agencja Atomistyki. Wniosek / zezwolenie",
       "price": 500,
       "required": true,
-      "note": "Для чего: без разрешения PAA (Państwowa Agencja Atomistyki) нельзя использовать рентген.\nГде: paa.gov.pl — заявление онлайн.\nСроки: 30 дней. Подавать после установки рентгена.\nДокументы: проект экранов, данные IOR, тип аппарата."
+      "note": "Po co: bez zezwolenia PAA (Państwowa Agencja Atomistyki) nie można używać rentgena.\nGdzie: paa.gov.pl — wniosek online.\nTerminy: 30 dni. Składać po montażu rentgena.\nDokumenty: projekt osłon, dane IOR, typ aparatu."
     },
     {
-      "cat": "Радиационная безопасность (RTG)",
-      "name": "Проект радиологических экранов",
-      "desc": "Расчёты стен, пола, потолка. Медицинский физик",
+      "cat": "Bezpieczeństwo radiologiczne (RTG)",
+      "name": "Projekt osłon radiologicznych",
+      "desc": "Obliczenia ścian, podłogi, sufitu. Fizyk medyczny",
       "price": 3000,
       "required": true,
-      "note": "Для чего: расчёт толщины защитных экранов (стены, пол, потолок) для рентген-кабинета.\nГде: медицинский физик (fizyk medyczny) с лицензией.\nСроки: до начала ремонта (влияет на толщину стен).\nВажно: зависит от типа аппарата, расположения, соседних помещений."
+      "note": "Po co: obliczenie grubości osłon (ściany, podłoga, sufit) dla pracowni RTG.\nGdzie: fizyk medyczny z uprawnieniami.\nTerminy: przed rozpoczęciem remontu (wpływa na grubość ścian).\nWażne: zależy od typu aparatu, lokalizacji, sąsiednich pomieszczeń."
     },
     {
-      "cat": "Радиационная безопасность (RTG)",
-      "name": "Инспектор радиационной защиты (IOR)",
-      "desc": "Обязательное назначение. Может быть внешний",
+      "cat": "Bezpieczeństwo radiologiczne (RTG)",
+      "name": "Inspektor Ochrony Radiologicznej (IOR)",
+      "desc": "Obowiązkowe powołanie. Może być zewnętrzny",
       "price": 3000,
       "required": true,
-      "note": "Для чего: обязательное назначение IOR (Inspektor Ochrony Radiologicznej).\nГде: внешний IOR (аутсорсинг) ~3000 PLN/год.\nСроки: до подачи в PAA.\nТребования: курс + экзамен PAA. Можно нанять внешнего."
+      "note": "Po co: obowiązkowe powołanie IOR (Inspektor Ochrony Radiologicznej).\nGdzie: zewnętrzny IOR (outsourcing) ~3000 PLN/rok.\nTerminy: przed złożeniem wniosku do PAA.\nWymagania: kurs + egzamin PAA. Można zatrudnić zewnętrznego."
     },
     {
-      "cat": "Радиационная безопасность (RTG)",
-      "name": "Приёмочные испытания рентгена",
-      "desc": "Испытания нового аппарата. Медицинский физик",
+      "cat": "Bezpieczeństwo radiologiczne (RTG)",
+      "name": "Testy odbiorcze rentgena",
+      "desc": "Testy nowego aparatu. Fizyk medyczny",
       "price": 2000,
       "required": true,
-      "note": "Для чего: обязательные испытания нового рентген-аппарата перед вводом в эксплуатацию.\nГде: медицинский физик.\nСроки: после установки, до начала использования.\nВключает: качество изображения, доза, геометрия, ПО."
+      "note": "Po co: obowiązkowe testy nowego aparatu RTG przed dopuszczeniem do eksploatacji.\nGdzie: fizyk medyczny.\nTerminy: po montażu, przed rozpoczęciem użytkowania.\nObejmuje: jakość obrazu, dawka, geometria, oprogramowanie."
     },
     {
-      "cat": "Радиационная безопасность (RTG)",
-      "name": "Специализированные тесты рентгена (год)",
-      "desc": "Ежегодные для поддержания разрешения",
+      "cat": "Bezpieczeństwo radiologiczne (RTG)",
+      "name": "Testy specjalistyczne rentgena (rok)",
+      "desc": "Coroczne, dla utrzymania zezwolenia",
       "price": 1500,
       "required": true,
-      "note": "Для чего: ежегодные тесты качества рентгеновского аппарата.\nГде: медицинский физик.\nСроки: ежегодно. Результаты хранить 20 лет.\nВажно: без тестов PAA может отозвать разрешение."
+      "note": "Po co: coroczne testy jakości aparatu rentgenowskiego.\nGdzie: fizyk medyczny.\nTerminy: corocznie. Wyniki przechowywać 20 lat.\nWażne: bez testów PAA może cofnąć zezwolenie."
     },
     {
-      "cat": "Радиационная безопасность (RTG)",
-      "name": "Персональные дозиметры",
-      "desc": "TLD-дозиметры. Считывание каждые 1-3 мес",
+      "cat": "Bezpieczeństwo radiologiczne (RTG)",
+      "name": "Dozymetry osobiste",
+      "desc": "Dozymetry TLD. Odczyt co 1–3 mies.",
       "price": 1200,
       "required": true,
-      "note": "Для чего: мониторинг дозы облучения для персонала работающего с рентгеном.\nГде: аккредитованная лаборатория (np. IFJ PAN Kraków, CLOR Warszawa).\nСроки: с первого дня работы с рентгеном. Считывание каждые 1–3 мес.\nВажно: результаты хранить 20 лет. Предел: 20 мЗв/год."
+      "note": "Po co: monitoring dawki promieniowania dla personelu pracującego przy rentgenie.\nGdzie: akredytowane laboratorium (np. IFJ PAN Kraków, CLOR Warszawa).\nTerminy: od pierwszego dnia pracy z rentgenem. Odczyt co 1–3 mies.\nWażne: wyniki przechowywać 20 lat. Limit: 20 mSv/rok."
     },
     {
-      "cat": "Радиационная безопасность (RTG)",
-      "name": "Обучение радиологической защите",
-      "desc": "Для работающих с рентгеном. Обновление каждые 5 лет",
+      "cat": "Bezpieczeństwo radiologiczne (RTG)",
+      "name": "Szkolenie z ochrony radiologicznej",
+      "desc": "Dla pracujących z rentgenem. Odnowienie co 5 lat",
       "price": 1500,
       "required": true,
-      "note": "Для чего: обязательное обучение для всех работающих с ионизирующим излучением.\nГде: аккредитованные центры или университеты.\nСроки: до начала работы с рентгеном. Обновление каждые 5 лет.\nВажно: без сертификата нельзя допускать к рентгену."
+      "note": "Po co: obowiązkowe szkolenie dla wszystkich pracujących z promieniowaniem jonizującym.\nGdzie: akredytowane ośrodki lub uczelnie.\nTerminy: przed rozpoczęciem pracy z rentgenem. Odnowienie co 5 lat.\nWażne: bez certyfikatu nie można dopuścić do rentgena."
     },
     {
-      "cat": "Радиационная безопасность (RTG)",
-      "name": "Таблицы доз и предупреждения",
-      "desc": "Знаки излучения, инструкции на стенах рентген-кабинета",
+      "cat": "Bezpieczeństwo radiologiczne (RTG)",
+      "name": "Tablice dawek i ostrzeżenia",
+      "desc": "Znaki promieniowania, instrukcje na ścianach pracowni RTG",
       "price": 300,
       "required": true,
-      "note": "Для чего: обязательные знаки и таблицы в рентген-кабинете.\nГде: заказать в типографии или мед. магазине.\nСроки: до начала работы.\nВключает: знак «ionizujące» на двери, таблица доз, инструкция для пациента, правила поведения."
+      "note": "Po co: obowiązkowe znaki i tablice w pracowni RTG.\nGdzie: zamówić w drukarni lub sklepie medycznym.\nTerminy: przed rozpoczęciem działalności.\nObejmuje: znak „promieniowanie jonizujące” na drzwiach, tablica dawek, instrukcja dla pacjenta, zasady postępowania."
     },
     {
-      "cat": "Радиационная безопасность (RTG)",
-      "name": "CBCT/Панорама — 3D разрешение",
-      "desc": "Доп. разрешение PAA для CBCT. Усиленные экраны",
+      "cat": "Bezpieczeństwo radiologiczne (RTG)",
+      "name": "CBCT/Pantomograf — zezwolenie 3D",
+      "desc": "Dodatkowe zezwolenie PAA dla CBCT. Wzmocnione osłony",
       "price": 5000,
       "required": false,
-      "note": "Для чего: для CBCT (конусно-лучевой КТ) нужно отдельное разрешение PAA и усиленные экраны.\nГде: PAA + медицинский физик.\nСроки: 30–60 дней. Планировать на этапе проектирования.\nВажно: стены толще, доза выше → более строгие требования к защите."
+      "note": "Po co: dla CBCT (tomografia wiązki stożkowej) wymagane jest osobne zezwolenie PAA i wzmocnione osłony.\nGdzie: PAA + fizyk medyczny.\nTerminy: 30–60 dni. Planować na etapie projektowania.\nWażne: grubsze ściany, wyższa dawka → bardziej rygorystyczne wymagania dot. osłon."
     },
     {
-      "cat": "Фармацевтика и препараты",
-      "name": "Аптечка кабинета",
-      "desc": "Адреналин, атропин, гидрокортизон, глюкоза, AED",
+      "cat": "Farmacja i leki",
+      "name": "Apteczka gabinetowa",
+      "desc": "Adrenalina, atropina, hydrokortyzon, glukoza, AED",
       "price": 3000,
       "required": true,
-      "note": "Для чего: обязательный набор для экстренной помощи в каждом кабинете.\nГде: фармацевтический склад + мед. магазин.\nСроки: до начала приёма пациентов.\nСостав: адреналин 1:1000, атропин, гидрокортизон, глюкоза 20%, кислород, AED, амбу."
+      "note": "Po co: obowiązkowy zestaw ratunkowy w każdym gabinecie.\nGdzie: hurtownia farmaceutyczna + sklep medyczny.\nTerminy: przed rozpoczęciem przyjmowania pacjentów.\nSkład: adrenalina 1:1000, atropina, hydrokortyzon, glukoza 20%, tlen, AED, worek ambu."
     },
     {
-      "cat": "Фармацевтика и препараты",
-      "name": "Учёт лекарств и анестетиков",
-      "desc": "Лидокаин, артикаин, мепивакаин — учёт, сроки годности",
+      "cat": "Farmacja i leki",
+      "name": "Ewidencja leków i anestetyków",
+      "desc": "Lidokaina, artykaina, mepiwakaina — ewidencja, daty ważności",
       "price": 500,
       "required": true,
-      "note": "Для чего: обязательный учёт всех лекарственных препаратов.\nГде: вести журнал (книгу учёта) самостоятельно.\nСроки: с первого дня работы.\nВключает: наименование, серия, срок годности, количество, расход. Проверять сроки ежемесячно."
+      "note": "Po co: obowiązkowa ewidencja wszystkich produktów leczniczych.\nGdzie: prowadzić książkę ewidencji samodzielnie.\nTerminy: od pierwszego dnia działalności.\nObejmuje: nazwa, seria, data ważności, ilość, zużycie. Daty sprawdzać co miesiąc."
     },
     {
-      "cat": "Фармацевтика и препараты",
-      "name": "Договор с фарм. складом",
-      "desc": "Закупки только из лицензированного склада",
+      "cat": "Farmacja i leki",
+      "name": "Umowa z hurtownią farmaceutyczną",
+      "desc": "Zakupy tylko z licencjonowanej hurtowni",
       "price": 0,
       "required": true,
-      "note": "Для чего: лекарства можно закупать ТОЛЬКО из лицензированного фармацевтического склада.\nГде: hurtownia farmaceutyczna (np. Medicover, Profarm, Marmed).\nСроки: договор до начала работы.\nВажно: покупка лекарств в обычной аптеке для клиники = нарушение."
+      "note": "Po co: leki można kupować WYŁĄCZNIE w licencjonowanej hurtowni farmaceutycznej.\nGdzie: hurtownia farmaceutyczna (np. Medicover, Profarm, Marmed).\nTerminy: umowa przed rozpoczęciem działalności.\nWażne: zakup leków w zwykłej aptece dla kliniki = naruszenie."
     },
     {
-      "cat": "Фармацевтика и препараты",
-      "name": "Фарм. холодильник (с регистратором)",
-      "desc": "Фармацевтический холодильник 2-8°C. Ежедневная запись",
+      "cat": "Farmacja i leki",
+      "name": "Lodówka farmaceutyczna (z rejestratorem)",
+      "desc": "Lodówka farmaceutyczna 2–8 °C. Codzienny wpis",
       "price": 2500,
       "required": true,
-      "note": "Для чего: хранение лекарств при 2-8°C (вакцины, анестетики, адреналин).\nГде: мед. магазин (фарм. холодильник с регистратором температуры).\nСроки: до начала работы.\nВажно: ежедневно записывать температуру (утро/вечер). Регистратор с аварийным сигналом."
+      "note": "Po co: przechowywanie leków w temperaturze 2–8 °C (szczepionki, anestetyki, adrenalina).\nGdzie: sklep medyczny (lodówka farmaceutyczna z rejestratorem temperatury).\nTerminy: przed rozpoczęciem działalności.\nWażne: codziennie zapisywać temperaturę (rano/wieczorem). Rejestrator z alarmem."
     },
     {
-      "cat": "Фармацевтика и препараты",
-      "name": "Разрешение на седацию",
-      "desc": "N2O или внутривенная седация. Доп. требования + обучение",
+      "cat": "Farmacja i leki",
+      "name": "Zezwolenie na sedację",
+      "desc": "N2O lub sedacja dożylna. Dodatkowe wymagania + szkolenie",
       "price": 5000,
       "required": false,
-      "note": "Для чего: если планируете седацию (N2O закись азота или в/в) — нужны доп. требования.\nГде: курс седации + уведомление воеводы.\nСроки: 2–4 недели на обучение.\nТребования: мониторинг пациента, кислород, обученный персонал, AED, реанимационный набор."
+      "note": "Po co: jeśli planujesz sedację (N2O podtlenek azotu lub dożylną) — wymagane dodatkowe warunki.\nGdzie: kurs sedacji + zgłoszenie do wojewody.\nTerminy: 2–4 tygodnie na szkolenie.\nWymagania: monitoring pacjenta, tlen, przeszkolony personel, AED, zestaw reanimacyjny."
     },
     {
-      "cat": "Доступность",
-      "name": "Архитектурная доступность",
-      "desc": "Пандус/лифт, двери >90 см, WC для инвалидов",
+      "cat": "Dostępność",
+      "name": "Dostępność architektoniczna",
+      "desc": "Podjazd/winda, drzwi >90 cm, WC dla niepełnosprawnych",
       "price": 8000,
       "required": true,
-      "note": "Для чего: обязательное обеспечение доступности для лиц с инвалидностью.\nГде: учитывается на этапе проектирования.\nСроки: до начала ремонта.\nТребования: пандус или лифт, двери >90 см, туалет для инвалидов, перила, контрастная маркировка."
+      "note": "Po co: obowiązkowe zapewnienie dostępności dla osób z niepełnosprawnościami.\nGdzie: uwzględnić na etapie projektowania.\nTerminy: przed rozpoczęciem remontu.\nWymagania: podjazd lub winda, drzwi >90 cm, toaleta dla niepełnosprawnych, poręcze, kontrastowe oznaczenia."
     },
     {
-      "cat": "Доступность",
-      "name": "Цифровая доступность",
-      "desc": "Сайт WCAG 2.1 AA. Рекомендуется для частных",
+      "cat": "Dostępność",
+      "name": "Dostępność cyfrowa",
+      "desc": "Strona WCAG 2.1 AA. Zalecana dla prywatnych",
       "price": 3000,
       "required": false,
-      "note": "Для чего: доступность сайта по WCAG 2.1 AA — обязательно для публичных, рекомендуется для частных.\nГде: веб-разработчик с опытом доступности.\nСроки: при создании сайта.\nВключает: контраст, навигация клавиатурой, alt-тексты, субтитры."
+      "note": "Po co: dostępność strony wg WCAG 2.1 AA — obowiązkowa dla podmiotów publicznych, zalecana dla prywatnych.\nGdzie: deweloper z doświadczeniem w dostępności.\nTerminy: przy tworzeniu strony.\nObejmuje: kontrast, nawigacja klawiaturą, teksty alternatywne, napisy."
     },
     {
-      "cat": "Доступность",
-      "name": "Информационная доступность",
-      "desc": "Пиктограммы, крупный шрифт, SMS/email для глухих",
+      "cat": "Dostępność",
+      "name": "Dostępność informacyjna",
+      "desc": "Piktogramy, duży font, SMS/e-mail dla niesłyszących",
       "price": 1500,
       "required": false,
-      "note": "Для чего: доступность информации для лиц с нарушениями слуха, зрения.\nГде: агентство дизайна + IT.\nСроки: до открытия.\nВключает: пиктограммы, крупный шрифт, SMS/email-напоминания, информация на Braille (опционально)."
+      "note": "Po co: dostępność informacji dla osób z wadami słuchu i wzroku.\nGdzie: agencja projektowa + IT.\nTerminy: przed otwarciem.\nObejmuje: piktogramy, duży font, przypomnienia SMS/e-mail, informacje w Braille’u (opcjonalnie)."
     },
     {
-      "cat": "Доступность",
-      "name": "Координатор по доступности",
-      "desc": "Обязательно для публичных. Рекомендуется при НФЗ",
+      "cat": "Dostępność",
+      "name": "Koordynator ds. dostępności",
+      "desc": "Obowiązkowy dla podmiotów publicznych. Zalecany przy NFZ",
       "price": 0,
       "required": false,
-      "note": "Для чего: koordynator ds. dostępności — обязателен для публичных учреждений.\nГде: назначить из сотрудников или внешний.\nСроки: при наличии контракта НФЗ.\nВажно: для чисто частных клиник не обязателен, но рекомендуется."
+      "note": "Po co: koordynator ds. dostępności — obowiązkowy dla podmiotów publicznych.\nGdzie: wyznaczyć spośród pracowników lub zewnętrznego.\nTerminy: przy kontrakcie z NFZ.\nWażne: dla czysto prywatnych klinik nie jest obowiązkowy, ale zalecany."
     },
     {
-      "cat": "Доступность",
-      "name": "Индукционная петля",
-      "desc": "Для слабослышащих на ресепшн",
+      "cat": "Dostępność",
+      "name": "Pętla indukcyjna",
+      "desc": "Dla niedosłyszących w recepcji",
       "price": 2500,
       "required": false,
-      "note": "Для чего: система усиления звука для слабослышащих с слуховым аппаратом.\nГде: специализированная фирма по аудио-системам.\nСроки: при ремонте (проводка).\nВажно: устанавливается на рецепции. Знак «T» на двери."
+      "note": "Po co: system wzmacniania dźwięku dla osób niedosłyszących z aparatem słuchowym.\nGdzie: wyspecjalizowana firma audio.\nTerminy: przy remoncie (okablowanie).\nWażne: montowana w recepcji. Znak „T” na drzwiach."
     },
     {
-      "cat": "Прочее",
-      "name": "Вывеска + информационная табличка",
-      "desc": "Вывеска + данные. Согласование с управляющим здания",
+      "cat": "Pozostałe",
+      "name": "Szyld + tablica informacyjna",
+      "desc": "Szyld + dane. Uzgodnienie z zarządcą budynku",
       "price": 3000,
       "required": true,
-      "note": "Для чего: наружная вывеска + табличка с данными — обязательно по закону.\nГде: рекламное агентство. Согласовать с управляющим здания и гминой.\nСроки: до открытия. Изготовление 1–2 недели.\nВажно: может потребоваться разрешение на вывеску (uchwała krajobrazowa)."
+      "note": "Po co: zewnętrzny szyld + tablica z danymi — obowiązek prawny.\nGdzie: agencja reklamowa. Uzgodnić z zarządcą budynku i gminą.\nTerminy: przed otwarciem. Wykonanie 1–2 tygodnie.\nWażne: może być wymagane zezwolenie na szyld (uchwała krajobrazowa)."
     },
     {
-      "cat": "Прочее",
-      "name": "Видеонаблюдение (по RODO)",
-      "desc": "В зале ожидания, коридорах (не в кабинетах!)",
+      "cat": "Pozostałe",
+      "name": "Monitoring wizyjny (zgodny z RODO)",
+      "desc": "W poczekalni, korytarzach (nie w gabinetach!)",
       "price": 5000,
       "required": false,
-      "note": "Для чего: безопасность. По RODO — только в общих зонах, НЕ в кабинетах.\nГде: фирма по видеонаблюдению + IT.\nСроки: при ремонте (проводка).\nВажно: табличка «мониторинг», реестр RODO, хранение макс. 30 дней. Запрещено в кабинетах!"
+      "note": "Po co: bezpieczeństwo. Wg RODO — tylko w strefach ogólnodostępnych, NIE w gabinetach.\nGdzie: firma monitoringu + IT.\nTerminy: przy remoncie (okablowanie).\nWażne: tabliczka „monitoring”, rejestr RODO, przechowywanie maks. 30 dni. Zabronione w gabinetach!"
     },
     {
-      "cat": "Прочее",
-      "name": "Охранная сигнализация",
-      "desc": "Система охраны + охранная компания",
+      "cat": "Pozostałe",
+      "name": "System alarmowy",
+      "desc": "System ochrony + agencja ochrony",
       "price": 3000,
       "required": false,
-      "note": "Для чего: защита от взлома — оборудование стоит 300-500K PLN.\nГде: охранная компания (np. Securitas, G4S, локальные).\nСроки: при ремонте.\nВключает: датчики движения, магнитные контакты, сирена, мониторинг 24/7. ~200 PLN/мес."
+      "note": "Po co: ochrona przed włamaniem — sprzęt kosztuje 300–500 tys. PLN.\nGdzie: agencja ochrony (np. Securitas, G4S, lokalne).\nTerminy: przy remoncie.\nObejmuje: czujki ruchu, kontaktrony, syrena, monitoring 24/7. ~200 PLN/mies."
     },
     {
-      "cat": "Прочее",
-      "name": "Домен + сайт",
-      "desc": "ZnanyLekarz, Google Business, регламент, RODO, прейскурант",
+      "cat": "Pozostałe",
+      "name": "Domena + strona internetowa",
+      "desc": "ZnanyLekarz, Google Business, regulamin, RODO, cennik",
       "price": 5000,
       "required": true,
-      "note": "Для чего: сайт обязателен (публикация прейскуранта, RODO, регламент). Также Google Business и ZnanyLekarz.\nГде: веб-разработчик или конструктор (Squarespace, WordPress).\nСроки: до открытия.\nВключает: сайт + Google Business + ZnanyLekarz + Booksy (онлайн-запись)."
+      "note": "Po co: strona jest obowiązkowa (publikacja cennika, RODO, regulaminu). Także Google Business i ZnanyLekarz.\nGdzie: deweloper lub kreator (Squarespace, WordPress).\nTerminy: przed otwarciem.\nObejmuje: strona + Google Business + ZnanyLekarz + Booksy (rezerwacja online)."
     },
     {
-      "cat": "Прочее",
-      "name": "Телефон и интернет (год)",
-      "desc": "Мин. 100 Мбит/с + резерв LTE для EDM, э-рецепт, P1",
+      "cat": "Pozostałe",
+      "name": "Telefon i internet (rok)",
+      "desc": "Min. 100 Mb/s + zapas LTE dla EDM, e-recepty, P1",
       "price": 3600,
       "required": true,
-      "note": "Для чего: стабильный интернет критичен — без него не работают э-рецепты, P1, EDM.\nГде: провайдер (np. Orange, Play, T-Mobile). Рекомендуется 2 канала (основной + LTE резерв).\nСроки: подключить до установки мед. ПО.\nВажно: мин. 100 Мбит/с + резервный LTE. ~300 PLN/мес."
+      "note": "Po co: stabilny internet jest krytyczny — bez niego nie działają e-recepty, P1, EDM.\nGdzie: dostawca (np. Orange, Play, T-Mobile). Zalecane 2 łącza (główne + rezerwowe LTE).\nTerminy: podłączyć przed instalacją oprogramowania medycznego.\nWażne: min. 100 Mb/s + zapasowe LTE. ~300 PLN/mies."
     },
     {
-      "cat": "Прочее",
-      "name": "Медицинское ПО (год)",
-      "desc": "EDM, график, э-рецепты. Mediporta/Dental4Windows/KS-Medis",
+      "cat": "Pozostałe",
+      "name": "Oprogramowanie medyczne (rok)",
+      "desc": "EDM, grafik, e-recepty. Mediporta/Dental4Windows/KS-Medis",
       "price": 8000,
       "required": true,
-      "note": "Для чего: система управления клиникой — обязательна для EDM, э-рецептов, графика.\nГде: Mediporta (~500 PLN/мес), Dental4Windows, KS-Medis, Comarch Optimed.\nСроки: выбрать и настроить за 2–4 недели до открытия.\nВключает: карточки пациентов, э-рецепты, график, касса, отчёты."
+      "note": "Po co: system zarządzania kliniką — obowiązkowy dla EDM, e-recept, grafiku.\nGdzie: Mediporta (~500 PLN/mies.), Dental4Windows, KS-Medis, Comarch Optimed.\nTerminy: wybrać i skonfigurować 2–4 tygodnie przed otwarciem.\nObejmuje: karty pacjentów, e-recepty, grafik, kasa, raporty."
     },
     {
-      "cat": "Прочее",
-      "name": "Музыка в зале ожидания (ZAiKS)",
-      "desc": "Абонемент за музыку в публичном помещении",
+      "cat": "Pozostałe",
+      "name": "Muzyka w poczekalni (ZAiKS)",
+      "desc": "Abonament za muzykę w lokalu publicznym",
       "price": 600,
       "required": false,
-      "note": "Для чего: публичное воспроизведение музыки требует лицензии ZAiKS.\nГде: zaiks.org.pl — заключить договор.\nСроки: до включения музыки.\nВажно: без лицензии — штраф. Альтернатива: royalty-free музыка (Epidemic Sound, Artlist)."
+      "note": "Po co: publiczne odtwarzanie muzyki wymaga licencji ZAiKS.\nGdzie: zaiks.org.pl — zawrzeć umowę.\nTerminy: przed włączeniem muzyki.\nWażne: bez licencji — kara. Alternatywa: muzyka royalty-free (Epidemic Sound, Artlist)."
     },
     {
-      "cat": "Прочее",
-      "name": "Ящик для жалоб",
-      "desc": "Ящик для жалоб — по закону о правах пациента",
+      "cat": "Pozostałe",
+      "name": "Skrzynka na skargi",
+      "desc": "Skrzynka na skargi — zgodnie z ustawą o prawach pacjenta",
       "price": 100,
       "required": true,
-      "note": "Для чего: по закону о правах пациента клиника обязана обеспечить возможность подачи жалоб.\nГде: купить ящик + разместить в приёмной.\nСроки: до открытия.\nВажно: рядом — информация о правах пациента и данные Rzecznika Praw Pacjenta."
+      "note": "Po co: zgodnie z ustawą o prawach pacjenta klinika musi zapewnić możliwość składania skarg.\nGdzie: kupić skrzynkę i umieścić w poczekalni.\nTerminy: przed otwarciem.\nWażne: obok — informacja o prawach pacjenta i dane Rzecznika Praw Pacjenta."
     }
   ]
 }
