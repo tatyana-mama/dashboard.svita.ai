@@ -802,15 +802,7 @@ Apple</button>
 <div class="login-role" data-role="owner" onclick="selectRole(this)">
 <div class="lr-icon" style="background:linear-gradient(135deg,var(--gn),#059669)">&#127970;</div>
 <div><div class="lr-name">Владелец / Заказчик</div><div class="lr-desc">Конструктор клиники: этапы, бюджет</div></div></div>
-<div class="login-role" data-role="contractor" onclick="selectRole(this)">
-<div class="lr-icon" style="background:linear-gradient(135deg,var(--or),var(--yl))">&#128736;</div>
-<div><div class="lr-name">Подрядчик</div><div class="lr-desc">Работы и коммерческие предложения</div></div></div>
-<div class="login-role" data-role="supplier" onclick="selectRole(this)">
-<div class="lr-icon" style="background:linear-gradient(135deg,#8b5cf6,#d946ef)">&#128230;</div>
-<div><div class="lr-name">Поставщик</div><div class="lr-desc">Каталог оборудования</div></div></div>
-<div class="login-role" data-role="employee" onclick="selectRole(this)">
-<div class="lr-icon" style="background:linear-gradient(135deg,#06b6d4,var(--ac))">&#129489;</div>
-<div><div class="lr-name">Сотрудник</div><div class="lr-desc">Профиль специалиста</div></div></div>
+<!-- PIVOT 2026-04-12: dental PL only — contractor/supplier/employee roles removed -->
 </div>
 <button class="btn pr" style="width:100%;padding:12px" onclick="afterRoleSelect()">Продолжить</button>
 </div>
@@ -848,15 +840,7 @@ Apple</button>
 <div class="login-role" data-role="owner" onclick="selectObRole(this)">
 <div class="lr-icon" style="background:linear-gradient(135deg,var(--gn),#059669)">&#127970;</div>
 <div><div class="lr-name">Владелец / Заказчик</div><div class="lr-desc">Конструктор клиники: этапы, бюджет</div></div></div>
-<div class="login-role" data-role="contractor" onclick="selectObRole(this)">
-<div class="lr-icon" style="background:linear-gradient(135deg,var(--or),var(--yl))">&#128736;</div>
-<div><div class="lr-name">Подрядчик</div><div class="lr-desc">Работы и коммерческие предложения</div></div></div>
-<div class="login-role" data-role="supplier" onclick="selectObRole(this)">
-<div class="lr-icon" style="background:linear-gradient(135deg,#8b5cf6,#d946ef)">&#128230;</div>
-<div><div class="lr-name">Поставщик</div><div class="lr-desc">Каталог оборудования</div></div></div>
-<div class="login-role" data-role="employee" onclick="selectObRole(this)">
-<div class="lr-icon" style="background:linear-gradient(135deg,#06b6d4,var(--ac))">&#129489;</div>
-<div><div class="lr-name">Сотрудник</div><div class="lr-desc">Профиль специалиста</div></div></div>
+<!-- PIVOT 2026-04-12: only owner role for onboarding -->
 </div>
 <div id="obError" style="font-size:11px;color:var(--rd);min-height:18px;margin-bottom:8px"></div>
 <button class="btn pr" style="width:100%;padding:12px;font-size:13px" onclick="completeOnboarding()">Начать работу</button>
@@ -1985,36 +1969,8 @@ function switchAdminRole(role){
 <div class="sec" id="sec-db-docs">
 <div class="bk" onclick="nav('s7')">&larr; Документация</div>
 <div class="ph"><div><h2>&#128203; Каталог документов</h2><div class="ph-s">Лицензии, согласования, регистрации — добавляйте в проект</div></div><div style="display:flex;gap:6px;align-items:center"><select id="docCountrySelect" onchange="loadDocsForCountry(this.value)" style="padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--sf);color:var(--tx);font-size:11px;font-family:var(--f);cursor:pointer">
+<!-- PIVOT 2026-04-12: dental PL only —28 stran usuniętych -->
 <option value="PL">🇵🇱 Polska</option>
-<option value="CZ">🇨🇿 Česko</option>
-<option value="DE">🇩🇪 Deutschland</option>
-<option value="AT">🇦🇹 Österreich</option>
-<option value="CH">🇨🇭 Schweiz</option>
-<option value="UK">🇬🇧 United Kingdom</option>
-<option value="IE">🇮🇪 Ireland</option>
-<option value="FR">🇫🇷 France</option>
-<option value="ES">🇪🇸 España</option>
-<option value="IT">🇮🇹 Italia</option>
-<option value="PT">🇵🇹 Portugal</option>
-<option value="NL">🇳🇱 Nederland</option>
-<option value="BE">🇧🇪 België</option>
-<option value="SE">🇸🇪 Sverige</option>
-<option value="NO">🇳🇴 Norge</option>
-<option value="DK">🇩🇰 Danmark</option>
-<option value="FI">🇫🇮 Suomi</option>
-<option value="HU">🇭🇺 Magyarország</option>
-<option value="RO">🇷🇴 România</option>
-<option value="BG">🇧🇬 България</option>
-<option value="HR">🇭🇷 Hrvatska</option>
-<option value="SI">🇸🇮 Slovenija</option>
-<option value="SK">🇸🇰 Slovensko</option>
-<option value="LU">🇱🇺 Luxembourg</option>
-<option value="EE">🇪🇪 Eesti</option>
-<option value="LV">🇱🇻 Latvija</option>
-<option value="LT">🇱🇹 Lietuva</option>
-<option value="CY">🇨🇾 Κύπρος</option>
-<option value="MT">🇲🇹 Malta</option>
-<option value="GR">🇬🇷 Ελλάδα</option>
 </select><span id="docCountryInfo" style="font-size:10px;color:var(--tx3)"></span><button class="btn sm pr" onclick="addCustomDoc()">+ Свой документ</button></div></div>
 <div id="docCatalogCards"></div>
 </div>
