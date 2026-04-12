@@ -2394,7 +2394,8 @@ function switchAdminRole(role){
 <aside class="rpanel" id="rpanel">
 <div class="rp-head" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px">
 <span>SVITA AI</span>
-<div style="display:flex;gap:3px">
+<div style="display:flex;gap:6px;align-items:center">
+<span id="rpQuota" style="font-size:9px;font-weight:600;color:var(--tx3);padding:2px 6px;border:1px solid var(--bd);border-radius:6px;background:var(--sf2);cursor:help" title="AI-запросов сегодня">—</span>
 <button onclick="exportConceptFile()" style="font-size:9px;padding:3px 6px;border:1px solid var(--bd);border-radius:6px;background:var(--sf2);color:var(--tx2);cursor:pointer;font-family:var(--f)" title="Скачать текущую концепцию">⬇</button>
 </div>
 </div>
@@ -6760,17 +6761,45 @@ function addNoteFromEmployee(eid){
   _notes.push({id:'n_'+Date.now(),title:r.name,body,role:'employee',refId:eid,ai:false,ts:Date.now()});
   _saveNotes();toast('Заметка добавлена','gn');
 }
-// AI usage limiter: trial=5/day, pro=50/day
+// AI usage limiter: trial=5/day, pro=50/day, unlimited=999.
+// Counter resets at the user's LOCAL midnight (not UTC).
 const _AI_LIMITS={trial:5,pro:50,unlimited:999};
+function _aiLocalDateKey(){
+  const d=new Date();
+  const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),da=String(d.getDate()).padStart(2,'0');
+  return 'svita_ai_'+y+'-'+m+'-'+da;
+}
+function _aiQuotaInfo(){
+  const isAdm=currentRole==='superadmin'||currentRole==='admin'||(typeof currentUser!=='undefined'&&currentUser&&currentUser.isSuperAdmin);
+  const plan=(typeof userSubscription!=='undefined'&&userSubscription.plan)||(typeof currentUser!=='undefined'&&currentUser&&currentUser.plan)||'trial';
+  const limit=isAdm?Infinity:(_AI_LIMITS[plan]||5);
+  const used=parseInt(localStorage.getItem(_aiLocalDateKey())||'0',10);
+  return {plan,limit,used,remaining:Math.max(0,limit-used),isAdm};
+}
 function _checkAiLimit(){
-  if(currentRole==='superadmin'||currentRole==='admin'||(typeof currentUser!=='undefined'&&currentUser&&currentUser.isSuperAdmin))return true;
-  const plan=(typeof userSubscription!=='undefined'&&userSubscription.plan)||'trial';
-  const limit=_AI_LIMITS[plan]||5;
-  const key='svita_ai_'+new Date().toISOString().slice(0,10);
-  const used=parseInt(localStorage.getItem(key)||'0');
-  if(used>=limit){toast('Лимит AI-запросов: '+limit+'/день. Upgrade для увеличения.','rd');return false}
-  localStorage.setItem(key,String(used+1));
+  const q=_aiQuotaInfo();
+  if(q.isAdm)return true;
+  if(q.used>=q.limit){toast('Лимит AI-запросов: '+q.limit+'/день. Сбросится в полночь по вашему времени.','rd');return false}
+  localStorage.setItem(_aiLocalDateKey(),String(q.used+1));
+  _updateAiQuotaUI();
   return true;
+}
+function _updateAiQuotaUI(){
+  const el=document.getElementById('rpQuota');if(!el)return;
+  const q=_aiQuotaInfo();
+  if(q.isAdm){el.textContent='∞';el.title='Безлимит (admin)';return}
+  el.textContent=q.used+'/'+q.limit;
+  el.title='AI-запросов сегодня: '+q.used+' из '+q.limit+' ('+q.plan+'). Сброс в полночь по вашему времени.';
+  if(q.remaining<=0){el.style.color='#ef4444'}
+  else if(q.remaining<=Math.max(1,Math.floor(q.limit*0.2))){el.style.color='#eab308'}
+  else{el.style.color='var(--tx3)'}
+}
+// Map UI lang code → human language name for AI prompt directive
+const _LANG_NAMES={be:'Belarusian (беларуская)',de:'German (Deutsch)',en:'English',es:'Spanish (Español)',fr:'French (Français)',it:'Italian (Italiano)',ja:'Japanese (日本語)',ko:'Korean (한국어)',pl:'Polish (Polski)',pt:'Portuguese (Português)',ru:'Russian (Русский)',uk:'Ukrainian (Українська)'};
+function _aiLangDirective(){
+  const code=(typeof _lang!=='undefined'&&_lang)||'ru';
+  const name=_LANG_NAMES[code]||'Russian (Русский)';
+  return '[Reply strictly in '+name+'. The user prefers this language for the entire response.] ';
 }
 async function aiGenerateNote(id,role){
   if(!_checkAiLimit())return;
@@ -10902,6 +10931,8 @@ async function sendRpChat(){
   const inp=document.getElementById('rpChatInput');
   const text=inp.value.trim();
   if(!text)return;
+  // Daily quota gate (counts only successful sends, see _checkAiLimit increment)
+  if(!_checkAiLimit())return;
   inp.value='';inp.style.height='auto';
 
   _rpChatAppend('user',text);
@@ -10941,6 +10972,9 @@ async function sendRpChat(){
     expenses:_eEl?_eEl.textContent:'0'
   };
   if(activeProperty)context.property={name:activeProperty.name,area:activeProperty.area,city:activeProperty.city};
+  // Inject UI language so the AI replies in the user-selected language
+  context.lang=(typeof _lang!=='undefined'&&_lang)||'ru';
+  context.lang_name=(_LANG_NAMES[context.lang]||'Russian (Русский)');
 
   const aiEl=_rpChatAppend('ai','Анализирую...');
   _aiChatStreaming=true;
@@ -10968,7 +11002,7 @@ async function sendRpChat(){
   try{
     aiEl.innerHTML='<span style="color:var(--tx3);font-size:11px">...</span>';
     const reply=await svitaStream({
-      message:text,
+      message:_aiLangDirective()+text,
       mode:'chat',
       context:context,
       history:_aiChatHistory.slice(-8),
@@ -11987,12 +12021,48 @@ async function sendAiChat(){
   }
 }
 
+// ── Handoff from svita.ai landing chat: continue conversation seamlessly ──
+function _consumeHandoff(){
+  try{
+    const m=document.cookie.match(/(?:^|;\s*)svita_handoff=([^;]+)/);
+    if(!m)return false;
+    const data=JSON.parse(decodeURIComponent(m[1]));
+    // Clear the cookie immediately to avoid replay on refresh
+    document.cookie='svita_handoff=;path=/;domain=.svita.ai;max-age=0;SameSite=Lax';
+    document.cookie='svita_handoff=;path=/;max-age=0;SameSite=Lax';
+    if(!data||(!data.u&&!data.b))return false;
+    // 1h freshness window
+    if(data.t&&(Date.now()-data.t)>3600000)return false;
+    if(data.u){
+      _aiChatHistory.push({role:'user',content:data.u});
+      _rpChatAppend('user',data.u);
+    }
+    if(data.b){
+      _aiChatHistory.push({role:'assistant',content:data.b});
+      _rpChatAppend('ai',data.b);
+    }
+    const bridge='👋 Я продолжаю с того, что мы обсуждали на главной. Расскажи подробнее, что ты задумал — соберём концепцию вместе.';
+    _aiChatHistory.push({role:'assistant',content:bridge});
+    _rpChatAppend('ai',bridge);
+    _saveChatHistory();
+    // Auto-open right panel so user sees the continuation
+    try{const rp=document.getElementById('rpanel');if(rp)rp.classList.add('open')}catch(e){}
+    return true;
+  }catch(e){return false}
+}
+
 // Show chat button after login
 const _origEnterApp=enterApp;
 enterApp=function(){
   _origEnterApp.apply(this,arguments);
-  _loadChatSession().then(()=>_restoreRpChat());
+  _loadChatSession().then(()=>{
+    _restoreRpChat();
+    _consumeHandoff();
+    _updateAiQuotaUI();
+  });
 };
+// Refresh quota counter once per minute (catches local-midnight rollover)
+setInterval(function(){try{_updateAiQuotaUI()}catch(e){}},60000);
 
 // Dynamic news from /news/posts.json
 (function(){
