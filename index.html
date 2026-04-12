@@ -2720,26 +2720,12 @@ const DB={
       {id:'cleaning-storage',name:'Зона хранения уборочного инвентаря',desc:'Швабры, дез. средства, контейнеры',icon:'🧹'}
     ]
   },
+  // PIVOT 2026-04-12: dental PL only — one-time €199 plan, no subscriptions, no PRO/UNLIMITED tiers
   rolePlans:{
-    owner:{icon:'🏠',name:'Владелец / Заказчик',currency:'PLN',
-      trial:{price:0,days:14,label:'Триал 14 дней',features:['1 проект','Обзор этапов','Базовый бюджет','Экспорт PDF (водяной знак)']},
-      paid:{price:299,period:'мес',label:'PRO',features:['До 5 проектов','Все 6 этапов','Бюджет + рентабельность','Типы кабинетов / зоны','Экспорт без ограничений','Приоритетная поддержка']},
-      unlimited:{price:599,period:'мес',label:'UNLIMITED',features:['Безлимит проектов','Все функции PRO','Подрядчики и КП','Мультипользователи','API доступ','Персональный менеджер']}
-    },
-    contractor:{icon:'🔧',name:'Подрядчик',currency:'$',
-      trial:{price:0,days:14,label:'Триал 14 дней',features:['1 профиль компании','До 5 заявок','1 концепция']},
-      paid:{price:49,period:'мес',label:'PRO',features:['Безлимит заявок','Рейтинг и отзывы','Уведомления о тендерах','Портфолио проектов','Аналитика конверсий']},
-      unlimited:{price:99,period:'мес',label:'UNLIMITED',features:['Все функции PRO','Приоритет в тендерах','Верифицированный бейдж','Мульти-филиалы','CRM интеграция','Выделенный аккаунт-менеджер']}
-    },
-    supplier:{icon:'📦',name:'Поставщик',currency:'$',
-      trial:{price:0,days:14,label:'Триал 14 дней',features:['До 10 товаров','Базовый каталог','1 категория']},
-      paid:{price:59,period:'мес',label:'PRO',features:['Безлимит товаров','Все категории','Интеграция со складом','Тендерные уведомления','Аналитика спроса']},
-      unlimited:{price:119,period:'мес',label:'UNLIMITED',features:['Все функции PRO','Premium размещение','API каталога','Автоматические тендеры','Мульти-склад','Персональный менеджер']}
-    },
-    employee:{icon:'🧑',name:'Сотрудник',currency:'PLN',
-      trial:{price:0,days:7,label:'Триал 7 дней',features:['Базовый профиль','Просмотр расписания']},
-      paid:{price:49,period:'мес',label:'PRO',features:['Полный профиль','Сертификаты и документы','Расписание + уведомления','Личная статистика','Обучение / курсы']},
-      unlimited:{price:99,period:'мес',label:'UNLIMITED',features:['Все функции PRO','Персональный dashboard','Карьерный трек','Менторство','Доступ к курсам','Приоритетная поддержка']}
+    owner:{icon:'🏠',name:'Владелец клиники',currency:'EUR',
+      trial:{price:0,days:14,label:'Триал 14 дней',features:['1 проект (стоматология PL)','Все 6 глав плана','Базовый бюджет','Экспорт PDF (водяной знак)']},
+      paid:{price:199,period:'one-time',label:'PLAN',features:['6 глав плана с источниками','Реальные цены KaVo/Planmeca/Henry Schein','Шаблоны NFZ/sanepid/PAA','Обновления цен 6 мес','PDF экспорт','Возврат 14 дней без вопросов']},
+      unlimited:{price:298,period:'one-time',label:'PLAN + CONSULT',features:['Всё из PLAN','+ 30-min Zoom с CEO Свитлицы','Запись остаётся у тебя']}
     }
   },
   users:[
