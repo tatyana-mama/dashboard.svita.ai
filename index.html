@@ -19,6 +19,21 @@
 <meta property="og:site_name" content="SVITA">
 
 <title>SVITA — Конструктор клиники</title>
+<script>
+// OAuth bounce-back: if user started OAuth on micro.svita.ai, Supabase Site URL
+// falls back here. Detect access_token hash + cookie flag and kick them back.
+(function(){
+  try{
+    var hasToken = location.hash.indexOf('access_token') !== -1;
+    var fromMicro = document.cookie.indexOf('oauth_from=micro') !== -1;
+    if(hasToken && fromMicro){
+      document.cookie = 'oauth_from=; domain=.svita.ai; path=/; max-age=0';
+      location.replace('https://micro.svita.ai/account.html' + location.hash);
+      return;
+    }
+  }catch(e){}
+})();
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
